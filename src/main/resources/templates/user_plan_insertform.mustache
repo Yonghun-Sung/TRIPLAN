@@ -70,13 +70,41 @@
         </div>
 
         <div class="plan-col-container">
-            <div id="plan-daybar" class="plan-col"></div>
+            <!--Day 목록-->
+            <!--달력에서 11/3 ~ 11/5 선택하면 DAY 탭 3개 → 장소목록 form 3개 생성-->
+            <div id="plan-daybar" class="plan-col">
+                <div class="day-info">
+                    <span class="day-num">DAY1</span>
+                    <div class="info-box">
+                        <span class="date">11.03</span>
+                        <span class="day">목요일</span>
+                    </div>
+                </div>
+                <div class="day-info">
+                    <span class="day-num">DAY2</span>
+                    <div class="info-box">
+                        <span class="date">11.04</span>
+                        <span class="day">금요일</span>
+                    </div>
+                </div>
+                <div class="day-info">
+                    <span class="day-num">DAY3</span>
+                    <div class="info-box">
+                        <span class="date">11.05</span>
+                        <span class="day">토요일</span>
+                    </div>
+                </div>
+            </div>
 
             <!--일정 장소목록-->
             <div id="plan-placebar" class="plan-col">
                 <div class="select-place-btn-box">
                     <button id="placeOk-btn" class="basic-btn">장소선택 완료 [경로최적화]</button>
                 </div>
+
+                <!--DAY 개수 만큼 있어야 함-->
+                <!--나중에 몇번째 DAY인지, 해당 DAY의 몇 번째 경유지인지 정보도 넣어줘야 함-->
+                <!--form은 하나로 하고 그 안에 div로 day별로 나눌까-->
                 <form class="place-form" action="">
                 </form>
             </div>

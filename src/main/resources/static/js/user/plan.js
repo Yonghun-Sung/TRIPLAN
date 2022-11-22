@@ -33,6 +33,7 @@ $('select#areacode').on('change', function () {
     }
 });
 
+var count = 1;
 /*장소 추가 버튼*/
 $(document).on('click', 'button.add-place', function() {
     var name = $(this).attr('name')
@@ -41,7 +42,7 @@ $(document).on('click', 'button.add-place', function() {
     var photo_path = $(this).attr('photo_path')
 
     $('form.place-form').append(
-        "<div class='select-place'>"
+        "<div id='place" + count++ + "' class='select-place'>"
         +   "<span class='num-box'><i class='bi bi-check'></i></span>"
         +   "<input type='text' id='name' name='name' class='select-name' value='" + name + "' disabled>"
         +   "<button class='delete-place'><i class='bi bi-dash'></i></button>"
@@ -52,6 +53,8 @@ $(document).on('click', 'button.add-place', function() {
         +   "<input type='hidden' id='loc_x' name='loc_x' value='" + loc_x + "'>"
         +   "<input type='hidden' id='loc_y' name='loc_y' value='" + loc_y + "'>"
         +   "<input type='hidden' id='photo_path' name='photo_path' value='" + photo_path + "'>"
+        +   "<input type='hidden' id='day' name='day' value=''>"
+        +   "<input type='hidden' id='order' name='order' value=''>"
         + "</div>");
 });
 
@@ -59,5 +62,3 @@ $(document).on('click', 'button.add-place', function() {
 $(document).on('click', 'button.delete-place', function () {
     $(this).parent().remove();
 });
-
-

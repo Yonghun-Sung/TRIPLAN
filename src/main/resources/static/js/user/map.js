@@ -94,10 +94,12 @@ function initTmap(){
 
 $('button#placeOk-btn').click(function () {
   let loc = [];
+  let viaPointIds = [];
   let count = 1;
   for (let i = 1; i <= $('.select-place').length; i++) {
     loc.push([$('.select-place:nth-child(' + i + ') input#loc_x').val()
             , $('.select-place:nth-child(' + i + ') input#loc_y').val()]);
+    viaPointIds.push($('.select-place:nth-child(' + i + ')').prop('id'));
   }
 
   // 2. 시작, 도착 마커 생성
@@ -151,7 +153,8 @@ $('button#placeOk-btn').click(function () {
     // 객체 형식으로 만들어서 전송
     // 배열로 만들어서 넘기려고 했는데
     // 아마 {}랑 [] 쌍 제대로 맞았으면 됐을 듯
-    result['viaPointId'] = 'test0' + (i-1);
+    //result['viaPointId'] = 'test0' + (i-1);
+    result['viaPointId'] = viaPointIds[i];
     result['viaPointName'] = 'test0' + (i-1);
     result['viaX'] = loc[i][1];
     result['viaY'] = loc[i][0];
@@ -193,6 +196,9 @@ $('button#placeOk-btn').click(function () {
 
       $("#result").text(tDistance+tTime+tFare);
 
+      // 경유 순서 갖고 오기 위해 테스트 진행중
+      var test = '';
+
       for(var i in resultFeatures) {
         var geometry = resultFeatures[i].geometry;
         var properties = resultFeatures[i].properties;
@@ -219,6 +225,20 @@ $('button#placeOk-btn').click(function () {
             map : map
           });
         }
+
+
+        // 경유 순서 value 보내줌 --------------------------------------------------
+        if(properties.index == 0) {
+          $('.select-place:nth-child(1) input#order').val(properties.index);
+          continue;
+        }
+        if(properties.index == $('.select-place').length - 1) {
+          $('.select-place:nth-child(2) input#order').val(properties.index);
+          continue;
+        }
+        $('div#' + properties.viaPointId + ' input#order').val(properties.index);
+        // -----------------------------------------------------------------------
+
       }
     },
     error:function(request,status,error){

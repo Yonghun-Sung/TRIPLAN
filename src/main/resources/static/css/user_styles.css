@@ -2431,6 +2431,19 @@ p.plan-date {
   }
 }
 
+div#plan-head {
+  float: left;
+  font-size: 22px;
+  font-weight: bold;
+  margin-left: 2.6%;
+  padding-top: 16px;
+}
+div#plan-day {
+  float: left;
+  font-size: 18px;
+  margin-left: 7%;
+  padding-top: 18px;
+}
 #plan-header .btn-box {
   width: 16%;
   float: right;
@@ -2459,6 +2472,49 @@ div.plan-col {
 div#plan-daybar {
   background-color: #22242e;
   width: 8%;
+}
+
+/*Day목록*/
+.day-info {
+  border-bottom: 1px solid #4a4a4a;
+  height: 76px;
+  text-align: center;
+  padding-top: 8%;
+}
+.day-info:nth-child(1) {
+  border-top: 1px solid #4a4a4a;
+}
+div.day-info .day-num {
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+  display: inline-block;
+}
+@media (max-width: 1920px) {
+  div.day-info .place {
+    color: #a9a9a9;
+    font-size: 15px;
+  }
+  div.day-info .date {
+    color: #81bef0;
+    font-size: 16px;
+  }
+  div.day-info .day {
+    color: #fff;
+    display: inline-block;
+    font-size: 13px;
+  }
+}
+@media (max-width: 1708px) {
+  div.day-info .place {
+    font-size: 13px;
+  }
+  div.day-info .date {
+    font-size: 14px;
+  }
+  div.day-info .day {
+    font-size: 11px;
+  }
 }
 
 
