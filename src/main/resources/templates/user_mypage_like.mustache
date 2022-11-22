@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>TRIPLAN</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="/img/favicon.png" rel="icon">
+    <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/css/mypage_style.css" rel="stylesheet">
+
+    <!--  마이로의 UIKit사용하기 위해 넣어봄-->
+    <!--  &lt;!&ndash; UIkit CSS &ndash;&gt;
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.13/dist/css/uikit.min.css" />
+
+      &lt;!&ndash; UIkit JS &ndash;&gt;
+      <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.13/dist/js/uikit.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.13/dist/js/uikit-icons.min.js"></script>-->
+
+    <!--부트스트랩 CDN-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!--  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>-->
+
+<style>
+.navbar a {
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 600;
+}
+.navbar a:hover, .navbar a:active, .navbar .active {
+    color: #000 !important;
+}
+</style>
+</head>
+<body class="page-blog">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <!-- ======= Header ======= -->
+    {{>user_header}}
+<main id="main">
+<!--
+     ======= Breadcrumbs =======
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('/img/banner.jpg');">
+        <div class="container position-relative d-flex flex-column align-items-center">
+        </div>
+    </div>  End Breadcrumbs
+-->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog planlist">
+        <div class="container" data-aos="fade-up">
+            <div class="col-lg-12" data-aos="fade-up" data-aos-delay="400">
+                <div class="sidebar">
+                    <!--프로필이랑 나의 일정, 댓글, 좋아요한 글 인덱스 버튼-->
+                    <div class="top-container">
+                        <div class="profilePhotoContainer">
+                            <div class="profilePhoto-text" id="profilePhoto">이</div> <!--그냥 정적으로 이 라고 써놓음-->
+                        </div>
+                        <div class="text">이름름</div><!--여기도 정적으로 넣음-->
+                        <button class="btn-normal" onclick="goToMyPage()">프로필 수정</button>
+                    </div>
+                    <div class="row">
+                        <div class="index-section">
+                            <!--나의 일정-->
+                            <div class="index-circle" onclick="myPlanData()">
+                                <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
+                                    <b>나의 일정</b>
+                                </h6>
+                                <div>
+                                    <h4 style="line-height: 1; font-weight: 700" id="myPlan">6</h4><!--내가 정적으로 걍 6넣음-->
+                                </div>
+                            </div>
+                            <!--나의 댓글-->
+                            <div class="index-circle" onclick="myReplyData()">
+                                <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
+                                    <b>나의 댓글</b>
+                                </h6>
+                                <div>
+                                    <h4 style="line-height: 1; font-weight: 700" id="myReply">5</h4><!--내가 정적으로 걍 5넣음-->
+                                </div>
+                            </div>
+                            <!--좋아요한 일정-->
+                            <div class="index-circle" onclick="myLikeData()">
+                                <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
+                                    <b>좋아요한 일정</b>
+                                </h6>
+                                <div>
+                                    <h4 style="line-height: 1; font-weight: 700" id="myLike">10</h4><!--내가 정적으로 걍 10넣음-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--"좋아요한 일정"-->
+                    <div class="section-title-container">
+                        <h3 class="sidebar-title-rep-like"> <!--css추가-->
+                            <b>좋아요한 일정</b>
+                        </h3>
+                    </div>
+                    <!--삭제 버튼-->
+                    <div class="delete-buttonbox">
+                        <!--<button type="button" class="btn btn-outline-primary">선택삭제</button>-->
+                        <button type="button" class="btn btn-outline-primary" style="margin-left: 1110px;">선택삭제</button>
+                        <button type="button" class="btn btn-primary">전체삭제</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div style="height: 15px;"></div>
+        <div class="container" data-aos="fade-up" data-aos-delay="400"><!--좋아요한 일정들//원래 내꺼에서 172-->
+
+            <div class="row g-5">
+
+                <div id="planlist-out-box" class="col-lg-12">
+
+                    <div id="planlist-in-box" class="row gy-5 posts-list">
+
+                        <div class="col-lg-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <!--Default checkbox-->
+                                </label>
+                            </div>
+                            <article class="d-flex flex-column">
+                                <div class="post-img">
+                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
+                                </div>
+
+                                <h2 class="title">
+                                    <a href="#!">여행지역나오는 곳</a><br>
+                                    <span class="plan-title">글 제목</span>
+                                </h2>
+
+                                <div class="meta-top">
+                                    <ul>
+                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>닉네임</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>장소개수</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>조회수</li>
+                                    </ul>
+                                </div>
+
+                                <div class="content">
+                                    <p class="plan-date">
+                                        2022-11-14 ~ 2022-11-18
+                                    </p>
+                                </div>
+
+                                <div class="read-more mt-auto align-self-end">
+                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </article>
+                        </div><!-- End post list item -->
+
+                        <div class="col-lg-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <!--Default checkbox-->
+                                </label>
+                            </div>
+                            <article class="d-flex flex-column">
+                                <div class="post-img">
+                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
+                                </div>
+
+                                <h2 class="title">
+                                    <a href="#!">제주</a><br>
+                                    <span class="plan-title">제주 2박3일</span>
+                                </h2>
+
+                                <div class="meta-top">
+                                    <ul>
+                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
+                                    </ul>
+                                </div>
+
+                                <div class="content">
+                                    <p class="plan-date">
+                                        2022-07-04 ~ 2022-07-06
+                                    </p>
+                                </div>
+
+                                <div class="read-more mt-auto align-self-end">
+                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </article>
+                        </div><!-- End post list item -->
+                        <div class="col-lg-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <!--Default checkbox-->
+                                </label>
+                            </div>
+                            <article class="d-flex flex-column">
+                                <div class="post-img">
+                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
+                                </div>
+
+                                <h2 class="title">
+                                    <a href="#!">제주</a><br>
+                                    <span class="plan-title">제주 2박3일</span>
+                                </h2>
+
+                                <div class="meta-top">
+                                    <ul>
+                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
+                                    </ul>
+                                </div>
+
+                                <div class="content">
+                                    <p class="plan-date">
+                                        2022-07-04 ~ 2022-07-06
+                                    </p>
+                                </div>
+
+                                <div class="read-more mt-auto align-self-end">
+                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </article>
+                        </div><!-- End post list item -->
+
+                        <div class="col-lg-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <!--Default checkbox-->
+                                </label>
+                            </div>
+                            <article class="d-flex flex-column">
+                                <div class="post-img">
+                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
+                                </div>
+
+                                <h2 class="title">
+                                    <a href="#!">제주</a><br>
+                                    <span class="plan-title">제주 2박3일</span>
+                                </h2>
+
+                                <div class="meta-top">
+                                    <ul>
+                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
+                                    </ul>
+                                </div>
+
+                                <div class="content">
+                                    <p class="plan-date">
+                                        2022-07-04 ~ 2022-07-06
+                                    </p>
+                                </div>
+
+                                <div class="read-more mt-auto align-self-end">
+                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </article>
+                        </div><!-- End post list item -->
+
+                        <div class="col-lg-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <!--Default checkbox-->
+                                </label>
+                            </div>
+                            <article class="d-flex flex-column">
+                                <div class="post-img">
+                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
+                                </div>
+
+                                <h2 class="title">
+                                    <a href="#!">제주</a><br>
+                                    <span class="plan-title">제주 2박3일</span>
+                                </h2>
+
+                                <div class="meta-top">
+                                    <ul>
+                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
+                                    </ul>
+                                </div>
+
+                                <div class="content">
+                                    <p class="plan-date">
+                                        2022-07-04 ~ 2022-07-06
+                                    </p>
+                                </div>
+
+                                <div class="read-more mt-auto align-self-end">
+                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </article>
+                        </div><!-- End post list item -->
+
+                        <div class="col-lg-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <!--Default checkbox-->
+                                </label>
+                            </div>
+                            <article class="d-flex flex-column">
+                                <div class="post-img">
+                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
+                                </div>
+
+                                <h2 class="title">
+                                    <a href="#!">제주</a><br>
+                                    <span class="plan-title">제주 2박3일</span>
+                                </h2>
+
+                                <div class="meta-top">
+                                    <ul>
+                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
+                                    </ul>
+                                </div>
+
+                                <div class="content">
+                                    <p class="plan-date">
+                                        2022-07-04 ~ 2022-07-06
+                                    </p>
+                                </div>
+
+                                <div class="read-more mt-auto align-self-end">
+                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </article>
+                        </div><!-- End post list item -->
+
+                        <div class="col-lg-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <!--Default checkbox-->
+                                </label>
+                            </div>
+                            <article class="d-flex flex-column">
+                                <div class="post-img">
+                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
+                                </div>
+
+                                <h2 class="title">
+                                    <a href="#!">제주</a><br>
+                                    <span class="plan-title">제주 2박3일</span>
+                                </h2>
+
+                                <div class="meta-top">
+                                    <ul>
+                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
+                                    </ul>
+                                </div>
+
+                                <div class="content">
+                                    <p class="plan-date">
+                                        2022-07-04 ~ 2022-07-06
+                                    </p>
+                                </div>
+
+                                <div class="read-more mt-auto align-self-end">
+                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </article>
+                        </div><!-- End post list item -->
+
+                        <div class="col-lg-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <!--Default checkbox-->
+                                </label>
+                            </div>
+                            <article class="d-flex flex-column">
+                                <div class="post-img">
+                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
+                                </div>
+
+                                <h2 class="title">
+                                    <a href="#!">제주</a><br>
+                                    <span class="plan-title">제주 2박3일</span>
+                                </h2>
+
+                                <div class="meta-top">
+                                    <ul>
+                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
+                                    </ul>
+                                </div>
+
+                                <div class="content">
+                                    <p class="plan-date">
+                                        2022-07-04 ~ 2022-07-06
+                                    </p>
+                                </div>
+
+                                <div class="read-more mt-auto align-self-end">
+                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </article>
+                        </div><!-- End post list item -->
+
+                        <div class="col-lg-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <!--Default checkbox-->
+                                </label>
+                            </div>
+                            <article class="d-flex flex-column">
+                                <div class="post-img">
+                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
+                                </div>
+
+                                <h2 class="title">
+                                    <a href="#!">제주</a><br>
+                                    <span class="plan-title">제주 2박3일</span>
+                                </h2>
+
+                                <div class="meta-top">
+                                    <ul>
+                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
+                                    </ul>
+                                </div>
+
+                                <div class="content">
+                                    <p class="plan-date">
+                                        2022-07-04 ~ 2022-07-06
+                                    </p>
+                                </div>
+
+                                <div class="read-more mt-auto align-self-end">
+                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </article>
+                        </div><!-- End post list item -->
+
+                        <div class="col-lg-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <!--Default checkbox-->
+                                </label>
+                            </div>
+                            <article class="d-flex flex-column">
+                                <div class="post-img">
+                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
+                                </div>
+
+                                <h2 class="title">
+                                    <a href="#!">제주</a><br>
+                                    <span class="plan-title">제주 2박3일</span>
+                                </h2>
+
+                                <div class="meta-top">
+                                    <ul>
+                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
+                                    </ul>
+                                </div>
+
+                                <div class="content">
+                                    <p class="plan-date">
+                                        2022-07-04 ~ 2022-07-06
+                                    </p>
+                                </div>
+
+                                <div class="read-more mt-auto align-self-end">
+                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </article>
+                        </div><!-- End post list item -->
+
+                        <div class="col-lg-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <!--Default checkbox-->
+                                </label>
+                            </div>
+                            <article class="d-flex flex-column">
+                                <div class="post-img">
+                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
+                                </div>
+
+                                <h2 class="title">
+                                    <a href="#!">제주</a><br>
+                                    <span class="plan-title">제주 2박3일</span>
+                                </h2>
+
+                                <div class="meta-top">
+                                    <ul>
+                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
+                                    </ul>
+                                </div>
+
+                                <div class="content">
+                                    <p class="plan-date">
+                                        2022-07-04 ~ 2022-07-06
+                                    </p>
+                                </div>
+
+                                <div class="read-more mt-auto align-self-end">
+                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </article>
+                        </div><!-- End post list item -->
+
+                        <div class="col-lg-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <!--Default checkbox-->
+                                </label>
+                            </div>
+                            <article class="d-flex flex-column">
+                                <div class="post-img">
+                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
+                                </div>
+
+                                <h2 class="title">
+                                    <a href="#!">제주</a><br>
+                                    <span class="plan-title">제주 2박3일</span>
+                                </h2>
+
+                                <div class="meta-top">
+                                    <ul>
+                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
+                                    </ul>
+                                </div>
+
+                                <div class="content">
+                                    <p class="plan-date">
+                                        2022-07-04 ~ 2022-07-06
+                                    </p>
+                                </div>
+
+                                <div class="read-more mt-auto align-self-end">
+                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </article>
+                        </div><!-- End post list item -->
+
+                    </div>
+
+                    <div class="blog-pagination">
+                        <ul class="justify-content-center">
+                            <li><a href="#!"><i class="bi bi-arrow-left"></i></a></li>
+                            <li class="active"><a href="#!">1</a></li>
+                            <li><a href="#!">2</a></li>
+                            <li><a href="#!">3</a></li>
+                            <li><a href="#!">4</a></li>
+                            <li><a href="#!">5</a></li>
+                            <li><a href="#!"><i class="bi bi-arrow-right"></i></a></li>
+                        </ul>
+                    </div><!-- End blog pagination -->
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section><!-- End Blog Section -->
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+{{>user_footer}}
+
+<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<div id="preloader"></div>
+
+<!-- Vendor JS Files -->
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendor/aos/aos.js"></script>
+<script src="/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/js/user/main.js"></script>
+
+
+</body>
+</html>
