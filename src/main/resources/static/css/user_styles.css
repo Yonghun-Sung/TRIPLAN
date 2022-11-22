@@ -2745,11 +2745,38 @@ section.plan-detail {
 div#plan-detail-header {
   margin-top: 10%;
   height: 250px;
-  border: 1px solid black;
-  margin-left: 6%;
-  margin-right: 6%;
+  margin-left: 16%;
+  margin-right: 16%;
+}
+div#plan-info {
+  background-image: url('/img/banner.jpg');
+  background-position: right;
+  height: 75%;
 }
 #plan-detail-header div#tab {
-  border: 1px solid black;
-  height: 28%;
+  border: 1px solid #a9a9a9;
+  height: 25%;
+  font-size: 18px;
+  padding: 1.3% 3%;
+  color: #666666;
+  letter-spacing: 1px;
+}
+#tab span.tab-name {
+  cursor: pointer;
+}
+#tab span#planTab {
+  color: #81bef0;
+  font-weight: bold;
+}
+#tab span.tab-name:hover {
+  color: #81bef0;
+  font-weight: bold;
+}
+#tab span#tab-bar {
+  padding-left: 3%;
+  padding-right: 3%;
+  color: #b3b3b3;
+}
+div.comments {
+  display: none;
 }
