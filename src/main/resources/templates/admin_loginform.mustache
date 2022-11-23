@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>TRIPLAN</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="/img/favicon.png" rel="icon">
+    <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/css/user_styles.css" rel="stylesheet">
+<style>
+    .navbar a {
+        color: rgba(0, 0, 0, 0.7);
+        font-weight: 600;
+    }
+    .navbar a:hover, .navbar a:active, .navbar .active {
+        color: #000 !important;
+    }
+</style>
+<script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+    $(function () {
+        $('#findpw-btn').click(function () {
+            alert('이메일이 전송되었습니다.');
+            $('#findpw-modal').modal('hide');
+        });
+    });
+</script>
+</head>
+<body class="page-contact">
+
+    <!-- ======= Header ======= -->
+    {{>admin_header}}
+
+    <main id="main">
+
+        <!-- ======= Contact Section ======= -->
+        <section id="contact" class="contact">
+            <div id="login-container" class="container position-relative">
+                <h2 id="title">로그인</h2>
+                <div class="row gy-4 d-flex justify-content-end">
+                    <form action="" method="post" role="form" class="php-email-form">
+                        <div class="mb-3">
+                            <input type="email" class="form-control" id="id" placeholder="이메일을 입력해주세요.">
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" id="pw" placeholder="비밀번호를 입력해주세요.">
+                        </div>
+                        <a id="forget-pw" href="#!" data-bs-toggle="modal" data-bs-target="#findpw-modal">비밀번호를 잊으셨나요?</a>
+                        <div class="text-center">
+                            <button id="login-btn" class="basic-btn">로그인</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section><!-- End Contact Section -->
+
+
+        <!--비밀번호 찾기 모달창-->
+        <div class="modal fade" id="findpw-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">비밀번호 찾기</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="id" class="col-form-label">이메일 주소</label>
+                                <input type="email" class="form-control" id="id">
+                            </div>
+                            <div class="pw-explan">
+                                <span class="ment">회원가입 시, 등록하셨던 이메일 주소를 입력해 주세요.</span>
+                                <span class="ment">임시 비밀번호를 보내드립니다.</span>
+                                <button id="findpw-btn" class="basic-btn">비밀번호 찾기</button>
+                                <span class="ment">* 메일이 도착하기까지 몇 분 정도 소요될 수 있습니다.</span>
+                                <span class="ment">* 스팸 메일함으로 발송될 수 있으니 체크 바랍니다.</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    {{>user_footer}}
+
+    <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/aos/aos.js"></script>
+    <script src="/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="/js/user/main.js"></script>
+
+</body>
+
+</html>

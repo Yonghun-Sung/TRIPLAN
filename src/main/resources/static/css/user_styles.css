@@ -2411,11 +2411,6 @@ p.plan-date {
     height: 86.4vh;
   }
 }
-@media (max-width: 1708px) {
-  .plan-container {
-    height: 81.3vh;
-  }
-}
 
 @media (max-width: 1920px) {
   div#plan-header {
@@ -2725,12 +2720,6 @@ button.add-place:hover i.bi-plus {
     width: 56%;
   }
 }
-@media (max-width: 1708px) {
-  div#plan-map {
-    width: 50%;
-  }
-}
-
 .placelist {
   width: 100%;
   height: auto;

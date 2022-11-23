@@ -11379,6 +11379,7 @@ body {
 }
 .sb-nav-fixed .sb-topnav {
   z-index: 1039;
+  border-bottom: 1px solid #c9c9c9;
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav {
   width: 225px;
@@ -11390,6 +11391,7 @@ body {
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav .sb-sidenav .sb-sidenav-menu {
   overflow-y: auto;
+  border-right: 1px solid #c9c9c9;
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_content {
   padding-left: 225px;
@@ -11698,4 +11700,20 @@ body {
   width: 20px !important;
   font-size: 0.75rem;
   border-radius: 0.25rem !important;
+}
+
+/*admin_bar*/
+img#logo {
+    width: 50%;
+}
+a#navbarDropdown {
+    color: #333333;
+}
+footer.py-4.bg-light.mt-auto {
+    background-color: #fff !important;
+}
+
+button#btn{
+    margin : auto;
+    display : block
 }
