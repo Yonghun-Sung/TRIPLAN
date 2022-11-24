@@ -13,14 +13,8 @@ public class LoginService {
     }
 
     // 로그인
-    public String loginUser(UserVo user) {
-        String id = loginMapper.loginUser(user);
-        return id;
-    }
-
-    // 닉네임 가져오기(아이디 사용): header
-    public String getNickname(String id) {
-        String nickname = loginMapper.getNickname(id);
-        return nickname;
+    public UserVo loginUser(UserVo loginInfo) {
+        UserVo user = loginMapper.loginUser(loginInfo);
+        return user;
     }
 }

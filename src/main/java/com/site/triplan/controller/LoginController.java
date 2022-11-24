@@ -28,36 +28,21 @@ public class LoginController {
 
     // 로그인
     @PostMapping("/loginform")
-    public String loginUser(Model model, HttpServletRequest request, UserVo user) {
-        String id = loginService.loginUser(user);
+    public String loginUser(Model model, HttpServletRequest request, UserVo loginInfo) {
+        UserVo user = loginService.loginUser(loginInfo);
         String view = "";
 
-        if (id == null) {
+        if (user.getId() == null) {
             model.addAttribute("errCode", "1");
             view = "redirect:/triplan/loginform?errCode=1";
         } else {
-            // id 세션에 심어두고, 메인으로 이동
             HttpSession session = request.getSession();
-            session.setAttribute("id", id);         // 세션에 id 심어놓음
-            String checkid = (String)session.getAttribute("id");
-            System.out.println(checkid);
+            session.setAttribute("session_id", user.getId());               // 세션에 id 넣음
+            session.setAttribute("session_nickname", user.getNickname());   // 세션에 nickname 넣음
             view = "redirect:/triplan/main";
         }
         return view;
     }
-
-    // 헤더 (로그인/비로그인 상태)
-    @GetMapping("/user_header")
-    public String showUserHeader(Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        String id = (String)session.getAttribute("id");
-        if (id != null) {
-            String nickname = loginService.getNickname(id);
-            model.addAttribute("nickname", nickname);
-        }
-        return "user_header";
-    }
-
 
     // 로그아웃
     @GetMapping("/logout")
