@@ -7,11 +7,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserService {
+public class AdminService {
 
     private AdminMapper adminMapper;
+    private AdminMapper adminMapper2;
 
-    public UserService(AdminMapper adminMapper) {
+
+    public AdminService(AdminMapper adminMapper) {
         this.adminMapper = adminMapper;
     }
 
