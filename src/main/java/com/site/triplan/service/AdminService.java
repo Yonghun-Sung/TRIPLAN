@@ -10,6 +10,8 @@ import java.util.List;
 public class AdminService {
 
     private AdminMapper adminMapper;
+    private AdminMapper adminMapper2;
+
 
     public AdminService(AdminMapper adminMapper) {
         this.adminMapper = adminMapper;
