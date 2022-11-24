@@ -70,7 +70,7 @@
                         <div class="profilePhotoContainer">
                             <div class="profilePhoto-text" id="profilePhoto">이</div> <!--그냥 정적으로 이 라고 써놓음-->
                         </div>
-                        <div class="text">이름름</div><!--여기도 정적으로 넣음-->
+                        <div class="text">{{userprofile.nickname}}</div>
                         <button class="btn-normal" onclick="location.href='/triplan/myprofile'">프로필 수정</button>
                     </div>
                     <!--나의 일정, 댓글, 좋아요한 글 인덱스 버튼-->
@@ -116,7 +116,7 @@
                     <div class="delete-buttonbox">
                         <!--<button type="button" class="btn btn-outline-primary">선택삭제</button>-->
                         <button type="button" class="btn btn-outline-primary" id="pick-btn">전체선택</button>
-                        <button type="button" class="btn btn-primary" id="delete_btn">삭제</button>
+                        <button type="button" class="btn btn-primary" id="delete-btn">삭제</button>
                     </div>
 
 

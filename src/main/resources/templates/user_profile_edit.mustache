@@ -71,7 +71,7 @@
             <h3 id="title" style="text-align: center;">회원정보수정</h3>
             <div class="top-container">
                 <div class="profilePhotoContainer">
-                    <div class="profilePhoto-text" id="profilePhoto">김</div> <!--그냥 정적으로 이 라고 써놓음-->
+                    <div class="profilePhoto-text" id="profilePhoto">{{firstletterNickname}}</div> <!--그냥 정적으로 이 라고 써놓음-->
                 </div>
                 <div class="text">{{userprofile.nickname}}</div><!--여기도 정적으로 넣음-->
             </div>
@@ -119,30 +119,30 @@
     </section><!-- End Contact Section -->
 
 
-    <!-- 회원탈퇴 Modal -->
+    <!-- 회원탈퇴 Modal창 -->
     <div class="modal fade" id="userDrop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">회원 탈퇴</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    사용하고 계신 계정을 탈퇴할 경우 복구가 불가능합니다. 탈퇴 후 회원 정보 및 서비스 이용기록은 모두 삭제되오니 신중하게 선택하여
-                    주시기 바랍니다.
-                    <br><br>
-                    회원탈퇴를 위해 비밀번호를 입력해주세요.
-                    <br><br>
-                    <form id="submitForm" method="post">
-                        <div>
-                            <input type="password" name="password" placeholder="비밀번호 입력" required/>
+                    <form>
+                        <div class="mb-3">
+                            사용하고 계신 계정을 탈퇴할 경우 복구가 불가능합니다.<br>탈퇴 후 회원 정보 및 서비스 이용기록은 모두 삭제되오니 신중하게 선택하여
+                            주시기 바랍니다.
+                        </div>
+                        <div class="mb-3">
+                            <label for="id" class="col-form-label">비밀번호 입력 후 탈퇴됩니다.</label>
+                            <input type="password" class="form-control" id="id" placeholder="비밀번호 입력" required/>
                         </div>
                     </form>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                    <button type="button" class="btn btn-primary">회원 탈퇴</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancel-btn">취소</button>
+                    <button type="button" class="btn btn-primary" id="modal-drop-btn">회원 탈퇴</button>
                 </div>
             </div>
         </div>

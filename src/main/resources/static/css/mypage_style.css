@@ -2544,7 +2544,7 @@ button#pick-btn {
     font-weight: 600;
     margin-left: 1110px
 }
-button#delete_btn{
+button#delete-btn{
     background: var(--color-primary);
     color: #fff;
     /*display: block;*/

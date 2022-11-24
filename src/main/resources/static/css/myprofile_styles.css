@@ -2824,3 +2824,29 @@ button.basic-btn2 {
     color: #000000;
 }
 
+/*user_profile_edit.mustache 회원정보수정 모달 취소, 탈퇴 버튼*/
+button#cancel-btn{
+    background: #6C757D;
+    color: #fff;
+    display: inline-box;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    border: none;
+    width: 45%;
+    height: 54px;
+    margin: 2%;
+
+}
+
+button#modal-drop-btn{
+background: var(--color-primary);
+    color: #fff;
+    display: inline-box;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    border: none;
+    width: 45%;
+    height: 54px;
+    margin: 2%;
+
+}

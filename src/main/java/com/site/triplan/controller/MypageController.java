@@ -23,6 +23,10 @@ public class MypageController {
 
     @RequestMapping("/mypage/like")
     public String mypagelike(Model model) {
+        /*맨 위 닉네임*/
+        UserVo userProfile = mypageService.getMyProfile();
+        model.addAttribute("userprofile", userProfile);
+        
         Integer planCount = mypageService.getAllPlanCount();
         Integer replyCount = mypageService.getAllReplyCount();
         Integer likeCount = mypageService.getAllLikeCount();
@@ -39,6 +43,10 @@ public class MypageController {
 
     @RequestMapping("/mypage/")
     public String mypage(Model model) {
+        /*맨 위 닉네임*/
+        UserVo userProfile = mypageService.getMyProfile();
+        model.addAttribute("userprofile", userProfile);
+        
         Integer planCount = mypageService.getAllPlanCount();
         Integer replyCount = mypageService.getAllReplyCount();
         Integer likeCount = mypageService.getAllLikeCount();
@@ -55,12 +63,18 @@ public class MypageController {
     public String myprofile(Model model) {
 
         UserVo userProfile = mypageService.getMyProfile();
+        Character nicknameFirst = userProfile.getNickname().charAt(0);
         model.addAttribute("userprofile", userProfile);
+        model.addAttribute("firstletterNickname", nicknameFirst);//받아온 UserVo에서 닉네임만 string으로 넘김,[0]인덱스 한글자만 보여주려고
         return "user_profile_edit";
     }
 
     @RequestMapping("/mypage/reply")
     public String mypagereply(Model model) {
+        /*맨 위 닉네임*/
+        UserVo userProfile = mypageService.getMyProfile();
+        model.addAttribute("userprofile", userProfile);
+
         Integer planCount = mypageService.getAllPlanCount();
         Integer replyCount = mypageService.getAllReplyCount();
         Integer likeCount = mypageService.getAllLikeCount();
