@@ -1,6 +1,7 @@
 package com.site.triplan.service;
 
 import com.site.triplan.mapper.AdminMapper;
+import com.site.triplan.vo.ReportVo;
 import com.site.triplan.vo.UserVo;
 import org.springframework.stereotype.Service;
 
@@ -10,14 +11,14 @@ import java.util.List;
 public class AdminService {
 
     private AdminMapper adminMapper;
-    private AdminMapper adminMapper2;
-
 
     public AdminService(AdminMapper adminMapper) {
         this.adminMapper = adminMapper;
     }
 
-    public List<UserVo> getAllUser() {
-        return adminMapper.findAll();
-    }
+    public List<UserVo> postAllUser() {return adminMapper.findAll();}
+    public List<UserVo> postBanUser() { return adminMapper.findBan(); }
+    public List<UserVo> postDropUser() { return adminMapper.findDrop(); }
+    public List<ReportVo> postUnreport() { return adminMapper.findUnreport(); }
+
 }

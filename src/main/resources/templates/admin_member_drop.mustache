@@ -40,94 +40,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
+                                    {{#posts}}
+                                        <tr>
+                                            <td>{{id}}</td>
+                                            <td>{{name}}</td>
+                                            <td>{{nickname}}</td>
+                                            <td>{{cnt}}</td>
+                                            <td>{{state}}</td>
+                                            <td>{{dt}}</td>
+                                        </tr>
+                                    {{/posts}}
                                     </tbody>
                                 </table>
                             </div>
@@ -163,6 +85,7 @@
                     ordering: true,
 	                info: false,
 	                paging: true,
+	                order: [ [ 5, "asc" ] ]
                 });
             }   );
         </script>

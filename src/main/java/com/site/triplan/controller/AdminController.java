@@ -1,6 +1,6 @@
 package com.site.triplan.controller;
 
-import com.site.triplan.service.UserService;
+import com.site.triplan.service.AdminService;
 import com.site.triplan.vo.UserVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,10 +12,10 @@ import java.util.List;
 @RequestMapping("/triplan")
 public class AdminController {
 
-    private UserService userService;
+    private AdminService adminService;
 
-    public AdminController(UserService userService){
-        this.userService = userService;
+    public AdminController(AdminService adminService){
+        this.adminService = adminService;
     }
 
     @RequestMapping("/admin")
@@ -35,24 +35,22 @@ public class AdminController {
 
     @RequestMapping("/memberAll")
     public String admin_member_all(Model model) {
-            List<UserVo> userVoList = userService.getAllUser();
+            List<UserVo> userVoList = adminService.postAllUser();
             model.addAttribute("posts", userVoList);
         return "admin_member_all";
     }
 
-//    @RequestMapping(value = "/triplan/memberAll")
-//    public String index(Model model){
-//        List<UserVo> userVoList = userService.getAllUser();
-//        return "/trinplan/adminAll";
-//    }
-
     @RequestMapping("/memberBan")
-    public String admin_member_ban() {
+    public String admin_member_ban(Model model) {
+        List<UserVo> userVoList= adminService.postBanUser();    // 정지회원 데이터 받아오는 함수
+        model.addAttribute("posts", userVoList);    // 정지회원 데이터 전달
         return "admin_member_ban";
     }
 
     @RequestMapping("/memberDrop")
-    public String admin_member_drop() {
+    public String admin_member_drop(Model model) {
+        List<UserVo> userVoList = adminService.postDropUser();
+        model.addAttribute("posts", userVoList);
         return "admin_member_drop";
     }
 
@@ -65,6 +63,5 @@ public class AdminController {
     public String admin_report_proc() {
         return "admin_report_proc";
     }
-
 
 }

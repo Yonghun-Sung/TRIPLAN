@@ -14,7 +14,11 @@ public class UserVo {
     String pw;
     String name;
     String nickname;
+    String reg_dt;
+    String dt;
+    String state;
+    Integer ban_flag;
+    Integer cnt;
     Integer user_code;
-
 
 }

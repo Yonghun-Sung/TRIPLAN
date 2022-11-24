@@ -3,8 +3,67 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.site.triplan.mapper.AdminMapper">
     <select id="findAll" resultType="com.site.triplan.vo.UserVo">
-        SELECT *
-        FROM user_info
-        ORDER BY id DESC
+        select
+        ui.id,
+        ui.name,
+        ui.nickname,
+        u.reg_dt,
+        u.ban_flag,
+        if(u.ban_flag = 1, '정지', '정상') as state,
+        count(rp.result_code) as cnt
+        from user_info ui inner join user u
+        on ui.user_code = u.code
+        left join reply rpy
+        on u.code = rpy.user_code
+        left join report_reg rr
+        on rpy.code = rr.reply_code
+        left join report_proc rp
+        on rr.code = rp.reg_code
+        -- where rp.result_code = 1
+        group by ui.id
+        order by u.reg_dt;
     </select>
+    <select id="findBan" resultType="com.site.triplan.vo.UserVo">
+        select
+        ui.id,
+        ui.name,
+        ui.nickname,
+        u.reg_dt,
+        u.ban_flag,
+        if(u.ban_flag = 1, '정지', '정상') as state,
+        count(rp.result_code) as cnt
+        from user_info ui inner join user u
+        on ui.user_code = u.code
+        left join reply rpy
+        on u.code = rpy.user_code
+        left join report_reg rr
+        on rpy.code = rr.reply_code
+        left join report_proc rp
+        on rr.code = rp.reg_code
+        where rp.result_code = 1 group by ui.id
+        order by u.reg_dt;
+    </select>
+    <select id="findDrop" resultType="com.site.triplan.vo.UserVo">
+        select
+        d.id,
+        d.name,
+        d.nickname,
+        d.dt,
+        u.ban_flag,
+        if(d.code is not null, '탈퇴', '정상') as state,
+        count(rp.result_code) as cnt
+        from user u join `drop` d
+        on u.code = d.user_code
+        left join reply rpy
+        on u.code = rpy.user_code
+        left join report_reg rr
+        on rpy.code = rr.reply_code
+        left join report_proc rp
+        on rr.code = rp.reg_code
+        group by d.id
+        order by u.reg_dt;
+    </select>
+    <!--    <select id="findUnreport" resultType="com.site.triplan.vo.ReportVo">-->
+    <!--        -->
+    <!--    </select>-->
 </mapper>

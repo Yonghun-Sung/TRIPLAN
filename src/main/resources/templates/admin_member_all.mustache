@@ -47,91 +47,11 @@
                                         <td>{{id}}</td>
                                         <td>{{name}}</td>
                                         <td>{{nickname}}</td>
-                                        <td> </td>
-                                        <td></td>
-                                        <td>2011/04/25</td>
+                                        <td>{{cnt}}</td>
+                                        <td>{{state}}</td>
+                                        <td>{{reg_dt}}</td>
                                     </tr>
                                     {{/posts}}
-<!--                                    <tr>-->
-<!--                                        <td>yonghun@naver.com</td>-->
-<!--                                        <td>성용훈</td>-->
-<!--                                        <td>yongyong</td>-->
-<!--                                        <td>0</td>-->
-<!--                                        <td>정상</td>-->
-<!--                                        <td>2011/04/25</td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>yonghun@naver.com</td>-->
-<!--                                        <td>성용훈</td>-->
-<!--                                        <td>yongyong</td>-->
-<!--                                        <td>0</td>-->
-<!--                                        <td>정상</td>-->
-<!--                                        <td>2011/04/25</td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>yonghun@naver.com</td>-->
-<!--                                        <td>성용훈</td>-->
-<!--                                        <td>yongyong</td>-->
-<!--                                        <td>0</td>-->
-<!--                                        <td>정상</td>-->
-<!--                                        <td>2011/04/25</td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>yonghun@naver.com</td>-->
-<!--                                        <td>성용훈</td>-->
-<!--                                        <td>yongyong</td>-->
-<!--                                        <td>0</td>-->
-<!--                                        <td>정상</td>-->
-<!--                                        <td>2011/04/25</td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>yonghun@naver.com</td>-->
-<!--                                        <td>성용훈</td>-->
-<!--                                        <td>yongyong</td>-->
-<!--                                        <td>0</td>-->
-<!--                                        <td>정상</td>-->
-<!--                                        <td>2011/04/25</td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>yonghun@naver.com</td>-->
-<!--                                        <td>성용훈</td>-->
-<!--                                        <td>yongyong</td>-->
-<!--                                        <td>0</td>-->
-<!--                                        <td>정상</td>-->
-<!--                                        <td>2011/04/25</td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>yonghun@naver.com</td>-->
-<!--                                        <td>성용훈</td>-->
-<!--                                        <td>yongyong</td>-->
-<!--                                        <td>0</td>-->
-<!--                                        <td>정상</td>-->
-<!--                                        <td>2011/04/25</td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>yonghun@naver.com</td>-->
-<!--                                        <td>성용훈</td>-->
-<!--                                        <td>yongyong</td>-->
-<!--                                        <td>0</td>-->
-<!--                                        <td>정상</td>-->
-<!--                                        <td>2011/04/25</td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>yonghun@naver.com</td>-->
-<!--                                        <td>성용훈</td>-->
-<!--                                        <td>yongyong</td>-->
-<!--                                        <td>0</td>-->
-<!--                                        <td>정상</td>-->
-<!--                                        <td>2011/04/25</td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>yonghun@naver.com</td>-->
-<!--                                        <td>성용훈</td>-->
-<!--                                        <td>yongyong</td>-->
-<!--                                        <td>0</td>-->
-<!--                                        <td>정상</td>-->
-<!--                                        <td>2011/04/25</td>-->
-<!--                                    </tr>-->
                                     </tbody>
                                 </table>
                             </div>
@@ -166,7 +86,8 @@
 	                searching: true,
                     ordering: true,
 	                info: false,
-	                paging: true
+	                paging: true,
+	                order: [ [ 5, "asc" ] ]
                 });
             }   );
         </script>
