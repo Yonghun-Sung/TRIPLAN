@@ -3,6 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <mappers>
+        <mapper resource = "mybatis/mapper/login-mapper.xml"/>
         <mapper resource = "mybatis/mapper/admin-mapper.xml"/>
         <mapper resource = "mybatis/mapper/mypage-mapper.xml"/>
     </mappers>

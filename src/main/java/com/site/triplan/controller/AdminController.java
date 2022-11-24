@@ -1,6 +1,6 @@
 package com.site.triplan.controller;
 
-import com.site.triplan.service.UserService;
+import com.site.triplan.service.AdminService;
 import com.site.triplan.vo.UserVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,10 +12,10 @@ import java.util.List;
 @RequestMapping("/triplan")
 public class AdminController {
 
-    private UserService userService;
+    private AdminService adminService;
 
-    public AdminController(UserService userService){
-        this.userService = userService;
+    public AdminController(AdminService adminService){
+        this.adminService = adminService;
     }
 
     @RequestMapping("/admin")
@@ -35,7 +35,7 @@ public class AdminController {
 
     @RequestMapping("/memberAll")
     public String admin_member_all(Model model) {
-            List<UserVo> userVoList = userService.getAllUser();
+            List<UserVo> userVoList = adminService.getAllUser();
             model.addAttribute("posts", userVoList);
         return "admin_member_all";
     }

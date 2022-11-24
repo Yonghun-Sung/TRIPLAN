@@ -20,25 +20,28 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <!-- ① 비로그인 -->
+                    <!-- ① 비로그인 (session에 id 정보 없음)-->
+                    {{^id}}
                     <li><a href="/triplan/planinsertform">일정만들기</a></li>
                     <li><a href="/triplan/planlist">일정보기</a></li>
                     <li><a href="#">이용방법</a></li>
                     <li><a href="/triplan/loginform">로그인</a></li>
+                    {{/id}}
 
-                    <!-- ② 로그인 -->
-                    <!--
-                    <li><a href="#" class="active">일정만들기</a></li>
-                    <li><a href="#">일정보기</a></li>
+                    <!-- ② 로그인 (session에 id 정보 있음)-->
+                    {{#id}}
+                    <li><a href="/triplan/planinsertform" class="active">일정만들기</a></li>
+                    <li><a href="/triplan/planlist">일정보기</a></li>
                     <li><a href="#">이용방법</a></li>
                     <li class="dropdown">
-                        <a href="#"><span>nickname 님</span><i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                        <a href="#"><span>nick 님</span><i class="bi bi-chevron-down dropdown-indicator"></i></a>
                         <ul>
-                            <li><a href="#">마이페이지</a></li>
-                            <li><a href="#">로그아웃</a></li>
+                            <li><a href="/triplan/mypage">마이페이지</a></li>
+                            <li><a href="/triplan/logout">로그아웃</a></li>
                         </ul>
                     </li>
-                     -->
+                    {{/id}}
+
                 </ul>
             </nav>
             <!-- .navbar -->

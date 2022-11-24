@@ -40,6 +40,12 @@
 <script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
     $(function () {
+        let urlParams = new URL(location.href).searchParams;
+        let errCode = urlParams.get('errCode');
+        if (errCode == "1") {
+            alert('이메일 또는 비밀번호를 확인해주세요.');
+        }
+
         $('#findpw-btn').click(function () {
             alert('이메일이 전송되었습니다.');
             $('#findpw-modal').modal('hide');
@@ -59,12 +65,12 @@
             <div id="login-container" class="container position-relative">
                 <h2 id="title">로그인</h2>
                 <div class="row gy-4 d-flex justify-content-end">
-                    <form action="" method="post" role="form" class="php-email-form">
+                    <form action="/triplan/loginform" method="post" role="form" class="basic-form">
                         <div class="mb-3">
-                            <input type="email" class="form-control" id="id" placeholder="이메일을 입력해주세요.">
+                            <input type="email" name="id" class="form-control" id="id" placeholder="이메일을 입력해주세요." required>
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control" id="pw" placeholder="비밀번호를 입력해주세요.">
+                            <input type="password" name="pw" class="form-control" id="pw" placeholder="비밀번호를 입력해주세요." required>
                         </div>
                         <a id="forget-pw" href="#!" data-bs-toggle="modal" data-bs-target="#findpw-modal">비밀번호를 잊으셨나요?</a>
                         <div class="text-center">
@@ -90,7 +96,7 @@
                         <form>
                             <div class="mb-3">
                                 <label for="id" class="col-form-label">이메일 주소</label>
-                                <input type="email" class="form-control" id="id">
+                                <input type="email" class="form-control">
                             </div>
                             <div class="pw-explan">
                                 <span class="ment">회원가입 시, 등록하셨던 이메일 주소를 입력해 주세요.</span>
@@ -120,7 +126,6 @@
     <script src="/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="/vendor/php-email-form/validate.js"></script>
 
     <!-- Template Main JS File -->
     <script src="/js/user/main.js"></script>
