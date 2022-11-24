@@ -75,35 +75,35 @@
                             <div class="profilePhoto-text" id="profilePhoto">이</div> <!--그냥 정적으로 이 라고 써놓음-->
                         </div>
                         <div class="text">이름름</div><!--여기도 정적으로 넣음-->
-                        <button class="btn-normal" onclick="goToMyPage()">프로필 수정</button>
+                        <button class="btn-normal" onclick="location.href='/triplan/myprofile'">프로필 수정</button>
                     </div>
                     <div class="row">
                         <div class="index-section">
                             <!--나의 일정-->
-                            <div class="index-circle" onclick="myPlanData()">
+                            <div class="index-circle" onclick="location.href='/triplan/mypage'">
                                 <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
                                     <b>나의 일정</b>
                                 </h6>
                                 <div>
-                                    <h4 style="line-height: 1; font-weight: 700" id="myPlan">6</h4><!--내가 정적으로 걍 6넣음-->
+                                    <h4 style="line-height: 1; font-weight: 700" id="myPlan">{{plancount}}</h4><!--내가 정적으로 걍 6넣음-->
                                 </div>
                             </div>
                             <!--나의 댓글-->
-                            <div class="index-circle" onclick="myReplyData()">
+                            <div class="index-circle" onclick="location.href='/triplan/mypage/reply'">
                                 <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
                                     <b>나의 댓글</b>
                                 </h6>
                                 <div>
-                                    <h4 style="line-height: 1; font-weight: 700" id="myReply">5</h4><!--내가 정적으로 걍 5넣음-->
+                                    <h4 style="line-height: 1; font-weight: 700" id="myReply">{{replycount}}</h4><!--내가 정적으로 걍 5넣음-->
                                 </div>
                             </div>
                             <!--좋아요한 일정-->
-                            <div class="index-circle" onclick="myLikeData()">
+                            <div class="index-circle" onclick="location.href='/triplan/mypage/like'">
                                 <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
                                     <b>좋아요한 일정</b>
                                 </h6>
                                 <div>
-                                    <h4 style="line-height: 1; font-weight: 700" id="myLike">10</h4><!--내가 정적으로 걍 10넣음-->
+                                    <h4 style="line-height: 1; font-weight: 700" id="myLike">{{likecount}}</h4><!--내가 정적으로 걍 10넣음-->
                                 </div>
                             </div>
                         </div>
@@ -118,8 +118,8 @@
                     <!--삭제 버튼-->
                     <div class="delete-buttonbox">
                         <!--<button type="button" class="btn btn-outline-primary">선택삭제</button>-->
-                        <button type="button" class="btn btn-outline-primary" style="margin-left: 1110px;">선택삭제</button>
-                        <button type="button" class="btn btn-primary">전체삭제</button>
+                        <button type="button" class="btn btn-outline-primary" id="pick-btn">전체선택</button>
+                        <button type="button" class="btn btn-primary" id="delete_btn">삭제</button>
                     </div>
 
                 </div>
@@ -133,7 +133,7 @@
                 <div id="planlist-out-box" class="col-lg-12">
 
                     <div id="planlist-in-box" class="row gy-5 posts-list">
-
+                        {{#likelist}}
                         <div class="col-lg-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -143,25 +143,26 @@
                             </div>
                             <article class="d-flex flex-column">
                                 <div class="post-img">
-                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
+                                    <!--<a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>-->
+                                    <a href="#!"><img src="http://img.earthtory.com/img/place_img/312/7317_0_et.jpg" alt="" class="img-fluid"></a>
                                 </div>
 
                                 <h2 class="title">
-                                    <a href="#!">여행지역나오는 곳</a><br>
-                                    <span class="plan-title">글 제목</span>
+                                    <a href="#!">{{name}}</a><br>
+                                    <span class="plan-title">{{title}}</span>
                                 </h2>
 
                                 <div class="meta-top">
                                     <ul>
-                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>닉네임</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>장소개수</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>조회수</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>{{nickname}}</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>{{placecount}}</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>{{views}}</li>
                                     </ul>
                                 </div>
 
                                 <div class="content">
                                     <p class="plan-date">
-                                        2022-11-14 ~ 2022-11-18
+                                        {{start_dt}} ~ {{end_dt}}
                                     </p>
                                 </div>
 
@@ -170,48 +171,13 @@
                                 </div>
                             </article>
                         </div><!-- End post list item -->
-
+                        {{/likelist}}
+<!--
                         <div class="col-lg-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
-                                </label>
-                            </div>
-                            <article class="d-flex flex-column">
-                                <div class="post-img">
-                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                                </div>
-
-                                <h2 class="title">
-                                    <a href="#!">제주</a><br>
-                                    <span class="plan-title">제주 2박3일</span>
-                                </h2>
-
-                                <div class="meta-top">
-                                    <ul>
-                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                                    </ul>
-                                </div>
-
-                                <div class="content">
-                                    <p class="plan-date">
-                                        2022-07-04 ~ 2022-07-06
-                                    </p>
-                                </div>
-
-                                <div class="read-more mt-auto align-self-end">
-                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
-                        </div><!-- End post list item -->
-                        <div class="col-lg-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
                             <article class="d-flex flex-column">
@@ -242,13 +208,12 @@
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </article>
-                        </div><!-- End post list item -->
-
+                        </div>&lt;!&ndash; End post list item &ndash;&gt;
                         <div class="col-lg-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
                             <article class="d-flex flex-column">
@@ -279,13 +244,13 @@
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </article>
-                        </div><!-- End post list item -->
+                        </div>&lt;!&ndash; End post list item &ndash;&gt;
 
                         <div class="col-lg-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
                             <article class="d-flex flex-column">
@@ -316,13 +281,13 @@
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </article>
-                        </div><!-- End post list item -->
+                        </div>&lt;!&ndash; End post list item &ndash;&gt;
 
                         <div class="col-lg-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
                             <article class="d-flex flex-column">
@@ -353,13 +318,13 @@
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </article>
-                        </div><!-- End post list item -->
+                        </div>&lt;!&ndash; End post list item &ndash;&gt;
 
                         <div class="col-lg-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
                             <article class="d-flex flex-column">
@@ -390,13 +355,13 @@
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </article>
-                        </div><!-- End post list item -->
+                        </div>&lt;!&ndash; End post list item &ndash;&gt;
 
                         <div class="col-lg-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
                             <article class="d-flex flex-column">
@@ -427,13 +392,13 @@
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </article>
-                        </div><!-- End post list item -->
+                        </div>&lt;!&ndash; End post list item &ndash;&gt;
 
                         <div class="col-lg-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
                             <article class="d-flex flex-column">
@@ -464,13 +429,13 @@
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </article>
-                        </div><!-- End post list item -->
+                        </div>&lt;!&ndash; End post list item &ndash;&gt;
 
                         <div class="col-lg-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
                             <article class="d-flex flex-column">
@@ -501,13 +466,13 @@
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </article>
-                        </div><!-- End post list item -->
+                        </div>&lt;!&ndash; End post list item &ndash;&gt;
 
                         <div class="col-lg-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
                             <article class="d-flex flex-column">
@@ -538,13 +503,13 @@
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </article>
-                        </div><!-- End post list item -->
+                        </div>&lt;!&ndash; End post list item &ndash;&gt;
 
                         <div class="col-lg-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
                             <article class="d-flex flex-column">
@@ -575,7 +540,45 @@
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </article>
-                        </div><!-- End post list item -->
+                        </div>&lt;!&ndash; End post list item &ndash;&gt;
+
+                        <div class="col-lg-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
+                                </label>
+                            </div>
+                            <article class="d-flex flex-column">
+                                <div class="post-img">
+                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
+                                </div>
+
+                                <h2 class="title">
+                                    <a href="#!">제주</a><br>
+                                    <span class="plan-title">제주 2박3일</span>
+                                </h2>
+
+                                <div class="meta-top">
+                                    <ul>
+                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
+                                    </ul>
+                                </div>
+
+                                <div class="content">
+                                    <p class="plan-date">
+                                        2022-07-04 ~ 2022-07-06
+                                    </p>
+                                </div>
+
+                                <div class="read-more mt-auto align-self-end">
+                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </article>
+                        </div>&lt;!&ndash; End post list item &ndash;&gt;
+-->
 
                     </div>
 

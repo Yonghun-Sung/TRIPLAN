@@ -71,36 +71,36 @@
                             <div class="profilePhoto-text" id="profilePhoto">이</div> <!--그냥 정적으로 이 라고 써놓음-->
                         </div>
                         <div class="text">이름름</div><!--여기도 정적으로 넣음-->
-                        <button class="btn-normal" onclick="goToMyPage()">프로필 수정</button>
+                        <button class="btn-normal" onclick="location.href='/triplan/myprofile'">프로필 수정</button>
                     </div>
                     <!--나의 일정, 댓글, 좋아요한 글 인덱스 버튼-->
                     <div class="row">
                         <div class="index-section">
                             <!--나의 일정-->
-                            <div class="index-circle" onclick="myPlanData()">
+                            <div class="index-circle" onclick="location.href='/triplan/mypage'">
                                 <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
                                     <b>나의 일정</b>
                                 </h6>
                                 <div>
-                                    <h4 style="line-height: 1; font-weight: 700" id="myPlan">6</h4><!--내가 정적으로 걍 6넣음-->
+                                    <h4 style="line-height: 1; font-weight: 700" id="myPlan">{{plancount}}</h4><!--내가 정적으로 걍 6넣음-->
                                 </div>
                             </div>
                             <!--나의 댓글-->
-                            <div class="index-circle" onclick="myReplyData()">
+                            <div class="index-circle" onclick="location.href='/triplan/mypage/reply'">
                                 <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
                                     <b>나의 댓글</b>
                                 </h6>
                                 <div>
-                                    <h4 style="line-height: 1; font-weight: 700" id="myReply">5</h4><!--내가 정적으로 걍 5넣음-->
+                                    <h4 style="line-height: 1; font-weight: 700" id="myReply">{{replycount}}</h4><!--내가 정적으로 걍 5넣음-->
                                 </div>
                             </div>
                             <!--좋아요한 일정-->
-                            <div class="index-circle" onclick="myLikeData()">
+                            <div class="index-circle" onclick="location.href='/triplan/mypage/like'">
                                 <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
                                     <b>좋아요한 일정</b>
                                 </h6>
                                 <div>
-                                    <h4 style="line-height: 1; font-weight: 700" id="myLike">10</h4><!--내가 정적으로 걍 10넣음-->
+                                    <h4 style="line-height: 1; font-weight: 700" id="myLike">{{likecount}}</h4><!--내가 정적으로 걍 10넣음-->
                                 </div>
                             </div>
                         </div>
@@ -115,8 +115,8 @@
                     <!--삭제 버튼-->
                     <div class="delete-buttonbox">
                         <!--<button type="button" class="btn btn-outline-primary">선택삭제</button>-->
-                        <button type="button" class="btn btn-outline-primary" style="margin-left: 1110px;">선택삭제</button>
-                        <button type="button" class="btn btn-primary">전체삭제</button>
+                        <button type="button" class="btn btn-outline-primary" id="pick-btn">전체선택</button>
+                        <button type="button" class="btn btn-primary" id="delete_btn">삭제</button>
                     </div>
 
 
@@ -133,6 +133,7 @@
 
                     <div id="planlist-in-box" class="row gy-5 posts-list"> <!--댓글작성일,댓글내용,여행지역,여행제목-->
                         <!--댓글 하나당 div col-lg-4인것-->
+                        {{#replies}}
                         <div class="col-lg-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -141,67 +142,41 @@
                                 </label>
                             </div>
 
-<!--                            &lt;!&ndash;댓글작성일&ndash;&gt;
-                            <div class="content">
-                                <p class="plan-date">2022-11-14</p>
-                            </div>-->
-
                             <article class="d-flex flex-column">
 
-
-
                                 <h2 class="title">
-                                    <a href="#!"class="a-region">대한민국 부산</a><br>
-                                    <span class="plan-title"><a href="#!" class="a-title">가족들과 부산여행여ㅐ행여해영앻앵ㄴㄹㄴㅇ~</a></span>
+                                    <a href="#!"class="a-region">{{name}}</a><br>
+                                    <span class="plan-title"><a href="#!" class="a-title">{{title}}</a></span>
                                 </h2>
 
                                 <div class="reply-content"> <!--여기고치는중-->
                                     <a href="#!"><!-- style="color: gray;-->
-                                        <p class="reply-p">댓글내용이 여기에 마구마구나와영!!! 내가 뭐라고달았을지는 몰라영일단최대한
-                                            다음달 부산 여행 계획중인데 참고하겠습니다 감사해욜~~!</p>
+                                        <p class="reply-p">{{content}}</p>
                                     </a>
                                 </div>
 
 
-                                <!--<div class="meta-top">
-                                                    <ul>
-                                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>닉네임</li>
-                                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>장소개수</li>
-                                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>조회수</li>
-                                                    </ul>
-                                                </div>-->
-
-                                <!--<div class="content">
-                                    <p class="plan-date">
-                                        2022-11-14 ~ 2022-11-18
-                                    </p>
-                                </div>-->
-
-                                <!--<div class="read-more mt-auto align-self-end">
-                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>-->
-
                             </article>
 
                             <div class="content">
-                                <p class="plan-date">2022-11-14</p>
+                                <p class="plan-date">{{write_dt}}</p>
                             </div>
 
                         </div>
-
-                        <!--댓글추가-->
+                        {{/replies}}
+<!--                        &lt;!&ndash;댓글추가&ndash;&gt;
                         <div class="col-lg-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
 
-                            <!--                            &lt;!&ndash;댓글작성일&ndash;&gt;
+                            &lt;!&ndash;                            &lt;!&ndash;댓글작성일&ndash;&gt;
                                                         <div class="content">
                                                             <p class="plan-date">2022-11-14</p>
-                                                        </div>-->
+                                                        </div>&ndash;&gt;
 
                             <article class="d-flex flex-column">
 
@@ -212,31 +187,31 @@
                                     <span class="plan-title"><a href="#!" class="a-title">가족들과 부산여행여ㅐ행여해영앻앵ㄴㄹㄴㅇ~</a></span>
                                 </h2>
 
-                                <div class="reply-content"> <!--여기고치는중-->
-                                    <a href="#!"><!-- style="color: gray;-->
+                                <div class="reply-content"> &lt;!&ndash;여기고치는중&ndash;&gt;
+                                    <a href="#!">&lt;!&ndash; style="color: gray;&ndash;&gt;
                                         <p class="reply-p">댓글내용이 여기에 마구마구나와영!!! 내가 뭐라고달았을지는 몰라영일단최대한
                                             다음달 부산 여행 계획중인데 참고하겠습니다 감사해욜~~!</p>
                                     </a>
                                 </div>
 
 
-                                <!--<div class="meta-top">
+                                &lt;!&ndash;<div class="meta-top">
                                                     <ul>
                                                         <li class="d-flex align-items-center"><i class="bi bi-person"></i>닉네임</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>장소개수</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-eye"></i>조회수</li>
                                                     </ul>
-                                                </div>-->
+                                                </div>&ndash;&gt;
 
-                                <!--<div class="content">
+                                &lt;!&ndash;<div class="content">
                                     <p class="plan-date">
                                         2022-11-14 ~ 2022-11-18
                                     </p>
-                                </div>-->
+                                </div>&ndash;&gt;
 
-                                <!--<div class="read-more mt-auto align-self-end">
+                                &lt;!&ndash;<div class="read-more mt-auto align-self-end">
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>-->
+                                </div>&ndash;&gt;
 
                             </article>
 
@@ -249,14 +224,14 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
 
-                            <!--                            &lt;!&ndash;댓글작성일&ndash;&gt;
+                            &lt;!&ndash;                            &lt;!&ndash;댓글작성일&ndash;&gt;
                                                         <div class="content">
                                                             <p class="plan-date">2022-11-14</p>
-                                                        </div>-->
+                                                        </div>&ndash;&gt;
 
                             <article class="d-flex flex-column">
 
@@ -267,31 +242,31 @@
                                     <span class="plan-title"><a href="#!" class="a-title">가족들과 부산여행여ㅐ행여해영앻앵ㄴㄹㄴㅇ~</a></span>
                                 </h2>
 
-                                <div class="reply-content"> <!--여기고치는중-->
-                                    <a href="#!"><!-- style="color: gray;-->
+                                <div class="reply-content"> &lt;!&ndash;여기고치는중&ndash;&gt;
+                                    <a href="#!">&lt;!&ndash; style="color: gray;&ndash;&gt;
                                         <p class="reply-p">댓글내용이 여기에 마구마구나와영!!! 내가 뭐라고달았을지는 몰라영일단최대한
                                             다음달 부산 여행 계획중인데 참고하겠습니다 감사해욜~~!</p>
                                     </a>
                                 </div>
 
 
-                                <!--<div class="meta-top">
+                                &lt;!&ndash;<div class="meta-top">
                                                     <ul>
                                                         <li class="d-flex align-items-center"><i class="bi bi-person"></i>닉네임</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>장소개수</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-eye"></i>조회수</li>
                                                     </ul>
-                                                </div>-->
+                                                </div>&ndash;&gt;
 
-                                <!--<div class="content">
+                                &lt;!&ndash;<div class="content">
                                     <p class="plan-date">
                                         2022-11-14 ~ 2022-11-18
                                     </p>
-                                </div>-->
+                                </div>&ndash;&gt;
 
-                                <!--<div class="read-more mt-auto align-self-end">
+                                &lt;!&ndash;<div class="read-more mt-auto align-self-end">
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>-->
+                                </div>&ndash;&gt;
 
                             </article>
 
@@ -304,14 +279,14 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
 
-                            <!--                            &lt;!&ndash;댓글작성일&ndash;&gt;
+                            &lt;!&ndash;                            &lt;!&ndash;댓글작성일&ndash;&gt;
                                                         <div class="content">
                                                             <p class="plan-date">2022-11-14</p>
-                                                        </div>-->
+                                                        </div>&ndash;&gt;
 
                             <article class="d-flex flex-column">
 
@@ -322,31 +297,31 @@
                                     <span class="plan-title"><a href="#!" class="a-title">가족들과 부산여행여ㅐ행여해영앻앵ㄴㄹㄴㅇ~</a></span>
                                 </h2>
 
-                                <div class="reply-content"> <!--여기고치는중-->
-                                    <a href="#!"><!-- style="color: gray;-->
+                                <div class="reply-content"> &lt;!&ndash;여기고치는중&ndash;&gt;
+                                    <a href="#!">&lt;!&ndash; style="color: gray;&ndash;&gt;
                                         <p class="reply-p">댓글내용이 여기에 마구마구나와영!!! 내가 뭐라고달았을지는 몰라영일단최대한
                                             다음달 부산 여행 계획중인데 참고하겠습니다 감사해욜~~!</p>
                                     </a>
                                 </div>
 
 
-                                <!--<div class="meta-top">
+                                &lt;!&ndash;<div class="meta-top">
                                                     <ul>
                                                         <li class="d-flex align-items-center"><i class="bi bi-person"></i>닉네임</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>장소개수</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-eye"></i>조회수</li>
                                                     </ul>
-                                                </div>-->
+                                                </div>&ndash;&gt;
 
-                                <!--<div class="content">
+                                &lt;!&ndash;<div class="content">
                                     <p class="plan-date">
                                         2022-11-14 ~ 2022-11-18
                                     </p>
-                                </div>-->
+                                </div>&ndash;&gt;
 
-                                <!--<div class="read-more mt-auto align-self-end">
+                                &lt;!&ndash;<div class="read-more mt-auto align-self-end">
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>-->
+                                </div>&ndash;&gt;
 
                             </article>
 
@@ -359,14 +334,14 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
 
-                            <!--                            &lt;!&ndash;댓글작성일&ndash;&gt;
+                            &lt;!&ndash;                            &lt;!&ndash;댓글작성일&ndash;&gt;
                                                         <div class="content">
                                                             <p class="plan-date">2022-11-14</p>
-                                                        </div>-->
+                                                        </div>&ndash;&gt;
 
                             <article class="d-flex flex-column">
 
@@ -377,31 +352,31 @@
                                     <span class="plan-title"><a href="#!" class="a-title">가족들과 부산여행여ㅐ행여해영앻앵ㄴㄹㄴㅇ~</a></span>
                                 </h2>
 
-                                <div class="reply-content"> <!--여기고치는중-->
-                                    <a href="#!"><!-- style="color: gray;-->
+                                <div class="reply-content"> &lt;!&ndash;여기고치는중&ndash;&gt;
+                                    <a href="#!">&lt;!&ndash; style="color: gray;&ndash;&gt;
                                         <p class="reply-p">댓글내용이 여기에 마구마구나와영!!! 내가 뭐라고달았을지는 몰라영일단최대한
                                             다음달 부산 여행 계획중인데 참고하겠습니다 감사해욜~~!</p>
                                     </a>
                                 </div>
 
 
-                                <!--<div class="meta-top">
+                                &lt;!&ndash;<div class="meta-top">
                                                     <ul>
                                                         <li class="d-flex align-items-center"><i class="bi bi-person"></i>닉네임</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>장소개수</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-eye"></i>조회수</li>
                                                     </ul>
-                                                </div>-->
+                                                </div>&ndash;&gt;
 
-                                <!--<div class="content">
+                                &lt;!&ndash;<div class="content">
                                     <p class="plan-date">
                                         2022-11-14 ~ 2022-11-18
                                     </p>
-                                </div>-->
+                                </div>&ndash;&gt;
 
-                                <!--<div class="read-more mt-auto align-self-end">
+                                &lt;!&ndash;<div class="read-more mt-auto align-self-end">
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>-->
+                                </div>&ndash;&gt;
 
                             </article>
 
@@ -414,14 +389,14 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
 
-                            <!--                            &lt;!&ndash;댓글작성일&ndash;&gt;
+                            &lt;!&ndash;                            &lt;!&ndash;댓글작성일&ndash;&gt;
                                                         <div class="content">
                                                             <p class="plan-date">2022-11-14</p>
-                                                        </div>-->
+                                                        </div>&ndash;&gt;
 
                             <article class="d-flex flex-column">
 
@@ -432,31 +407,31 @@
                                     <span class="plan-title"><a href="#!" class="a-title">가족들과 부산여행여ㅐ행여해영앻앵ㄴㄹㄴㅇ~</a></span>
                                 </h2>
 
-                                <div class="reply-content"> <!--여기고치는중-->
-                                    <a href="#!"><!-- style="color: gray;-->
+                                <div class="reply-content"> &lt;!&ndash;여기고치는중&ndash;&gt;
+                                    <a href="#!">&lt;!&ndash; style="color: gray;&ndash;&gt;
                                         <p class="reply-p">댓글내용이 여기에 마구마구나와영!!! 내가 뭐라고달았을지는 몰라영일단최대한
                                             다음달 부산 여행 계획중인데 참고하겠습니다 감사해욜~~!</p>
                                     </a>
                                 </div>
 
 
-                                <!--<div class="meta-top">
+                                &lt;!&ndash;<div class="meta-top">
                                                     <ul>
                                                         <li class="d-flex align-items-center"><i class="bi bi-person"></i>닉네임</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>장소개수</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-eye"></i>조회수</li>
                                                     </ul>
-                                                </div>-->
+                                                </div>&ndash;&gt;
 
-                                <!--<div class="content">
+                                &lt;!&ndash;<div class="content">
                                     <p class="plan-date">
                                         2022-11-14 ~ 2022-11-18
                                     </p>
-                                </div>-->
+                                </div>&ndash;&gt;
 
-                                <!--<div class="read-more mt-auto align-self-end">
+                                &lt;!&ndash;<div class="read-more mt-auto align-self-end">
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>-->
+                                </div>&ndash;&gt;
 
                             </article>
 
@@ -469,14 +444,14 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
 
-                            <!--                            &lt;!&ndash;댓글작성일&ndash;&gt;
+                            &lt;!&ndash;                            &lt;!&ndash;댓글작성일&ndash;&gt;
                                                         <div class="content">
                                                             <p class="plan-date">2022-11-14</p>
-                                                        </div>-->
+                                                        </div>&ndash;&gt;
 
                             <article class="d-flex flex-column">
 
@@ -487,31 +462,31 @@
                                     <span class="plan-title"><a href="#!" class="a-title">가족들과 부산여행여ㅐ행여해영앻앵ㄴㄹㄴㅇ~</a></span>
                                 </h2>
 
-                                <div class="reply-content"> <!--여기고치는중-->
-                                    <a href="#!"><!-- style="color: gray;-->
+                                <div class="reply-content"> &lt;!&ndash;여기고치는중&ndash;&gt;
+                                    <a href="#!">&lt;!&ndash; style="color: gray;&ndash;&gt;
                                         <p class="reply-p">댓글내용이 여기에 마구마구나와영!!! 내가 뭐라고달았을지는 몰라영일단최대한
                                             다음달 부산 여행 계획중인데 참고하겠습니다 감사해욜~~!</p>
                                     </a>
                                 </div>
 
 
-                                <!--<div class="meta-top">
+                                &lt;!&ndash;<div class="meta-top">
                                                     <ul>
                                                         <li class="d-flex align-items-center"><i class="bi bi-person"></i>닉네임</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>장소개수</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-eye"></i>조회수</li>
                                                     </ul>
-                                                </div>-->
+                                                </div>&ndash;&gt;
 
-                                <!--<div class="content">
+                                &lt;!&ndash;<div class="content">
                                     <p class="plan-date">
                                         2022-11-14 ~ 2022-11-18
                                     </p>
-                                </div>-->
+                                </div>&ndash;&gt;
 
-                                <!--<div class="read-more mt-auto align-self-end">
+                                &lt;!&ndash;<div class="read-more mt-auto align-self-end">
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>-->
+                                </div>&ndash;&gt;
 
                             </article>
 
@@ -524,14 +499,14 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
 
-                            <!--                            &lt;!&ndash;댓글작성일&ndash;&gt;
+                            &lt;!&ndash;                            &lt;!&ndash;댓글작성일&ndash;&gt;
                                                         <div class="content">
                                                             <p class="plan-date">2022-11-14</p>
-                                                        </div>-->
+                                                        </div>&ndash;&gt;
 
                             <article class="d-flex flex-column">
 
@@ -542,31 +517,31 @@
                                     <span class="plan-title"><a href="#!" class="a-title">가족들과 부산여행여ㅐ행여해영앻앵ㄴㄹㄴㅇ~</a></span>
                                 </h2>
 
-                                <div class="reply-content"> <!--여기고치는중-->
-                                    <a href="#!"><!-- style="color: gray;-->
+                                <div class="reply-content"> &lt;!&ndash;여기고치는중&ndash;&gt;
+                                    <a href="#!">&lt;!&ndash; style="color: gray;&ndash;&gt;
                                         <p class="reply-p">댓글내용이 여기에 마구마구나와영!!! 내가 뭐라고달았을지는 몰라영일단최대한
                                             다음달 부산 여행 계획중인데 참고하겠습니다 감사해욜~~!</p>
                                     </a>
                                 </div>
 
 
-                                <!--<div class="meta-top">
+                                &lt;!&ndash;<div class="meta-top">
                                                     <ul>
                                                         <li class="d-flex align-items-center"><i class="bi bi-person"></i>닉네임</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>장소개수</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-eye"></i>조회수</li>
                                                     </ul>
-                                                </div>-->
+                                                </div>&ndash;&gt;
 
-                                <!--<div class="content">
+                                &lt;!&ndash;<div class="content">
                                     <p class="plan-date">
                                         2022-11-14 ~ 2022-11-18
                                     </p>
-                                </div>-->
+                                </div>&ndash;&gt;
 
-                                <!--<div class="read-more mt-auto align-self-end">
+                                &lt;!&ndash;<div class="read-more mt-auto align-self-end">
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>-->
+                                </div>&ndash;&gt;
 
                             </article>
 
@@ -579,14 +554,14 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
 
-                            <!--                            &lt;!&ndash;댓글작성일&ndash;&gt;
+                            &lt;!&ndash;                            &lt;!&ndash;댓글작성일&ndash;&gt;
                                                         <div class="content">
                                                             <p class="plan-date">2022-11-14</p>
-                                                        </div>-->
+                                                        </div>&ndash;&gt;
 
                             <article class="d-flex flex-column">
 
@@ -597,31 +572,31 @@
                                     <span class="plan-title"><a href="#!" class="a-title">가족들과 부산여행여ㅐ행여해영앻앵ㄴㄹㄴㅇ~</a></span>
                                 </h2>
 
-                                <div class="reply-content"> <!--여기고치는중-->
-                                    <a href="#!"><!-- style="color: gray;-->
+                                <div class="reply-content"> &lt;!&ndash;여기고치는중&ndash;&gt;
+                                    <a href="#!">&lt;!&ndash; style="color: gray;&ndash;&gt;
                                         <p class="reply-p">댓글내용이 여기에 마구마구나와영!!! 내가 뭐라고달았을지는 몰라영일단최대한
                                             다음달 부산 여행 계획중인데 참고하겠습니다 감사해욜~~!</p>
                                     </a>
                                 </div>
 
 
-                                <!--<div class="meta-top">
+                                &lt;!&ndash;<div class="meta-top">
                                                     <ul>
                                                         <li class="d-flex align-items-center"><i class="bi bi-person"></i>닉네임</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>장소개수</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-eye"></i>조회수</li>
                                                     </ul>
-                                                </div>-->
+                                                </div>&ndash;&gt;
 
-                                <!--<div class="content">
+                                &lt;!&ndash;<div class="content">
                                     <p class="plan-date">
                                         2022-11-14 ~ 2022-11-18
                                     </p>
-                                </div>-->
+                                </div>&ndash;&gt;
 
-                                <!--<div class="read-more mt-auto align-self-end">
+                                &lt;!&ndash;<div class="read-more mt-auto align-self-end">
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>-->
+                                </div>&ndash;&gt;
 
                             </article>
 
@@ -634,14 +609,14 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
 
-                            <!--                            &lt;!&ndash;댓글작성일&ndash;&gt;
+                            &lt;!&ndash;                            &lt;!&ndash;댓글작성일&ndash;&gt;
                                                         <div class="content">
                                                             <p class="plan-date">2022-11-14</p>
-                                                        </div>-->
+                                                        </div>&ndash;&gt;
 
                             <article class="d-flex flex-column">
 
@@ -652,31 +627,31 @@
                                     <span class="plan-title"><a href="#!" class="a-title">가족들과 부산여행여ㅐ행여해영앻앵ㄴㄹㄴㅇ~</a></span>
                                 </h2>
 
-                                <div class="reply-content"> <!--여기고치는중-->
-                                    <a href="#!"><!-- style="color: gray;-->
+                                <div class="reply-content"> &lt;!&ndash;여기고치는중&ndash;&gt;
+                                    <a href="#!">&lt;!&ndash; style="color: gray;&ndash;&gt;
                                         <p class="reply-p">댓글내용이 여기에 마구마구나와영!!! 내가 뭐라고달았을지는 몰라영일단최대한
                                             다음달 부산 여행 계획중인데 참고하겠습니다 감사해욜~~!</p>
                                     </a>
                                 </div>
 
 
-                                <!--<div class="meta-top">
+                                &lt;!&ndash;<div class="meta-top">
                                                     <ul>
                                                         <li class="d-flex align-items-center"><i class="bi bi-person"></i>닉네임</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>장소개수</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-eye"></i>조회수</li>
                                                     </ul>
-                                                </div>-->
+                                                </div>&ndash;&gt;
 
-                                <!--<div class="content">
+                                &lt;!&ndash;<div class="content">
                                     <p class="plan-date">
                                         2022-11-14 ~ 2022-11-18
                                     </p>
-                                </div>-->
+                                </div>&ndash;&gt;
 
-                                <!--<div class="read-more mt-auto align-self-end">
+                                &lt;!&ndash;<div class="read-more mt-auto align-self-end">
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>-->
+                                </div>&ndash;&gt;
 
                             </article>
 
@@ -689,14 +664,14 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
 
-                            <!--                            &lt;!&ndash;댓글작성일&ndash;&gt;
+                            &lt;!&ndash;                            &lt;!&ndash;댓글작성일&ndash;&gt;
                                                         <div class="content">
                                                             <p class="plan-date">2022-11-14</p>
-                                                        </div>-->
+                                                        </div>&ndash;&gt;
 
                             <article class="d-flex flex-column">
 
@@ -707,31 +682,31 @@
                                     <span class="plan-title"><a href="#!" class="a-title">가족들과 부산여행여ㅐ행여해영앻앵ㄴㄹㄴㅇ~</a></span>
                                 </h2>
 
-                                <div class="reply-content"> <!--여기고치는중-->
-                                    <a href="#!"><!-- style="color: gray;-->
+                                <div class="reply-content"> &lt;!&ndash;여기고치는중&ndash;&gt;
+                                    <a href="#!">&lt;!&ndash; style="color: gray;&ndash;&gt;
                                         <p class="reply-p">댓글내용이 여기에 마구마구나와영!!! 내가 뭐라고달았을지는 몰라영일단최대한
                                             다음달 부산 여행 계획중인데 참고하겠습니다 감사해욜~~!</p>
                                     </a>
                                 </div>
 
 
-                                <!--<div class="meta-top">
+                                &lt;!&ndash;<div class="meta-top">
                                                     <ul>
                                                         <li class="d-flex align-items-center"><i class="bi bi-person"></i>닉네임</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>장소개수</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-eye"></i>조회수</li>
                                                     </ul>
-                                                </div>-->
+                                                </div>&ndash;&gt;
 
-                                <!--<div class="content">
+                                &lt;!&ndash;<div class="content">
                                     <p class="plan-date">
                                         2022-11-14 ~ 2022-11-18
                                     </p>
-                                </div>-->
+                                </div>&ndash;&gt;
 
-                                <!--<div class="read-more mt-auto align-self-end">
+                                &lt;!&ndash;<div class="read-more mt-auto align-self-end">
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>-->
+                                </div>&ndash;&gt;
 
                             </article>
 
@@ -744,14 +719,14 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <!--Default checkbox-->
+                                    &lt;!&ndash;Default checkbox&ndash;&gt;
                                 </label>
                             </div>
 
-                            <!--                            &lt;!&ndash;댓글작성일&ndash;&gt;
+                            &lt;!&ndash;                            &lt;!&ndash;댓글작성일&ndash;&gt;
                                                         <div class="content">
                                                             <p class="plan-date">2022-11-14</p>
-                                                        </div>-->
+                                                        </div>&ndash;&gt;
 
                             <article class="d-flex flex-column">
 
@@ -762,31 +737,31 @@
                                     <span class="plan-title"><a href="#!" class="a-title">가족들과 부산여행여ㅐ행여해영앻앵ㄴㄹㄴㅇ~</a></span>
                                 </h2>
 
-                                <div class="reply-content"> <!--여기고치는중-->
-                                    <a href="#!"><!-- style="color: gray;-->
+                                <div class="reply-content"> &lt;!&ndash;여기고치는중&ndash;&gt;
+                                    <a href="#!">&lt;!&ndash; style="color: gray;&ndash;&gt;
                                         <p class="reply-p">댓글내용이 여기에 마구마구나와영!!! 내가 뭐라고달았을지는 몰라영일단최대한
                                             다음달 부산 여행 계획중인데 참고하겠습니다 감사해욜~~!</p>
                                     </a>
                                 </div>
 
 
-                                <!--<div class="meta-top">
+                                &lt;!&ndash;<div class="meta-top">
                                                     <ul>
                                                         <li class="d-flex align-items-center"><i class="bi bi-person"></i>닉네임</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>장소개수</li>
                                                         <li class="d-flex align-items-center"><i class="bi bi-eye"></i>조회수</li>
                                                     </ul>
-                                                </div>-->
+                                                </div>&ndash;&gt;
 
-                                <!--<div class="content">
+                                &lt;!&ndash;<div class="content">
                                     <p class="plan-date">
                                         2022-11-14 ~ 2022-11-18
                                     </p>
-                                </div>-->
+                                </div>&ndash;&gt;
 
-                                <!--<div class="read-more mt-auto align-self-end">
+                                &lt;!&ndash;<div class="read-more mt-auto align-self-end">
                                     <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>-->
+                                </div>&ndash;&gt;
 
                             </article>
 
@@ -794,7 +769,7 @@
                                 <p class="plan-date">2022-11-14</p>
                             </div>
 
-                        </div>
+                        </div>-->
 
                     </div> <!--여기까지 댓글 12개-->
 

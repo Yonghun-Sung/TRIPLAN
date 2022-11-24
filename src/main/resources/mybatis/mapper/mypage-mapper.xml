@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.site.triplan.mapper.MypageMapper">
+    <select id="getAllReplies" resultType="com.site.triplan.vo.ReplyVo"><!--//댓글.content, reply.write_dt, reply.plan_code, plan.title, plan.area_code, area.name//reply: r plan :p area: a-->
+        SELECT r.content, r.write_dt, p.title, a.name FROM reply r
+        JOIN plan p ON r.plan_code = p.code
+        JOIN area a ON p.area_code = a.code
+        WHERE r.user_code = 1
+    </select>
+    <select id="getReplyCount" resultType="Integer"><!--나의 댓글 갯수-->
+        SELECT COUNT(*) FROM reply
+        WHERE reply.user_code = 1
+    </select>
+    <select id="getPlanCount" resultType="Integer"><!--나의 일정 갯수-->
+        SELECT COUNT(*) FROM plan
+        WHERE plan.user_code = 1
+    </select>
+    <select id="getLikeCount" resultType="Integer"><!--좋아요한 일정 갯수-->
+        SELECT COUNT(*) FROM likes
+        WHERE likes.user_code = 1
+    </select>
+    <select id="getAllLikePlans" resultType="com.site.triplan.vo.LikePlanVo"><!--좋아한 일정페이지에 필요한 정보들-->
+        SELECT a.name, p.title, us.nickname, p.views, p.start_dt, p.end_dt FROM `like` l
+        JOIN plan p ON l.plan_code = p.code
+        JOIN user u ON p.user_code = u.code
+        JOIN user_info us ON u.code = us.user_code
+        JOIN area a ON p.area_code = a.code
+        WHERE l.user_code = 1;
+    </select>
+    <select id="getPlaceCount" resultType="Integer"><!--하나의 일정의 장소개수-->
+        SELECT COUNT(*) FROM place
+        WHERE place.plan_code = 1
+    </select>
+<!--    <update id="updateUserProfile">
+        UPDATE user_info SET id = '', name = '', pw ='', nickname = ''
+        WHERE id=''
+    </update>-->
+    <select id="getUserProfile" resultType="com.site.triplan.vo.UserVo">
+        SELECT id, name, nickname FROM user_info
+        WHERE id='jiyun@gmail.com'
+    </select>
+</mapper>

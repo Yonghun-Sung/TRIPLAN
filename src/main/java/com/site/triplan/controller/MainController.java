@@ -27,19 +27,4 @@ public class MainController {
         return "user_joinform";
     }
 
-    @RequestMapping("/mypage/like")
-    public String mypagelike() {
-        return "user_mypage_like";
-    }
-
-    @RequestMapping("/mypage/reply")
-    public String mypagereply() {
-        return "user_mypage_reply";
-    }
-
-    @RequestMapping("/mypage/")
-    public String mypage() {
-        return "user_mypage_main";
-    }
-
 }
