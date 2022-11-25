@@ -1,15 +1,16 @@
 package com.site.triplan.controller;
 
 import com.site.triplan.service.LoginService;
+import com.site.triplan.vo.AreaVo;
+import com.site.triplan.vo.MailVo;
 import com.site.triplan.vo.UserVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/triplan")
@@ -31,8 +32,7 @@ public class LoginController {
     public String loginUser(Model model, HttpServletRequest request, UserVo loginInfo) {
         UserVo user = loginService.loginUser(loginInfo);
         String view = "";
-
-        if (user.getId() == null) {
+        if (user == null) {
             model.addAttribute("errCode", "1");
             view = "redirect:/triplan/loginform?errCode=1";
         } else {
@@ -49,5 +49,20 @@ public class LoginController {
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/triplan/main";
+    }
+
+    // ID 중복확인
+    @PostMapping("/checkId")
+    public @ResponseBody Integer checkId(@RequestParam String email) {
+        Integer count = loginService.countId(email);
+        return count;
+    }
+
+    // 메일 전송
+    @PostMapping("/mail")
+    //public void sendMail(@RequestParam String email) {
+    public String sendMail(MailVo mailVo) {
+        loginService.sendTempPwMail(mailVo);
+        return "redirect:/triplan/loginform";
     }
 }

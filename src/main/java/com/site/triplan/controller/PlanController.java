@@ -85,7 +85,7 @@ public class PlanController {
     // ------------------------------------------------------------------------- tourlist 테스트 중
 
     @GetMapping("/getSigunguList")
-    public @ResponseBody List<AreaVo> getSigunguList(Model model, @RequestParam Integer areaCode) {
+    public @ResponseBody List<AreaVo> getSigunguList(@RequestParam Integer areaCode) {
         String key = "8cHlpbteCRtJBou8%2FnhQqhIndcUFnxYvrzPQFJQKsjbtXDA9Z%2BGwQuRNTaWcXfSWgyZe2cE1Fh4K8KyncXYj%2Fw%3D%3D";
         List<AreaVo> sigunguList = new ArrayList<>();
 
@@ -119,11 +119,11 @@ public class PlanController {
     }
 
     @GetMapping("/searchSpotList")
-    public @ResponseBody List<AttractionVo> searchSpotList(Model model, @RequestParam String keyword, @RequestParam String areaCode, @RequestParam String sigunguCode) throws Exception {
+    public @ResponseBody List<AttractionVo> searchSpotList(@RequestParam String keyword, @RequestParam String areaCode, @RequestParam String sigunguCode) {
         String key = "8cHlpbteCRtJBou8%2FnhQqhIndcUFnxYvrzPQFJQKsjbtXDA9Z%2BGwQuRNTaWcXfSWgyZe2cE1Fh4K8KyncXYj%2Fw%3D%3D";
-        String encodeKeyword = URLEncoder.encode(keyword,"utf-8");
         List<AttractionVo> tourList = new ArrayList<>();
         try{
+            String encodeKeyword = URLEncoder.encode(keyword,"utf-8");
             String url = "http://apis.data.go.kr/B551011/KorService/searchKeyword?numOfRows=20&pageNo=1&MobileOS=ETC&MobileApp=AppTest&ServiceKey=" + key + "&arrange=B&contentTypeId=12&areaCode=" + areaCode + "&sigunguCode=" + sigunguCode + "&cat1=&cat2=&cat3=&keyword=" + encodeKeyword;
 
             DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
