@@ -1,6 +1,7 @@
 package com.site.triplan.controller;
 
 import com.site.triplan.service.AdminService;
+import com.site.triplan.vo.ReportVo;
 import com.site.triplan.vo.UserVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,7 +56,9 @@ public class AdminController {
     }
 
     @RequestMapping("/reportUnproc")
-    public String admin_report_unproc() {
+    public String admin_report_unproc(Model model) {
+        List<ReportVo> reportVoList = adminService.postUnreport();
+        model.addAttribute("posts", reportVoList);
         return "admin_report_unproc";
     }
 
