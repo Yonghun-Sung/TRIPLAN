@@ -62,71 +62,85 @@
     </div>  End Breadcrumbs-->
     <!-- ======= Blog Section ======= -->
     <section id="blog" class="blog"><!--######이상해지면 blog planlist로 바꾸기-->
-        <div class="container" data-aos="fade-up">
+        <!--<div class="container" data-aos="fade-up">
             <div class="col-lg-12" data-aos="fade-up" data-aos-delay="400">
                 <div class="sidebar">
-                    <!--프로필-->
+                    &lt;!&ndash;프로필&ndash;&gt;
                     <div class="top-container">
                         <div class="profilePhotoContainer">
-                            <div class="profilePhoto-text" id="profilePhoto">이</div> <!--그냥 정적으로 이 라고 써놓음-->
+                            <div class="profilePhoto-text" id="profilePhoto">{{firstletterNickname}}</div> &lt;!&ndash;그냥 정적으로 이 라고 써놓음&ndash;&gt;
                         </div>
                         <div class="text">{{userprofile.nickname}}</div>
                         <button class="btn-normal" onclick="location.href='/triplan/myprofile'">프로필 수정</button>
                     </div>
-                    <!--나의 일정, 댓글, 좋아요한 글 인덱스 버튼-->
+                    &lt;!&ndash;나의 일정, 댓글, 좋아요한 글 인덱스 버튼&ndash;&gt;
                     <div class="row">
                         <div class="index-section">
-                            <!--나의 일정-->
+                            &lt;!&ndash;나의 일정&ndash;&gt;
                             <div class="index-circle" onclick="location.href='/triplan/mypage'">
-                                <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
+                                <h6>&lt;!&ndash;여기에 마이로는 h5 style="폰트패밀리넣음"&ndash;&gt;
                                     <b>나의 일정</b>
                                 </h6>
                                 <div>
-                                    <h4 style="line-height: 1; font-weight: 700" id="myPlan">{{plancount}}</h4><!--내가 정적으로 걍 6넣음-->
+                                    <h4 style="line-height: 1; font-weight: 700" id="myPlan">{{plancount}}</h4>&lt;!&ndash;내가 정적으로 걍 6넣음&ndash;&gt;
                                 </div>
                             </div>
-                            <!--나의 댓글-->
+                            &lt;!&ndash;나의 댓글&ndash;&gt;
                             <div class="index-circle" onclick="location.href='/triplan/mypage/reply'">
-                                <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
+                                <h6>&lt;!&ndash;여기에 마이로는 h5 style="폰트패밀리넣음"&ndash;&gt;
                                     <b>나의 댓글</b>
                                 </h6>
                                 <div>
-                                    <h4 style="line-height: 1; font-weight: 700" id="myReply">{{replycount}}</h4><!--내가 정적으로 걍 5넣음-->
+                                    <h4 style="line-height: 1; font-weight: 700" id="myReply">{{replycount}}</h4>&lt;!&ndash;내가 정적으로 걍 5넣음&ndash;&gt;
                                 </div>
                             </div>
-                            <!--좋아요한 일정-->
+                            &lt;!&ndash;좋아요한 일정&ndash;&gt;
                             <div class="index-circle" onclick="location.href='/triplan/mypage/like'">
-                                <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
+                                <h6>&lt;!&ndash;여기에 마이로는 h5 style="폰트패밀리넣음"&ndash;&gt;
                                     <b>좋아요한 일정</b>
                                 </h6>
                                 <div>
-                                    <h4 style="line-height: 1; font-weight: 700" id="myLike">{{likecount}}</h4><!--내가 정적으로 걍 10넣음-->
+                                    <h4 style="line-height: 1; font-weight: 700" id="myLike">{{likecount}}</h4>&lt;!&ndash;내가 정적으로 걍 10넣음&ndash;&gt;
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!--"좋아요한 일정"-->
+                    &lt;!&ndash;"나의 댓글"&ndash;&gt;
                     <div class="section-title-container">
-                        <h3 class="sidebar-title-rep-like"> <!--css추가-->
+                        <h3 class="sidebar-title-rep-like"> &lt;!&ndash;css추가&ndash;&gt;
                             <b>나의 댓글</b>
                         </h3>
                     </div>
-                    <!--삭제 버튼-->
+                    &lt;!&ndash;&lt;!&ndash;삭제 버튼&ndash;&gt;
                     <div class="delete-buttonbox">
-                        <!--<button type="button" class="btn btn-outline-primary">선택삭제</button>-->
+                        &lt;!&ndash;<button type="button" class="btn btn-outline-primary">선택삭제</button>&ndash;&gt;
                         <button type="button" class="btn btn-outline-primary" id="pick-btn">전체선택</button>
+
                         <button type="button" class="btn btn-primary" id="delete-btn">삭제</button>
+                    </div>&ndash;&gt;
+
+                    &lt;!&ndash;삭제버튼&ndash;&gt;
+                    <div class="delete_buttonBox">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                &lt;!&ndash;Default checkbox&ndash;&gt;
+                            </label>
+                            <button type="button" class="btn btn-primary" id="delete-btn">삭제</button>
+                        </div>
                     </div>
 
 
                 </div>
             </div>
-        </div>
-        <div style="height: 15px;"></div><!--삭제버튼 물려서 포인터눌리는거 없어지길래 아예 아래 container랑 간격 띄울려고 -->
+        </div>-->
+        {{>user_mypage_header}}
+        <!--<div style="height: 15px;"></div>&lt;!&ndash;삭제버튼 물려서 포인터눌리는거 없어지길래 아예 아래 container랑 간격 띄울려고 &ndash;&gt;-->
         <div class="container" data-aos="fade-up" data-aos-delay="400"><!--내 댓글들-->
 
-            <div class="row g-5">
+        <!--<div class="row g-5">-->
+            <div class="row">
 
                 <div id="planlist-out-box" class="col-lg-12">
 

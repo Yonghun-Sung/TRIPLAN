@@ -72,9 +72,9 @@
                     <!--프로필이랑 나의 일정, 댓글, 좋아요한 글 인덱스 버튼-->
                     <div class="top-container">
                         <div class="profilePhotoContainer">
-                            <div class="profilePhoto-text" id="profilePhoto">이</div> <!--그냥 정적으로 이 라고 써놓음-->
+                            <div class="profilePhoto-text" id="profilePhoto">{{firstletterNickname}}</div>
                         </div>
-                        <div class="text">이름름</div><!--여기도 정적으로 넣음-->
+                        <div class="text">{{session_nickname}}</div><!--여기도 정적으로 넣음-->
                         <button class="btn-normal" onclick="location.href='/triplan/myprofile'">프로필 수정</button>
                     </div>
                     <div class="row">
@@ -90,7 +90,7 @@
                             </div>
                             <!--나의 댓글-->
                             <div class="index-circle" onclick="location.href='/triplan/mypage/reply'">
-                                <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
+                                <h6>
                                     <b>나의 댓글</b>
                                 </h6>
                                 <div>
@@ -115,18 +115,29 @@
                             <b>좋아요한 일정</b>
                         </h3>
                     </div>
-                    <!--삭제 버튼-->
-                    <div class="delete-buttonbox">
-                        <!--<button type="button" class="btn btn-outline-primary">선택삭제</button>-->
-                        <button type="button" class="btn btn-outline-primary" id="pick-btn">전체선택</button>
-                        <button type="button" class="btn btn-primary" id="delete-btn">삭제</button>
+<!--                    &lt;!&ndash;삭제 버튼&ndash;&gt;-->
+<!--                    <div class="delete-buttonbox">-->
+<!--                        &lt;!&ndash;<button type="button" class="btn btn-outline-primary">선택삭제</button>&ndash;&gt;-->
+<!--                        <button type="button" class="btn btn-outline-primary" id="pick-btn">전체선택</button>-->
+<!--                        <button type="button" class="btn btn-primary" id="delete-btn">삭제</button>-->
+<!--                    </div>-->
+
+                    <!--삭제버튼-->
+                    <div class="delete_buttonBox">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                <!--Default checkbox-->
+                            </label>
+                            <button type="button" class="btn btn-primary" id="delete-btn">삭제</button>
+                        </div>
                     </div>
 
                 </div>
             </div>
         </div>
         <div style="height: 15px;"></div>
-        <div class="container" data-aos="fade-up" data-aos-delay="400"><!--좋아요한 일정들//원래 내꺼에서 172-->
+        <div class="container" data-aos="fade-up" data-aos-delay="400"><!--좋아요한 일정들 내꺼에서 172-->
 
             <div class="row g-5">
 

@@ -17,16 +17,23 @@
         WHERE plan.user_code = 1
     </select>
     <select id="getLikeCount" resultType="Integer"><!--좋아요한 일정 갯수-->
-        SELECT COUNT(*) FROM likes
-        WHERE likes.user_code = 1
+        SELECT COUNT(*) FROM `like`
+        WHERE `like`.user_code = 1
     </select>
-    <select id="getAllLikePlans" resultType="com.site.triplan.vo.LikePlanVo"><!--좋아한 일정페이지에 필요한 정보들-->
-        SELECT a.name, p.title, us.nickname, p.views, p.start_dt, p.end_dt FROM `like` l
+    <select id="getAllLikePlans" resultType="com.site.triplan.vo.PlanVo"><!--좋아한 일정페이지에 필요한 정보들-->
+        <!--SELECT a.name, p.title, us.nickname, p.views, p.start_dt, p.end_dt FROM `like` l
         JOIN plan p ON l.plan_code = p.code
         JOIN user u ON p.user_code = u.code
         JOIN user_info us ON u.code = us.user_code
         JOIN area a ON p.area_code = a.code
-        WHERE l.user_code = 1;
+        WHERE l.user_code = 1;-->
+        SELECT a.name, p.title, ui.nickname, p.views, p.start_dt, p.end_dt, pl.photo_path FROM `like` l
+        JOIN plan p ON l.plan_code = p.code
+        JOIN user u ON p.user_code = u.code
+        JOIN user_info ui ON u.code = ui.user_code
+        JOIN area a ON p.area_code = a.code
+        JOIN place pl ON p.code = pl.plan_code
+        WHERE l.user_code = 1 AND pl.plan_code = 1 AND pl.day = 1 AND pl.order = 1;
     </select>
     <select id="getPlaceCount" resultType="Integer"><!--하나의 일정의 장소개수-->
         SELECT COUNT(*) FROM place
@@ -40,4 +47,13 @@
         SELECT id, name, nickname FROM user_info
         WHERE id='jiyun@gmail.com'
     </select>
+<!--    <select id="getAllMyPlans" resultType="com.site.triplan.vo.PlanVo"> &lt;!&ndash;나의 일정 페이지 정보들&ndash;&gt;
+        SELECT a.name, p.title, ui.nickname, p.views, p.start_dt, p.end_dt, pl.photo_path, ui.id, p.write_dt FROM `like` l
+        JOIN plan p ON l.plan_code = p.code
+        JOIN user u ON p.user_code = u.code
+        JOIN user_info ui ON u.code = ui.user_code
+        JOIN area a ON p.area_code = a.code
+        JOIN place pl ON p.code = pl.plan_code
+        WHERE l.user_code = 1 AND pl.plan_code = 1 AND pl.day = 1 AND pl.order = 1;
+    </select>-->
 </mapper>

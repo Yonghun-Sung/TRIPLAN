@@ -1,13 +1,15 @@
 package com.site.triplan.controller;
 
 import com.site.triplan.service.MypageService;
-import com.site.triplan.vo.LikePlanVo;
+import com.site.triplan.vo.PlanVo;
 import com.site.triplan.vo.ReplyVo;
 import com.site.triplan.vo.UserVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -22,68 +24,118 @@ public class MypageController {
 
 
     @RequestMapping("/mypage/like")
-    public String mypagelike(Model model) {
-        /*맨 위 닉네임*/
-        UserVo userProfile = mypageService.getMyProfile();
-        model.addAttribute("userprofile", userProfile);
-        
-        Integer planCount = mypageService.getAllPlanCount();
-        Integer replyCount = mypageService.getAllReplyCount();
-        Integer likeCount = mypageService.getAllLikeCount();
-        model.addAttribute("plancount", planCount);
-        model.addAttribute("replycount", replyCount);
-        model.addAttribute("likecount", likeCount);
-        List<LikePlanVo> likeList = mypageService.getAllLikeList();
-        model.addAttribute("likelist",likeList);
+    public String mypagelike(Model model, HttpServletRequest request) {
+        String view = "";
+        HttpSession session = request.getSession();
+        String id = (String)session.getAttribute("session_id");
 
-        Integer placeCount = mypageService.getPlaceNum();
-        model.addAttribute("placecount", placeCount);
-        return "user_mypage_like";
+        if (id == null) {
+            model.addAttribute("errCode", "2");
+            view = "redirect:/triplan/loginform?errCode=2";
+        } else {
+            /*맨 위 닉네임 한글자 + 닉네임*/
+            UserVo userProfile = mypageService.getMyProfile();
+            //Character nicknameFirst = userProfile.getNickname().charAt(0);
+            model.addAttribute("userprofile", userProfile);
+            //model.addAttribute("firstletterNickname", nicknameFirst);
+
+            String nickname = (String)session.getAttribute("session_nickname");
+            Character nicknameFirst = nickname.charAt(0);
+            model.addAttribute("firstletterNickname",nicknameFirst);
+
+
+
+            Integer planCount = mypageService.getAllPlanCount();
+            Integer replyCount = mypageService.getAllReplyCount();
+            Integer likeCount = mypageService.getAllLikeCount();
+            model.addAttribute("plancount", planCount);
+            model.addAttribute("replycount", replyCount);
+            model.addAttribute("likecount", likeCount);
+            List<PlanVo> likeList = mypageService.getAllLikeList();
+            model.addAttribute("likelist",likeList);
+
+            Integer placeCount = mypageService.getPlaceNum();
+            model.addAttribute("placecount", placeCount);
+            view = "user_mypage_like";
+        }
+        return view;
     }
 
     @RequestMapping("/mypage/")
-    public String mypage(Model model) {
-        /*맨 위 닉네임*/
-        UserVo userProfile = mypageService.getMyProfile();
-        model.addAttribute("userprofile", userProfile);
-        
-        Integer planCount = mypageService.getAllPlanCount();
-        Integer replyCount = mypageService.getAllReplyCount();
-        Integer likeCount = mypageService.getAllLikeCount();
-        model.addAttribute("plancount", planCount);
-        model.addAttribute("replycount", replyCount);
+    public String mypage(Model model, HttpServletRequest request) {
+        String view = "";
+        HttpSession session = request.getSession();
+        String id = (String)session.getAttribute("session_id");
 
-        model.addAttribute("likecount", likeCount);
-/*        //planlist들어가기*/
+        if (id == null) {
+            model.addAttribute("errCode", "2");
+            view = "redirect:/triplan/loginform?errCode=2";
+        } else {
+            UserVo userProfile = mypageService.getMyProfile();
+            Character nicknameFirst = userProfile.getNickname().charAt(0);
+            model.addAttribute("userprofile", userProfile);
+            model.addAttribute("firstletterNickname", nicknameFirst);
 
-        return "user_mypage_main";
+            Integer planCount = mypageService.getAllPlanCount();
+            Integer replyCount = mypageService.getAllReplyCount();
+            Integer likeCount = mypageService.getAllLikeCount();
+            model.addAttribute("plancount", planCount);
+            model.addAttribute("replycount", replyCount);
+            model.addAttribute("likecount", likeCount);
+
+            /*List<PlanVo> planList = mypageService.getAllPlanList();
+            model.addAttribute("planlist", planList);*/
+
+            view = "user_mypage_main2";
+        }
+        return view;
     }
 
     @RequestMapping("/myprofile")
-    public String myprofile(Model model) {
+    public String myprofile(Model model, HttpServletRequest request) {
+        String view = "";
+        HttpSession session = request.getSession();
+        String id = (String)session.getAttribute("session_id");
 
-        UserVo userProfile = mypageService.getMyProfile();
-        Character nicknameFirst = userProfile.getNickname().charAt(0);
-        model.addAttribute("userprofile", userProfile);
-        model.addAttribute("firstletterNickname", nicknameFirst);//받아온 UserVo에서 닉네임만 string으로 넘김,[0]인덱스 한글자만 보여주려고
-        return "user_profile_edit";
+        if (id == null) {
+            model.addAttribute("errCode", "2");
+            view = "redirect:/triplan/loginform?errCode=2";
+        } else {
+            UserVo userProfile = mypageService.getMyProfile();
+            Character nicknameFirst = userProfile.getNickname().charAt(0);
+            model.addAttribute("userprofile", userProfile);
+            model.addAttribute("firstletterNickname", nicknameFirst);//받아온 UserVo에서 닉네임만 string으로 넘김,[0]인덱스 한글자만 보여주려고
+            view = "user_profile_edit";
+        }
+        return view;
     }
 
     @RequestMapping("/mypage/reply")
-    public String mypagereply(Model model) {
-        /*맨 위 닉네임*/
-        UserVo userProfile = mypageService.getMyProfile();
-        model.addAttribute("userprofile", userProfile);
+    public String mypagereply(Model model, HttpServletRequest request) {
+        String view = "";
+        HttpSession session = request.getSession();
+        String id = (String)session.getAttribute("session_id");
 
-        Integer planCount = mypageService.getAllPlanCount();
-        Integer replyCount = mypageService.getAllReplyCount();
-        Integer likeCount = mypageService.getAllLikeCount();
-        List<ReplyVo> replyList = mypageService.getAllList();
-        model.addAttribute("plancount", planCount);
-        model.addAttribute("replycount", replyCount);;
-        model.addAttribute("likecount", likeCount);
-        model.addAttribute("replies", replyList);
-        return "user_mypage_reply";
+        if (id == null) {
+            model.addAttribute("errCode", "2");
+            view = "redirect:/triplan/loginform?errCode=2";
+        } else {
+            UserVo userProfile = mypageService.getMyProfile();
+            Character nicknameFirst = userProfile.getNickname().charAt(0);
+            model.addAttribute("userprofile", userProfile);
+            model.addAttribute("firstletterNickname", nicknameFirst);
+
+            Integer planCount = mypageService.getAllPlanCount();
+            Integer replyCount = mypageService.getAllReplyCount();
+            Integer likeCount = mypageService.getAllLikeCount();
+            List<ReplyVo> replyList = mypageService.getAllList();
+            model.addAttribute("plancount", planCount);
+            model.addAttribute("replycount", replyCount);;
+            model.addAttribute("likecount", likeCount);
+            model.addAttribute("replies", replyList);
+            view = "user_mypage_reply";
+        }
+        return view;
     }
 
 

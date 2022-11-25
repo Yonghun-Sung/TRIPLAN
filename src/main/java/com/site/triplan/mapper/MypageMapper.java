@@ -1,6 +1,6 @@
 package com.site.triplan.mapper;
 
-import com.site.triplan.vo.LikePlanVo;
+import com.site.triplan.vo.PlanVo;
 import com.site.triplan.vo.ReplyVo;
 import com.site.triplan.vo.UserVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -17,8 +17,9 @@ public interface MypageMapper {
     //나의 댓글
     List<ReplyVo> getAllReplies();
     //좋아요한 일정
-    List<LikePlanVo> getAllLikePlans();
+    List<PlanVo> getAllLikePlans();
     //회원정보수정에서 이메일, 이름, 닉네임출력
     UserVo getUserProfile();
-
+    //나의 일정들
+/*    List<PlanVo> getAllMyPlans();*/
 }

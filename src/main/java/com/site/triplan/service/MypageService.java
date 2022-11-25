@@ -1,7 +1,7 @@
 package com.site.triplan.service;
 
 import com.site.triplan.mapper.MypageMapper;
-import com.site.triplan.vo.LikePlanVo;
+import com.site.triplan.vo.PlanVo;
 import com.site.triplan.vo.ReplyVo;
 import com.site.triplan.vo.UserVo;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class MypageService {
         return mypageMapper.getLikeCount();
     }
 
-    public List<LikePlanVo> getAllLikeList() { /*좋아요한 일정들*/
+    public List<PlanVo> getAllLikeList() { /*좋아요한 일정들*/
         return mypageMapper.getAllLikePlans();
     }
 
@@ -43,5 +43,9 @@ public class MypageService {
     public UserVo getMyProfile() {
         return mypageMapper.getUserProfile();
     }
+
+//    public List<PlanVo> getAllPlanList() {
+//        return mypageMapper.getAllMyPlans();
+//    }
 
 }
