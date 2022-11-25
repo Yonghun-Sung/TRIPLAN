@@ -41,7 +41,7 @@
 <script>
     $(function () {
         $('#plan-exitbtn').click(function () {
-            history.back();
+            window.location.href='/triplan/main';
         });
     });
 
@@ -62,7 +62,7 @@
 
         <div id="plan-header">
             <div id="plan-head">일정</div>
-            <div id="plan-day">DAY1 | 11.03 (목)</div>
+            <div id="plan-day"></div>
             <div class="btn-box">
                 <button id="plan-savebtn" class="basic-btn plan-btn">저장</button>
                 <button id="plan-exitbtn" class="basic-btn plan-btn">나가기</button>
