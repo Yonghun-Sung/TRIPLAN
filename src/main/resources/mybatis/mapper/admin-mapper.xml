@@ -11,14 +11,10 @@
         u.ban_flag,
         if(u.ban_flag = 1, '정지', '정상') as state,
         count(rp.result_code) as cnt
-        from user_info ui inner join user u
-        on ui.user_code = u.code
-        left join reply rpy
-        on u.code = rpy.user_code
-        left join report_reg rr
-        on rpy.code = rr.reply_code
-        left join report_proc rp
-        on rr.code = rp.reg_code
+        from user_info ui inner join user u on ui.user_code = u.code
+        left join reply rpy on u.code = rpy.user_code
+        left join report_reg rr on rpy.code = rr.reply_code
+        left join report_proc rp on rr.code = rp.reg_code
         -- where rp.result_code = 1
         group by ui.id
         order by u.reg_dt;
@@ -32,14 +28,10 @@
             u.ban_flag,
             if(u.ban_flag = 1, '정지', '정상') as state,
             if(count(rp.result_code) is not null, count(rp.result_code), 0) as cnt
-        from user_info ui inner join user u
-        on ui.user_code = u.code
-        left join reply rpy
-        on u.code = rpy.user_code
-        left join report_reg rr
-        on rpy.code = rr.reply_code
-        left join report_proc rp
-        on rr.code = rp.reg_code
+        from user_info ui inner join user u on ui.user_code = u.code
+        left join reply rpy on u.code = rpy.user_code
+        left join report_reg rr on rpy.code = rr.reply_code
+        left join report_proc rp on rr.code = rp.reg_code
         where rp.result_code = 1
         group by ui.id
         having cnt = 3
@@ -54,18 +46,51 @@
             u.ban_flag,
             if(d.code is not null, '탈퇴', '정상') as state,
         count(rp.result_code) as cnt
-        from user u join `drop` d
-        on u.code = d.user_code
-        left join reply rpy
-        on u.code = rpy.user_code
-        left join report_reg rr
-        on rpy.code = rr.reply_code
-        left join report_proc rp
-        on rr.code = rp.reg_code
+        from user u join `drop` d on u.code = d.user_code
+        left join reply rpy on u.code = rpy.user_code
+        left join report_reg rr on rpy.code = rr.reply_code
+        left join report_proc rp on rr.code = rp.reg_code
         group by d.id
         order by u.reg_dt;
     </select>
-    <!--    <select id="findUnreport" resultType="com.site.triplan.vo.ReportVo">-->
-    <!--        -->
-    <!--    </select>-->
+    <select id="findUnreport" resultType="com.site.triplan.vo.ReportVo">
+        select ui.name,
+            rpy.content,
+            case when rr.type_code = 1 then '스팸홍보/도배'
+            when rr.type_code = 2 then '음란물'
+            when rr.type_code = 3 then '불법정보'
+            when rr.type_code = 4 then '청소년유해'
+            when rr.type_code = 5 then '욕설/혐오/차별'
+            when rr.type_code = 6 then '개인정보노출'
+            else '불쾌한표현'
+            end as state,
+            rr.dt
+        from user_info ui inner join user u on ui.user_code = u.code
+        inner join reply rpy on u.code = rpy.user_code
+        inner join report_reg rr on rpy.code = rr.reply_code
+        left join report_proc rp on rr.code = rp.reg_code
+        where rp.result_code is null
+    </select>
+    <select id="findReport" resultType="com.site.triplan.vo.ReportVo">
+        select ui.name,
+        rpy.content,
+        case when rr.type_code = 1 then '스팸홍보/도배'
+        when rr.type_code = 2 then '음란물'
+        when rr.type_code = 3 then '불법정보'
+        when rr.type_code = 4 then '청소년유해'
+        when rr.type_code = 5 then '욕설/혐오/차별'
+        when rr.type_code = 6 then '개인정보노출'
+        else '불쾌한표현'
+        end as state,
+        rr.dt
+        from user_info ui inner join user u
+        on ui.user_code = u.code
+        inner join reply rpy
+        on u.code = rpy.user_code
+        inner join report_reg rr
+        on rpy.code = rr.reply_code
+        left join report_proc rp
+        on rr.code = rp.reg_code
+        where rp.result_code = 1
+    </select>
 </mapper>

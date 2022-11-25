@@ -20,5 +20,6 @@ public class AdminService {
     public List<UserVo> postBanUser() { return adminMapper.findBan(); }
     public List<UserVo> postDropUser() { return adminMapper.findDrop(); }
     public List<ReportVo> postUnreport() { return adminMapper.findUnreport(); }
+    public List<ReportVo> postReport() { return adminMapper.findReport(); }
 
 }

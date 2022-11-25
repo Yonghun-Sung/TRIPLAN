@@ -18,5 +18,6 @@ public interface AdminMapper {
     List<UserVo> findDrop();    // 탈퇴회원 데이터
 
     List<ReportVo> findUnreport();
+    List<ReportVo> findReport();
 
 }

@@ -33,110 +33,23 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>신고자</th>
-                                        <th>신고내역</th>
+                                        <th>신고내용</th>
                                         <th>신고사유</th>
                                         <th>접수일</th>
                                         <th id="btn-th"> </th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    {{#unreport}}
                                     <tr>
-                                        <td>성용훈</td>
-                                        <td>000</td>
-                                        <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                                        <td>무단광고</td>
-                                        <td>2022-10-31</td>
+                                        <td>{{name}}</td>
+                                        <td></td>
+                                        <td>[댓글] {{content}}</td>
+                                        <td>{{state}}</td>
+                                        <td>{{dt}}</td>
                                         <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
                                     </tr>
-                                    <tr>
-                                        <td>김정용</td>
-                                        <td>000</td>
-                                        <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                                        <td>욕설/비속어</td>
-                                        <td>2022-11-01</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>김지윤</td>
-                                        <td>000</td>
-                                        <td>[댓글]XXXXXXXXXXXX</td>
-                                        <td>이용방해</td>
-                                        <td>2022-11-03</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>정성경</td>
-                                        <td>000</td>
-                                        <td>[게시글]XXXXXXXXXXXXX</td>
-                                        <td>무단광고</td>
-                                        <td>2022-11-03</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>성용훈</td>
-                                        <td>000</td>
-                                        <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                                        <td>무단광고</td>
-                                        <td>2022-11-04</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>김정용</td>
-                                        <td>000</td>
-                                        <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                                        <td>욕설/비속어</td>
-                                        <td>2022-11-05</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>김지윤</td>
-                                        <td>000</td>
-                                        <td>[댓글]XXXXXXXXXXXX</td>
-                                        <td>이용방해</td>
-                                        <td>2022-11-07</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>정성경</td>
-                                        <td>000</td>
-                                        <td>[게시글]XXXXXXXXXXXXX</td>
-                                        <td>무단광고</td>
-                                        <td>2022-11-07</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>성용훈</td>
-                                        <td>000</td>
-                                        <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                                        <td>무단광고</td>
-                                        <td>2022-11-09</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>김정용</td>
-                                        <td>000</td>
-                                        <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                                        <td>욕설/비속어</td>
-                                        <td>2022-11-11</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>김지윤</td>
-                                        <td>000</td>
-                                        <td>[댓글]XXXXXXXXXXXX</td>
-                                        <td>이용방해</td>
-                                        <td>2022-11-12</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>정성경</td>
-                                        <td>000</td>
-                                        <td>[게시글]XXXXXXXXXXXXX</td>
-                                        <td>무단광고</td>
-                                        <td>2022-11-13</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
+                                    {{/unreport}}
                                     </tbody>
                                 </table>
                             </div>
@@ -214,7 +127,7 @@
                     ordering: true,
 	                info: false,
 	                paging: true,
-	                order: [ [ 4, "asc" ] ]
+	                order: [ [ 4, "desc" ] ]
                 });
 
                 $('#btn-th').removeClass('sorting');
