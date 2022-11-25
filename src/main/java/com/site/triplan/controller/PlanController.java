@@ -1,9 +1,13 @@
 package com.site.triplan.controller;
 
+import com.site.triplan.service.PlanService;
+import com.site.triplan.vo.AreaVo;
 import com.site.triplan.vo.AttractionVo;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -12,11 +16,20 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
+
+import static com.site.triplan.util.parsingXml.getTagValue;
 
 @Controller
 @RequestMapping("/triplan")
 public class PlanController {
+    private PlanService planService;
+
+    public PlanController(PlanService planService) {
+        this.planService = planService;
+    }
 
     // map 테스트 중 ------------------------------------------------------------------------------
     @RequestMapping("/map")
@@ -25,51 +38,18 @@ public class PlanController {
     }
     // ------------------------------------------------------------------------------ map 테스트 중
 
-    // tourlist 테스트 중 -------------------------------------------------------------------------
-    // tag값의 정보를 가져오는 함수
-    public static String getTagValue(String tag, Element eElement) {
-
-        //결과를 저장할 result 변수 선언
-        String result = "";
-
-        NodeList nlList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
-
-        result = nlList.item(0).getTextContent();
-
-        return result;
-    }
-
-    // tag값의 정보를 가져오는 함수
-    public static String getTagValue(String tag, String childTag, Element eElement) {
-
-        //결과를 저장할 result 변수 선언
-        String result = "";
-
-        NodeList nlList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
-
-        for(int i = 0; i < eElement.getElementsByTagName(childTag).getLength(); i++) {
-
-            //result += nlList.item(i).getFirstChild().getTextContent() + " ";
-            result += nlList.item(i).getChildNodes().item(0).getTextContent() + " ";
-        }
-
-        return result;
-    }
-
-    //@RequestMapping("/tourlist")
-    @RequestMapping("/planinsertform")
+    @GetMapping("/planinsertform")
+    //public String show_planInsertForm(Model model, @RequestParam Integer areaCode) {
     public String show_planInsertForm(Model model) {
         // 본인이 받은 api키를 추가
         String key = "8cHlpbteCRtJBou8%2FnhQqhIndcUFnxYvrzPQFJQKsjbtXDA9Z%2BGwQuRNTaWcXfSWgyZe2cE1Fh4K8KyncXYj%2Fw%3D%3D";
 
-        ArrayList<AttractionVo> tourList = new ArrayList<>();
+        List<AttractionVo> tourList = new ArrayList<>();
+        List<AreaVo> areaList = new ArrayList<>();
+        areaList = planService.getAreaInfo();
 
         try{
-            // parsing할 url 지정(API 키 포함해서)
-            //ex1) 제주도 전체
-            //String url = "http://apis.data.go.kr/B551011/KorService/areaBasedList?serviceKey=" + key + "&pageNo=1&numOfRows=10&MobileApp=AppTest&MobileOS=WIN&arrange=P&contentTypeId=12&areaCode=39";
-            //ex2) 제주-제주시
-            String url = "http://apis.data.go.kr/B551011/KorService/areaBasedList?serviceKey=" + key + "&pageNo=1&numOfRows=10&MobileApp=AppTest&MobileOS=WIN&arrange=P&contentTypeId=12&areaCode=39&sigunguCode=4";
+            String url = "http://apis.data.go.kr/B551011/KorService/areaBasedList?serviceKey=" + key + "&pageNo=1&numOfRows=20&MobileApp=AppTest&MobileOS=WIN&arrange=B&contentTypeId=12&areaCode=6";
 
             DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
@@ -83,7 +63,6 @@ public class PlanController {
 
             for(int temp = 0; temp < nList.getLength(); temp++){
                 Node nNode = nList.item(temp);
-
                 Element eElement = (Element) nNode;
 
                 AttractionVo attraction = new AttractionVo();
@@ -99,12 +78,86 @@ public class PlanController {
             e.printStackTrace();
         }
 
+        model.addAttribute("areaList", areaList);
         model.addAttribute("tourList", tourList);
         return "user_plan_insertform";
     }
     // ------------------------------------------------------------------------- tourlist 테스트 중
 
-    @RequestMapping("/plandetail")
+    @GetMapping("/getSigunguList")
+    public @ResponseBody List<AreaVo> getSigunguList(Model model, @RequestParam Integer areaCode) {
+        String key = "8cHlpbteCRtJBou8%2FnhQqhIndcUFnxYvrzPQFJQKsjbtXDA9Z%2BGwQuRNTaWcXfSWgyZe2cE1Fh4K8KyncXYj%2Fw%3D%3D";
+        List<AreaVo> sigunguList = new ArrayList<>();
+
+        try{
+            String url = "http://apis.data.go.kr/B551011/KorService/areaCode?serviceKey=" + key + "&areaCode=" + areaCode + "&numOfRows=50&pageNo=1&MobileOS=WIN&MobileApp=AppTest";
+
+            DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
+            Document doc = dBuilder.parse(url);
+
+            // 제일 첫번째 태그
+            doc.getDocumentElement().normalize();
+
+            // 파싱할 tag
+            NodeList nList = doc.getElementsByTagName("item");
+
+            for(int temp = 0; temp < nList.getLength(); temp++){
+                Node nNode = nList.item(temp);
+                Element eElement = (Element) nNode;
+
+                AreaVo sigungu = new AreaVo();
+                sigungu.setCode(getTagValue("code", eElement));
+                sigungu.setName(getTagValue("name", eElement));
+                sigunguList.add(sigungu);
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return sigunguList;
+    }
+
+    @GetMapping("/searchSpotList")
+    public @ResponseBody List<AttractionVo> searchSpotList(Model model, @RequestParam String keyword, @RequestParam String areaCode, @RequestParam String sigunguCode) throws Exception {
+        String key = "8cHlpbteCRtJBou8%2FnhQqhIndcUFnxYvrzPQFJQKsjbtXDA9Z%2BGwQuRNTaWcXfSWgyZe2cE1Fh4K8KyncXYj%2Fw%3D%3D";
+        String encodeKeyword = URLEncoder.encode(keyword,"utf-8");
+        List<AttractionVo> tourList = new ArrayList<>();
+        try{
+            String url = "http://apis.data.go.kr/B551011/KorService/searchKeyword?numOfRows=20&pageNo=1&MobileOS=ETC&MobileApp=AppTest&ServiceKey=" + key + "&arrange=B&contentTypeId=12&areaCode=" + areaCode + "&sigunguCode=" + sigunguCode + "&cat1=&cat2=&cat3=&keyword=" + encodeKeyword;
+
+            DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
+
+            Document doc = dBuilder.parse(url);
+
+            // 제일 첫번째 태그
+            doc.getDocumentElement().normalize();
+
+            // 파싱할 tag
+            NodeList nList = doc.getElementsByTagName("item");
+
+            for(int temp = 0; temp < nList.getLength(); temp++){
+                Node nNode = nList.item(temp);
+                Element eElement = (Element) nNode;
+
+                AttractionVo attraction = new AttractionVo();
+                attraction.setName(getTagValue("title", eElement));
+                attraction.setLoc_x(getTagValue("mapy", eElement));
+                attraction.setLoc_y(getTagValue("mapx", eElement));
+                attraction.setImgPath(getTagValue("firstimage", eElement));
+
+                tourList.add(attraction);
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return tourList;
+    }
+
+
+    @GetMapping("/plandetail")
     public String showPlanDetail() {
         return "user_plan_detail";
     }

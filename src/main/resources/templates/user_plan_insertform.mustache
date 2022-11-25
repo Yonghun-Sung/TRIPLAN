@@ -73,27 +73,6 @@
             <!--Day 목록-->
             <!--달력에서 11/3 ~ 11/5 선택하면 DAY 탭 3개 → 장소목록 form 3개 생성-->
             <div id="plan-daybar" class="plan-col">
-                <div class="day-info">
-                    <span class="day-num">DAY1</span>
-                    <div class="info-box">
-                        <span class="date">11.03</span>
-                        <span class="day">목요일</span>
-                    </div>
-                </div>
-                <div class="day-info">
-                    <span class="day-num">DAY2</span>
-                    <div class="info-box">
-                        <span class="date">11.04</span>
-                        <span class="day">금요일</span>
-                    </div>
-                </div>
-                <div class="day-info">
-                    <span class="day-num">DAY3</span>
-                    <div class="info-box">
-                        <span class="date">11.05</span>
-                        <span class="day">토요일</span>
-                    </div>
-                </div>
             </div>
 
             <!--일정 장소목록-->
@@ -125,54 +104,42 @@
                     <div class="region-box">
                         <select id="areacode" class="region form-select form-select-sm" aria-label=".form-select-sm example">
                             <option selected value="">--- 지역 ---</option>
-                            <option value="1">서울</option>
-                            <option value="2">인천</option>
-                            <option value="3">대전</option>
-                            <option value="4">대구</option>
-                            <option value="5">광주</option>
-                            <option value="6">부산</option>
-                            <option value="7">울산</option>
-                            <option value="8">세종시</option>
-                            <option value="31">경기도</option>
-                            <option value="32">강원도</option>
-                            <option value="33">충청북도</option>
-                            <option value="34">충청남도</option>
-                            <option value="35">경상북도</option>
-                            <option value="36">경상남도</option>
-                            <option value="37">전라북도</option>
-                            <option value="38">전라남도</option>
-                            <option value="39">제주도</option>
+                            {{#areaList}}
+                                <option value="{{code}}">{{name}}</option>
+                            {{/areaList}}
                         </select>
                         <select id="sigungucode" class="region form-select form-select-sm" aria-label=".form-select-sm example">
-                            <option selected>-- 시군구 --</option>
-                            <option value="">전체</option>
-                            <option value="1">성동구</option>
-                            <option value="2">마포구</option>
+                            <option selected value="">-- 시군구 --</option>
                         </select>
                         <button id="region-search-btn" class="basic-btn"><i class="bi bi-search"></i></button>
+                        <div class="spot-search-box">
+                            <input type="text" class="text_custom" id="spot-search" placeholder="관광지 이름 검색">
+                            <button type="button" id="spot-search-btn" class="basic-btn"><i class="bi bi-search"></i></button>
+                        </div>
                     </div>
 
-                    <!--결과 리스트 테스트 중-->
-                    {{#tourList}}
-                        <div class="rec-list-box">
-                            <img class="rec-img" src="{{imgPath}}">
-                            <div class="rec-content">
-                                <div class="rec-btn-box">
-                                    <button class="add-place rec-add-btn" name="{{name}}" loc_x="{{loc_x}}" loc_y="{{loc_y}}" photo_path="{{imgPath}}">
-                                        <i class='bi bi-plus'></i>
-                                    </button>
+                    <div id="tour-list-box">
+                        {{#tourList}}
+                            <div class="rec-list-box">
+                                <img class="rec-img" src="{{imgPath}}">
+                                <div class="rec-content">
+                                    <div class="rec-btn-box">
+                                        <button type="button" class="add-place rec-add-btn" name="{{name}}" loc_x="{{loc_x}}" loc_y="{{loc_y}}" photo_path="{{imgPath}}">
+                                            <i class='bi bi-plus'></i>
+                                        </button>
+                                    </div>
+                                    <span class="name">{{name}}</span>
                                 </div>
-                                <span class="name">{{name}}</span>
                             </div>
-                        </div>
-                    {{/tourList}}
+                        {{/tourList}}
+                    </div>
                 </div>
 
                 <!--2) 지도 검색-->
                 <div class="placelist" style="display: none;">
                     <div class="map-search-box">
                         <input type="text" class="text_custom" id="map-search" name="searchKeyword">
-                        <button id="map-search-btn" class="basic-btn"><i class="bi bi-search"></i></button>
+                        <button type="button" id="map-search-btn" class="basic-btn"><i class="bi bi-search"></i></button>
                     </div>
                     <div>
                         <div class="rst_wrap">
@@ -183,28 +150,29 @@
                     </div>
                 </div>
             </div>
+
             <div id="plan-map" class="plan-col">
                 <div id="map_wrap" class="map_wrap">
                     <div id="map_div"></div>
                 </div>
             </div>
+
         </div>
     </div>
 
-  <!-- Vendor JS Files -->
-  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="/vendor/aos/aos.js"></script>
-  <script src="/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="/vendor/php-email-form/validate.js"></script>
+    <!-- Vendor JS Files -->
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/aos/aos.js"></script>
+    <script src="/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/vendor/php-email-form/validate.js"></script>
 
-  <!-- Template Main JS File -->
-  <script src="/js/user/main.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/js/user/main.js"></script>
 
-  <script src="/js/user/map.js"></script>
-  <script src="/js/user/plan.js"></script>
-  <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx3baa04961c80465ea1fe8a3be504d3e1"></script>
-
+    <script src="/js/user/map.js"></script>
+    <script src="/js/user/plan.js"></script>
+    <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx3baa04961c80465ea1fe8a3be504d3e1"></script>
 </body>
 </html>
