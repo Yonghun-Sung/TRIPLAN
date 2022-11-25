@@ -1,6 +1,7 @@
 package com.site.triplan.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -15,11 +16,6 @@ public class MainController {
     @RequestMapping("/planlist")
     public String planlist() {
         return "user_plan_list";
-    }
-
-    @RequestMapping("/loginform")
-    public String loginform() {
-        return "user_loginform";
     }
 
     @RequestMapping("/joinform")
