@@ -25,13 +25,13 @@
     </select>
     <select id="findBan" resultType="com.site.triplan.vo.UserVo">
         select
-        ui.id,
-        ui.name,
-        ui.nickname,
-        u.reg_dt,
-        u.ban_flag,
-        if(u.ban_flag = 1, '정지', '정상') as state,
-        count(rp.result_code) as cnt
+            ui.id,
+            ui.name,
+            ui.nickname,
+            rp.dt,
+            u.ban_flag,
+            if(u.ban_flag = 1, '정지', '정상') as state,
+            if(count(rp.result_code) is not null, count(rp.result_code), 0) as cnt
         from user_info ui inner join user u
         on ui.user_code = u.code
         left join reply rpy
@@ -40,17 +40,19 @@
         on rpy.code = rr.reply_code
         left join report_proc rp
         on rr.code = rp.reg_code
-        where rp.result_code = 1 group by ui.id
-        order by u.reg_dt;
+        where rp.result_code = 1
+        group by ui.id
+        having cnt = 3
+        order by rp.dt;
     </select>
     <select id="findDrop" resultType="com.site.triplan.vo.UserVo">
         select
-        d.id,
-        d.name,
-        d.nickname,
-        d.dt,
-        u.ban_flag,
-        if(d.code is not null, '탈퇴', '정상') as state,
+            d.id,
+            d.name,
+            d.nickname,
+            d.dt,
+            u.ban_flag,
+            if(d.code is not null, '탈퇴', '정상') as state,
         count(rp.result_code) as cnt
         from user u join `drop` d
         on u.code = d.user_code

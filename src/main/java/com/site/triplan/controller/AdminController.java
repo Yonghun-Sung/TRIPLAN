@@ -36,7 +36,6 @@ public class AdminController {
     @RequestMapping("/memberAll")
     public String admin_member_all(Model model) {
             List<UserVo> userVoList = adminService.postAllUser();
-            List<UserVo> userVoList = adminService.getAllUser();
             model.addAttribute("posts", userVoList);
         return "admin_member_all";
     }
