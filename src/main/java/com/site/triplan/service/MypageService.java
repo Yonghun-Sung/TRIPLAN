@@ -44,8 +44,16 @@ public class MypageService {
         return mypageMapper.getUserProfile();
     }
 
-//    public List<PlanVo> getAllPlanList() {
-//        return mypageMapper.getAllMyPlans();
-//    }
+    /*public List<PlanVo> getAllPlanList() {
+        return mypageMapper.getAllMyPlans();
+    }*/
+
+    public List<PlanVo> getScheduledList() {
+        return mypageMapper.getScheduledPlans();
+    }
+
+    public List<PlanVo> getCompletedList() {
+        return mypageMapper.getCompletedPlans();
+    }
 
 }

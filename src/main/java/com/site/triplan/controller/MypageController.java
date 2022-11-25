@@ -60,8 +60,8 @@ public class MypageController {
         }
         return view;
     }
-
-    @RequestMapping("/mypage/")
+    /*다가올 일정*/
+    @RequestMapping("/mypage")
     public String mypage(Model model, HttpServletRequest request) {
         String view = "";
         HttpSession session = request.getSession();
@@ -82,11 +82,52 @@ public class MypageController {
             model.addAttribute("plancount", planCount);
             model.addAttribute("replycount", replyCount);
             model.addAttribute("likecount", likeCount);
+            Integer placeCount = mypageService.getPlaceNum();
+            model.addAttribute("placecount", placeCount);
 
             /*List<PlanVo> planList = mypageService.getAllPlanList();
-            model.addAttribute("planlist", planList);*/
+            model.addAttribute("planlist", planList);
 
-            view = "user_mypage_main2";
+            view = "user_mypage_main2";*/
+
+            List<PlanVo> schPlanList = mypageService.getScheduledList();
+            model.addAttribute("schplanlist",schPlanList);
+
+            view = "user_mypage_scheduledplan";
+        }
+        return view;
+    }
+
+    /*완료된 일정*/
+    @RequestMapping("/mypage/completedplans")
+    public String mypageCompletedPlans(Model model, HttpServletRequest request) {
+        String view = "";
+        HttpSession session = request.getSession();
+        String id = (String)session.getAttribute("session_id");
+
+        if (id == null) {
+            model.addAttribute("errCode", "2");
+            view = "redirect:/triplan/loginform?errCode=2";
+        } else {
+            UserVo userProfile = mypageService.getMyProfile();
+            Character nicknameFirst = userProfile.getNickname().charAt(0);
+            model.addAttribute("userprofile", userProfile);
+            model.addAttribute("firstletterNickname", nicknameFirst);
+
+            Integer planCount = mypageService.getAllPlanCount();
+            Integer replyCount = mypageService.getAllReplyCount();
+            Integer likeCount = mypageService.getAllLikeCount();
+            model.addAttribute("plancount", planCount);
+            model.addAttribute("replycount", replyCount);
+            model.addAttribute("likecount", likeCount);
+            Integer placeCount = mypageService.getPlaceNum();
+            model.addAttribute("placecount", placeCount);
+
+            List<PlanVo> comPlanList = mypageService.getCompletedList();
+            model.addAttribute("complanlist",comPlanList);
+
+
+            view = "user_mypage_completedplan";
         }
         return view;
     }

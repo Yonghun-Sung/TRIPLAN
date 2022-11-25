@@ -21,5 +21,9 @@ public interface MypageMapper {
     //회원정보수정에서 이메일, 이름, 닉네임출력
     UserVo getUserProfile();
     //나의 일정들
-/*    List<PlanVo> getAllMyPlans();*/
+    /*List<PlanVo> getAllMyPlans();*/
+    //다가오는 일정
+    List<PlanVo> getScheduledPlans();
+
+    List<PlanVo> getCompletedPlans();
 }

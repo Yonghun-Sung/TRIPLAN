@@ -47,13 +47,31 @@
         SELECT id, name, nickname FROM user_info
         WHERE id='jiyun@gmail.com'
     </select>
-<!--    <select id="getAllMyPlans" resultType="com.site.triplan.vo.PlanVo"> &lt;!&ndash;나의 일정 페이지 정보들&ndash;&gt;
-        SELECT a.name, p.title, ui.nickname, p.views, p.start_dt, p.end_dt, pl.photo_path, ui.id, p.write_dt FROM `like` l
-        JOIN plan p ON l.plan_code = p.code
+    <!--<select id="getAllMyPlans" resultType="com.site.triplan.vo.PlanVo"> &lt;!&ndash;나의 일정 페이지 정보들&ndash;&gt;
+        SELECT a.name, p.title, ui.nickname, p.views, p.start_dt, p.end_dt, pl.photo_path, ui.id, p.write_dt FROM plan p
         JOIN user u ON p.user_code = u.code
         JOIN user_info ui ON u.code = ui.user_code
         JOIN area a ON p.area_code = a.code
         JOIN place pl ON p.code = pl.plan_code
-        WHERE l.user_code = 1 AND pl.plan_code = 1 AND pl.day = 1 AND pl.order = 1;
+        WHERE p.user_code = 1 AND pl.day = 1 AND pl.order = 1;
     </select>-->
+    <select id="getScheduledPlans" resultType="com.site.triplan.vo.PlanVo"> <!--다가오는 일정-->
+        SELECT a.name, p.title, ui.nickname, p.views, DATE_FORMAT(p.start_dt, '%Y-%m-%d'), date_format(p.end_dt, '%Y-%m-%d'), pl.photo_path, ui.id, p.write_dt FROM plan p
+        JOIN user u ON p.user_code = u.code
+        JOIN user_info ui ON u.code = ui.user_code
+        JOIN area a ON p.area_code = a.code
+        JOIN place pl ON p.code = pl.plan_code
+        WHERE p.user_code = 1 AND pl.day = 1 AND pl.order = 1 AND start_dt &gt; DATE(NOW()) <!-- &gt; : >= -->
+    </select>
+    <select id="getCompletedPlans" resultType="com.site.triplan.vo.PlanVo"> <!--완료된 일정-->
+        SELECT a.name, p.title, ui.nickname, p.views, DATE_FORMAT(p.start_dt, '%Y-%m-%d'), date_format(p.end_dt, '%Y-%m-%d'), pl.photo_path, ui.id, p.write_dt FROM plan p
+        JOIN user u ON p.user_code = u.code
+        JOIN user_info ui ON u.code = ui.user_code
+        JOIN area a ON p.area_code = a.code
+        JOIN place pl ON p.code = pl.plan_code
+        WHERE p.user_code = 1 AND pl.day = 1 AND pl.order = 1 AND end_dt &lt; DATE(NOW()) <!--&lt; : < -->
+    </select>
+
+    
+    
 </mapper>
