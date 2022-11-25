@@ -4,7 +4,8 @@
 <configuration>
     <mappers>
         <mapper resource = "mybatis/mapper/login-mapper.xml"/>
-        <mapper resource = "mybatis/mapper/admin-mapper.xml"/>
+        <mapper resource = "mybatis/mapper/plan-mapper.xml"/>
         <mapper resource = "mybatis/mapper/mypage-mapper.xml"/>
+        <mapper resource = "mybatis/mapper/admin-mapper.xml"/>
     </mappers>
 </configuration>

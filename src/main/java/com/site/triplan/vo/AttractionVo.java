@@ -1,7 +1,7 @@
 package com.site.triplan.vo;
 
 public class AttractionVo {
-    String name, addr, imgPath, loc_x, loc_y;
+    private String name, addr, imgPath, loc_x, loc_y;
 
     public String getName() {
         return name;
