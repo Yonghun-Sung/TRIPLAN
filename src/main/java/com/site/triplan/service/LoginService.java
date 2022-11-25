@@ -8,6 +8,7 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.net.URLEncoder;
 
@@ -83,5 +84,23 @@ public class LoginService {
             System.out.println("메일발송실패");
             e.printStackTrace();
         }
+    }
+
+    // 탈퇴회원 체크
+    public Integer checkDropId(String id) {
+        Integer count = loginMapper.checkDropId(id);
+        return count;
+    }
+
+    // 회원가입
+    @Transactional
+    public void insertUser(UserVo user) {
+        System.out.println("now:" + user.getUser_code());
+        loginMapper.insertUser();
+        Integer user_code = loginMapper.getMaxUserCode();
+        System.out.println(user_code);
+        user.setUser_code(user_code);
+        System.out.println(user.getUser_code());
+        loginMapper.insertUserInfo(user);
     }
 }
