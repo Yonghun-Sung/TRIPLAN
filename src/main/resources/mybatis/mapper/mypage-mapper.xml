@@ -27,7 +27,7 @@
         JOIN user_info us ON u.code = us.user_code
         JOIN area a ON p.area_code = a.code
         WHERE l.user_code = 1;-->
-        SELECT a.name, p.title, ui.nickname, p.views, p.start_dt, p.end_dt, pl.photo_path FROM `like` l
+        SELECT a.name, p.title, ui.nickname, p.views, p.start_dt, p.end_dt, pl.photo_path, p.code FROM `like` l <!--체크박스위해서 plan.code추가-->
         JOIN plan p ON l.plan_code = p.code
         JOIN user u ON p.user_code = u.code
         JOIN user_info ui ON u.code = ui.user_code

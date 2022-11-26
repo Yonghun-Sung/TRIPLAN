@@ -17,9 +17,11 @@ public class PlanVo {
     String id; // 작성자 이메일
     String write_dt; // 일정 작성일
 
+    Integer code; //일정 코드-삭제할때필요
+
 
     //좋아요한 일정
-    public PlanVo(String name, String title, String nickname, Integer views, String start_dt, String end_dt, String photo_path) {
+    public PlanVo(String name, String title, String nickname, Integer views, String start_dt, String end_dt, String photo_path, Integer code) {
         this.name = name;
         this.title = title;
         this.nickname = nickname;
@@ -27,6 +29,7 @@ public class PlanVo {
         this.start_dt = start_dt;
         this.end_dt = end_dt;
         this.photo_path = photo_path;
+        this.code = code;
     }
 
     //나의 일정

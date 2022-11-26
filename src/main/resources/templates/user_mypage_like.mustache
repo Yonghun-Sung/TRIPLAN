@@ -28,7 +28,7 @@
 
     <!-- Template Main CSS File -->
     <link href="/css/mypage_style.css" rel="stylesheet">
-
+    <script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!--  마이로의 UIKit사용하기 위해 넣어봄-->
     <!--  &lt;!&ndash; UIkit CSS &ndash;&gt;
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.13/dist/css/uikit.min.css" />
@@ -125,8 +125,8 @@
                     <!--삭제버튼-->
                     <div class="delete_buttonBox">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" value="" id="all">
+                            <label class="form-check-label" for="all">
                                 <!--Default checkbox-->
                             </label>
                             <button type="button" class="btn btn-primary" id="delete-btn">삭제</button>
@@ -147,7 +147,7 @@
                         {{#likelist}}
                         <div class="col-lg-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <input class="form-check-input" type="checkbox" name = "cb1" value="{{code}}" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     <!--Default checkbox-->
                                 </label>
@@ -632,7 +632,7 @@
 
 <!-- Template Main JS File -->
 <script src="/js/user/main.js"></script>
-
+<script src="/js/mypage/delete.js"></script>
 
 </body>
 </html>

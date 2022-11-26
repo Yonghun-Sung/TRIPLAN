@@ -2545,6 +2545,9 @@ div#plan-daybar {
 }
 
 /*Day목록*/
+a.trip-day.active>div.day-info {
+  background-color: #4b4c54 !important;
+}
 .day-info {
   border-bottom: 1px solid #4a4a4a;
   height: 76px;
@@ -2590,6 +2593,10 @@ div.day-info .day-num {
 
 
 /*일정장소*/
+.selected-place {
+  display: none;
+}
+
 @media (max-width: 1708px) {
   button#placeOk-btn {
     font-size: 14px;

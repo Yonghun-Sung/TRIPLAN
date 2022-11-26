@@ -1,3 +1,4 @@
+
 // 며칠 여행 인지 넘어왔따고 치면 ex 2022/11/3부터 3일
 // 모달 닫으면 넘겨받을 값들 (title, days, startday, endday)
 function addDays(date, days) {
@@ -5,27 +6,59 @@ function addDays(date, days) {
     clone.setDate(date.getDate() + days)
     return clone;
 }
-let tripDays = 3;
-let result = "";
+let tripDays = 3;       // 여행일수
+let daysResult = "";
+let placeResult = "";
 let dayArr = ['일', '월', '화', '수', '목', '금', '토'];
 let date = new Date(2022, 6, 30);      // month는 -1
 $('div#plan-day').text("DAY1 | " + (date.getMonth()+1) + "/" + date.getDate() + " (" + dayArr[date.getDay()] + ")");
 for (let i = 1; i <= tripDays; i++) {
-    result += "<a class='trip-day' id='day" + i + "' href='#!'>" +
-                "<div class='day-info'>" +
-                    "<span class='day-num'>DAY" + i + "</span>" +
-                    "<div class='info-box'>" +
-                        "<span class='date'>" + (date.getMonth()+1) + "/" + date.getDate() + "</span>" +
-                        "<span class='day'>(" + dayArr[date.getDay()] + ")</span>" +
+    // DAY
+    daysResult += "<a class='trip-day' id='day" + i + "' href='#!'>" +
+                    "<div class='day-info'>" +
+                        "<span class='day-num'>DAY" + i + "</span>" +
+                        "<div class='info-box'>" +
+                            "<span class='date'>" + (date.getMonth()+1) + "/" + date.getDate() + "</span>" +
+                            "<span class='day'>(" + dayArr[date.getDay()] + ")</span>" +
+                        "</div>" +
                     "</div>" +
-                "</div>" +
-              "</a>";
+                  "</a>";
+
+    // 일정 장소
+    placeResult += "<div id='form" + i + "' class='selected-place'></div>";
+
+    // 지도
+
 
     date = addDays(date, 1);
 }
-$('div#plan-daybar').html(result);
+$('div#plan-daybar').html(daysResult);
+$('form.place-form').append(placeResult);
+$('div#form1').css('display', 'block');
+
+
+// 현재 클릭되어 있는 DAY 파악
+let nowDayPageNum = 1;  //현재 클릭되어 있는 DAY
+// 처음엔 DAY1 a태그에 active 속성
+$('a#day1').addClass('active');
+
 
 $('a.trip-day').click(function () {
+    let dayNum = $(this).prop('id').substring(3);
+
+    for (let i = 1; i <= tripDays; i++) {
+        if (i == dayNum) {
+            $('div#form' + i).css('display', 'block');
+            $('a#day' + i).addClass('active');
+        }
+        else {
+            $('div#form' + i).css('display', 'none');
+            $('a#day' + i).removeClass('active');
+        }
+    }
+
+    nowDayPageNum = $('a.trip-day.active').prop('id').substring(3);
+
     //DAY1 | 11/3 (목)
     let day_order = $(this).find('span.day-num').text();
     let trip_date = $(this).find('span.date').text();
@@ -122,7 +155,8 @@ $(document).on('click', 'button.add-place', function() {
     var loc_y = $(this).attr('loc_y')
     var photo_path = $(this).attr('photo_path')
 
-    $('form.place-form').append(
+    //$('form.place-form').append(
+    $('div#form' + nowDayPageNum).append(
         "<div id='place" + count++ + "' class='select-place'>"
         +   "<span class='num-box'><i class='bi bi-check'></i></span>"
         +   "<input type='text' id='name' name='name' class='select-name' value='" + name + "' disabled>"

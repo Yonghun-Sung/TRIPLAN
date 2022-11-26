@@ -6,6 +6,7 @@ import com.site.triplan.vo.ReplyVo;
 import com.site.triplan.vo.UserVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -178,6 +179,11 @@ public class MypageController {
         }
         return view;
     }
+
+    @PostMapping("/post/delete")
+    public String deletePost(@RequestPram )
+
+
 
 
 }

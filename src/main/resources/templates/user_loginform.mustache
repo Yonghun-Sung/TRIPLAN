@@ -39,27 +39,13 @@
 </style>
 <script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
-    $(function () {
-        let urlParams = new URL(location.href).searchParams;
-        let errCode = urlParams.get('errCode');
-        if (errCode == "1") {
-            alert('이메일 또는 비밀번호를 확인해주세요.');
-        } else if (errCode == "2") {
-            alert('로그인 후 이용가능한 서비스입니다.');
-        }
 
-        $('#findpw-btn').click(function () {
-            alert('이메일이 전송되었습니다.');
-            $('#findpw-modal').modal('hide');
-        });
-    });
-</script>
 </head>
 <body class="page-contact">
 
     <!-- ======= Header ======= -->
     {{>user_header}}
-
+gi
     <main id="main">
 
         <!-- ======= Contact Section ======= -->
@@ -95,15 +81,14 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form id="findpw-form" action="/triplan/mail" method="post">
                             <div class="mb-3">
-                                <label for="id" class="col-form-label">이메일 주소</label>
-                                <input type="email" class="form-control">
+                                <label for="email" class="col-form-label">이메일 주소</label>
+                                <input type="email" class="form-control" name="address" id="email">
                             </div>
                             <div class="pw-explan">
-                                <span class="ment">회원가입 시, 등록하셨던 이메일 주소를 입력해 주세요.</span>
-                                <span class="ment">임시 비밀번호를 보내드립니다.</span>
-                                <button id="findpw-btn" class="basic-btn">비밀번호 찾기</button>
+                                <span class="ment">입력한 이메일로 임시 비밀번호가 전송됩니다.</span>
+                                <button type="button" id="findpw-btn" class="basic-btn">비밀번호 찾기</button>
                                 <span class="ment">* 메일이 도착하기까지 몇 분 정도 소요될 수 있습니다.</span>
                                 <span class="ment">* 스팸 메일함으로 발송될 수 있으니 체크 바랍니다.</span>
                             </div>
@@ -131,6 +116,8 @@
 
     <!-- Template Main JS File -->
     <script src="/js/user/main.js"></script>
+
+    <script src="/js/user/loginform.js"></script>
 
 </body>
 
