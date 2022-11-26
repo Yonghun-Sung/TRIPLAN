@@ -11717,3 +11717,18 @@ button#btn{
     margin : auto;
     display : block
 }
+
+.report_modal{
+   border: 1px solid black;
+   width: 500px;
+   max-height: 50px;
+   border-radius:0.3rem;
+}
+
+div#reportmodalC{
+   border: 1px solid black;
+   width: 500px;
+   height: 100px;
+   max-height: 200px;
+   border-radius:0.3rem;
+}

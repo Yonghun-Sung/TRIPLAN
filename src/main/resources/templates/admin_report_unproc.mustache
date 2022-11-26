@@ -31,7 +31,7 @@
                                 <table id="datatablesSimple3" class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>피신고자</th>
                                         <th>신고자</th>
                                         <th>신고내용</th>
                                         <th>신고사유</th>
@@ -42,12 +42,14 @@
                                     <tbody>
                                     {{#unreport}}
                                     <tr>
-                                        <td>{{name}}</td>
-                                        <td></td>
+                                        <td>{{reportedUser}}</td>
+                                        <td>{{reportUser}}</td>
                                         <td>[댓글] {{content}}</td>
                                         <td>{{state}}</td>
                                         <td>{{dt}}</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
+                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal"
+                                                    data-reportedUser="{{reportedUser}}" data-reportUser="{{reportUser}}" data-content="{{content}}"
+                                                    data-state="{{state}}" data-dt="{{dt}}">관리</button></td>
                                     </tr>
                                     {{/unreport}}
                                     </tbody>
@@ -62,42 +64,47 @@
                     <div class="modal fade" id="report-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
+                                <!--헤더-->
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="exampleModalLabel">미처리 신고</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
+                                <!--바디-->
                                 <div class="modal-body">
                                     <div class="container">
-                                        <div class="row">
-                                            <label for="id1" class="col-form-label"><b>신고자</b></label>
-                                            <div class="col-md-1" style="border: 1px solid black;
-                                                                                           width: 500px;"> col-md-1 </div>
-                                        </div>
-                                        <div class="row">
-                                            <label for="id2" class="col-form-label"><b>피신고자</b></label>
-                                            <div class="col-md-2" style="border: 1px solid black;
-                                                                                           width: 500px;"> col-md-4 </div>
-                                        </div>
-                                        <div class="row">
-                                            <label for="id3" class="col-form-label"><b>신고사유</b></label>
-                                            <div class=col-md-3" style="border: 1px solid black;
-                                                                                           width: 500px;"> col-md-4 </div>
-                                        </div>
-                                        <div class="row">
-                                            <label for="id4" class="col-form-label"><b>신고내역</b></label>
-                                            <div class="col-md-4" style="border: 1px solid black;
-                                                                                           width: 500px;
-                                                                                           height: 100px;"> col-md-4 </div>
+                                        <div class="container">
+                                            <div class="row">
+                                                <label for="id1" class="col-form-label"><b>피신고자</b></label>
+                                                <div class="report_modal" id="modal_reported" > </div>
+                                            </div>
+                                            <div class="row">
+                                                <label for="id2" class="col-form-label"><b>신고자</b>  </label>
+                                                <div class="report_modal" id="modal_report" > </div>
+                                            </div>
+                                            <div class="row">
+                                                <label for="id3" class="col-form-label"><b>접수일</b></label>
+                                                <div class="report_modal" id="modal_dt" > </div>
+                                            </div>
+                                            <div class="row">
+                                                <label for="id4" class="col-form-label"><b>신고사유</b></label>
+                                                <div class="report_modal" id="modal_state" > </div>
+                                            </div>
+                                            <div class="row">
+                                                <label for="id5" class="col-form-label"><b>신고내용</b></label>
+                                                <div class="report_modal" id="modal_content"> </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!--푸터-->
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">승인</button>
-                                    <button type="button" class="btn btn-secondary">반려</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">반려</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
                 </main>
                 <footer class="py-4 bg-light mt-auto">
@@ -133,5 +140,6 @@
                 $('#btn-th').removeClass('sorting');
             }   );
         </script>
+        <script src="/js/admin/admin.js"></script>
     </body>
 </html>

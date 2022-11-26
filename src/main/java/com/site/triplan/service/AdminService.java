@@ -22,4 +22,6 @@ public class AdminService {
     public List<ReportVo> postUnreport() { return adminMapper.findUnreport(); }
     public List<ReportVo> postReport() { return adminMapper.findReport(); }
 
+
+
 }

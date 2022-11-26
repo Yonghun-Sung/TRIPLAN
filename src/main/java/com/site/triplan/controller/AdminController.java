@@ -5,8 +5,11 @@ import com.site.triplan.vo.ReportVo;
 import com.site.triplan.vo.UserVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -35,6 +38,7 @@ public class AdminController {
     public String admin_myinfo() {
         return "admin_myinfo";
     }
+
 
     @RequestMapping("/memberAll")
     public String admin_member_all(Model model) {

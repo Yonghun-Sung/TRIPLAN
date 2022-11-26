@@ -10,9 +10,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReportVo {
-    String name;
+    String reportUser;
+    String reportedUser;
     String content;
     String state;
     String dt;
-
 }
