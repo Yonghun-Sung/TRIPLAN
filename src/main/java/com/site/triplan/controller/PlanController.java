@@ -122,9 +122,15 @@ public class PlanController {
     public @ResponseBody List<AttractionVo> searchSpotList(@RequestParam String keyword, @RequestParam String areaCode, @RequestParam String sigunguCode) {
         String key = "8cHlpbteCRtJBou8%2FnhQqhIndcUFnxYvrzPQFJQKsjbtXDA9Z%2BGwQuRNTaWcXfSWgyZe2cE1Fh4K8KyncXYj%2Fw%3D%3D";
         List<AttractionVo> tourList = new ArrayList<>();
+        String url = "";
         try{
-            String encodeKeyword = URLEncoder.encode(keyword,"utf-8");
-            String url = "http://apis.data.go.kr/B551011/KorService/searchKeyword?numOfRows=20&pageNo=1&MobileOS=ETC&MobileApp=AppTest&ServiceKey=" + key + "&arrange=B&contentTypeId=12&areaCode=" + areaCode + "&sigunguCode=" + sigunguCode + "&cat1=&cat2=&cat3=&keyword=" + encodeKeyword;
+
+            if (keyword == "") {
+                url = "http://apis.data.go.kr/B551011/KorService/areaBasedList?serviceKey=" + key + "&pageNo=1&numOfRows=25&MobileApp=AppTest&MobileOS=WIN&arrange=B&contentTypeId=12&areaCode=" + areaCode + "&sigunguCode=" + sigunguCode;
+            } else {
+                String encodeKeyword = URLEncoder.encode(keyword,"utf-8");
+                url = "http://apis.data.go.kr/B551011/KorService/searchKeyword?numOfRows=25&pageNo=1&MobileOS=ETC&MobileApp=AppTest&ServiceKey=" + key + "&arrange=B&contentTypeId=12&areaCode=" + areaCode + "&sigunguCode=" + sigunguCode + "&cat1=&cat2=&cat3=&keyword=" + encodeKeyword;
+            }
 
             DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();

@@ -114,11 +114,14 @@ $('select#areacode').change(function () {
     }
 });
 
-// 관광지 검색
-$('#spot-search-btn').click(function () {
+// 관광지 이름으로 검색
+//$('#spot-search-btn').click(function () {
+$('.spot-list-btn ').click(function () {
     let keyword = $('#spot-search').val();
     let areaCode = $('#areacode option:selected').val();
     let sigunguCode = $('#sigungucode option:selected').val();
+
+    alert(keyword == "");
 
     $.ajax({
         method: "GET",
