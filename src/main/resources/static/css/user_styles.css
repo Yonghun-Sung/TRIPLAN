@@ -1430,7 +1430,8 @@ section {
 }
 
 .contact .basic-form button[type=submit] {
-  background: #1f98d1;
+  /*background: #1f98d1;*/
+  background: #81bef0;
   border: 0;
   padding: 12px 40px;
   color: #fff;
@@ -1701,14 +1702,15 @@ section {
 }
 
 .blog .post-author img {
-  max-width: 120px;
-  margin-right: 20px;
+  height: 120px;
+  width: 120px;
+  margin-right: 2.8%;
 }
 
 .blog .post-author h4 {
   font-weight: 600;
   font-size: 22px;
-  margin-bottom: 0px;
+  margin-bottom: 2%;
   padding: 0;
   color: var(--color-secondary);
 }
@@ -1899,6 +1901,7 @@ section {
 .blog .comments .comment {
   margin-top: 30px;
   position: relative;
+  border-bottom: 1px solid #ededed;
 }
 
 .blog .comments .comment .comment-img {
@@ -1910,8 +1913,10 @@ section {
 }
 
 .blog .comments .comment h5 {
-  font-size: 16px;
+  font-size: 15px;
   margin-bottom: 2px;
+  display: inline-block;
+  font-weight: bold;
 }
 
 .blog .comments .comment h5 a {
@@ -1934,10 +1939,11 @@ section {
 }
 
 .blog .comments .comment time {
-  display: block;
-  font-size: 14px;
+  display: inline-block;
+  font-size: 13px;
   color: rgba(27, 47, 69, 0.8);
   margin-bottom: 5px;
+  float: right;
 }
 
 .blog .comments .comment.comment-reply {
@@ -1953,6 +1959,7 @@ section {
 .blog .comments .reply-form h4 {
   font-weight: bold;
   font-size: 22px;
+  margin-bottom: 2%;
 }
 
 .blog .comments .reply-form p {
@@ -1974,6 +1981,8 @@ section {
   border-radius: 4px;
   padding: 10px 10px;
   font-size: 14px;
+  display: inline-block;
+  width: 90%;
 }
 
 .blog .comments .reply-form textarea:focus {
@@ -2310,8 +2319,26 @@ div#joinform-container {
   height: 48px;
 }
 
+#joinform input#id {
+  display: inline-block;
+  width: 85%;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
 #joinform label.form-label, #joinform label.form-check-label {
   font-size: 14px;
+  display: block;
+}
+
+button#id-overlap-btn {
+  display: inline-block;
+  width: 15%;
+  height: 48px;
+  font-size: 13px;
+  float: right;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 
 input#agree-terms {
@@ -2331,6 +2358,18 @@ button#joininsert-btn {
 
 #termsOfService .mb-3, #privacyPolicy .mb-3 {
   font-size: 14px;
+}
+
+div.errMsg {
+  display: none;
+  margin-top: 0.5%;
+  font-size: 14px;
+  font-weight: bold;
+  color: #e01b1b;
+}
+div#joinErrMsg {
+  text-align: left;
+  margin-top: 2%;
 }
 
 /*==============================
@@ -2856,6 +2895,19 @@ button.add-place:hover i.bi-plus {
 ================================*/
 section.plan-detail {
   margin: 0px 190px;
+  padding: 45px 0;
+}
+@media (max-width: 1920px) {
+  .plan-detail .row.g-5 {
+    width: 101.5%;
+    margin-left: -1.7%;
+  }
+}
+@media (max-width: 1708px) {
+  .plan-detail .row.g-5 {
+    width: 94.8%;
+    margin-left: 1.4%;
+  }
 }
 div#plan-detail-header {
   margin-top: 10%;
@@ -2867,7 +2919,62 @@ div#plan-info {
   background-image: url('/img/banner.jpg');
   background-position: right;
   height: 75%;
+  padding-top: 5%;
+  padding-left: 1.5%;
 }
+#plan-info div#like-icon {
+  display: inline-block;
+}
+#plan-info .bi-suit-heart, #plan-info .bi-suit-heart-fill {
+  color: #ed2424;
+  font-size: 28px;
+  -webkit-text-stroke: 0.8px;
+  padding: 0px 8px;
+  cursor: pointer;
+}
+#plan-info div#like-icon {
+  display: inline-block;
+  margin-left: 0.5%;
+  border-radius: 50%;
+}
+div#plan-info h2#title {
+  font-weight: 600;
+  font-size: 24px;
+  margin-bottom: 0px;
+  padding: 0;
+  color: var(--color-secondary);
+  text-align: left;
+  display: inline-block;
+  letter-spacing: 0.4px;
+}
+#plan-info p.plan-date {
+  margin-bottom: 0.6%;
+  font-size: 14px;
+}
+@media (max-width: 1920px) {
+  #plan-info .meta-top {
+    display: inline-block;
+    border: 1px solid #595959;
+    padding: 0.3% 0.8%;
+    width: 18.5%;
+  }
+}
+@media (max-width: 1708px) {
+  #plan-info .meta-top {
+    width: 22.7%;
+  }
+}
+
+#plan-info .meta-top i {
+  -webkit-text-stroke: 0.2px;
+  padding-right: 2%;
+  font-size: 18px;
+}
+#plan-info .meta-top span {
+  padding-right: 6%;
+  font-size: 15px;
+}
+
 #plan-detail-header div#tab {
   border: 1px solid #a9a9a9;
   height: 25%;
@@ -2892,6 +2999,78 @@ div#plan-info {
   padding-right: 3%;
   color: #b3b3b3;
 }
+#plan-detail-header .btn-box {
+  float: right;
+  display: inline-block;
+}
+button.plan-detail-btn {
+  display: inline-block;
+  height: 45px;
+  width: 9%;
+  font-size: 16px;
+  float: right;
+  margin-top: -0.7%;
+  margin-right: 0.5%;
+}
+button#plan-delete-btn {
+  margin-left: 0.5%;
+  background-color: #a7a7a7;
+  margin-right: -1%;
+}
+
+@media (max-width: 1920px) {
+  .day-info-box {
+    background: #f5f5ff;
+    margin-top: -6.5%;
+    margin-left: -4%;
+    width: 108%;
+    height: 62px;
+    font-weight: bold;
+  }
+}
+@media (max-width: 1708px) {
+  .day-info-box {
+    margin-top: -8.5%;
+    margin-left: -5%;
+    width: 110%;
+  }
+}
+.day-info-box div.day {
+  display: inline-block;
+  border: 1px solid black;
+  height: 100%;
+  padding: 17px 30px;
+  font-size: 18px;
+  background: #22242e;
+  color: #fff;
+  margin-right: 2%;
+}
+
+
+.place-by-day {
+  margin-bottom: 13%;
+}
 div.comments {
   display: none;
 }
+a.reply-option {
+  display: inline-block;
+  font-size: 14px;
+  color: rgba(27, 47, 69, 0.8);
+  margin-bottom: 5px;
+  float: right;
+  padding-left: 0.6%;
+}
+button#insert-reply-btn {
+  display: inline-block;
+  width: 9%;
+  height: 64px;
+  float: right;
+}
+.comment p {
+  font-size: 15px;
+}
+div.place-info p.memo {
+  font-size: 15px;
+}
+

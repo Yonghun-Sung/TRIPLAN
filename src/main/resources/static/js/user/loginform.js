@@ -1,6 +1,10 @@
 
 let urlParams = new URL(location.href).searchParams;
+let join = urlParams.get('join');
 let errCode = urlParams.get('errCode');
+if (join == "1") {
+    alert('회원가입이 완료되었습니다.');
+}
 if (errCode == "1") {
     alert('이메일 또는 비밀번호를 확인해주세요.');
 }
@@ -20,15 +24,12 @@ $('#findpw-btn').click(function () {
             $('#findpw-form').submit();
             alert('이메일이 전송되었습니다.');
             $('#findpw-modal').modal('hide');
-            //window.location.href='redirect:/triplan/loginform';
         }
     })
     .fail(function (e) {
         console.log(e.status);
         console.log(e.responseText);
     });
-
-
 });
 
 

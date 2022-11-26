@@ -60,9 +60,26 @@ public class LoginController {
 
     // 메일 전송
     @PostMapping("/mail")
-    //public void sendMail(@RequestParam String email) {
     public String sendMail(MailVo mailVo) {
         loginService.sendTempPwMail(mailVo);
         return "redirect:/triplan/loginform";
+    }
+
+    // 회원가입: id 체크(중복/탈퇴)
+    @PostMapping("/checkJoinId")
+    public @ResponseBody int[] checkJoinId(@RequestParam String id) {
+        int[] result = new int[2];
+        int checkOverlapId = loginService.countId(id);
+        int checkDropId = loginService.checkDropId(id);
+        result[0] = checkOverlapId;
+        result[1] = checkDropId;
+        return result;
+    }
+
+    // 회원가입
+    @PostMapping("/join")
+    public String insertUser(Model model, UserVo user) {
+        loginService.insertUser(user);
+        return "redirect:/triplan/loginform?join=1";
     }
 }
