@@ -46,16 +46,22 @@ $('a#day1').addClass('active');
 $('a.trip-day').click(function () {
     let dayNum = $(this).prop('id').substring(3);
 
+    // DAY별 일정 장소목록 & 지도
     for (let i = 1; i <= tripDays; i++) {
         if (i == dayNum) {
             $('div#form' + i).css('display', 'block');
             $('a#day' + i).addClass('active');
+
+            $('div#map_div' + i).css('display', 'block');
         }
         else {
             $('div#form' + i).css('display', 'none');
             $('a#day' + i).removeClass('active');
+
+            $('div#map_div' + i).css('display', 'none');
         }
     }
+
 
     nowDayPageNum = $('a.trip-day.active').prop('id').substring(3);
 
@@ -121,8 +127,6 @@ $('.spot-list-btn ').click(function () {
     let areaCode = $('#areacode option:selected').val();
     let sigunguCode = $('#sigungucode option:selected').val();
 
-    alert(keyword == "");
-
     $.ajax({
         method: "GET",
         url: "/triplan/searchSpotList",
@@ -158,7 +162,6 @@ $(document).on('click', 'button.add-place', function() {
     var loc_y = $(this).attr('loc_y')
     var photo_path = $(this).attr('photo_path')
 
-    //$('form.place-form').append(
     $('div#form' + nowDayPageNum).append(
         "<div id='place" + count++ + "' class='select-place'>"
         +   "<span class='num-box'><i class='bi bi-check'></i></span>"
@@ -171,7 +174,7 @@ $(document).on('click', 'button.add-place', function() {
         +   "<input type='hidden' id='loc_x' name='loc_x' value='" + loc_x + "'>"
         +   "<input type='hidden' id='loc_y' name='loc_y' value='" + loc_y + "'>"
         +   "<input type='hidden' id='photo_path' name='photo_path' value='" + photo_path + "'>"
-        +   "<input type='hidden' id='day' name='day' value=''>"
+        +   "<input type='hidden' id='day' name='day' value='" + nowDayPageNum + "'>"
         +   "<input type='hidden' id='order' name='order' value=''>"
         + "</div>");
 });
