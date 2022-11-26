@@ -1,8 +1,10 @@
 $(function(){
     $('#report-modal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget);
-        var reportUser = button.data('reportUser');
-        var reportedUser = button.data('reportedUser');
+
+
+        var reportedUser = button.data('reporteduser');
+        var reportUser = button.data("reportuser");
         var content = button.data('content');
         var state = button.data('state');
         var dt = button.data('dt');
