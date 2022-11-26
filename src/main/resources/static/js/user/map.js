@@ -13,7 +13,7 @@ function initTmap(){
     center: new Tmapv2.LatLng(37.56701114710962, 126.9973611831669),
     width : "100%",
     height : "745px",
-    zoom : 13,
+    zoom : 6,
     zoomControl : true,
     scrollwheel : true
   });
@@ -93,14 +93,20 @@ function initTmap(){
 }
 
 $('button#placeOk-btn').click(function () {
+  let nowDayPageNum = $('a.trip-day.active').prop('id').substring(3);
+  alert($('div#form' + nowDayPageNum + '>.select-place').length);
+
   let loc = [];
   let viaPointIds = [];
   let count = 1;
-  for (let i = 1; i <= $('.select-place').length; i++) {
-    loc.push([$('.select-place:nth-child(' + i + ') input#loc_x').val()
-            , $('.select-place:nth-child(' + i + ') input#loc_y').val()]);
-    viaPointIds.push($('.select-place:nth-child(' + i + ')').prop('id'));
+  for (let i = 1; i <= $('div#form' + nowDayPageNum + '>.select-place').length; i++) {
+    loc.push([$('div#form' + nowDayPageNum + '>.select-place:nth-child(' + i + ') input#loc_x').val()
+            , $('div#form' + nowDayPageNum + '>.select-place:nth-child(' + i + ') input#loc_y').val()]);
+    viaPointIds.push($('div#form' + nowDayPageNum + '>.select-place:nth-child(' + i + ')').prop('id'));
   }
+  console.log(loc);
+  console.log(viaPointIds);
+
 
   // 2. 시작, 도착 마커 생성
   // 시작

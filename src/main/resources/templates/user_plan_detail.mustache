@@ -54,6 +54,7 @@
             $('div.comments').css('display', 'block');
             $('div.content').css('display', 'none');
         });
+
     });
 </script>
 </head>
@@ -61,196 +62,284 @@
     <!-- ======= Header ======= -->
     {{>user_header}}
 
-  <main id="main">
+    <main id="main">
 
-    <div id="plan-detail-header">
-        <div id="plan-info">
-          <div>
-              <i class="bi bi-suit-heart"></i>
-              <i class="bi bi-person-circle"></i>
-              <h4>닉네임</h4>
-          </div>
-          <h2>제목제목제목</h2>
+        <div id="plan-detail-header">
+            <div id="plan-info">
+                <h2 id="title">제주도 서부 2박3일 일정</h2>
+                <div id="like-icon">
+                    <i class="bi bi-suit-heart"></i>
+                    <!--
+                    <i class="bi bi-suit-heart-fill"></i>
+                    -->
+                </div>
+                <div>
+                    <p class="plan-date">
+                        2022-11-14 ~ 2022-11-16
+                    </p>
+                </div>
+                <div class="meta-top">
+                    <i class="bi bi-person"></i><span id="nickname" class="article-info">yong</span>
+                    <i class="bi bi-geo-alt"></i><span id="placeNum" class="article-info">25</span>
+                    <i class="bi bi-eye"></i><span id="views" class="article-info">10082</span>
+                    </ul>
+                </div>
+            </div>
+            <div id="tab">
+                <span id="planTab" class="tab-name">일정</span>
+                <span id="tab-bar">|</span>
+                <span id="replyTab" class="tab-name">댓글</span>
+
+                <!--본인 글이면 뜨게-->
+                <button id="plan-delete-btn" class="basic-btn plan-detail-btn">삭제</button>
+                <button id="plan-update-btn" class="basic-btn plan-detail-btn">수정</button>
+            </div>
         </div>
-        <div id="tab">
-            <span id="planTab" class="tab-name">일정</span>
-            <span id="tab-bar">|</span>
-            <span id="replyTab" class="tab-name">댓글</span>
-        </div>
-    </div>
 
-      <!-- ======= Blog Details Section ======= -->
-      <section id="blog" class="blog plan-detail">
-          <div class="container">
+        <!-- ======= Blog Details Section ======= -->
+        <section id="blog" class="blog plan-detail">
+            <div class="container">
 
-              <div class="row g-5">
+                <div class="row g-5">
 
-                  <div class="col-lg-8">
+                    <div class="col-lg-8">
 
-                      <article class="blog-details">
+                        <article class="blog-details">
 
-                          <!--일정 내용-->
-                          <div class="content">
-                              <div class="post-author d-flex align-items-center">
-                                  <img src="/img/blog/blog-author.jpg" class="rounded-circle flex-shrink-0" alt="">
-                                  <div>
-                                      <h4>Jane Smith</h4>
-                                      <p>
-                                          Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus
-                                          accusantium.
-                                          Quas repellat voluptatem officia numquam sint aspernatur voluptas. Esse et
-                                          accusantium
-                                          ut unde voluptas.
-                                      </p>
-                                  </div>
-                              </div>
-                              <div class="post-author d-flex align-items-center">
-                                  <img src="/img/blog/blog-author.jpg" class="rounded-circle flex-shrink-0" alt="">
-                                  <div>
-                                      <h4>Jane Smith</h4>
-                                      <p>
-                                          Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus
-                                          accusantium. Quas repellat voluptatem officia numquam sint aspernatur
-                                          voluptas. Esse
-                                          et accusantium ut unde voluptas.
-                                      </p>
-                                  </div>
-                              </div>
-                              <div class="post-author d-flex align-items-center">
-                                  <img src="/img/blog/blog-author.jpg" class="rounded-circle flex-shrink-0" alt="">
-                                  <div>
-                                      <h4>Jane Smith</h4>
-                                      <p>
-                                          Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus
-                                          accusantium. Quas repellat voluptatem officia numquam sint aspernatur
-                                          voluptas. Esse
-                                          et accusantium ut unde voluptas.
-                                      </p>
-                                  </div>
-                              </div>
-                          </div>
-                          <!-- End post content -->
+                            <!--일정 내용-->
+                            <div class="content">
+                                <div class="place-by-day">
+
+                                    <div class="day-info-box">
+                                        <div class="day">DAY1</div>
+                                        <span class="date">2022-11-04</span>
+                                    </div>
+                                    <div class="place-info post-author d-flex align-items-center">
+                                        <img src="http://img.earthtory.com/img/place_img/312/7505_0_et.jpg" class="rounded-circle flex-shrink-0" alt="">
+                                        <div>
+                                            <h4 name="name">용담 해안도로</h4>
+                                            <p class="memo">
+                                                드라이브하기에 좋은 도로
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="place-info post-author d-flex align-items-center">
+                                        <img src="http://img.earthtory.com/img/place_img/312/7281_2_et.jpg" class="rounded-circle flex-shrink-0" alt="">
+                                        <div>
+                                            <h4 name="name">협재 해수욕장</h4>
+                                           <p class="memo">
+                                               해수욕장에서 바다수영좀 할려고^!^
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="place-info post-author d-flex align-items-center">
+                                        <img src="http://img.earthtory.com/img/place_img_user/820668/7326/820668_1402468693.JPG" class="rounded-circle flex-shrink-0" alt="">
+                                        <div>
+                                            <h4 name="name">오설록 티 뮤지엄</h4>
+                                            <p class="memo">
+                                                오설록 티뮤지엄 드디어 가봄><
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="place-by-day">
+                                    <div class="day-info-box">
+                                        <div class="day">DAY2</div>
+                                        <span class="date">2022-11-05</span>
+                                    </div>
+                                    <div class="place-info post-author d-flex align-items-center">
+                                        <img src="http://img.earthtory.com/img/place_img_user/820668/7321/820668_1402468744.JPG" class="rounded-circle flex-shrink-0" alt="">
+                                        <div>
+                                            <h4 name="name">중문·대포해안 주상 절리대</h4>
+                                            <p class="memo">
+                                                생각보다 더 아름다웠던 절리대
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="place-info post-author d-flex align-items-center">
+                                        <img src="http://img.earthtory.com/img/place_img/312/7359_0_et.jpg" class="rounded-circle flex-shrink-0" alt="">
+                                        <div>
+                                            <h4 name="name">김영갑 갤러리 두모악</h4>
+                                            <p class="memo">
+                                                갤러뤼
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="place-info post-author d-flex align-items-center">
+                                        <img src="http://img.earthtory.com/img/place_img/312/7410_0_et.jpg" class="rounded-circle flex-shrink-0" alt="">
+                                        <div>
+                                            <h4 name="name">동문 재래시장</h4>
+                                            <p class="memo">
+                                                야시장가서 다 포장해와서 먹을 예정!
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="place-by-day">
+                                    <div class="day-info-box">
+                                        <div class="day">DAY3</div>
+                                        <span class="date">2022-11-06</span>
+                                    </div>
+                                    <div class="place-info post-author d-flex align-items-center">
+                                        <img src="http://img.earthtory.com/img/place_img_user/820668/7321/820668_1402468744.JPG" class="rounded-circle flex-shrink-0" alt="">
+                                        <div>
+                                            <h4 name="name">중문·대포해안 주상 절리대</h4>
+                                            <p class="memo">
+                                                생각보다 더 아름다웠던 절리대
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="place-info post-author d-flex align-items-center">
+                                        <img src="http://img.earthtory.com/img/place_img/312/7359_0_et.jpg" class="rounded-circle flex-shrink-0" alt="">
+                                        <div>
+                                            <h4 name="name">김영갑 갤러리 두모악</h4>
+                                            <p class="memo">
+                                                갤러뤼
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="place-info post-author d-flex align-items-center">
+                                        <img src="http://img.earthtory.com/img/place_img/312/7410_0_et.jpg" class="rounded-circle flex-shrink-0" alt="">
+                                        <div>
+                                            <h4 name="name">동문 재래시장</h4>
+                                            <p class="memo">
+                                                야시장가서 다 포장해와서 먹을 예정!
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- End post content -->
 
 
-                          <!-- 댓글 -->
-                          <div class="comments">
+                            <!-- 댓글 -->
+                            <div class="comments">
 
-                              <h4 class="comments-count">8 Comments</h4>
+                                <h4 class="comments-count">8 Comments</h4>
 
-                              <div class="reply-form">
-                                  <h4>Leave a Reply</h4>
-                                  <form action="">
-                                      <div class="row">
-                                          <div class="col form-group">
+                                <div class="reply-form">
+                                    <h4>댓글</h4>
+                                    <form action="">
+                                        <div class="row">
+                                            <div class="col form-group">
                                               <textarea name="comment" class="form-control"
-                                                        placeholder="Your Comment*"></textarea>
-                                          </div>
-                                      </div>
-                                      <button type="submit" class="btn-basic">Post Comment</button>
-                                  </form>
-                              </div>
+                                                        placeholder="내용을 입력하세요."></textarea>
+                                                <button type="submit" id="insert-reply-btn" class="basic-btn">등록
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
 
-                              <div id="comment-1" class="comment">
-                                  <div class="d-flex">
-                                      <div class="comment-img"><img src="assets/img/blog/comments-1.jpg" alt=""></div>
-                                      <div>
-                                          <h5>Georgia Reader</h5>
-                                          <time datetime="2020-01-01">01 Jan,2022</time>
-                                          <p>
-                                              Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et. Est
-                                              ad aut sapiente quis molestiae est qui cum soluta.
-                                              Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui facilis
-                                              et.
-                                          </p>
-                                      </div>
-                                  </div>
-                              </div><!-- End comment #1 -->
+                                <div id="comment-1" class="comment">
+                                    <div class="d-flex">
+                                        <div class="comment-img"><img src="/img/user.png"></div>
+                                        <div>
+                                            <h5>Georgia Reader</h5>
+                                            <a href="#!" class="reply-option">신고</a>
+                                            <p>
+                                                Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et.
+                                                Est
+                                                ad aut sapiente quis molestiae est qui cum soluta.
+                                                Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui
+                                                facilis
+                                                et.
+                                            </p>
+                                            <time datetime="2020-01-01">2020-01-01</time>
+                                        </div>
+                                    </div>
+                                </div>
 
-                              <div id="comment-2" class="comment">
-                                  <div class="d-flex">
-                                      <div class="comment-img"><img src="assets/img/blog/comments-2.jpg" alt=""></div>
-                                      <div>
-                                          <h5>Georgia Reader</h5>
-                                          <time datetime="2020-01-01">01 Jan,2022</time>
-                                          <p>
-                                              Ipsam tempora sequi voluptatem quis sapiente non. Autem itaque eveniet
-                                              saepe. Officiis illo ut beatae.
-                                          </p>
-                                      </div>
-                                  </div>
+                                <div id="comment-2" class="comment">
+                                    <div class="d-flex">
+                                        <div class="comment-img"><img src="/img/user.png" alt=""></div>
+                                        <div>
+                                            <h5>Georgia Reader</h5>
+                                            <a href="#!" class="reply-option">삭제</a>
+                                            <a href="#!" class="reply-option">수정 | </a>
+                                            <p>
+                                                Ipsam tempora sequi voluptatem quis sapiente non. Autem itaque eveniet
+                                                saepe. Officiis illo ut beatae.
+                                            </p>
+                                            <time datetime="2020-01-01">2020-01-03</time>
+                                        </div>
+                                    </div>
+                                </div>
 
-                              </div><!-- End comment #2-->
+                                <div id="comment-3" class="comment">
+                                    <div class="d-flex">
+                                        <div class="comment-img"><img src="/img/user.png"></div>
+                                        <div>
+                                            <h5>Georgia Reader</h5>
+                                            <a href="#!" class="reply-option">신고</a>
+                                            <p>
+                                                Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et.
+                                                Est
+                                                ad aut sapiente quis molestiae est qui cum soluta.
+                                                Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui
+                                                facilis
+                                                et.
+                                            </p>
+                                            <time datetime="2020-01-01">2020-01-01</time>
+                                        </div>
+                                    </div>
+                                </div>
 
-                              <div id="comment-3" class="comment">
-                                  <div class="d-flex">
-                                      <div class="comment-img"><img src="assets/img/blog/comments-5.jpg" alt=""></div>
-                                      <div>
-                                          <h5>Georgia Reader</h5>
-                                          <time datetime="2020-01-01">01 Jan,2022</time>
-                                          <p>
-                                              Distinctio nesciunt rerum reprehenderit sed. Iste omnis eius repellendus
-                                              quia nihil ut accusantium tempore. Nesciunt expedita id dolor
-                                              exercitationem aspernatur aut quam ut. Voluptatem est accusamus iste at.
-                                              Non aut et et esse qui sit modi neque. Exercitationem et eos aspernatur.
-                                              Ea est consequuntur officia beatae ea aut eos soluta. Non qui dolorum
-                                              voluptatibus et optio veniam. Quam officia sit nostrum dolorem.
-                                          </p>
-                                      </div>
-                                  </div>
+                                <div id="comment-4" class="comment">
+                                    <div class="d-flex">
+                                        <div class="comment-img"><img src="/img/user.png"></div>
+                                        <div>
+                                            <h5>Georgia Reader</h5>
+                                            <a href="#!" class="reply-option">신고</a>
+                                            <p>
+                                                Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et.
+                                                Est
+                                                ad aut sapiente quis molestiae est qui cum soluta.
+                                                Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui
+                                                facilis
+                                                et.
+                                            </p>
+                                            <time datetime="2020-01-01">2020-01-01</time>
+                                        </div>
+                                    </div>
+                                </div>
 
-                              </div><!-- End comment #3 -->
+                            </div><!-- End blog comments -->
 
-                              <div id="comment-4" class="comment">
-                                  <div class="d-flex">
-                                      <div class="comment-img"><img src="assets/img/blog/comments-6.jpg" alt=""></div>
-                                      <div>
-                                          <h5>Georgia Reader</h5>
-                                          <time datetime="2020-01-01">01 Jan,2022</time>
-                                          <p>
-                                              Dolorem atque aut. Omnis doloremque blanditiis quia eum porro quis ut
-                                              velit tempore. Cumque sed quia ut maxime. Est ad aut cum. Ut
-                                              exercitationem non in fugiat.
-                                          </p>
-                                      </div>
-                                  </div>
+                        </article><!-- End blog post -->
 
-                              </div><!-- End comment #4 -->
+                    </div>
+                    <div class="col-lg-4">
 
-                          </div><!-- End blog comments -->
+                        <div class="sidebar ps-lg-4">
 
-                      </article><!-- End blog post -->
+                            <div class="sidebar-item recent-posts">
+                                <div class="mt-3">
 
-                  </div>
-                  <div class="col-lg-4">
+                                    <div class="post-item mt-3">
+                                        <img src="assets/img/blog/blog-recent-1.jpg" alt="" class="flex-shrink-0">
+                                        <div>
+                                            <h4><a href="blog-post.html">Nihil blanditiis at in nihil autem</a></h4>
+                                            <time datetime="2020-01-01">Jan 1, 2020</time>
+                                        </div>
+                                    </div><!-- End recent post item-->
 
-                      <div class="sidebar ps-lg-4">
+                                </div>
 
-                          <div class="sidebar-item recent-posts">
-                              <h3 class="sidebar-title">Recent Posts</h3>
+                            </div><!-- End sidebar recent posts-->
 
-                              <div class="mt-3">
+                        </div><!-- End Blog Sidebar -->
 
-                                  <div class="post-item mt-3">
-                                      <img src="assets/img/blog/blog-recent-1.jpg" alt="" class="flex-shrink-0">
-                                      <div>
-                                          <h4><a href="blog-post.html">Nihil blanditiis at in nihil autem</a></h4>
-                                          <time datetime="2020-01-01">Jan 1, 2020</time>
-                                      </div>
-                                  </div><!-- End recent post item-->
+                    </div>
 
-                              </div>
+                </div>
+            </div>
+        </section><!-- End Blog Details Section -->
 
-                          </div><!-- End sidebar recent posts-->
-
-                      </div><!-- End Blog Sidebar -->
-
-                  </div>
-
-              </div>
-          </div>
-      </section><!-- End Blog Details Section -->
-
-  </main><!-- End #main -->
+    </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   {{>user_footer}}

@@ -8,4 +8,41 @@
         FROM user_info
         WHERE id LIKE #{id} AND pw LIKE #{pw}
     </select>
+
+    <!--ID 중복확인-->
+    <select id="countId" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM user_info
+        WHERE id LIKE #{id}
+    </select>
+
+    <!--비밀번호 변경-->
+    <update id="updatePw">
+        UPDATE user_info
+        SET pw=#{pw}
+        WHERE id LIKE #{id}
+    </update>
+
+    <!--탈퇴회원 확인-->
+    <select id="checkDropId" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM `drop`
+        WHERE id LIKE #{id}
+    </select>
+
+    <!--회원가입-->
+    <!-- >> 회원테이블 -->
+    <insert id="insertUser">
+        INSERT INTO user() VALUES()
+    </insert>
+    <!-- >> 최대 회원코드 찾기 -->
+    <select id="getMaxUserCode" resultType="java.lang.Integer">
+        SELECT MAX(code)
+        FROM user
+    </select>
+    <!-- >> 회원정보테이블 -->
+    <insert id="insertUserInfo">
+        INSERT INTO user_info(id, pw, name, nickname, user_code)
+        VALUES(#{id}, #{pw}, #{name}, #{nickname}, #{user_code})
+    </insert>
 </mapper>
