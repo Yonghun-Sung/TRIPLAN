@@ -26,4 +26,13 @@ public interface MypageMapper {
     List<PlanVo> getScheduledPlans();
 
     List<PlanVo> getCompletedPlans();
+
+/*    //나의 일정 삭제
+    void deleteByplanId(Integer id);
+    //좋아요한 일정 삭제(좋아요테이블에서인듯?일정자체가 없어지는게 아니라!)
+    void deleteBylikeId(Integer id);
+    //나의 댓글 삭제
+    void deleteByreplyId(Integer id);*/
+
+    void updateTitle(String title, Integer code);
 }

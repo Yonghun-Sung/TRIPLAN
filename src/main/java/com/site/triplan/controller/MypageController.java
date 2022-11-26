@@ -4,10 +4,10 @@ import com.site.triplan.service.MypageService;
 import com.site.triplan.vo.PlanVo;
 import com.site.triplan.vo.ReplyVo;
 import com.site.triplan.vo.UserVo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -180,12 +180,25 @@ public class MypageController {
         return view;
     }
 
-    @PostMapping("/post/delete")
-    public String deletePost(@RequestPram )
+//    @PostMapping("/mypage/reply/delete")
+//    public String deleteReply(@RequestParam Integer id){
+//        mypageService.deleteReply(id);
+//        return "redirect:/mypage/reply";
+//    }
+//    //나의 일정 삭제
+//    @PostMapping("/mypage/plan/delete/{id}")
+//    public String deletePlans(@PathVariable Integer id) {
+//        mypageService.deleteMyPlans(id);
+//        return "redirect:/mypage";
+//    }
 
 
-
-
+    //여행 제목 수정
+    @PutMapping("/mypage")
+    public String updateTitle(@Param("title") String title, @Param("code") Integer code) { //vo로 바꾸는게 편할듯;;
+        mypageService.updateTitle(title, code);
+        return "redirect:/mypage";//수정하고 다시 마이페이지 일정보여주기
+    }
 }
 /*----캐쉬 사용함..보통은--------------------------------각뷰페이지마다 같은 거를 모델로 넘겨줘야하는데{{}} 따로 분리를 할까 했더니 url도 같고....---*/
 /*그부분만 파일로 따로 뺴고 각 뷰에서그부분 지우고 include{{>}}해준 상태로*/

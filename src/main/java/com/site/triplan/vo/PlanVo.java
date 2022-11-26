@@ -33,7 +33,7 @@ public class PlanVo {
     }
 
     //나의 일정
-    public PlanVo(String name, String title, String nickname, Integer views, String start_dt, String end_dt, String photo_path, String id, String write_dt) {
+    public PlanVo(String name, String title, String nickname, Integer views, String start_dt, String end_dt, String photo_path, String id, String write_dt, Integer code) {
         this.name = name;
         this.title = title;
         this.nickname = nickname;
@@ -43,5 +43,8 @@ public class PlanVo {
         this.photo_path = photo_path;
         this.id = id;
         this.write_dt = write_dt;
+        this.code = code;
     }
+
+
 }

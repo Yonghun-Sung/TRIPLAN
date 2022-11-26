@@ -56,4 +56,36 @@ public class MypageService {
         return mypageMapper.getCompletedPlans();
     }
 
+/*    //나의 댓글 삭제
+    public Integer deleteReply(final Integer id) {
+        mypageMapper.deleteByreplyId(id);
+        return id;
+    }
+
+    //나의 일정 삭제
+    public Integer deleteMyPlans(final Integer id) {
+        mypageMapper.deleteByplanId(id);
+        return id;
+    }
+
+    //좋아요 일정 삭제<-좋아요한 일정이 사라지는게 아니라 내mypage에서 사라짐 +좋아요테이블
+    public Integer deleteLike(final Integer id) {
+        mypageMapper.deleteBylikeId(id);
+        return id;
+    }*/
+    //여행제목 업데이트
+
+
+
+    //일정 수정된 화면 보여지기
+
+    //댓글 삭제되면->화면 업데이트
+
+    //회원정보 수정~
+
+    //여행제목수정
+    public void updateTitle(String title,Integer code){
+        mypageMapper.updateTitle(title, code);
+    }
+
 }
