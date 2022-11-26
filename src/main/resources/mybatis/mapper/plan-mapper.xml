@@ -4,8 +4,31 @@
 <mapper namespace="com.site.triplan.mapper.PlanMapper">
     <!--지역-->
     <select id="getAreaInfo" resultType="com.site.triplan.vo.AreaVo">
-        SELECT code, name
+        SELECT code, name, engname, loc_x, loc_y, zoom
         FROM area
         ORDER BY code
     </select>
+
+    <!--일정 작성-->
+    <!-- >> id로 회원코드 찾기 -->
+    <select id="getUserCodeById" resultType="java.lang.Integer">
+        SELECT user_code
+        FROM user_info
+        WHERE id=#{id}
+    </select>
+    <!-- >> 일정 INSERT -->
+    <insert id="insertPlan">
+        INSERT INTO plan (title, start_dt, end_dt, area_code, user_code)
+        VALUES (#{title}, #{start_dt}, #{end_dt}, #{area_code}, #{user_code})
+    </insert>
+    <!-- >> 최대 일정코드 찾기 -->
+    <select id="getMaxPlanCode" resultType="java.lang.Integer">
+        SELECT max(code)
+        FROM plan
+    </select>
+    <!-- >> 장소 INSERT -->
+    <insert id="insertPlace">
+        INSERT INTO place (day, order, name, loc_x, loc_y, memo, photo_path, plan_code)
+        VALUES (#{day}, #{order}, #{name}, #{loc_x}, #{loc_x}, #{memo}, #{photo_path}, #{plan_code})
+    </insert>
 </mapper>

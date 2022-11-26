@@ -1,5 +1,4 @@
-// 일수 넘겨받은거를 변수로
-let days = 3;
+
 // 현재 지도 선택
 let mapId;
 // 지도 배열
@@ -8,6 +7,21 @@ let mapArr = [];
 let nowMapId;
 let map_nowDayPageNum;
 
+let mapInfo = JSON.parse(localStorage.getItem('planInfo'));
+let x = mapInfo.loc_x;
+let y = mapInfo.loc_y;
+let zoom = mapInfo.zoom;
+
+// 일수 넘겨받은거를 변수로
+let start_day = mapInfo.start_dt;
+let end_day = mapInfo.end_dt;
+let arr = start_day.split("-");
+start_day = new Date(arr[0], arr[1], arr[2]);
+arr = end_day.split("-");
+end_day = new Date(arr[0], arr[1], arr[2]);
+let dif = end_day.getTime() - start_day.getTime();
+let days = Math.abs(dif / (1000 * 60 * 60 * 24)) + 1;
+
 
 // 기본 변수들-------------------------------
 var map, marker;
@@ -15,6 +29,13 @@ var map, marker;
 var markerArr = [];		// 검색
 var drawInfoArr = [];	// 경로최적화
 //------------------------------------------
+
+// 지도 들어갈 공간 만들기
+for (let i = 1; i <= days; i++) {
+  $('#map_wrap').append(
+      "<div id='map_div" + i + "'></div>"
+  );
+}
 
 function initTmap(){
 
@@ -25,10 +46,12 @@ function initTmap(){
     markerArr[i] = new Array();
 
     mapArr[i] = new Tmapv2.Map(mapId, {
-      center: new Tmapv2.LatLng(37.56701114710962, 126.9973611831669),
+      //center: new Tmapv2.LatLng(37.56701114710962, 126.9973611831669),
+      center: new Tmapv2.LatLng(x, y),
       width : "100%",
       height : "745px",
-      zoom : 6,
+      //zoom : 6,
+      zoom : zoom,
       zoomControl : true,
       scrollwheel : true
     });
@@ -118,8 +141,8 @@ $("#map-search-btn").click(function(){
   });
 });
 
-
 $('button#placeOk-btn').click(function () {
+
   map_nowDayPageNum = $('a.trip-day.active').prop('id').substring(3);
 
   let loc = [];
@@ -248,16 +271,14 @@ $('button#placeOk-btn').click(function () {
             drawInfoArr.push(convertChange);
           }
 
-          console.log(drawInfoArr);
-
           polyline_ = new Tmapv2.Polyline({
             path : drawInfoArr,
             strokeColor : "#ff0000",
             strokeWeight: 6,
             map : mapArr[map_nowDayPageNum]
           });
-        }
 
+        }
 
         // 경유 순서 value 보내줌 --------------------------------------------------
         map_nowDayPageNum = $('a.trip-day.active').prop('id').substring(3);

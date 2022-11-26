@@ -33,7 +33,6 @@ public class LoginController {
         UserVo user = loginService.loginUser(loginInfo);
         String view = "";
         if (user == null) {
-            model.addAttribute("errCode", "1");
             view = "redirect:/triplan/loginform?errCode=1";
         } else {
             HttpSession session = request.getSession();

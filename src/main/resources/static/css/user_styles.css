@@ -2299,7 +2299,7 @@ button#join-btn {
   font-size: 14px;
   margin: 6px 5px;
 }
-button#findpw-btn {
+button.modal-btn {
   margin: 3% 0%;
 }
 
@@ -2444,6 +2444,37 @@ p.plan-date {
 /*==============================
   # 일정만들기(plan_insertform)
 ================================*/
+/*일정만들기 모달*/
+#create-plan-modal .form-control {
+  display: inline-block;
+  font-size: 15px;
+}
+#create-plan-modal label {
+  margin: 0% 3%;
+}
+#create-plan-modal input#title {
+  width: 80%;
+}
+#create-plan-modal select#areacode {
+  width: 28%;
+  display: inline-block;
+  margin-left: 0;
+  height: 36.5px;
+}
+#create-plan-modal .date {
+  width: 36%;
+}
+#create-plan-modal span#tilde {
+  font-size: 18px;
+  display: inline-block;
+  padding: 0px 8px;
+}
+button#create-plan-btn {
+  margin-left: 3%;
+  margin-top: 5%;
+  width: 94%;
+}
+
 /* jquery 달력 */
 .ui-widget-header { border: 0px solid #dddddd; background: #fff; }
 
@@ -2581,6 +2612,7 @@ div.plan-col {
 div#plan-daybar {
   background-color: #22242e;
   width: 8%;
+  overflow-y: scroll;
 }
 
 /*Day목록*/

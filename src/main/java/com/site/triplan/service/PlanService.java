@@ -2,7 +2,10 @@ package com.site.triplan.service;
 
 import com.site.triplan.mapper.PlanMapper;
 import com.site.triplan.vo.AreaVo;
+import com.site.triplan.vo.AttractionVo;
+import com.site.triplan.vo.PlanVo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,5 +23,11 @@ public class PlanService {
         List<AreaVo> areaList = new ArrayList<>();
         areaList = planMapper.getAreaInfo();
         return areaList;
+    }
+
+    // 일정 작성
+    @Transactional
+    public Integer insertPlan(PlanVo plan, AttractionVo place) {
+        return 1;
     }
 }

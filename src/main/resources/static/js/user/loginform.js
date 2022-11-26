@@ -7,6 +7,8 @@ if (join == "1") {
 }
 if (errCode == "1") {
     alert('이메일 또는 비밀번호를 확인해주세요.');
+} else if (errCode == "2") {
+    alert('로그인 후 이용하실 수 있습니다.');
 }
 
 

@@ -1,3 +1,38 @@
+$('#plan-exitbtn').click(function () {
+    window.location.href='/triplan/main';
+});
+// 새로고침,나가기 confirm()
+function refresh() {
+    window.onbeforeunload = function (e) {
+        return 0;
+    };
+}
+
+// localStorage에 저장해놓음
+let planInfo = JSON.parse(localStorage.getItem('planInfo'));
+/*
+    alert("제목: " + planInfo.title
+            + "\n시작날짜: " + planInfo.start_dt
+            + "\n마지막날짜:" + planInfo.end_dt
+            + "\nx: " + planInfo.loc_x
+            + "\ny: " + planInfo.loc_y
+            + "\nzoom: " + planInfo.zoom);
+ */
+$('input#title').val(planInfo.title);
+$('input#start_dt').val(planInfo.start_dt);
+$('input#end_dt').val(planInfo.end_dt);
+$('input#area_code').val(planInfo.area_code);
+
+// 마지막일-시작일 일수 계산
+let start_dt = planInfo.start_dt;
+let end_dt = planInfo.end_dt;
+let dateArr = start_dt.split("-");
+start_dt = new Date(dateArr[0], dateArr[1], dateArr[2]);
+dateArr = end_dt.split("-");
+end_dt = new Date(dateArr[0], dateArr[1], dateArr[2]);
+let diff = end_dt.getTime() - start_dt.getTime();
+let tripDays = Math.abs(diff / (1000 * 60 * 60 * 24)) + 1;
+
 
 // 며칠 여행 인지 넘어왔따고 치면 ex 2022/11/3부터 3일
 // 모달 닫으면 넘겨받을 값들 (title, days, startday, endday)
@@ -6,11 +41,10 @@ function addDays(date, days) {
     clone.setDate(date.getDate() + days)
     return clone;
 }
-let tripDays = 3;       // 여행일수
 let daysResult = "";
 let placeResult = "";
 let dayArr = ['일', '월', '화', '수', '목', '금', '토'];
-let date = new Date(2022, 6, 30);      // month는 -1
+let date = start_dt;      // month는 -1
 $('div#plan-day').text("DAY1 | " + (date.getMonth()+1) + "/" + date.getDate() + " (" + dayArr[date.getDay()] + ")");
 for (let i = 1; i <= tripDays; i++) {
     // DAY
@@ -26,9 +60,6 @@ for (let i = 1; i <= tripDays; i++) {
 
     // 일정 장소
     placeResult += "<div id='form" + i + "' class='selected-place'></div>";
-
-    // 지도
-
 
     date = addDays(date, 1);
 }
@@ -182,4 +213,10 @@ $(document).on('click', 'button.add-place', function() {
 /*장소 제거 버튼*/
 $(document).on('click', 'button.delete-place', function () {
     $(this).parent().remove();
+});
+
+
+// 폼 제출
+$('#plan-savebtn').click(function () {
+
 });
