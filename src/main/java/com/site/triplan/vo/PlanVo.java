@@ -45,6 +45,10 @@ public class PlanVo {
         this.write_dt = write_dt;
         this.code = code;
     }
+    /*public PlanVo(String title, Integer code) {
+        this.code = code;
+        this.title = title;
+    }*/
 
 
 }

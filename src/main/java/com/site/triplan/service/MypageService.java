@@ -16,44 +16,44 @@ public class MypageService {
     }
 
     
-    public List<ReplyVo> getAllList() { //댓글
-        return mypageMapper.getAllReplies();
+    public List<ReplyVo> getAllList(String code) { //댓글
+        return mypageMapper.getAllReplies(code);
     }
 
-    public Integer getAllReplyCount() {
-        return mypageMapper.getReplyCount();
+    public Integer getAllReplyCount(String code) {
+        return mypageMapper.getReplyCount(code);
     }
 
-    public Integer getAllPlanCount() {
-        return mypageMapper.getPlanCount();
+    public Integer getAllPlanCount(String code) {
+        return mypageMapper.getPlanCount(code);
     }
 
-    public Integer getAllLikeCount() {
-        return mypageMapper.getLikeCount();
+    public Integer getAllLikeCount(String code) {
+        return mypageMapper.getLikeCount(code);
     }
 
-    public List<PlanVo> getAllLikeList() { /*좋아요한 일정들*/
-        return mypageMapper.getAllLikePlans();
+    public List<PlanVo> getAllLikeList(String code) { /*좋아요한 일정들*/
+        return mypageMapper.getAllLikePlans(code);
     }
 
     public Integer getPlaceNum() {
         return mypageMapper.getPlaceCount();
     }
 
-    public UserVo getMyProfile() {
-        return mypageMapper.getUserProfile();
+    public UserVo getMyProfile(String id) {
+        return mypageMapper.getUserProfile(id);
     }
 
     /*public List<PlanVo> getAllPlanList() {
         return mypageMapper.getAllMyPlans();
     }*/
 
-    public List<PlanVo> getScheduledList() {
-        return mypageMapper.getScheduledPlans();
+    public List<PlanVo> getScheduledList(String code) {
+        return mypageMapper.getScheduledPlans(code);
     }
 
-    public List<PlanVo> getCompletedList() {
-        return mypageMapper.getCompletedPlans();
+    public List<PlanVo> getCompletedList(String code) {
+        return mypageMapper.getCompletedPlans(code);
     }
 
 /*    //나의 댓글 삭제
@@ -88,4 +88,18 @@ public class MypageService {
         mypageMapper.updateTitle(title, code);
     }
 
+//    public boolean updateTitle(PlanVo plan) {
+//        Integer result = mypageMapper.updatePlanTitle(plan);
+//        return result == 1;
+//    }
+//
+    //나의 일정 삭제
+    public void deletePlans(Integer code) {
+        mypageMapper.deletePlans(code);
+    }
+
+    //좋아요한 일정 삭제
+    public void deleteLike(String code, Integer plan_code) {
+        mypageMapper.deleteLike(code, plan_code);
+    }
 }

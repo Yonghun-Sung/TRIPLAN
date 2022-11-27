@@ -9,23 +9,29 @@ import java.util.List;
 
 @Mapper
 public interface MypageMapper {
-    Integer getPlanCount();
-    Integer getReplyCount();
-    Integer getLikeCount();
+    Integer getPlanCount(String code);
+
+    Integer getReplyCount(String code);//usercode
+
+    Integer getLikeCount(String code);
+
     Integer getPlaceCount(); //좋아요한 여행일정의 장소개수 알려고
 
     //나의 댓글
-    List<ReplyVo> getAllReplies();
+    List<ReplyVo> getAllReplies(String code);
+
     //좋아요한 일정
-    List<PlanVo> getAllLikePlans();
+    List<PlanVo> getAllLikePlans(String code);
+
     //회원정보수정에서 이메일, 이름, 닉네임출력
-    UserVo getUserProfile();
+    UserVo getUserProfile(String id);//session에서 받아올 id
+
     //나의 일정들
     /*List<PlanVo> getAllMyPlans();*/
     //다가오는 일정
-    List<PlanVo> getScheduledPlans();
+    List<PlanVo> getScheduledPlans(String code);
 
-    List<PlanVo> getCompletedPlans();
+    List<PlanVo> getCompletedPlans(String code);
 
 /*    //나의 일정 삭제
     void deleteByplanId(Integer id);
@@ -34,5 +40,15 @@ public interface MypageMapper {
     //나의 댓글 삭제
     void deleteByreplyId(Integer id);*/
 
+    //여행 제목 수정
     void updateTitle(String title, Integer code);
+
+    //나의 일정 삭제
+    void deletePlans(Integer code);
+
+    //좋아요한 일정 삭제
+    void deleteLike(String code, Integer plan_code);
+    /*    Integer updatePlanTitle(@Param("plan") PlanVo plan);
+
+    Integer insertToPlanDeleted(@Param("delete_plan") )*/
 }
