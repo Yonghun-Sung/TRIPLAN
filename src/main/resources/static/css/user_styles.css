@@ -1914,7 +1914,7 @@ section {
 
 .blog .comments .comment h5 {
   font-size: 15px;
-  margin-bottom: 2px;
+  margin-bottom: 5px;
   display: inline-block;
   font-weight: bold;
 }
@@ -2245,6 +2245,15 @@ h2#plain-logo {
   }
 }
 
+div.main-title-box h2#title {
+  margin-bottom: 5%;
+}
+
+#main-area-img {
+  width: 100%;
+  height: 204px;
+}
+
 /*======================
   # 로그인(loginform)
 =======================*/
@@ -2299,7 +2308,7 @@ button#join-btn {
   font-size: 14px;
   margin: 6px 5px;
 }
-button#findpw-btn {
+button.modal-btn {
   margin: 3% 0%;
 }
 
@@ -2394,17 +2403,19 @@ table#planlist-table {
   text-align: center;
   vertical-align: middle;
   padding: 8px 14px;
+  width: 8%;
 }
 @media (max-width: 1920px) {
   a.planlist-option span.item {
     display: inline-block;
-    width: 75px;
+    width: 10.5%;
     padding: 2px 0px;
   }
 }
 @media (max-width: 1708px) {
   a.planlist-option span.item {
-    width: 71px;
+    width: 12%;
+    font-size: 14px;
   }
 }
 
@@ -2444,6 +2455,37 @@ p.plan-date {
 /*==============================
   # 일정만들기(plan_insertform)
 ================================*/
+/*일정만들기 모달*/
+#create-plan-modal .form-control {
+  display: inline-block;
+  font-size: 15px;
+}
+#create-plan-modal label {
+  margin: 0% 3%;
+}
+#create-plan-modal input#title {
+  width: 80%;
+}
+#create-plan-modal select#areacode {
+  width: 28%;
+  display: inline-block;
+  margin-left: 0;
+  height: 36.5px;
+}
+#create-plan-modal .date {
+  width: 36%;
+}
+#create-plan-modal span#tilde {
+  font-size: 18px;
+  display: inline-block;
+  padding: 0px 8px;
+}
+button#create-plan-btn {
+  margin-left: 3%;
+  margin-top: 5%;
+  width: 94%;
+}
+
 /* jquery 달력 */
 .ui-widget-header { border: 0px solid #dddddd; background: #fff; }
 
@@ -2581,6 +2623,7 @@ div.plan-col {
 div#plan-daybar {
   background-color: #22242e;
   width: 8%;
+  overflow-y: scroll;
 }
 
 /*Day목록*/
@@ -2956,12 +2999,12 @@ div#plan-info h2#title {
     display: inline-block;
     border: 1px solid #595959;
     padding: 0.3% 0.8%;
-    width: 18.5%;
+    width: 23%;
   }
 }
 @media (max-width: 1708px) {
   #plan-info .meta-top {
-    width: 22.7%;
+    width: 28%;
   }
 }
 
@@ -3019,18 +3062,23 @@ button#plan-delete-btn {
 }
 
 @media (max-width: 1920px) {
+  div.day-info-box:nth-child(1) {
+    margin-top: -6.5%;
+  }
   .day-info-box {
     background: #f5f5ff;
-    margin-top: -6.5%;
     margin-left: -4%;
     width: 108%;
     height: 62px;
     font-weight: bold;
+    margin-top: 10%;
   }
 }
 @media (max-width: 1708px) {
+  div.day-info-box:nth-child(1) {
+    margin-top: -8.3%;
+  }
   .day-info-box {
-    margin-top: -8.5%;
     margin-left: -5%;
     width: 110%;
   }
@@ -3059,7 +3107,7 @@ a.reply-option {
   color: rgba(27, 47, 69, 0.8);
   margin-bottom: 5px;
   float: right;
-  padding-left: 0.6%;
+  padding-left: 4.6%;
 }
 button#insert-reply-btn {
   display: inline-block;
@@ -3067,10 +3115,24 @@ button#insert-reply-btn {
   height: 64px;
   float: right;
 }
-.comment p {
-  font-size: 15px;
+@media (max-width: 1920px) {
+  .comment p {
+    font-size: 15px;
+    width: 690px;
+  }
 }
+@media (max-width: 1708px) {
+  .comment p {
+    font-size: 14px;
+    width: 520px;
+  }
+}
+
 div.place-info p.memo {
   font-size: 15px;
 }
 
+.other-reply, .my-reply {
+  width: 20%;
+  float: right;
+}

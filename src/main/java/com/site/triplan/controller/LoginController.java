@@ -31,7 +31,6 @@ public class LoginController {
         UserVo user = loginService.loginUser(loginInfo);
         String view = "";
         if (user == null) {
-            model.addAttribute("errCode", "1");
             view = "redirect:/triplan/loginform?errCode=1";
         } else {
             HttpSession session = request.getSession();
@@ -65,6 +64,12 @@ public class LoginController {
     public String sendMail(MailVo mailVo) {
         loginService.sendTempPwMail(mailVo);
         return "redirect:/triplan/loginform";
+    }
+
+    // 회원가입폼
+    @GetMapping("/joinform")
+    public String joinform() {
+        return "user_joinform";
     }
 
     // 회원가입: id 체크(중복/탈퇴)

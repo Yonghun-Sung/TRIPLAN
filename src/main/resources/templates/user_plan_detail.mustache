@@ -39,23 +39,6 @@
     }
 </style>
 <script>
-    $(function () {
-        $('#planTab').click(function () {
-            $(this).css('color', '#81bef0').css('font-weight', 'bold');
-            $('#replyTab').css('color', '#666666').css('font-weight', 'normal');
-
-            $('div.content').css('display', 'block');
-            $('div.comments').css('display', 'none');
-        });
-        $('#replyTab').click(function () {
-            $(this).css('color', '#81bef0').css('font-weight', 'bold');
-            $('#planTab').css('color', '#666666').css('font-weight', 'normal');
-
-            $('div.comments').css('display', 'block');
-            $('div.content').css('display', 'none');
-        });
-
-    });
 </script>
 </head>
 <body class="page-blog">
@@ -66,22 +49,31 @@
 
         <div id="plan-detail-header">
             <div id="plan-info">
-                <h2 id="title">제주도 서부 2박3일 일정</h2>
+                <h2 id="title">{{plan.title}}</h2>
                 <div id="like-icon">
+                    {{^session_id}}
                     <i class="bi bi-suit-heart"></i>
-                    <!--
-                    <i class="bi bi-suit-heart-fill"></i>
-                    -->
+                    {{/session_id}}
+                    {{#session_id}}
+                        {{^isLike}}
+                        <i class="bi bi-suit-heart"></i>
+                        {{/isLike}}
+                        {{#isLike}}
+                        <i class="bi bi-suit-heart-fill"></i>
+                        {{/isLike}}
+                        <input type="hidden" id="now_user_id" value="{{now_user_id}}">
+                    {{/session_id}}
                 </div>
                 <div>
                     <p class="plan-date">
-                        2022-11-14 ~ 2022-11-16
+                        {{plan.start_dt}} ~ {{plan.end_dt}}
                     </p>
                 </div>
                 <div class="meta-top">
-                    <i class="bi bi-person"></i><span id="nickname" class="article-info">yong</span>
-                    <i class="bi bi-geo-alt"></i><span id="placeNum" class="article-info">25</span>
-                    <i class="bi bi-eye"></i><span id="views" class="article-info">10082</span>
+                    <i class="bi bi-person"></i><span id="nickname" class="article-info"
+                    data-id="{{plan.id}}">{{plan.nickname}}</span>
+                    <i class="bi bi-geo-alt"></i><span id="placeNum" class="article-info">{{plan.place_num}}</span>
+                    <i class="bi bi-eye"></i><span id="views" class="article-info">{{plan.views}}</span>
                     </ul>
                 </div>
             </div>
@@ -108,107 +100,22 @@
 
                             <!--일정 내용-->
                             <div class="content">
-                                <div class="place-by-day">
-
-                                    <div class="day-info-box">
-                                        <div class="day">DAY1</div>
-                                        <span class="date">2022-11-04</span>
-                                    </div>
-                                    <div class="place-info post-author d-flex align-items-center">
-                                        <img src="http://img.earthtory.com/img/place_img/312/7505_0_et.jpg" class="rounded-circle flex-shrink-0" alt="">
-                                        <div>
-                                            <h4 name="name">용담 해안도로</h4>
-                                            <p class="memo">
-                                                드라이브하기에 좋은 도로
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="place-info post-author d-flex align-items-center">
-                                        <img src="http://img.earthtory.com/img/place_img/312/7281_2_et.jpg" class="rounded-circle flex-shrink-0" alt="">
-                                        <div>
-                                            <h4 name="name">협재 해수욕장</h4>
-                                           <p class="memo">
-                                               해수욕장에서 바다수영좀 할려고^!^
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="place-info post-author d-flex align-items-center">
-                                        <img src="http://img.earthtory.com/img/place_img_user/820668/7326/820668_1402468693.JPG" class="rounded-circle flex-shrink-0" alt="">
-                                        <div>
-                                            <h4 name="name">오설록 티 뮤지엄</h4>
-                                            <p class="memo">
-                                                오설록 티뮤지엄 드디어 가봄><
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <div class="place-by-day">
-                                    <div class="day-info-box">
-                                        <div class="day">DAY2</div>
-                                        <span class="date">2022-11-05</span>
-                                    </div>
-                                    <div class="place-info post-author d-flex align-items-center">
-                                        <img src="http://img.earthtory.com/img/place_img_user/820668/7321/820668_1402468744.JPG" class="rounded-circle flex-shrink-0" alt="">
+                                    {{#placeList}}
+                                    <div class="place-info post-author d-flex align-items-center"
+                                    data-daynum="{{day}}" data-startday="{{travel_date}}">
+                                        <img src="{{photo_path}}" class="rounded-circle flex-shrink-0" alt="">
                                         <div>
-                                            <h4 name="name">중문·대포해안 주상 절리대</h4>
+                                            <h4 name="name">{{name}}</h4>
                                             <p class="memo">
-                                                생각보다 더 아름다웠던 절리대
+                                                {{#memo}}
+                                                    {{memo}}
+                                                {{/memo}}
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="place-info post-author d-flex align-items-center">
-                                        <img src="http://img.earthtory.com/img/place_img/312/7359_0_et.jpg" class="rounded-circle flex-shrink-0" alt="">
-                                        <div>
-                                            <h4 name="name">김영갑 갤러리 두모악</h4>
-                                            <p class="memo">
-                                                갤러뤼
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="place-info post-author d-flex align-items-center">
-                                        <img src="http://img.earthtory.com/img/place_img/312/7410_0_et.jpg" class="rounded-circle flex-shrink-0" alt="">
-                                        <div>
-                                            <h4 name="name">동문 재래시장</h4>
-                                            <p class="memo">
-                                                야시장가서 다 포장해와서 먹을 예정!
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="place-by-day">
-                                    <div class="day-info-box">
-                                        <div class="day">DAY3</div>
-                                        <span class="date">2022-11-06</span>
-                                    </div>
-                                    <div class="place-info post-author d-flex align-items-center">
-                                        <img src="http://img.earthtory.com/img/place_img_user/820668/7321/820668_1402468744.JPG" class="rounded-circle flex-shrink-0" alt="">
-                                        <div>
-                                            <h4 name="name">중문·대포해안 주상 절리대</h4>
-                                            <p class="memo">
-                                                생각보다 더 아름다웠던 절리대
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="place-info post-author d-flex align-items-center">
-                                        <img src="http://img.earthtory.com/img/place_img/312/7359_0_et.jpg" class="rounded-circle flex-shrink-0" alt="">
-                                        <div>
-                                            <h4 name="name">김영갑 갤러리 두모악</h4>
-                                            <p class="memo">
-                                                갤러뤼
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="place-info post-author d-flex align-items-center">
-                                        <img src="http://img.earthtory.com/img/place_img/312/7410_0_et.jpg" class="rounded-circle flex-shrink-0" alt="">
-                                        <div>
-                                            <h4 name="name">동문 재래시장</h4>
-                                            <p class="memo">
-                                                야시장가서 다 포장해와서 먹을 예정!
-                                            </p>
-                                        </div>
-                                    </div>
+                                    {{/placeList}}
                                 </div>
 
                             </div>
@@ -218,7 +125,7 @@
                             <!-- 댓글 -->
                             <div class="comments">
 
-                                <h4 class="comments-count">8 Comments</h4>
+                                <h4 class="comments-count">{{plan.reply_num}} Comments</h4>
 
                                 <div class="reply-form">
                                     <h4>댓글</h4>
@@ -234,77 +141,28 @@
                                     </form>
                                 </div>
 
-                                <div id="comment-1" class="comment">
-                                    <div class="d-flex">
-                                        <div class="comment-img"><img src="/img/user.png"></div>
-                                        <div>
-                                            <h5>Georgia Reader</h5>
-                                            <a href="#!" class="reply-option">신고</a>
-                                            <p>
-                                                Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et.
-                                                Est
-                                                ad aut sapiente quis molestiae est qui cum soluta.
-                                                Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui
-                                                facilis
-                                                et.
-                                            </p>
-                                            <time datetime="2020-01-01">2020-01-01</time>
+                                <div id="planDetail-reply-box">
+                                    {{#replyList}}
+                                    <div class="comment">
+                                        <div class="d-flex">
+                                            <div class="comment-img"><img src="/img/user.png"></div>
+                                            <div>
+                                                <h5 class="reply-nickname" data-id="{{id}}">{{nickname}}</h5>
+                                                <div class="other-reply">
+                                                    <a href="#!" class="reply-option">신고</a>
+                                                </div>
+                                                <div class="my-reply">
+                                                    <a href="#!" class="reply-option">삭제</a>
+                                                    <a href="#!" class="reply-option">수정 | </a>
+                                                </div>
+                                                <p>
+                                                    {{content}}
+                                                </p>
+                                                <time datetime="2020-01-01">{{write_dt}}</time>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div id="comment-2" class="comment">
-                                    <div class="d-flex">
-                                        <div class="comment-img"><img src="/img/user.png" alt=""></div>
-                                        <div>
-                                            <h5>Georgia Reader</h5>
-                                            <a href="#!" class="reply-option">삭제</a>
-                                            <a href="#!" class="reply-option">수정 | </a>
-                                            <p>
-                                                Ipsam tempora sequi voluptatem quis sapiente non. Autem itaque eveniet
-                                                saepe. Officiis illo ut beatae.
-                                            </p>
-                                            <time datetime="2020-01-01">2020-01-03</time>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div id="comment-3" class="comment">
-                                    <div class="d-flex">
-                                        <div class="comment-img"><img src="/img/user.png"></div>
-                                        <div>
-                                            <h5>Georgia Reader</h5>
-                                            <a href="#!" class="reply-option">신고</a>
-                                            <p>
-                                                Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et.
-                                                Est
-                                                ad aut sapiente quis molestiae est qui cum soluta.
-                                                Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui
-                                                facilis
-                                                et.
-                                            </p>
-                                            <time datetime="2020-01-01">2020-01-01</time>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div id="comment-4" class="comment">
-                                    <div class="d-flex">
-                                        <div class="comment-img"><img src="/img/user.png"></div>
-                                        <div>
-                                            <h5>Georgia Reader</h5>
-                                            <a href="#!" class="reply-option">신고</a>
-                                            <p>
-                                                Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et.
-                                                Est
-                                                ad aut sapiente quis molestiae est qui cum soluta.
-                                                Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui
-                                                facilis
-                                                et.
-                                            </p>
-                                            <time datetime="2020-01-01">2020-01-01</time>
-                                        </div>
-                                    </div>
+                                    {{/replyList}}
                                 </div>
 
                             </div><!-- End blog comments -->
@@ -320,7 +178,7 @@
                                 <div class="mt-3">
 
                                     <div class="post-item mt-3">
-                                        <img src="assets/img/blog/blog-recent-1.jpg" alt="" class="flex-shrink-0">
+                                        <img src="/img/blog/blog-recent-1.jpg" alt="" class="flex-shrink-0">
                                         <div>
                                             <h4><a href="blog-post.html">Nihil blanditiis at in nihil autem</a></h4>
                                             <time datetime="2020-01-01">Jan 1, 2020</time>
@@ -358,6 +216,8 @@
 
   <!-- Template Main JS File -->
   <script src="/js/user/main.js"></script>
+
+  <script src="/js/user/plan_detail.js"></script>
 
 </body>
 </html>

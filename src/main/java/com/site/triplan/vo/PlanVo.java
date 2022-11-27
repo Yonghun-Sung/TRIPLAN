@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PlanVo {
+<<<<<<< HEAD
     String name;
     String title;
     String nickname;
@@ -19,6 +20,11 @@ public class PlanVo {
 
     Integer code; //일정 코드-삭제할때필요
 
+    Integer area_code, user_code;
+    // 일정보기
+    String area_name, area_engname;
+
+    Integer place_num, reply_num;  //--장소 개수, 댓글 개수
 
     //좋아요한 일정
     public PlanVo(String name, String title, String nickname, Integer views, String start_dt, String end_dt, String photo_path, Integer code) {
@@ -49,6 +55,5 @@ public class PlanVo {
         this.code = code;
         this.title = title;
     }*/
-
 
 }
