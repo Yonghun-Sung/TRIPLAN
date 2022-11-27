@@ -13,6 +13,8 @@ public class ReplyVo {
     String name; //area.name
     //user_code받아야하나?
 
+    String code, user_code, nickname, plan_code, id;
+
 
     public ReplyVo(String content, String write_dt, String title, String name) {
         this.content = content;

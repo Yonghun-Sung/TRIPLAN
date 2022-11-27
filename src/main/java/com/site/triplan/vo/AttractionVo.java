@@ -9,7 +9,7 @@ import java.util.List;
 @Setter
 public class AttractionVo {
     private String name, addr, imgPath, loc_x, loc_y;
-    private String code, memo, photo_path, plan_code;
+    private String code, memo, photo_path, plan_code, travel_date;
     private Integer day, order;
     private List<AttractionVo> attractionList;
 }

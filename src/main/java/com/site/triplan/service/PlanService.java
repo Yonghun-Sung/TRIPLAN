@@ -4,6 +4,7 @@ import com.site.triplan.mapper.PlanMapper;
 import com.site.triplan.vo.AreaVo;
 import com.site.triplan.vo.AttractionVo;
 import com.site.triplan.vo.PlanVo;
+import com.site.triplan.vo.ReplyVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +26,30 @@ public class PlanService {
         return planList;
     }
 
+    // 일정 상세보기
+    //-- 일정 내용
+    public PlanVo getPlanDetail(String plan_code) {
+        PlanVo plan = planMapper.getPlanDetail(plan_code);
+        return plan;
+    }
+    //-- 찜 여부
+    public int isLike(String plan_code, Integer user_code) {
+        int isLike = planMapper.isLike(plan_code, user_code);
+        return isLike;
+    }
+    //-- 장소 목록
+    public List<AttractionVo> getPlaceList(String plan_code) {
+        List<AttractionVo> placeList = new ArrayList<>();
+        placeList = planMapper.getPlaceList(plan_code);
+        return placeList;
+    }
+    //-- 댓글 목록
+    public List<ReplyVo> getReplyList(String plan_code) {
+        List<ReplyVo> replyList = new ArrayList<>();
+        replyList = planMapper.getReplyList(plan_code);
+        return replyList;
+    }
+
     // 지역
     public List<AreaVo> getAreaInfo() {
         List<AreaVo> areaList = new ArrayList<>();
@@ -33,6 +58,11 @@ public class PlanService {
     }
 
     // 일정 작성
+    //-- id로 회원코드 찾기
+    public int getUserCodeById(String id) {
+        int user_code = planMapper.getUserCodeById(id);
+        return user_code;
+    }
     @Transactional
     public Integer insertPlan(PlanVo plan, AttractionVo place) {
         return 1;

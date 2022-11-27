@@ -5,6 +5,7 @@ import com.site.triplan.vo.AreaVo;
 import com.site.triplan.vo.AttractionVo;
 
 import com.site.triplan.vo.PlanVo;
+import com.site.triplan.vo.ReplyVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -55,6 +56,31 @@ public class PlanController {
         model.addAttribute("areaList", areaList);
         model.addAttribute("planList", planList);
         return "user_plan_list";
+    }
+
+    // 일정 상세보기
+    @GetMapping("/plandetail")
+    public String showPlanDetail(Model model, HttpServletRequest request, @RequestParam(required=true)String code) {
+        HttpSession session = request.getSession();
+        String session_id = (String)session.getAttribute("session_id");
+
+        PlanVo plan = planService.getPlanDetail(code);
+        List<AttractionVo> placeList = new ArrayList<>();
+        List<ReplyVo> replyList = new ArrayList<>();
+        if (session_id != null) {
+            int user_code = planService.getUserCodeById(session_id);
+            int isLike = planService.isLike(code, user_code);
+            if (isLike > 0)
+                model.addAttribute("isLike", isLike);
+
+            model.addAttribute("now_user_id", session_id);
+        }
+        placeList = planService.getPlaceList(code);
+        replyList = planService.getReplyList(code);
+        model.addAttribute("plan", plan);
+        model.addAttribute("placeList", placeList);
+        model.addAttribute("replyList", replyList);
+        return "user_plan_detail";
     }
 
     // 일정 모달창
@@ -219,9 +245,4 @@ public class PlanController {
         return "redirect:/triplan/plandetail?code=" + plan_code;
     }
 
-    // 일정 상세보기
-    @GetMapping("/plandetail")
-    public String showPlanDetail() {
-        return "user_plan_detail";
-    }
 }
