@@ -34,6 +34,21 @@ public class PlanController {
         this.planService = planService;
     }
 
+    // 메인: 지역
+    @GetMapping("/main")
+    public String user_main(Model model) {
+        List<AreaVo> areaList = new ArrayList<>();
+        areaList = planService.getAreaInfo();
+        model.addAttribute("areaList", areaList);
+        return "user_main";
+    }
+
+    // <일정보기>
+    @GetMapping("/planlist")
+    public String planlist() {
+        return "user_plan_list";
+    }
+
     // 일정 모달창
     @GetMapping("/planModal")
     public String showMap(Model model, HttpServletRequest request) {

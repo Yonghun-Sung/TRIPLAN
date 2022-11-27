@@ -52,194 +52,26 @@
         <a id="start"></a>
 
         <section id="recent-posts" class="recent-posts">
-            <div id="main-container" class="container">
+            <div id="main-container" class="main-title-box container">
                 <div class="section-header">
                     <h2 id="title">어디로 여행을 떠나시나요?</h2>
                     <h4 id="ment">여행지를 선택하여 추천 여행코스를 보세요.</h4>
                 </div>
 
                 <div class="row gy-5">
+                    {{#areaList}}
                     <div class="col-xl-3 col-md-6">
-                        <a href="#!">
+                        <a href="/triplan/planlist?code={{code}}">
                             <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
+                                <div class="post-img"><img src="/img/main/{{engname}}.jpg" id="main-area-img" class="img-fluid" alt=""></div>
+                                <h3 class="post-title">{{engname}}</h3>
+                                <p>{{name}}</p>
                             </div>
                         </a>
                     </div>
-                    <div class="col-xl-3 col-md-6">
-                        <a href="#!">
-                            <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <a href="#!">
-                            <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <a href="#!">
-                            <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <a href="#!">
-                            <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <a href="#!">
-                            <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <a href="#!">
-                            <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <a href="#!">
-                            <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <a href="#!">
-                            <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <a href="#!">
-                            <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <a href="#!">
-                            <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <a href="#!">
-                            <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <a href="#!">
-                            <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <a href="#!">
-                            <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <a href="#!">
-                            <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <a href="#!">
-                            <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <a href="#!">
-                            <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <a href="#!">
-                            <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <a href="#!">
-                            <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <a href="#!">
-                            <div class="post-box">
-                                <div class="post-img"><img src="/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <h3 class="post-title">JEJU</h3>
-                                <p>제주도</p>
-                            </div>
-                        </a>
-                    </div>
+                    {{/areaList}}
                 </div>
+
             </div>
         </section><!-- End Recent Blog Posts Section -->
 

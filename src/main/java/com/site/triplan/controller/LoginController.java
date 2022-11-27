@@ -64,6 +64,12 @@ public class LoginController {
         return "redirect:/triplan/loginform";
     }
 
+    // 회원가입폼
+    @GetMapping("/joinform")
+    public String joinform() {
+        return "user_joinform";
+    }
+
     // 회원가입: id 체크(중복/탈퇴)
     @PostMapping("/checkJoinId")
     public @ResponseBody int[] checkJoinId(@RequestParam String id) {
