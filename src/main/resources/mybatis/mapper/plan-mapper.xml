@@ -16,7 +16,7 @@
         FROM plan p
             join area a on a.code = p.area_code
             join user_info u on u.user_code = p.user_code
-        WHERE area_code like '%'
+        WHERE area_code like #{area_code}
     </select>
 
     <!--지역-->
