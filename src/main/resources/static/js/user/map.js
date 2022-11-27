@@ -1,111 +1,158 @@
-var map, marker;
-var marker_s, marekr_e;
 
+// 현재 지도 선택
+let mapId;
+// 지도 배열
+let mapArr = [];
+
+let nowMapId;
+let map_nowDayPageNum;
+
+let mapInfo = JSON.parse(localStorage.getItem('planInfo'));
+let x = mapInfo.loc_x;
+let y = mapInfo.loc_y;
+let zoom = mapInfo.zoom;
+
+// 일수 넘겨받은거를 변수로
+let start_day = mapInfo.start_dt;
+let end_day = mapInfo.end_dt;
+let arr = start_day.split("-");
+start_day = new Date(arr[0], arr[1], arr[2]);
+arr = end_day.split("-");
+end_day = new Date(arr[0], arr[1], arr[2]);
+let dif = end_day.getTime() - start_day.getTime();
+let days = Math.abs(dif / (1000 * 60 * 60 * 24)) + 1;
+
+
+// 기본 변수들-------------------------------
+var map, marker;
 //경로그림정보
 var markerArr = [];		// 검색
 var drawInfoArr = [];	// 경로최적화
-var markers = [];
+//------------------------------------------
+
+// 지도 들어갈 공간 만들기
+for (let i = 1; i <= days; i++) {
+  $('#map_wrap').append(
+      "<div id='map_div" + i + "'></div>"
+  );
+}
 
 function initTmap(){
 
   // 1. 지도 띄우기
-  map = new Tmapv2.Map("map_div", {
-    center: new Tmapv2.LatLng(37.56701114710962, 126.9973611831669),
-    width : "100%",
-    height : "745px",
-    zoom : 6,
-    zoomControl : true,
-    scrollwheel : true
-  });
+  for (let i = 1; i <= days; i++) {
 
-  // 검색 코드
-  // 2. POI 통합 검색 API 요청
-  $("#map-search-btn").click(function(){
-    var searchKeyword = $('#map-search').val();
-    $.ajax({
-      method:"GET",
-      url:"https://apis.openapi.sk.com/tmap/pois?version=1&format=json&callback=result",
-      async:false,
-      data:{
-        "appKey" : "l7xx3baa04961c80465ea1fe8a3be504d3e1",
-        "searchKeyword" : searchKeyword,
-        "resCoordType" : "EPSG3857",
-        "reqCoordType" : "WGS84GEO",
-        "count" : 10
-      },
-      success:function(response){
-        var resultpoisData = response.searchPoiInfo.pois.poi;
+    mapId = 'map_div' + i;
+    markerArr[i] = new Array();
 
-        // 기존 마커, 팝업 제거
-        if(markerArr.length > 0){
-          for(var i in markerArr){
-            markerArr[i].setMap(null);
-          }
-        }
-        var innerHtml ="";	// Search Reulsts 결과값 노출 위한 변수
-        var positionBounds = new Tmapv2.LatLngBounds();		//맵에 결과물 확인 하기 위한 LatLngBounds객체 생성
-
-        for(var k in resultpoisData){
-
-          var noorLat = Number(resultpoisData[k].noorLat);
-          var noorLon = Number(resultpoisData[k].noorLon);
-          var name = resultpoisData[k].name;
-
-          var pointCng = new Tmapv2.Point(noorLon, noorLat);
-          var projectionCng = new Tmapv2.Projection.convertEPSG3857ToWGS84GEO(pointCng);
-
-          var lat = projectionCng._lat;
-          var lon = projectionCng._lng;
-
-          var markerPosition = new Tmapv2.LatLng(lat, lon);
-
-          marker = new Tmapv2.Marker({
-            position : markerPosition,
-            //icon : "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_a.png",
-            icon : "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_" + k + ".png",
-            iconSize : new Tmapv2.Size(24, 38),
-            title : name,
-            map:map
-          });
-          /*
-          innerHtml += "<li><img src='http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_" + k + ".png' style='vertical-align:middle;'/><span>"+name+"</span></li>";
-           */
-
-          innerHtml += "<li class='search-result'><img src='http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_" + k + ".png' style='vertical-align:middle;'/><span class='name'>"+name+"</span>"
-              + "<button class='add-place' name='" + name + "' loc_x='" + lat + "'loc_y='" + lon + "' photo_path=''>"
-              +   "<i class='bi bi-plus'></i>"
-              + "</button></li>";
-
-          markerArr.push(marker);
-          positionBounds.extend(markerPosition);	// LatLngBounds의 객체 확장
-        }
-
-        $("#searchResult").html(innerHtml);	//searchResult 결과값 노출
-        map.panToBounds(positionBounds);	// 확장된 bounds의 중심으로 이동시키기
-        map.zoomOut();
-
-      },
-      error:function(request,status,error){
-        console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-      }
+    mapArr[i] = new Tmapv2.Map(mapId, {
+      //center: new Tmapv2.LatLng(37.56701114710962, 126.9973611831669),
+      center: new Tmapv2.LatLng(x, y),
+      width : "100%",
+      height : "745px",
+      //zoom : 6,
+      zoom : zoom,
+      zoomControl : true,
+      scrollwheel : true
     });
-  });
+  }
 }
 
+// 검색 코드
+// POI 통합 검색 API 요청
+$("#map-search-btn").click(function(){
+  map_nowDayPageNum = $('a.trip-day.active').prop('id').substring(3);
+
+  var searchKeyword = $('#map-search').val();
+  $.ajax({
+    method:"GET",
+    url:"https://apis.openapi.sk.com/tmap/pois?version=1&format=json&callback=result",
+    async:false,
+    data:{
+      "appKey" : "l7xx3baa04961c80465ea1fe8a3be504d3e1",
+      "searchKeyword" : searchKeyword,
+      "resCoordType" : "EPSG3857",
+      "reqCoordType" : "WGS84GEO",
+      "count" : 10
+    },
+    success:function(response){
+      var resultpoisData = response.searchPoiInfo.pois.poi;
+
+      // 기존 마커, 팝업 제거
+      /*
+      if(markerArr.length > 0){
+        for(var i in markerArr){
+          markerArr[i].setMap(null);
+        }
+      }
+      */
+      if(markerArr[map_nowDayPageNum].length > 0){
+        for(var i in markerArr[map_nowDayPageNum]){
+          markerArr[map_nowDayPageNum][i].setMap(null);
+        }
+      }
+      var innerHtml ="";	// Search Reulsts 결과값 노출 위한 변수
+      var positionBounds = new Tmapv2.LatLngBounds();		//맵에 결과물 확인 하기 위한 LatLngBounds객체 생성
+
+      for(var k in resultpoisData){
+
+        var noorLat = Number(resultpoisData[k].noorLat);
+        var noorLon = Number(resultpoisData[k].noorLon);
+        var name = resultpoisData[k].name;
+
+        var pointCng = new Tmapv2.Point(noorLon, noorLat);
+        var projectionCng = new Tmapv2.Projection.convertEPSG3857ToWGS84GEO(pointCng);
+
+        var lat = projectionCng._lat;
+        var lon = projectionCng._lng;
+
+        var markerPosition = new Tmapv2.LatLng(lat, lon);
+
+        marker = new Tmapv2.Marker({
+          position : markerPosition,
+          //icon : "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_a.png",
+          icon : "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_" + k + ".png",
+          iconSize : new Tmapv2.Size(24, 38),
+          title : name,
+          map:mapArr[map_nowDayPageNum]
+        });
+        /*
+        innerHtml += "<li><img src='http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_" + k + ".png' style='vertical-align:middle;'/><span>"+name+"</span></li>";
+         */
+
+        innerHtml += "<li class='search-result'><img src='http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_" + k + ".png' style='vertical-align:middle;'/><span class='name'>"+name+"</span>"
+            + "<button class='add-place' name='" + name + "' loc_x='" + lat + "'loc_y='" + lon + "' photo_path=''>"
+            +   "<i class='bi bi-plus'></i>"
+            + "</button></li>";
+
+        //markerArr.push(marker);
+        markerArr[map_nowDayPageNum].push(marker);
+        positionBounds.extend(markerPosition);	// LatLngBounds의 객체 확장
+      }
+
+      $("#searchResult").html(innerHtml);	//searchResult 결과값 노출
+      mapArr[map_nowDayPageNum].panToBounds(positionBounds);	// 확장된 bounds의 중심으로 이동시키기
+      mapArr[map_nowDayPageNum].zoomOut();
+
+    },
+    error:function(request,status,error){
+      console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+    }
+  });
+});
+
 $('button#placeOk-btn').click(function () {
-  let nowDayPageNum = $('a.trip-day.active').prop('id').substring(3);
-  alert($('div#form' + nowDayPageNum + '>.select-place').length);
+
+  map_nowDayPageNum = $('a.trip-day.active').prop('id').substring(3);
 
   let loc = [];
   let viaPointIds = [];
   let count = 1;
-  for (let i = 1; i <= $('div#form' + nowDayPageNum + '>.select-place').length; i++) {
-    loc.push([$('div#form' + nowDayPageNum + '>.select-place:nth-child(' + i + ') input#loc_x').val()
-            , $('div#form' + nowDayPageNum + '>.select-place:nth-child(' + i + ') input#loc_y').val()]);
-    viaPointIds.push($('div#form' + nowDayPageNum + '>.select-place:nth-child(' + i + ')').prop('id'));
+  for (let i = 1; i <= $('div#form' + map_nowDayPageNum + '>.select-place').length; i++) {
+    loc.push([$('div#form' + map_nowDayPageNum + '>.select-place:nth-child(' + i + ') input#loc_x').val()
+            , $('div#form' + map_nowDayPageNum + '>.select-place:nth-child(' + i + ') input#loc_y').val()]);
+    viaPointIds.push($('div#form' + map_nowDayPageNum + '>.select-place:nth-child(' + i + ')').prop('id'));
   }
-  console.log(loc);
-  console.log(viaPointIds);
 
 
   // 2. 시작, 도착 마커 생성
@@ -133,7 +180,7 @@ $('button#placeOk-btn').click(function () {
     var marker = new Tmapv2.Marker({
       position: new Tmapv2.LatLng(lat,lon),
       icon: imgURL,
-      map: map
+      map: mapArr[map_nowDayPageNum]
     });
     return marker;
   }
@@ -228,18 +275,20 @@ $('button#placeOk-btn').click(function () {
             path : drawInfoArr,
             strokeColor : "#ff0000",
             strokeWeight: 6,
-            map : map
+            map : mapArr[map_nowDayPageNum]
           });
-        }
 
+        }
 
         // 경유 순서 value 보내줌 --------------------------------------------------
+        map_nowDayPageNum = $('a.trip-day.active').prop('id').substring(3);
+
         if(properties.index == 0) {
-          $('.select-place:nth-child(1) input#order').val(properties.index);
+          $('#form' + map_nowDayPageNum + ' .select-place:nth-child(1) input#order').val(properties.index);
           continue;
         }
-        if(properties.index == $('.select-place').length - 1) {
-          $('.select-place:nth-child(2) input#order').val(properties.index);
+        if(properties.index == ($('#form' + map_nowDayPageNum + ' .select-place').length) - 1) {
+          $('#form' + map_nowDayPageNum + ' .select-place:nth-child(2) input#order').val(properties.index);
           continue;
         }
         $('div#' + properties.viaPointId + ' input#order').val(properties.index);

@@ -38,30 +38,30 @@
 </style>
 </head>
 <body class="page-blog">
-    <!-- ======= Header ======= -->
-    {{>user_header}}
+<!-- ======= Header ======= -->
+{{>user_header}}
 
-    <main id="main">
+<main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs d-flex align-items-center" style="background-image: url('/img/banner.jpg');">
-      <div class="container position-relative d-flex flex-column align-items-center">
-      </div>
+        <div class="container position-relative d-flex flex-column align-items-center">
+        </div>
     </div><!-- End Breadcrumbs -->
 
     <!-- ======= Blog Section ======= -->
     <section id="blog" class="blog planlist">
         <div class="search-container">
             <div class="search-box">
-              <div class="sidebar ps-lg-4">
-                <div class="sidebar-item search-form">
-                    <h3 class="sidebar-title">다른 회원들의 일정을 살펴보세요.</h3>
-                    <form action="" class="mt-3">
-                        <input type="text" placeholder="도시/장소명을 입력하세요.">
-                        <button type="submit"><i class="bi bi-search"></i></button>
-                    </form>
+                <div class="sidebar ps-lg-4">
+                    <div class="sidebar-item search-form">
+                        <h3 class="sidebar-title">다른 회원들의 일정을 살펴보세요.</h3>
+                        <form action="" class="mt-3">
+                            <input type="text" placeholder="도시/장소명을 입력하세요.">
+                            <button type="submit"><i class="bi bi-search"></i></button>
+                        </form>
+                    </div>
                 </div>
-              </div>
             </div>
 
             <table id="planlist-table" class="table">
@@ -71,25 +71,11 @@
                 <tr>
                     <th scope="row">지역</th>
                     <td>
-                        <a class="planlist-option" href="#!"><span class="item">전체</span></a>
-                        <a class="planlist-option" href="#!"><span class="item">서울</span></a>
-                        <a class="planlist-option" href="#!"><span class="item">인천</span></a>
-                        <a class="planlist-option" href="#!"><span class="item">대전</span></a>
-                        <a class="planlist-option" href="#!"><span class="item">대구</span></a>
-                        <a class="planlist-option" href="#!"><span class="item">광주</span></a>
-                        <a class="planlist-option" href="#!"><span class="item">부산</span></a>
-                        <a class="planlist-option" href="#!"><span class="item">울산</span></a>
-                        <a class="planlist-option" href="#!"><span class="item">세종</span></a>
-                        <a class="planlist-option" href="#!"><span class="item">경기</span></a>
-                        <a class="planlist-option" href="#!"><span class="item">강원</span></a>
-                        <br>
-                        <a class="planlist-option" href="#!"><span class="item">충청북도</span></a>
-                        <a class="planlist-option" href="#!"><span class="item">충청남도</span></a>
-                        <a class="planlist-option" href="#!"><span class="item">경상북도</span></a>
-                        <a class="planlist-option" href="#!"><span class="item">경상남도</span></a>
-                        <a class="planlist-option" href="#!"><span class="item">전라북도</span></a>
-                        <a class="planlist-option" href="#!"><span class="item">전라남도</span></a>
-                        <a class="planlist-option" href="#!"><span class="item">제주도</span></a>
+                        <a class="planlist-option" href="/triplan/planlist"><span class="item">전체</span></a>
+                        {{#areaList}}
+                            <a class="planlist-option" href="/triplan/planlist?code={{code}}"><span
+                                class="item">{{name}}</span></a>
+                        {{/areaList}}
                     </td>
                 </tr>
                 <tr>
@@ -102,12 +88,13 @@
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row">시기</th></a>
+                    <th scope="row">시기</th>
+                    </a>
                     <td>
-                        <a class="planlist-option" href="#!"><span class="item">봄</span></a>
-                        <a class="planlist-option" href="#!"><span class="item">여름</span></a>
-                        <a class="planlist-option" href="#!"><span class="item">가을</span></a>
-                        <a class="planlist-option" href="#!"><span class="item">겨울</span></a>
+                        <a class="planlist-option" href="#!"><span class="item">봄(3~5월)</span></a>
+                        <a class="planlist-option" href="#!"><span class="item">여름(6~8월)</span></a>
+                        <a class="planlist-option" href="#!"><span class="item">가을(9~11월)</span></a>
+                        <a class="planlist-option" href="#!"><span class="item">겨울(12~2월)</span></a>
                     </td>
                 </tr>
                 </tbody>
@@ -115,426 +102,88 @@
 
         </div>
 
-      <div class="container">
+        <div class="container">
 
-        <div class="row g-5">
+            <div class="row g-5">
 
-          <div id="planlist-out-box" class="col-lg-12">
+                <div id="planlist-out-box" class="col-lg-12">
 
-            <div id="planlist-in-box" class="row gy-5 posts-list">
+                    <div id="planlist-in-box" class="row gy-5 posts-list">
 
-              <div class="col-lg-4">
-                    <article class="d-flex flex-column">
-                      <div class="post-img">
-                          <a href="/triplan/plandetail"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                      </div>
+                        {{#planList}}
+                        <div class="col-lg-4">
+                            <article class="d-flex flex-column">
+                                <div class="post-img">
+                                    <a href="/triplan/plandetail?code={{code}}"><img src="/img/main/{{area_engname}}.jpg" alt=""
+                                                                       class="img-fluid"></a>
+                                </div>
 
-                      <h2 class="title">
-                        <a href="/triplan/plandetail">여행지역나오는 곳</a><br>
-                        <span class="plan-title">글 제목</span>
-                      </h2>
+                                <h2 class="title">
+                                    <a href="/triplan/plandetail?code={{code}}">{{area_name}}</a><br>
+                                    <span class="plan-title">{{title}}</span>
+                                </h2>
 
-                      <div class="meta-top">
-                        <ul>
-                          <li class="d-flex align-items-center"><i class="bi bi-person"></i>닉네임</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>장소개수</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-eye"></i>조회수</li>
+                                <div class="meta-top">
+                                    <ul>
+                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>{{nickname}}</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>{{place_num}}</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>{{views}}</li>
+                                    </ul>
+                                </div>
+
+                                <div class="content">
+                                    <p class="plan-date">
+                                        {{start_dt}} ~ {{end_dt}}
+                                    </p>
+                                </div>
+
+                                <div class="read-more mt-auto align-self-end">
+                                    <a href="/triplan/plandetail?code={{code}}">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </article>
+                        </div>
+                        {{/planList}}
+
+                    </div><!-- End blog posts list -->
+
+                    <div class="blog-pagination">
+                        <ul class="justify-content-center">
+                            <li><a href="#!"><i class="bi bi-arrow-left"></i></a></li>
+                            <li class="active"><a href="#!">1</a></li>
+                            <li><a href="#!">2</a></li>
+                            <li><a href="#!">3</a></li>
+                            <li><a href="#!">4</a></li>
+                            <li><a href="#!">5</a></li>
+                            <li><a href="#!"><i class="bi bi-arrow-right"></i></a></li>
                         </ul>
-                      </div>
+                    </div><!-- End blog pagination -->
 
-                      <div class="content">
-                        <p class="plan-date">
-                          2022-11-14 ~ 2022-11-18
-                        </p>
-                      </div>
+                </div>
 
-                      <div class="read-more mt-auto align-self-end">
-                        <a href="/triplan/plandetail">Read More <i class="bi bi-arrow-right"></i></a>
-                      </div>
-                    </article>
-              </div><!-- End post list item -->
-
-              <div class="col-lg-4">
-                    <article class="d-flex flex-column">
-                      <div class="post-img">
-                          <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                      </div>
-
-                      <h2 class="title">
-                        <a href="#!">제주</a><br>
-                        <span class="plan-title">제주 2박3일</span>
-                      </h2>
-
-                      <div class="meta-top">
-                        <ul>
-                          <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                        </ul>
-                      </div>
-
-                      <div class="content">
-                        <p class="plan-date">
-                          2022-07-04 ~ 2022-07-06
-                        </p>
-                      </div>
-
-                      <div class="read-more mt-auto align-self-end">
-                        <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                      </div>
-                    </article>
-              </div><!-- End post list item -->
-
-              <div class="col-lg-4">
-                    <article class="d-flex flex-column">
-                      <div class="post-img">
-                          <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                      </div>
-
-                      <h2 class="title">
-                        <a href="#!">제주</a><br>
-                        <span class="plan-title">제주 2박3일</span>
-                      </h2>
-
-                      <div class="meta-top">
-                        <ul>
-                          <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                        </ul>
-                      </div>
-
-                      <div class="content">
-                        <p class="plan-date">
-                          2022-07-04 ~ 2022-07-06
-                        </p>
-                      </div>
-
-                      <div class="read-more mt-auto align-self-end">
-                        <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                      </div>
-                    </article>
-              </div><!-- End post list item -->
-
-              <div class="col-lg-4">
-                    <article class="d-flex flex-column">
-                      <div class="post-img">
-                          <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                      </div>
-
-                      <h2 class="title">
-                        <a href="#!">제주</a><br>
-                        <span class="plan-title">제주 2박3일</span>
-                      </h2>
-
-                      <div class="meta-top">
-                        <ul>
-                          <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                        </ul>
-                      </div>
-
-                      <div class="content">
-                        <p class="plan-date">
-                          2022-07-04 ~ 2022-07-06
-                        </p>
-                      </div>
-
-                      <div class="read-more mt-auto align-self-end">
-                        <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                      </div>
-                    </article>
-              </div><!-- End post list item -->
-
-              <div class="col-lg-4">
-                    <article class="d-flex flex-column">
-                      <div class="post-img">
-                          <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                      </div>
-
-                      <h2 class="title">
-                        <a href="#!">제주</a><br>
-                        <span class="plan-title">제주 2박3일</span>
-                      </h2>
-
-                      <div class="meta-top">
-                        <ul>
-                          <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                        </ul>
-                      </div>
-
-                      <div class="content">
-                        <p class="plan-date">
-                          2022-07-04 ~ 2022-07-06
-                        </p>
-                      </div>
-
-                      <div class="read-more mt-auto align-self-end">
-                        <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                      </div>
-                    </article>
-              </div><!-- End post list item -->
-
-              <div class="col-lg-4">
-                    <article class="d-flex flex-column">
-                      <div class="post-img">
-                          <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                      </div>
-
-                      <h2 class="title">
-                        <a href="#!">제주</a><br>
-                        <span class="plan-title">제주 2박3일</span>
-                      </h2>
-
-                      <div class="meta-top">
-                        <ul>
-                          <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                        </ul>
-                      </div>
-
-                      <div class="content">
-                        <p class="plan-date">
-                          2022-07-04 ~ 2022-07-06
-                        </p>
-                      </div>
-
-                      <div class="read-more mt-auto align-self-end">
-                        <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                      </div>
-                    </article>
-              </div><!-- End post list item -->
-
-              <div class="col-lg-4">
-                    <article class="d-flex flex-column">
-                      <div class="post-img">
-                          <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                      </div>
-
-                      <h2 class="title">
-                        <a href="#!">제주</a><br>
-                        <span class="plan-title">제주 2박3일</span>
-                      </h2>
-
-                      <div class="meta-top">
-                        <ul>
-                          <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                        </ul>
-                      </div>
-
-                      <div class="content">
-                        <p class="plan-date">
-                          2022-07-04 ~ 2022-07-06
-                        </p>
-                      </div>
-
-                      <div class="read-more mt-auto align-self-end">
-                        <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                      </div>
-                    </article>
-              </div><!-- End post list item -->
-
-              <div class="col-lg-4">
-                    <article class="d-flex flex-column">
-                      <div class="post-img">
-                          <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                      </div>
-
-                      <h2 class="title">
-                        <a href="#!">제주</a><br>
-                        <span class="plan-title">제주 2박3일</span>
-                      </h2>
-
-                      <div class="meta-top">
-                        <ul>
-                          <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                        </ul>
-                      </div>
-
-                      <div class="content">
-                        <p class="plan-date">
-                          2022-07-04 ~ 2022-07-06
-                        </p>
-                      </div>
-
-                      <div class="read-more mt-auto align-self-end">
-                        <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                      </div>
-                    </article>
-              </div><!-- End post list item -->
-
-              <div class="col-lg-4">
-                    <article class="d-flex flex-column">
-                      <div class="post-img">
-                          <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                      </div>
-
-                      <h2 class="title">
-                        <a href="#!">제주</a><br>
-                        <span class="plan-title">제주 2박3일</span>
-                      </h2>
-
-                      <div class="meta-top">
-                        <ul>
-                          <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                        </ul>
-                      </div>
-
-                      <div class="content">
-                        <p class="plan-date">
-                          2022-07-04 ~ 2022-07-06
-                        </p>
-                      </div>
-
-                      <div class="read-more mt-auto align-self-end">
-                        <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                      </div>
-                    </article>
-              </div><!-- End post list item -->
-
-              <div class="col-lg-4">
-                    <article class="d-flex flex-column">
-                      <div class="post-img">
-                          <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                      </div>
-
-                      <h2 class="title">
-                        <a href="#!">제주</a><br>
-                        <span class="plan-title">제주 2박3일</span>
-                      </h2>
-
-                      <div class="meta-top">
-                        <ul>
-                          <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                        </ul>
-                      </div>
-
-                      <div class="content">
-                        <p class="plan-date">
-                          2022-07-04 ~ 2022-07-06
-                        </p>
-                      </div>
-
-                      <div class="read-more mt-auto align-self-end">
-                        <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                      </div>
-                    </article>
-              </div><!-- End post list item -->
-
-              <div class="col-lg-4">
-                    <article class="d-flex flex-column">
-                      <div class="post-img">
-                          <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                      </div>
-
-                      <h2 class="title">
-                        <a href="#!">제주</a><br>
-                        <span class="plan-title">제주 2박3일</span>
-                      </h2>
-
-                      <div class="meta-top">
-                        <ul>
-                          <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                        </ul>
-                      </div>
-
-                      <div class="content">
-                        <p class="plan-date">
-                          2022-07-04 ~ 2022-07-06
-                        </p>
-                      </div>
-
-                      <div class="read-more mt-auto align-self-end">
-                        <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                      </div>
-                    </article>
-              </div><!-- End post list item -->
-
-              <div class="col-lg-4">
-                    <article class="d-flex flex-column">
-                      <div class="post-img">
-                          <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                      </div>
-
-                      <h2 class="title">
-                        <a href="#!">제주</a><br>
-                        <span class="plan-title">제주 2박3일</span>
-                      </h2>
-
-                      <div class="meta-top">
-                        <ul>
-                          <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                          <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                        </ul>
-                      </div>
-
-                      <div class="content">
-                        <p class="plan-date">
-                          2022-07-04 ~ 2022-07-06
-                        </p>
-                      </div>
-
-                      <div class="read-more mt-auto align-self-end">
-                        <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                      </div>
-                    </article>
-              </div><!-- End post list item -->
-
-            </div><!-- End blog posts list -->
-
-            <div class="blog-pagination">
-              <ul class="justify-content-center">
-                  <li><a href="#!"><i class="bi bi-arrow-left"></i></a></li>
-                  <li class="active"><a href="#!">1</a></li>
-                  <li><a href="#!">2</a></li>
-                  <li><a href="#!">3</a></li>
-                  <li><a href="#!">4</a></li>
-                  <li><a href="#!">5</a></li>
-                  <li><a href="#!"><i class="bi bi-arrow-right"></i></a></li>
-              </ul>
-            </div><!-- End blog pagination -->
-
-          </div>
+            </div>
 
         </div>
-
-      </div>
     </section><!-- End Blog Section -->
 
-    </main><!-- End #main -->
+</main><!-- End #main -->
 
-    <!-- ======= Footer ======= -->
-    {{>user_footer}}
+<!-- ======= Footer ======= -->
+{{>user_footer}}
 
-    <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-    <div id="preloader"></div>
+<div id="preloader"></div>
 
-    <!-- Vendor JS Files -->
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/vendor/aos/aos.js"></script>
-    <script src="/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="/vendor/php-email-form/validate.js"></script>
+<!-- Vendor JS Files -->
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendor/aos/aos.js"></script>
+<script src="/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="/vendor/php-email-form/validate.js"></script>
 
-    <!-- Template Main JS File -->
-    <script src="/js/user/main.js"></script>
+<!-- Template Main JS File -->
+<script src="/js/user/main.js"></script>
 
 </body>
 </html>
