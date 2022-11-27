@@ -2,6 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.site.triplan.mapper.PlanMapper">
+    <!--일정보기-->
+    <select id="getPlanList" resultType="com.site.triplan.vo.PlanVo">
+        SELECT p.code, p.title
+             , date_format(p.start_dt, '%Y-%m-%d') "start_dt"
+             , date_format(p.end_dt, '%Y-%m-%d') "end_dt"
+             , p.write_dt, p.views
+             , a.code "area_code", a.name "area_name", a.engname "area_engname"
+             , u.user_code, u.nickname
+             , (SELECT count(*)
+                FROM place
+                WHERE plan_code = p.code) "place_num"
+        FROM plan p
+            join area a on a.code = p.area_code
+            join user_info u on u.user_code = p.user_code
+        WHERE area_code like '%'
+    </select>
+
     <!--지역-->
     <select id="getAreaInfo" resultType="com.site.triplan.vo.AreaVo">
         SELECT code, name, engname, loc_x, loc_y, zoom

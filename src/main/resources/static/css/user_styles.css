@@ -2403,17 +2403,19 @@ table#planlist-table {
   text-align: center;
   vertical-align: middle;
   padding: 8px 14px;
+  width: 8%;
 }
 @media (max-width: 1920px) {
   a.planlist-option span.item {
     display: inline-block;
-    width: 75px;
+    width: 10.5%;
     padding: 2px 0px;
   }
 }
 @media (max-width: 1708px) {
   a.planlist-option span.item {
-    width: 71px;
+    width: 12%;
+    font-size: 14px;
   }
 }
 

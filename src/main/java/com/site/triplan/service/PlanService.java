@@ -18,6 +18,13 @@ public class PlanService {
         this.planMapper = planMapper;
     }
 
+    // 일정 리스트 (지역코드 사용)
+    public List<PlanVo> getPlanList(String area_code) {
+        List<PlanVo> planList = new ArrayList<>();
+        planList = planMapper.getPlanList(area_code);
+        return planList;
+    }
+
     // 지역
     public List<AreaVo> getAreaInfo() {
         List<AreaVo> areaList = new ArrayList<>();

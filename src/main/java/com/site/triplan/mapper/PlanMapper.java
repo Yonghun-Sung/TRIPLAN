@@ -9,6 +9,9 @@ import java.util.List;
 
 @Mapper
 public interface PlanMapper {
+    // 일정보기
+    List<PlanVo> getPlanList(String area_code);
+
     // 지역
     List<AreaVo> getAreaInfo();
 

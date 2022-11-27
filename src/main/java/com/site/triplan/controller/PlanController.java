@@ -45,7 +45,16 @@ public class PlanController {
 
     // <일정보기>
     @GetMapping("/planlist")
-    public String planlist() {
+    public String planlist(Model model, @RequestParam(required=false, defaultValue="")String code) {
+
+        System.out.println(code.isEmpty());
+
+        List<AreaVo> areaList = new ArrayList<>();
+        List<PlanVo> planList = new ArrayList<>();
+        areaList = planService.getAreaInfo();
+        planList = planService.getPlanList(code);
+        model.addAttribute("areaList", areaList);
+        model.addAttribute("planList", planList);
         return "user_plan_list";
     }
 
