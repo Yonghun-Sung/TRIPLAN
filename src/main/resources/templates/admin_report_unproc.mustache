@@ -45,11 +45,11 @@
                                         <td>{{reportedUser}}</td>
                                         <td>{{reportUser}}</td>
                                         <td>[댓글] {{content}}</td>
-                                        <td>{{state}}</td>
+                                        <td>{{reason}}</td>
                                         <td>{{dt}}</td>
                                         <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal"
                                                     data-reporteduser="{{reportedUser}}" data-reportuser="{{reportUser}}" data-content="{{content}}"
-                                                    data-state="{{state}}" data-dt="{{dt}}">관리</button></td>
+                                                    data-reason="{{reason}}" data-dt="{{dt}}" data-code="{{code}}">관리</button></td>
                                     </tr>
                                     {{/unreport}}
                                     </tbody>
@@ -78,7 +78,7 @@
                                                 <div class="report_modal" id="modal_reported" > </div>
                                             </div>
                                             <div class="row">
-                                                <label for="id2" class="col-form-label"><b>신고자</b>  </label>
+                                                <label for="id2" class="col-form-label"><b>신고자</b></label>
                                                 <div class="report_modal" id="modal_report" > </div>
                                             </div>
                                             <div class="row">
@@ -87,7 +87,7 @@
                                             </div>
                                             <div class="row">
                                                 <label for="id4" class="col-form-label"><b>신고사유</b></label>
-                                                <div class="report_modal" id="modal_state" > </div>
+                                                <div class="report_modal" id="modal_reason" > </div>
                                             </div>
                                             <div class="row">
                                                 <label for="id5" class="col-form-label"><b>신고내용</b></label>
@@ -98,13 +98,16 @@
                                 </div>
                                 <!--푸터-->
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">승인</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">반려</button>
+                                    <form id="report-proc-form" action="/triplan/processReport" method="post">
+                                        <input type="hidden" name="reg_code" id="report-reg-code" value="">
+                                        <input type="hidden" name="result_code" id="report-result-code" value="">
+                                        <button type="button" class="report-result-btn btn btn-primary"  value="1">승인</button>
+                                        <button type="button" class="report-result-btn btn btn-secondary" value="2">반려</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-
 
                 </main>
                 <footer class="py-4 bg-light mt-auto">

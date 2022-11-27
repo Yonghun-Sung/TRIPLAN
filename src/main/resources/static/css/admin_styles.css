@@ -11725,6 +11725,14 @@ button#btn{
    border-radius:0.3rem;
 }
 
+div.report_modal2{
+   border: 1px solid black;
+   width: 350px;
+   border-radius:0.3rem;
+   margin-bottom: 10px;
+   padding-left: 10px;
+}
+
 div#reportmodalC{
    border: 1px solid black;
    width: 500px;
@@ -11732,3 +11740,11 @@ div#reportmodalC{
    max-height: 200px;
    border-radius:0.3rem;
 }
+
+button.btn-basic2{
+    position: relative;
+    right: -10px;
+    margin: auto;
+    top: -5px;
+}
+

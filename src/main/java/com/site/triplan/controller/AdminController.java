@@ -6,6 +6,7 @@ import com.site.triplan.vo.UserVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,13 +23,6 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @RequestMapping("/admin")
-    public String admin_main(Model model) {
-        List<ReportVo> reportVoList = adminService.postUnreport();      // 미처리신고 데이터 받아오기
-        model.addAttribute("unreport",reportVoList);        // 미처리신고 데이터 전달
-        return "admin_main";
-    }
-
     @RequestMapping("/adminLogin")
     public String admin_loginform() {
         return "admin_loginform";
@@ -39,6 +33,12 @@ public class AdminController {
         return "admin_myinfo";
     }
 
+    @RequestMapping("/admin")
+    public String admin_main(Model model) {
+        List<ReportVo> reportVoList = adminService.postUnreport();      // 미처리신고 데이터 받아오기
+        model.addAttribute("unreport",reportVoList);        // 미처리신고 데이터 전달
+        return "admin_main";
+    }
 
     @RequestMapping("/memberAll")
     public String admin_member_all(Model model) {
@@ -73,6 +73,13 @@ public class AdminController {
         List<ReportVo> reportVoList = adminService.postReport();    // 처리신고 데이터 받아오기
         model.addAttribute("report",reportVoList);      // 처리신고 데이터 전달
         return "admin_report_proc";
+    }
+
+
+    @PostMapping("/processReport")  // 신고처리
+    public String processReport(ReportVo reportVo) {
+        adminService.processReport(reportVo);
+        return "/triplan/reportUnproc";
     }
 
 }

@@ -18,8 +18,10 @@ public interface AdminMapper {
     List<UserVo> findBan();     // 정지회원 
     List<UserVo> findDrop();    // 탈퇴회원 
 
-    List<ReportVo> findUnreport();  // 미처리신고 
+    List<ReportVo> findUnreport();  // 미처리신고
     List<ReportVo> findReport();    // 처리신고
+
+    void processReport(ReportVo reportVo);   // 신고처리
 
 
 }

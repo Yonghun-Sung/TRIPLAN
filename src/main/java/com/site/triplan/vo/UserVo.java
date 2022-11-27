@@ -17,7 +17,6 @@ public class UserVo {
     String reg_dt;
     String dt;
     String state;
-    Integer ban_flag;
     Integer cnt;
     Integer user_code;
 

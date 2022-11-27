@@ -8,7 +8,6 @@
         ui.name,
         ui.nickname,
         u.reg_dt,
-        u.ban_flag,
         if(u.ban_flag = 1, '정지', '정상') as state,
         count(rp.result_code) as cnt
         from user_info ui inner join user u on ui.user_code = u.code
@@ -25,7 +24,6 @@
             ui.name,
             ui.nickname,
             rp.dt,
-            u.ban_flag,
             if(u.ban_flag = 1, '정지', '정상') as state,
             if(count(rp.result_code) is not null, count(rp.result_code), 0) as cnt
         from user_info ui inner join user u on ui.user_code = u.code
@@ -34,7 +32,7 @@
         left join report_proc rp on rr.code = rp.reg_code
         where rp.result_code = 1
         group by ui.id
-        having cnt = 3
+        having cnt >= 3
         order by rp.dt;
     </select>
     <select id="findDrop" resultType="com.site.triplan.vo.UserVo">
@@ -43,9 +41,8 @@
             d.name,
             d.nickname,
             d.dt,
-            u.ban_flag,
             if(d.code is not null, '탈퇴', '정상') as state,
-        count(rp.result_code) as cnt
+            count(rp.result_code) as cnt
         from user u join `drop` d on u.code = d.user_code
         left join reply rpy on u.code = rpy.user_code
         left join report_reg rr on rpy.code = rr.reply_code
@@ -55,45 +52,52 @@
     </select>
     <select id="findUnreport" resultType="com.site.triplan.vo.ReportVo">
         select
-        (select name
-        from user_info
-        where user_code = rr.user_code) as reportUser,
-        ui.name as reportedUser,
-        rpy.content,
-        case when rr.type_code = 1 then '스팸홍보/도배'
-        when rr.type_code = 2 then '음란물'
-        when rr.type_code = 3 then '불법정보'
-        when rr.type_code = 4 then '청소년유해'
-        when rr.type_code = 5 then '욕설/혐오/차별'
-        when rr.type_code = 6 then '개인정보노출'
-        else '불쾌한표현'
-        end as state,
-        rr.dt
+            (select name
+            from user_info
+            where user_code = rr.user_code) as reportUser,
+            ui.name as reportedUser,
+            rpy.content,
+            case when rr.type_code = 1 then '스팸홍보/도배'
+            when rr.type_code = 2 then '음란물'
+            when rr.type_code = 3 then '불법정보'
+            when rr.type_code = 4 then '청소년유해'
+            when rr.type_code = 5 then '욕설/혐오/차별'
+            when rr.type_code = 6 then '개인정보노출'
+            when rr.type_code = 7 then '불쾌한표현'
+            else '반려'
+            end as reason,
+            rr.dt,
+            rr.code
         from report_proc rp
         right join report_reg rr on rp.reg_code = rr.code
         inner join reply rpy on rr.reply_code = rpy.code
         inner join user_info ui on rpy.user_code = ui.user_code
         where rp.result_code is null
     </select>
+
     <select id="findReport" resultType="com.site.triplan.vo.ReportVo">
         select (select name
-                from user_info
-                where user_code = rr.user_code) as reportUser,
-                ui.name as reportedUser,
-                rpy.content,
-                case when rr.type_code = 1 then '스팸홍보/도배'
-                when rr.type_code = 2 then '음란물'
-                when rr.type_code = 3 then '불법정보'
-                when rr.type_code = 4 then '청소년유해'
-                when rr.type_code = 5 then '욕설/혐오/차별'
-                when rr.type_code = 6 then '개인정보노출'
-                else '불쾌한표현'
-                end as state,
-                rp.dt
+            from user_info
+            where user_code = rr.user_code) as reportUser,
+            ui.name as reportedUser,
+            rpy.content,
+            case when rr.type_code = 1 then '스팸홍보/도배'
+            when rr.type_code = 2 then '음란물'
+            when rr.type_code = 3 then '불법정보'
+            when rr.type_code = 4 then '청소년유해'
+            when rr.type_code = 5 then '욕설/혐오/차별'
+            when rr.type_code = 6 then '개인정보노출'
+            when rr.type_code = 7 then '불쾌한표현'
+            else '반려'
+            end as reason,
+            rp.dt
         from report_proc rp
         right join report_reg rr on rp.reg_code = rr.code
         inner join reply rpy on rr.reply_code = rpy.code
         inner join user_info ui on rpy.user_code = ui.user_code
-        where rp.result_code = 1
     </select>
+    <insert id="processReport">
+        INSERT INTO report_proc(reg_code, result_code, admin_code)
+        VALUES(#{reg_code}, #{result_code}, #{admin_code})
+    </insert>
 </mapper>

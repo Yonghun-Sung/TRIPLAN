@@ -47,11 +47,11 @@
                                         <td>{{reportUser}}</td>
                                         <td>[댓글] {{content}}</td>
                                         <td>블라인드</td>
-                                        <td>{{state}}</td>
+                                        <td>{{reason}}</td>
                                         <td>{{dt}}</td>
                                         <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal"
                                                     data-reporteduser="{{reportedUser}}" data-reportuser="{{reportUser}}" data-content="{{content}}"
-                                                    data-state="{{state}}" data-dt="{{dt}}">관리</button></td>
+                                                    data-reason="{{reason}}" data-dt="{{dt}}">관리</button></td>
                                     </tr>
                                     {{/report}}
                                     </tbody>
@@ -86,7 +86,7 @@
                                         </div>
                                         <div class="row">
                                             <label for="id4" class="col-form-label"><b>신고사유</b></label>
-                                            <div class="report_modal" id="modal_state" > </div>
+                                            <div class="report_modal" id="modal_reason" > </div>
                                         </div>
                                         <div class="row">
                                             <label for="id5" class="col-form-label"><b>신고내용</b></label>
@@ -95,8 +95,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">철회</button>
-                                    <button type="button" class="btn btn-secondary">유지</button>
+                                    <button type="button" class="btn btn-primary" >철회</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">유지</button>
                                 </div>
                             </div>
                         </div>

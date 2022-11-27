@@ -13,15 +13,29 @@ public class AdminService {
     private AdminMapper adminMapper;
 
     public AdminService(AdminMapper adminMapper) {
+
         this.adminMapper = adminMapper;
     }
 
-    public List<UserVo> postAllUser() {return adminMapper.findAll();}
-    public List<UserVo> postBanUser() { return adminMapper.findBan(); }
-    public List<UserVo> postDropUser() { return adminMapper.findDrop(); }
-    public List<ReportVo> postUnreport() { return adminMapper.findUnreport(); }
-    public List<ReportVo> postReport() { return adminMapper.findReport(); }
+    public List<UserVo> postAllUser() {
+        return adminMapper.findAll();}
+    public List<UserVo> postBanUser() {
+        return adminMapper.findBan(); }
+    public List<UserVo> postDropUser() {
+        return adminMapper.findDrop(); }
+    public List<ReportVo> postUnreport() {
+        return adminMapper.findUnreport(); }
+    public List<ReportVo> postReport() {
+        return adminMapper.findReport(); }
 
 
+    public void insertReport(ReportVo reportVo){
 
+    }
+
+    // 신고 처리
+    public void processReport(ReportVo reportVo) {
+        reportVo.setAdmin_code("1");
+        adminMapper.processReport(reportVo);
+    }
 }
