@@ -195,6 +195,7 @@ $(document).on('click', 'button.add-place', function() {
 
     $('div#form' + nowDayPageNum).append(
         "<div id='place" + count++ + "' class='select-place'>"
+        +   "<div class='info-ment'></div>"
         +   "<span class='num-box'><i class='bi bi-check'></i></span>"
         +   "<input type='text' id='name' name='name' class='select-name' value='" + name + "' disabled>"
         +   "<button class='delete-place'><i class='bi bi-dash'></i></button>"
@@ -208,11 +209,22 @@ $(document).on('click', 'button.add-place', function() {
         +   "<input type='hidden' id='day' name='day' value='" + nowDayPageNum + "'>"
         +   "<input type='hidden' id='order' name='order' value=''>"
         + "</div>");
+
+    $('div#form' + nowDayPageNum + ' > .select-place:nth-child(1)').css('background-color', '#e0e0e0');
+    $('div#form' + nowDayPageNum + ' > .select-place:nth-child(2)').css('background-color', '#e0e0e0');
+
+    $('div#form' + nowDayPageNum + ' > .select-place:nth-child(1) div.info-ment').text('출발 장소');
+    $('div#form' + nowDayPageNum + ' > .select-place:nth-child(2) div.info-ment').text('도착 장소');
 });
 
 /*장소 제거 버튼*/
 $(document).on('click', 'button.delete-place', function () {
     $(this).parent().remove();
+    $('div#form' + nowDayPageNum + ' > .select-place:nth-child(1)').css('background-color', '#e0e0e0');
+    $('div#form' + nowDayPageNum + ' > .select-place:nth-child(2)').css('background-color', '#e0e0e0');
+
+    $('div#form' + nowDayPageNum + ' > .select-place:nth-child(1) div.info-ment').text('출발 장소');
+    $('div#form' + nowDayPageNum + ' > .select-place:nth-child(2) div.info-ment').text('도착 장소');
 });
 
 

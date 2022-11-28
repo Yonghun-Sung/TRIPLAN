@@ -2702,9 +2702,14 @@ div.day-info .day-num {
 
 div#plan-placebar .select-place,
 div#plan-placebar .select-place-btn-box{
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #d4d2d2;
   width: 100%;
   padding: 10px 10px;
+}
+.info-ment {
+  font-weight: bold;
+  color: #991717;
+  margin-right: 70%;
 }
 input.select-name {
   font-size: 14px;
