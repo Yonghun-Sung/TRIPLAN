@@ -1,6 +1,6 @@
 // --미처리 신고
 $('#report-modal').on('show.bs.modal', function(event) {
-    var button = $(event.relatedTarget);                // button에 바인딩된 함수 가져오기
+    var button = $(event.relatedTarget);                // button에 바인딩 된 함수 가져오기
     var reportedUser = button.data('reporteduser');     // 피신고자, 신고자, 신고내용, 신고사유, 접수일 가져오기
     var reportUser = button.data("reportuser");
     var content = button.data('content');
@@ -27,7 +27,7 @@ $('#report-modal').on('show.bs.modal', function(event) {
 
 // --처리내역
 $('#report-proc-modal').on('show.bs.modal', function(event) {
-    var button = $(event.relatedTarget);                // button에 바인딩된 함수 가져오기
+    var button = $(event.relatedTarget);                // button에 바인딩 된 함수 가져오기
     var reportedUser = button.data('reporteduser');     // 피신고자, 신고자, 신고내용, 신고사유, 접수일 가져오기
     var reportUser = button.data("reportuser");
     var content = button.data('content');

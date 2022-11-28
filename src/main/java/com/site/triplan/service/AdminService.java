@@ -17,28 +17,26 @@ public class AdminService {
         this.adminMapper = adminMapper;
     }
 
-    public List<UserVo> postAllUser() {
+    public List<UserVo> postAllUser() {         // 전체회원
         return adminMapper.findAll();}
-    public List<UserVo> postBanUser() {
+    public List<UserVo> postBanUser() {         // 정지회원
         return adminMapper.findBan(); }
-    public List<UserVo> postDropUser() {
+    public List<UserVo> postDropUser() {        // 탈퇴회원
         return adminMapper.findDrop(); }
-    public List<ReportVo> postUnreport() {
+    public List<ReportVo> postUnreport() {      // 미처리신고
         return adminMapper.findUnreport(); }
-    public List<ReportVo> postReport() {
+    public List<ReportVo> postReport() {        // 처리내역
         return adminMapper.findReport(); }
 
 
 
-    // 신고 처리
-    public void processReport(ReportVo reportVo) {
+
+    public void processReport(ReportVo reportVo) {     // 미처리신고 신고(승인, 반려)
         reportVo.setAdmin_code(1);
         adminMapper.processReport(reportVo);
     }
 
-    public void processedReport(ReportVo reportVo){
-        System.out.println(reportVo.getReg_code());
-        System.out.println(reportVo.getResult_code());
-//        adminMapper.processedReport(reportVo);
+    public void processedReport(ReportVo reportVo){     // 처리내역 (철회, 유지)
+        adminMapper.processedReport(reportVo);
     }
 }

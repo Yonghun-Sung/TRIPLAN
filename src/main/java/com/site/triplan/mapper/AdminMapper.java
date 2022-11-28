@@ -19,9 +19,9 @@ public interface AdminMapper {
     List<UserVo> findDrop();    // 탈퇴회원 
 
     List<ReportVo> findUnreport();  // 미처리신고
-    List<ReportVo> findReport();    // 처리신고
+    List<ReportVo> findReport();    // 처리내역
 
-    void processReport(ReportVo reportVo);   // 미처리신고
-    void processedReport(ReportVo reportVo); // 처리내역
+    void processReport(ReportVo reportVo);   // 미처리신고 신고(승인, 반려)
+    void processedReport(ReportVo reportVo); // // 처리내역 (철회, 유지)
 
 }
