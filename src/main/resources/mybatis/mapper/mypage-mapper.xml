@@ -2,15 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.site.triplan.mapper.MypageMapper">
-    <select id="getAllReplies" resultType="com.site.triplan.vo.ReplyVo"><!--나의 댓글: 댓글목록 : 삭제된 일정에 단 댓글 제외-->
-        SELECT r.content, r.write_dt, p.title, a.name FROM reply r
+    <select id="getAllReplies" resultType="com.site.triplan.vo.ReplyVo"><!--나의 댓글: 삭제된 일정의 댓글 제외, 신고 승인된 댓글 제외-->
+        SELECT r.content, r.write_dt, p.title, a.name, r.code FROM reply r
         JOIN plan p ON r.plan_code = p.code
         JOIN area a ON p.area_code = a.code
-        WHERE r.user_code=#{code} AND p.`code`
+        LEFT JOIN report_reg rr ON r.code = rr.reply_code
+        LEFT JOIN report_proc rp ON rr.code = rp.reg_code
+        WHERE r.user_code=#{code} AND rp.result_code IS NULL OR rp.result_code = 2 AND p.code
         IN (SELECT p.code FROM plan p
         LEFT OUTER JOIN plan_deleted pd
         ON p.code = pd.plan_code
-        WHERE pd.plan_code IS NULL)
+        WHERE pd.plan_code IS NULL);
     </select>
     <select id="getReplyCount" resultType="Integer"><!--나의 댓글 갯수-->
         SELECT COUNT(*) FROM reply
@@ -34,18 +36,19 @@
         JOIN user_info us ON u.code = us.user_code
         JOIN area a ON p.area_code = a.code
         WHERE l.user_code = 1;-->
-        SELECT a.name, p.title, ui.nickname, p.views, p.start_dt, p.end_dt, pl.photo_path, p.code FROM `like` l <!--체크박스위해서 plan.code추가-->
+        SELECT a.name, p.title, ui.nickname, p.views, p.start_dt, p.end_dt, pl.photo_path, p.code, (SELECT count(*)
+        FROM place WHERE plan_code = p.code) "place_num" FROM `like` l <!--체크박스위해서 plan.code추가-->
         JOIN plan p ON l.plan_code = p.code
         JOIN user u ON p.user_code = u.code
         JOIN user_info ui ON u.code = ui.user_code
         JOIN area a ON p.area_code = a.code
         JOIN place pl ON p.code = pl.plan_code
-        WHERE l.user_code=#{code} AND pl.plan_code = 1 AND pl.day = 1 AND pl.order = 1;
+        WHERE l.user_code=#{code} AND pl.day = 1 AND pl.order = 1; <!--AND pl.plan_code = 1-->
     </select>
-    <select id="getPlaceCount" resultType="Integer"><!--일정 1개의 선택장소 개수--><!--조인해야할듯-->
-        SELECT COUNT(*) FROM place
-        WHERE plan_code =1
-    </select>
+    <!--<select id="getPlaceCount" resultType="Integer">&lt;!&ndash;일정 1개의 선택장소 개수&ndash;&gt;&lt;!&ndash;조인해야할듯&ndash;&gt;
+        SELECT COUNT(*) FROM place p
+        WHERE plan_code = p.code
+    </select>-->
 <!--    <update id="updateUserProfile">
         UPDATE user_info SET id = '', name = '', pw ='', nickname = ''
         WHERE id=''
@@ -63,7 +66,8 @@
         WHERE p.user_code = 1 AND pl.day = 1 AND pl.order = 1;
     </select>-->
     <select id="getScheduledPlans" resultType="com.site.triplan.vo.PlanVo"> <!--나의 일정 : 다가오는 일정-->
-        SELECT a.name, p.title, ui.nickname, p.views, DATE_FORMAT(p.start_dt, '%Y-%m-%d'), date_format(p.end_dt, '%Y-%m-%d'), pl.photo_path, ui.id, p.write_dt, p.`code` FROM plan p
+        SELECT a.name, p.title, ui.nickname, p.views, DATE_FORMAT(p.start_dt, '%Y-%m-%d'), date_format(p.end_dt, '%Y-%m-%d'), pl.photo_path, ui.id, p.write_dt, p.code,
+        (SELECT count(*) FROM place WHERE plan_code = p.code) "place_num" FROM plan p
         JOIN user u ON p.user_code = u.code
         JOIN user_info ui ON u.code = ui.user_code
         JOIN area a ON p.area_code = a.code
@@ -76,7 +80,8 @@
         <!-- &gt;= : >= -->
     </select>
     <select id="getCompletedPlans" resultType="com.site.triplan.vo.PlanVo"> <!--나의 일정 : 완료된 일정-->
-        SELECT a.name, p.title, ui.nickname, p.views, DATE_FORMAT(p.start_dt, '%Y-%m-%d'), date_format(p.end_dt, '%Y-%m-%d'), pl.photo_path, ui.id, p.write_dt, p.`code` FROM plan p
+        SELECT a.name, p.title, ui.nickname, p.views, DATE_FORMAT(p.start_dt, '%Y-%m-%d'), date_format(p.end_dt, '%Y-%m-%d'), pl.photo_path, ui.id, p.write_dt, p.code,
+        (SELECT count(*) FROM place WHERE plan_code = p.code) "place_num" FROM plan p
         JOIN user u ON p.user_code = u.code
         JOIN user_info ui ON u.code = ui.user_code
         JOIN area a ON p.area_code = a.code
@@ -102,6 +107,9 @@
         <!---->
         <!--내가 아니라 다른 사람이 좋아해놓은 같은 plan.code인거까지 다삭제되니까,,,  -->
         <!--user_code의 {code} : 세션의 code값 받으면되는데, plan_code는 RequestParam 으로 받아소 -->
+    </delete>
+    <delete id="deleteReply">
+        DELETE FROM reply WHERE code=#{reply_code} AND user_code=#{code}
     </delete>
 
 

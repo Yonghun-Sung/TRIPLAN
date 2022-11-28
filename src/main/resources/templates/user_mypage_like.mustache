@@ -147,15 +147,15 @@
                         {{#likelist}}
                         <div class="col-lg-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name = "cb1" date-code='{{code}}' id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
+                                <input class=" form-check-input like-cb" type="checkbox" name="cb1" data-code='{{code}}'><!--id="flexCheckDefault"  name = "cb1"-->
+                                <label class="form-check-label">
                                     <!--Default checkbox-->
                                 </label>
                             </div>
                             <article class="d-flex flex-column">
                                 <div class="post-img">
                                     <!--<a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>-->
-                                    <a href="#!"><img src="http://img.earthtory.com/img/place_img/312/7317_0_et.jpg" alt="" class="img-fluid"></a>
+                                    <a href="#!"><img src="{{photo_path}}" alt="" class="img-fluid"></a>
                                 </div>
 
                                 <h2 class="title">
@@ -166,7 +166,8 @@
                                 <div class="meta-top">
                                     <ul>
                                         <li class="d-flex align-items-center"><i class="bi bi-person"></i>{{nickname}}</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>{{placecount}}</li>
+                                        <!--<li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>placecount</li>-->
+                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>{{place_num}}</li>
                                         <li class="d-flex align-items-center"><i class="bi bi-eye"></i>{{views}}</li>
                                     </ul>
                                 </div>

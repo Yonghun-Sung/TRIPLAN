@@ -129,6 +129,7 @@ function titleEdit(){
 $('.inputTravelName_idx_a').click(function() {
     let title = $(this).prev().val();
     let code = $(this).data('code');
+    let urlpathname = $(location).attr('pathname');
 
     $.ajax({
             method: "PUT",
@@ -141,7 +142,7 @@ $('.inputTravelName_idx_a').click(function() {
             console.log(response);
             console.log("success");
             alert("여행 제목이 변경되었습니다.");
-            window.location.href = "/triplan/mypage/completedplans";
+            window.location.href = urlpathname;
         })
         .fail(function (e) {
             console.log("err");
@@ -149,42 +150,76 @@ $('.inputTravelName_idx_a').click(function() {
             console.log(e.responseText);
         });
 });
-
+//완료된 일정 삭제
 $('.threeplan-btn.deleteSavedBtn').click(function() {
     let code = $(this).data('code');
-
+    /*let url = $(location).attr('href');*/
+    let urlpathname = $(location).attr('pathname');
+    alert(urlpathname);
     $.ajax({
         method: "POST",
         url: "/triplan/mypage/delete",
         data: {
-            "code": code
+            "code": code,
+            "urlpathname" : urlpathname
         }
     }).done(function(response){
         console.log("delete!")
         alert("여행 일정이 삭제되었습니다.");
-        window.location.href = "/triplan/mypage/completedplans";
+        window.location.href = urlpathname;
     }).fail(function(e) {
         console.log(e.status);
         console.log(e.responseText);
     });
 });
 
+//좋아요한 일정 체크한 거 삭제
 $('.btn.btn-primary.like-delete-btn').click(function() {
-    let checkBoxArr = [];
-      $("input:checkbox[name='cb1']:checked").each(function() {
-      checkBoxArr.push($(this).data('code'));     // 선택된 체크박스의 plan.code 배열에 push
-      console.log(checkBoxArr);
+   let checkBoxArr = [];
+      /*$("input:checkbox[name='cb1']:checked").each(function() {*/
+    $('.form-check-input.like-cb:checked').each(function() {
+    alert($(this).data('code'));
+    /*checkBoxArr.push(1);*/
+    checkBoxArr.push($(this).data('code'));
+    alert(checkBoxArr);
     })
     $.ajax({
         method: "POST",
         url: "/triplan/mypage/like/delete",
         data: {
-            "plan_code" : code
+            "checkBoxArr" : checkBoxArr
         }
     }).done(function(response) {
         console.log("like delete!")
         alert("좋아요한 일정이 삭제되었습니다.");
         window.location.href = "/triplan/mypage/like";
+    }).fail(function(e) {
+        console.log(e.status);
+        console.log(e.responseText);
+    });
+});
+
+
+//댓글 체크한 거 삭제
+$('.btn.btn-primary.reply-delete-btn').click(function() {
+   let checkBoxArr = [];
+      /*$("input:checkbox[name='cb1']:checked").each(function() {*/
+    $('.form-check-input.reply-cb:checked').each(function() {
+    alert($(this).data('code')); //reply.code
+    /*checkBoxArr.push(1);*/
+    checkBoxArr.push($(this).data('code'));
+    alert(checkBoxArr);
+    })
+    $.ajax({
+        method: "POST",
+        url: "/triplan/mypage/reply/delete",
+        data: {
+            "checkBoxArr" : checkBoxArr
+        }
+    }).done(function(response) {
+        console.log("reply delete!")
+        alert("댓글이 삭제되었습니다.");
+        window.location.href = "/triplan/mypage/reply";
     }).fail(function(e) {
         console.log(e.status);
         console.log(e.responseText);

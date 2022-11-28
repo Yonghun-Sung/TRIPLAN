@@ -2281,7 +2281,7 @@ button#join-btn {
 }
 
 /*비밀번호 모달*/
-#findpw-modal input#id {
+/*#findpw-modal input#id {
   height: 45px;
   letter-spacing: 1px;
 }
@@ -2292,7 +2292,7 @@ button#join-btn {
 }
 button#findpw-btn {
   margin: 3% 0%;
-}
+}*/
 
 /*======================
   # 회원가입(joinform)

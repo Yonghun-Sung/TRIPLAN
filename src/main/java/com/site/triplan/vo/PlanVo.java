@@ -6,7 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PlanVo {
-<<<<<<< HEAD
     String name;
     String title;
     String nickname;
@@ -27,7 +26,7 @@ public class PlanVo {
     Integer place_num, reply_num;  //--장소 개수, 댓글 개수
 
     //좋아요한 일정
-    public PlanVo(String name, String title, String nickname, Integer views, String start_dt, String end_dt, String photo_path, Integer code) {
+    public PlanVo(String name, String title, String nickname, Integer views, String start_dt, String end_dt, String photo_path, Integer code, Integer place_num) {
         this.name = name;
         this.title = title;
         this.nickname = nickname;
@@ -36,10 +35,11 @@ public class PlanVo {
         this.end_dt = end_dt;
         this.photo_path = photo_path;
         this.code = code;
+        this.place_num = place_num;
     }
 
     //나의 일정
-    public PlanVo(String name, String title, String nickname, Integer views, String start_dt, String end_dt, String photo_path, String id, String write_dt, Integer code) {
+    public PlanVo(String name, String title, String nickname, Integer views, String start_dt, String end_dt, String photo_path, String id, String write_dt, Integer code, Integer place_num) {
         this.name = name;
         this.title = title;
         this.nickname = nickname;
@@ -50,6 +50,7 @@ public class PlanVo {
         this.id = id;
         this.write_dt = write_dt;
         this.code = code;
+        this.place_num = place_num;
     }
     /*public PlanVo(String title, Integer code) {
         this.code = code;

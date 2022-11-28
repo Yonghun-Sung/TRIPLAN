@@ -18,6 +18,7 @@ import java.util.List;
 public class MypageController {
 
     private MypageService mypageService;
+    private List<String> checkBoxArr;
 
     public MypageController(MypageService mypageService) {
         this.mypageService = mypageService;
@@ -56,8 +57,8 @@ public class MypageController {
             List<PlanVo> likeList = mypageService.getAllLikeList(code);
             model.addAttribute("likelist",likeList);
 
-            Integer placeCount = mypageService.getPlaceNum();
-            model.addAttribute("placecount", placeCount);
+            /*Integer placeCount = mypageService.getPlaceNum();
+            model.addAttribute("placecount", placeCount);*/
             view = "user_mypage_like";
         }
         return view;
@@ -85,8 +86,46 @@ public class MypageController {
             model.addAttribute("plancount", planCount);
             model.addAttribute("replycount", replyCount);
             model.addAttribute("likecount", likeCount);
-            Integer placeCount = mypageService.getPlaceNum();
-            model.addAttribute("placecount", placeCount);
+            /*Integer placeCount = mypageService.getPlaceNum();
+            model.addAttribute("placecount", placeCount);*/
+
+            /*List<PlanVo> planList = mypageService.getAllPlanList();
+            model.addAttribute("planlist", planList);
+
+            view = "user_mypage_main2";*/
+
+            List<PlanVo> schPlanList = mypageService.getScheduledList(code);
+            model.addAttribute("schplanlist",schPlanList);
+
+            view = "user_mypage_scheduledplan";
+        }
+        return view;
+    }
+
+    @PostMapping("/mypage")
+    public String mypagePost(Model model, HttpServletRequest request) {
+        String view = "";
+        HttpSession session = request.getSession();
+        String id = (String)session.getAttribute("session_id");
+        String code = String.valueOf(session.getAttribute("session_code"));
+
+        if (id == null) {
+            model.addAttribute("errCode", "2");
+            view = "redirect:/triplan/loginform?errCode=2";
+        } else {
+            UserVo userProfile = mypageService.getMyProfile(id);
+            Character nicknameFirst = userProfile.getNickname().charAt(0);
+            model.addAttribute("userprofile", userProfile);
+            model.addAttribute("firstletterNickname", nicknameFirst);
+
+            Integer planCount = mypageService.getAllPlanCount(code);
+            Integer replyCount = mypageService.getAllReplyCount(code);
+            Integer likeCount = mypageService.getAllLikeCount(code);
+            model.addAttribute("plancount", planCount);
+            model.addAttribute("replycount", replyCount);
+            model.addAttribute("likecount", likeCount);
+            /*Integer placeCount = mypageService.getPlaceNum();
+            model.addAttribute("placecount", placeCount);*/
 
             /*List<PlanVo> planList = mypageService.getAllPlanList();
             model.addAttribute("planlist", planList);
@@ -102,7 +141,7 @@ public class MypageController {
     }
 
     /*완료된 일정*/    /*@GetMapping("/mypage/completedPlans")*/
-    @RequestMapping("/mypage/completedplans")
+    @GetMapping("/mypage/completedplans")
     /*@GetMapping("mypage/completedPlans")*/
     public String mypageCompletedPlans(Model model, HttpServletRequest request) {
         String view = "";
@@ -126,8 +165,8 @@ public class MypageController {
             model.addAttribute("plancount", planCount);
             model.addAttribute("replycount", replyCount);
             model.addAttribute("likecount", likeCount);
-            Integer placeCount = mypageService.getPlaceNum();
-            model.addAttribute("placecount", placeCount);
+            /*Integer placeCount = mypageService.getPlaceNum();
+            model.addAttribute("placecount", placeCount);*/
 
             List<PlanVo> comPlanList = mypageService.getCompletedList(code);
             model.addAttribute("complanlist",comPlanList);
@@ -161,8 +200,8 @@ public class MypageController {
             model.addAttribute("plancount", planCount);
             model.addAttribute("replycount", replyCount);
             model.addAttribute("likecount", likeCount);
-            Integer placeCount = mypageService.getPlaceNum();
-            model.addAttribute("placecount", placeCount);
+            /*Integer placeCount = mypageService.getPlaceNum();
+            model.addAttribute("placecount", placeCount);*/
 
             List<PlanVo> comPlanList = mypageService.getCompletedList(code);
             model.addAttribute("complanlist",comPlanList);
@@ -222,6 +261,35 @@ public class MypageController {
         return view;
     }
 
+    @PostMapping("/mypage/reply")
+    public String mypagereplyPost(Model model, HttpServletRequest request) {
+        String view = "";
+        HttpSession session = request.getSession();
+        String id = (String)session.getAttribute("session_id");
+        String code = String.valueOf(session.getAttribute("session_code"));
+
+        if (id == null) {
+            model.addAttribute("errCode", "2");
+            view = "redirect:/triplan/loginform?errCode=2";
+        } else {
+            UserVo userProfile = mypageService.getMyProfile(id);
+            Character nicknameFirst = userProfile.getNickname().charAt(0);
+            model.addAttribute("userprofile", userProfile);
+            model.addAttribute("firstletterNickname", nicknameFirst);
+
+            Integer planCount = mypageService.getAllPlanCount(code);
+            Integer replyCount = mypageService.getAllReplyCount(code);
+            Integer likeCount = mypageService.getAllLikeCount(code);
+            List<ReplyVo> replyList = mypageService.getAllList(code);
+            model.addAttribute("plancount", planCount);
+            model.addAttribute("replycount", replyCount);;
+            model.addAttribute("likecount", likeCount);
+            model.addAttribute("replies", replyList);
+            view = "user_mypage_reply";
+        }
+        return view;
+    }
+
 //    @PostMapping("/mypage/reply/delete")
 //    public String deleteReply(@RequestParam Integer id){
 //        mypageService.deleteReply(id);
@@ -247,21 +315,43 @@ public class MypageController {
         return 1;
     }
     //나의 일정 삭제
+    @ResponseBody
     @PostMapping("/mypage/delete")
-    public String deletePlans(@RequestParam Integer code){
+    public String deletePlans(@RequestParam Integer code, @RequestParam String urlpathname){
         System.out.println(code);
+        System.out.println(urlpathname);
         mypageService.deletePlans(code);//삭제테이블에 insert
         System.out.println(code);
-        return "redirect:/triplan/mypage/completedplans";
+        return "redirect:" + urlpathname;
     }
 
+    //좋아요한 일정 삭제
+    @ResponseBody
     @PostMapping("/mypage/like/delete")
-    public String deleteLike(HttpServletRequest request, @RequestParam Integer plan_code){
-        String view = "";
+    public String likeDelete(HttpServletRequest request, @RequestParam(value = "checkBoxArr[]") List<Integer> checkBoxArr) throws Exception {
+        System.out.println("controller start");
         HttpSession session = request.getSession();
         String code = String.valueOf(session.getAttribute("session_code"));
-        mypageService.deleteLike(code, plan_code);
+
+        System.out.println(checkBoxArr);
+        for(Integer plan_code : checkBoxArr){
+            mypageService.deleteLike(code, plan_code);
+        }
         return "redirect:/triplan/mypage/like";
+    }
+
+    @ResponseBody
+    @PostMapping("/mypage/reply/delete")
+    public String replyDelete(HttpServletRequest request, @RequestParam(value = "checkBoxArr[]") List<Integer> checkBoxArr) throws Exception {
+        System.out.println("controller start");
+        HttpSession session = request.getSession();
+        String code = String.valueOf(session.getAttribute("session_code"));
+
+        System.out.println(checkBoxArr);
+        for(Integer reply_code : checkBoxArr){
+            mypageService.deleteReply(code, reply_code);
+        }
+        return "redirect:/triplan/mypage/reply";
     }
 
 }

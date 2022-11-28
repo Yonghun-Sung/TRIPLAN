@@ -15,7 +15,7 @@ public interface MypageMapper {
 
     Integer getLikeCount(String code);
 
-    Integer getPlaceCount(); //좋아요한 여행일정의 장소개수 알려고
+    /*Integer getPlaceCount(); //좋아요한 여행일정의 장소개수 알려고*/
 
     //나의 댓글
     List<ReplyVo> getAllReplies(String code);
@@ -44,11 +44,12 @@ public interface MypageMapper {
     void updateTitle(String title, Integer code);
 
     //나의 일정 삭제
-    void deletePlans(Integer code);
+    void deletePlans(Integer code);//plan_code
 
-    //좋아요한 일정 삭제
+    //체크한 좋아요한 일정 삭제
     void deleteLike(String code, Integer plan_code);
     /*    Integer updatePlanTitle(@Param("plan") PlanVo plan);
-
     Integer insertToPlanDeleted(@Param("delete_plan") )*/
+    //체크한 댓글 삭제
+    void deleteReply(String code, Integer reply_code);
 }

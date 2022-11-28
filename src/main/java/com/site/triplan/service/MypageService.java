@@ -36,9 +36,9 @@ public class MypageService {
         return mypageMapper.getAllLikePlans(code);
     }
 
-    public Integer getPlaceNum() {
+    /*public Integer getPlaceNum() {
         return mypageMapper.getPlaceCount();
-    }
+    }*/
 
     public UserVo getMyProfile(String id) {
         return mypageMapper.getUserProfile(id);
@@ -102,4 +102,12 @@ public class MypageService {
     public void deleteLike(String code, Integer plan_code) {
         mypageMapper.deleteLike(code, plan_code);
     }
+
+    //선택한 댓글 삭제
+    public void deleteReply(String code, Integer reply_code) {
+        mypageMapper.deleteReply(code, reply_code);
+    }
+
+
+
 }

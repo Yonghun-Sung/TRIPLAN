@@ -137,7 +137,79 @@
                 </div>
             </div>
         </div>-->
-        {{>user_mypage_header}}
+        <div class="container" data-aos="fade-up">
+            <div class="col-lg-12" data-aos="fade-up" data-aos-delay="400">
+                <div class="sidebar">
+                    <!--프로필-->
+                    <div class="top-container">
+                        <div class="profilePhotoContainer">
+                            <div class="profilePhoto-text" id="profilePhoto">{{firstletterNickname}}</div> <!--그냥 정적으로 이 라고 써놓음-->
+                        </div>
+                        <div class="text">{{userprofile.nickname}}</div>
+                        <button class="btn-normal" onclick="location.href='/triplan/myprofile'">프로필 수정</button>
+                    </div>
+                    <!--나의 일정, 댓글, 좋아요한 글 인덱스 버튼-->
+                    <div class="row">
+                        <div class="index-section">
+                            <!--나의 일정-->
+                            <div class="index-circle" onclick="location.href='/triplan/mypage'">
+                                <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
+                                    <b>나의 일정</b>
+                                </h6>
+                                <div>
+                                    <h4 style="line-height: 1; font-weight: 700" id="myPlan">{{plancount}}</h4><!--내가 정적으로 걍 6넣음-->
+                                </div>
+                            </div>
+                            <!--나의 댓글-->
+                            <div class="index-circle" onclick="location.href='/triplan/mypage/reply'">
+                                <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
+                                    <b>나의 댓글</b>
+                                </h6>
+                                <div>
+                                    <h4 style="line-height: 1; font-weight: 700" id="myReply">{{replycount}}</h4><!--내가 정적으로 걍 5넣음-->
+                                </div>
+                            </div>
+                            <!--좋아요한 일정-->
+                            <div class="index-circle" onclick="location.href='/triplan/mypage/like'">
+                                <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
+                                    <b>좋아요한 일정</b>
+                                </h6>
+                                <div>
+                                    <h4 style="line-height: 1; font-weight: 700" id="myLike">{{likecount}}</h4><!--내가 정적으로 걍 10넣음-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--"나의 댓글"-->
+                    <div class="section-title-container">
+                        <h3 class="sidebar-title-rep-like"> <!--css추가-->
+                            <b>나의 댓글</b>
+                        </h3>
+                    </div>
+                    <!--&lt;!&ndash;삭제 버튼&ndash;&gt;
+                    <div class="delete-buttonbox">
+                        &lt;!&ndash;<button type="button" class="btn btn-outline-primary">선택삭제</button>&ndash;&gt;
+                        <button type="button" class="btn btn-outline-primary" id="pick-btn">전체선택</button>
+
+                        <button type="button" class="btn btn-primary" id="delete-btn">삭제</button>
+                    </div>-->
+
+                    <!--삭제버튼-->
+                    <div class="delete_buttonBox">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="all">
+                            <label class="form-check-label" for="all">
+                                <!--Default checkbox-->
+                            </label>
+                            <button type="button" class="btn btn-primary reply-delete-btn" id="delete-btn">삭제</button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
         <!--<div style="height: 15px;"></div>&lt;!&ndash;삭제버튼 물려서 포인터눌리는거 없어지길래 아예 아래 container랑 간격 띄울려고 &ndash;&gt;-->
         <div class="container" data-aos="fade-up" data-aos-delay="400"><!--내 댓글들-->
 
@@ -152,8 +224,8 @@
                         {{#replies}}
                         <div class="col-lg-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name = "cb1" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
+                                <input class="form-check-input reply-cb" type="checkbox" name = "cb1" data-code='{{code}}'>
+                                <label class="form-check-label">
                                     <!--Default checkbox-->
                                 </label>
                             </div>

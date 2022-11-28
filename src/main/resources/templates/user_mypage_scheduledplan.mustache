@@ -170,8 +170,17 @@
                                                 <div class="small-title">
                                                     여행이름
                                                     <div class="uk-inline">
-                                                        <a class="uk-form-icon uk-form-icon-flip uk-icon" uk-icon="icon: file-edit" onclick="inputTravelName(0)" id="inputTravelNameBtn_idx_0"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" d="M18.65,1.68 C18.41,1.45 18.109,1.33 17.81,1.33 C17.499,1.33 17.209,1.45 16.98,1.68 L8.92,9.76 L8,12.33 L10.55,11.41 L18.651,3.34 C19.12,2.87 19.12,2.15 18.65,1.68 L18.65,1.68 L18.65,1.68 Z"></path><polyline fill="none" stroke="#000" points="16.5 8.482 16.5 18.5 3.5 18.5 3.5 1.5 14.211 1.5"></polyline></svg></a>
-                                                        <input class="uk-input uk-form-blank uk-form-width-medium small-text" type="text" placeholder="{{title}}" id="inputTravelName_idx_0" value="">
+                                                        <!--<a class="uk-form-icon uk-form-icon-flip uk-icon" uk-icon="icon: file-edit" onclick="inputTravelName(0)" id="inputTravelNameBtn_idx_0"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" d="M18.65,1.68 C18.41,1.45 18.109,1.33 17.81,1.33 C17.499,1.33 17.209,1.45 16.98,1.68 L8.92,9.76 L8,12.33 L10.55,11.41 L18.651,3.34 C19.12,2.87 19.12,2.15 18.65,1.68 L18.65,1.68 L18.65,1.68 Z"></path><polyline fill="none" stroke="#000" points="16.5 8.482 16.5 18.5 3.5 18.5 3.5 1.5 14.211 1.5"></polyline></svg></a>
+                                                        <input class="uk-input uk-form-blank uk-form-width-medium small-text" type="text" placeholder="{{title}}" id="inputTravelName_idx_0" value="">-->
+
+                                                        <input type="hidden" id="title-edit-code" value="{{code}}" />
+                                                        <input class="Title uk-input uk-form-blank uk-form-width-medium small-text" type="text" id="inputTravelName_idx_0" value="{{title}}"><!--placeholder=괄호두개title-->
+                                                        <a style="margin:0 3px; text-decoration: none; cursor: pointer;" class="inputTravelName_idx_a" data-code='{{code}}'>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                                            </svg></a>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -186,13 +195,13 @@
                                             <div class="uk-width-1-2 info-container-bottom uk-first-column">
                                                 <div class="small-title">
                                                     여행일자
-                                                    <span class="small-text">{{start_dt}}  -  {{end_dt}}</span>
+                                                    <span class="small-text">{{start_dt}}    -    {{end_dt}}</span>
                                                 </div>
                                             </div>
                                             <div class="uk-width-1-2 info-container-bottom">
                                                 <div class="small-title">
                                                     선택장소
-                                                    <span class="small-text">{{placecount}}</span>
+                                                    <span class="small-text">{{place_num}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -201,7 +210,7 @@
                                 <!--                        <div class="uk-grid uk-grid-stack" uk-grid style="margin: 0; height: 40%">&lt;!&ndash;아래칸&ndash;&gt;
 
                                                         </div>-->
-                                <div class="uk-grid uk-grid-stack" uk-grid="" style="margin: 0; height: 40%"> <!--아래칸: 일정삭제 수정 동행자-->
+                                <!--<div class="uk-grid uk-grid-stack" uk-grid="" style="margin: 0; height: 40%"> &lt;!&ndash;아래칸: 일정삭제 수정 동행자&ndash;&gt;
                                     <div class="uk-width-expand@m info-container uk-first-column">
                                         <div class="uk-text-center uk-grid uk-width-1-1 uk-padding-small" uk-grid="">
                                             <div class="uk-width-1-4 uk-first-column">
@@ -222,6 +231,34 @@
                                                 <div>
                                                     <button class="basic-btn uk-button uk-button-large uk-card-default" uk-toggle="target:#modal-center_idx_0" onclick="modalCenterBtn(0)" aria-expanded="false">
                                                         일정 공유
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>-->
+                                <div class="uk-grid uk-grid-stack" uk-grid="" style="margin: 0; height: 40%"> <!--아래칸: 일정삭제 수정 동행자-->
+                                    <div class="uk-width-expand@m info-container uk-first-column">
+                                        <div class="uk-grid">
+                                            <div class="bottom-btn">
+                                                <div class="three-btn">
+                                                    <button class="threeplan-btn-first" id="modifySavedRoute_idx_0">
+                                                        일정 수정
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="bottom-btn">
+                                                <div class="three-btn">
+                                                    <!--<button class="threeplan-btn" id="deleteSavedBtn_0" onclick="deleteSavedRoute(0)">-->
+                                                    <button class="threeplan-btn deleteSavedBtn" data-code='{{code}}'><!--onclick="deletePlan();" id랑 value삭제-->
+                                                        일정 삭제
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="bottom-btn">
+                                                <div class="three-btn">
+                                                    <button class="threeplan-btn" uk-toggle="target:#modal-center_idx_0" onclick="modalCenterBtn(0)" aria-expanded="false">
+                                                        동행자 추가
                                                     </button>
                                                 </div>
                                             </div>
