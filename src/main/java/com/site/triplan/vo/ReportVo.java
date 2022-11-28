@@ -14,10 +14,11 @@ public class ReportVo {
     String reportedUser;
     String content;
     String reason;
+    String state;
     String dt;
     String code;
-    String reg_code;
-    String result_code;
-    String admin_code;
+    Integer reg_code;
+    Integer result_code;
+    Integer admin_code;
     String user_code;
 }

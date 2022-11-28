@@ -21,7 +21,7 @@ public interface AdminMapper {
     List<ReportVo> findUnreport();  // 미처리신고
     List<ReportVo> findReport();    // 처리신고
 
-    void processReport(ReportVo reportVo);   // 신고처리
-
+    void processReport(ReportVo reportVo);   // 미처리신고
+    void processedReport(ReportVo reportVo); // 처리내역
 
 }

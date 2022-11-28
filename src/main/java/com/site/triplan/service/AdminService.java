@@ -29,13 +29,16 @@ public class AdminService {
         return adminMapper.findReport(); }
 
 
-    public void insertReport(ReportVo reportVo){
-
-    }
 
     // 신고 처리
     public void processReport(ReportVo reportVo) {
-        reportVo.setAdmin_code("1");
+        reportVo.setAdmin_code(1);
         adminMapper.processReport(reportVo);
+    }
+
+    public void processedReport(ReportVo reportVo){
+        System.out.println(reportVo.getReg_code());
+        System.out.println(reportVo.getResult_code());
+//        adminMapper.processedReport(reportVo);
     }
 }

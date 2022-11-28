@@ -5,9 +5,7 @@ import com.site.triplan.vo.ReportVo;
 import com.site.triplan.vo.UserVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -82,4 +80,12 @@ public class AdminController {
         return "/triplan/reportUnproc";
     }
 
+    @PutMapping("/processedReport")
+    public String processedReport(ReportVo reportVo) {
+        System.out.println(reportVo.getReg_code());
+        System.out.println(reportVo.getResult_code());
+        System.out.println();
+        adminService.processedReport(reportVo);
+        return "/triplan/reportProc";
+    }
 }
