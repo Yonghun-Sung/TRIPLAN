@@ -4,15 +4,19 @@
 <mapper namespace="com.site.triplan.mapper.AdminMapper">
     <select id="findAll" resultType="com.site.triplan.vo.UserVo">
         select ui.id
-              ,ui.name
-              ,ui.nickname
-              ,(SELECT count(result_code)
-              FROM report_proc rp
-              right join report_reg rr on rp.reg_code = rr.code
-              inner join reply rpy on rr.reply_code = rpy.code
-              where ui.user_code = rpy.user_code and result_code = 1) as cnt
-              ,if(u.ban_flag = 1, '정지', '정상') as state
-              ,u.reg_dt
+               ,ui.name
+               ,ui.nickname
+               ,(SELECT count(result_code)
+               FROM report_proc rp
+               right join report_reg rr on rp.reg_code = rr.code
+               inner join reply rpy on rr.reply_code = rpy.code
+               where ui.user_code = rpy.user_code and result_code = 1) as cnt
+               ,(SELECT if(count(result_code) >= 3, '정지', '정상')
+               FROM report_proc rp
+               right join report_reg rr on rp.reg_code = rr.code
+               inner join reply rpy on rr.reply_code = rpy.code
+               where ui.user_code = rpy.user_code and result_code = 1) as state
+               ,u.reg_dt
         from user_info ui
         inner join user u on ui.user_code = u.code
         order by u.reg_dt
@@ -23,7 +27,6 @@
             ui.name,
             ui.nickname,
             rp.dt,
-            if(u.ban_flag = 1, '정지', '정상') as state,
             if(count(rp.result_code) is not null, count(rp.result_code), 0) as cnt
         from user_info ui inner join user u on ui.user_code = u.code
         left join reply rpy on u.code = rpy.user_code
