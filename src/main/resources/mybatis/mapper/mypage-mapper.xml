@@ -53,8 +53,8 @@
         UPDATE user_info SET id = '', name = '', pw ='', nickname = ''
         WHERE id=''
     </update>-->
-    <select id="getUserProfile" resultType="com.site.triplan.vo.UserVo"><!--프로필: 이메일, 이름, 닉네임-->
-        SELECT id, name, nickname FROM user_info
+    <select id="getUserProfile" resultType="com.site.triplan.vo.UserVo"><!--프로필: 이메일(세션에서), 이름, 닉네임-, 패스워드-->
+        SELECT id, name, nickname, pw, user_code FROM user_info
         WHERE id=#{id}
     </select>
     <!--<select id="getAllMyPlans" resultType="com.site.triplan.vo.PlanVo"> &lt;!&ndash;나의 일정 페이지 정보들&ndash;&gt;
@@ -111,6 +111,21 @@
     <delete id="deleteReply">
         DELETE FROM reply WHERE code=#{reply_code} AND user_code=#{code}
     </delete>
+    <update id="updateUser">
+        UPDATE user_info
+        SET nickname=#{nickname}, pw=#{pw}
+        WHERE id=#{id}
+    </update>
+    <insert id="userToDropTbl">
+        INSERT INTO drop(id, name, nickname, user_code) VALUES (#(id), #(name), #(nickname), #{code}) <!--유저코드를 넘김-->
+    </insert>
+    <delete id="dropUser">
 
-
+    </delete>
+    <select id="mateIdSearch"><!--입력받은 아이디로 검색한 -->
+        SELECT * FROM
+    </select>
+    <insert id=""> <!--동행자 테이블에 넣어줌-->
+        INSERT INTO mate() VALUES (#())
+    </insert>
 </mapper>

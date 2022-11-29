@@ -2324,10 +2324,14 @@ input#agree-terms {
   margin-top: 7%;
 }
 
-button#joininsert-btn {
+/*button#userupdate-btn {
   font-weight: 600;
   margin-top: 5%;
 }
+button#userdrop-btn {
+  font-weight: 600;
+  margin-top: 5%;
+}*/
 
 #termsOfService .mb-3, #privacyPolicy .mb-3 {
   font-size: 14px;

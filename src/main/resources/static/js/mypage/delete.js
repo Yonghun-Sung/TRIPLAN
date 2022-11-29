@@ -23,10 +23,10 @@ $('.')
 $('#all').click(function () {
     if($("input:checkbox[id='all']").prop("checked")) {
         $("input[name=cb1]").prop('checked', true);
-        } else {
+    } else {
         $("input[name=cb1]").prop('checked', false);
-        }
-    });
+    }
+});
 
 
 
@@ -150,7 +150,7 @@ $('.inputTravelName_idx_a').click(function() {
             console.log(e.responseText);
         });
 });
-//완료된 일정 삭제
+//나의 일정 삭제
 $('.threeplan-btn.deleteSavedBtn').click(function() {
     let code = $(this).data('code');
     /*let url = $(location).attr('href');*/
@@ -224,4 +224,103 @@ $('.btn.btn-primary.reply-delete-btn').click(function() {
         console.log(e.status);
         console.log(e.responseText);
     });
+});
+
+//회원정보 수정(닉네임, 비밀번호)
+$('#userupdate-btn').click(function() {
+    let nickname = $('#nickname').val();
+    alert(nickname);
+    let pw = $('#pwNew').val();
+    alert(pw);
+    $.ajax({
+        method: "PUT",
+        url: "/triplan/myprofile/update",
+        data: {
+            "nickname": nickname,
+            "pw": pw
+        }
+    }).done(function(response){
+        console.log(response);
+        console.log("success");
+        alert("회원정보가 변경되었습니다.");
+        window.location.href = "/triplan/myprofile";
+    })
+    .fail(function (e) {
+        console.log("err");
+        console.log(e.status);
+        console.log(e.responseText);
+    });
+});
+//회원탈퇴모달창-탈퇴버튼 클릭하면 id는 세션에서 받을수있어서 제외, name, nickname(마찬가지), code(마찬가지) 보내주기
+$('#modal-drop-btn').click(function() {
+   /* let id = $('#id')*/
+    let name = $('#name').val();
+    /*let nickname = $('#nickname').val();*/
+    /*let user_code = $(this).data('userprofile.user_code');*/
+    let userpw = $('#db-pw').val(); // 기존 db의 pw
+    let pwconfirm = $('.form-control.password-confirm').val(); //입력받은 pw;
+
+    if(pwconfirm == "") {
+        alert('탈퇴를 원하시면 비밀번호를 입력해주세요.');
+    } else if(userpw != pwconfirm ){
+        alert('비밀번호가 일치하지 않습니다.')
+        /*$('#exampleModal').on('hidden.bs.modal');*/
+    } else {
+        $.ajax({
+            method: "GET",
+            url: "/triplan/myprofile/drop",
+            data: {
+                /*"id" : id,*/
+                "name" : name,
+                /*"nickname": nickname,*/
+                /*"user_code": user_code*/
+                }
+            }).done(function(response){
+                console.log(response);
+                console.log("success");
+                alert("탈퇴 되었습니다.");
+                window.location.href = "/triplan/main";
+            })
+            .fail(function (e) {
+                console.log("err");
+                console.log(e.status);
+                console.log(e.responseText);
+            });
+    }
+
+/*    $.ajax({
+        method: "POST",
+        url: "/triplan/myprofile/drop",
+        data: {
+            *//*"id" : id,*//*
+            "name" : name,
+            *//*"nickname": nickname,
+            "user_code": user_code*//*
+        }
+    }).done(function(response){
+        console.log(response);
+        console.log("success");
+        alert("탈퇴 되었습니다.");
+        window.location.href = "/triplan/main";
+    })
+    .fail(function (e) {
+        console.log("err");
+        console.log(e.status);
+        console.log(e.responseText);
+    });*/
+});
+
+$('#all').click(function () {
+    if($("input:checkbox[id='all']").prop("checked")) {
+        $("input[name=cb1]").prop('checked', true);
+    } else {
+        $("input[name=cb1]").prop('checked', false);
+    }
+});
+
+
+$('.btn.btn-primary.mate-search').click(function() {
+    let mateEmail = $('.form-control.mate-email').val();
+    let
+
 });

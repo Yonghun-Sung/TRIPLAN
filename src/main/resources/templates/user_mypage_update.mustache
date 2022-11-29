@@ -18,13 +18,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
-    <!-- Vendor CSS Files -->
-    <!--<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="/vendor/aos/aos.css" rel="stylesheet">
-    <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">-->
 
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -33,11 +26,10 @@
     <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
     <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
 
-    <!-- Template Main CSS File -->
-<!--    <link href="/css/user_styles.css" rel="stylesheet">-->
     <link href="/css/myprofile_styles.css" rel="stylesheet">
-    <!--<link href="/css/mypage_styles.css" rel="stylesheet">-->
-    <style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+
+<style>
     .navbar a {
         color: rgba(0, 0, 0, 0.7);
         font-weight: 600;
@@ -46,34 +38,10 @@
         color: #000 !important;
     }
 </style>
-<script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>-->
-<!--    <script>
-    $(function () {
-        $('#findpw-btn').click(function () {
-            alert('이메일이 전송되었습니다.');
-            $('#findpw-modal').modal('hide');
-        });
-    });
-</script>-->
 </head>
 <body class="page-contact">
-
-<!-- ======= Header ======= -->
 {{>user_header}}
-
-<!--
-<div class="top-container">
-    <div class="profilePhotoContainer">
-        <div class="profilePhoto-text" id="profilePhoto">이</div> &lt;!&ndash;그냥 정적으로 이 라고 써놓음&ndash;&gt;
-    </div>
-    <div class="text">이름름</div>&lt;!&ndash;여기도 정적으로 넣음&ndash;&gt;
-    <button class="btn-normal" onclick="goToMyPage()">프로필 수정</button>
-</div>
--->
-
 <main id="main">
-
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
         <div id="joinform-container" class="container position-relative">
@@ -117,18 +85,51 @@
                         <button id="joininsert-btn" class="basic-btn2">저장</button>
                     </div>-->
 
-
                 </form>
                 <div class=" text-center">
-                    <button id="userdrop-btn" class="basic-btn2" data-bs-toggle="modal" data-bs-target="#userDrop">회원탈퇴</button>
+                    <button id="button userdrop-btn" class="basic-btn2" data-bs-toggle="modal" data-bs-target="#exampleModal">회원탈퇴</button>
                     <button id="userupdate-btn" class="basic-btn2">저장</button>
                 </div>
+                <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Launch demo modal
+                </button>-->
             </div>
         </div>
     </section><!-- End Contact Section -->
 
-
-    <!-- 회원탈퇴 Modal창 -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">회원정보 탈퇴</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            사용하고 계신 계정을 탈퇴할 경우 복구가 불가능합니다.<br>탈퇴 후 회원 정보 및 서비스 이용기록은 모두 삭제되오니 신중하게 선택하여
+                            주시기 바랍니다.
+                        </div>
+                        <div class="mb-3">
+                            <label for="id" class="col-form-label">비밀번호 입력 후 탈퇴됩니다.</label>
+                            <input type="hidden" id="db-pw" value="{{userprofile.pw}}" />
+                            <input type="password" class="form-control password-confirm" id="id" placeholder="비밀번호 입력" required/>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-primary" id="modal-drop-btn" data-code="{{userprofile.user_code}}">회원 탈퇴</button>
+                </div>
+<!--                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancel-btn" onclick="location.href='/triplan/myprofile'">취소</button>
+                    <button type="button" class="btn btn-primary" id="modal-drop-btn">회원 탈퇴</button>
+                </div>-->
+            </div>
+        </div>
+    </div>
+<!--    &lt;!&ndash; 회원탈퇴 Modal창 &ndash;&gt;
     <div class="modal fade" id="#userDrop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -155,36 +156,60 @@
                 </div>
             </div>
         </div>
+    </div>-->
+
+
+
+   <!-- &lt;!&ndash;비밀번호 찾기 모달창&ndash;&gt;
+    <div class="modal fade" id="#userDrop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">회원정보 탈퇴</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="findpw-form" action="/triplan/mail" method="post">
+                        &lt;!&ndash;<div class="mb-3">
+                            <label for="email" class="col-form-label">이메일 주소</label>
+                            <input type="email" class="form-control" name="address" id="email">
+                        </div>&ndash;&gt;
+                        <div class="mb-3">
+                            사용하고 계신 계정을 탈퇴할 경우 복구가 불가능합니다.<br>탈퇴 후 회원 정보 및 서비스 이용기록은 모두 삭제되오니 신중하게 선택하여
+                            주시기 바랍니다.
+                        </div>
+                        <div class="mb-3">
+                            <label for="id" class="col-form-label">비밀번호 입력 후 탈퇴됩니다.</label>
+                            <input type="password" class="form-control" id="id" placeholder="비밀번호 입력" required/>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancel-btn" onclick="location.href='/triplan/myprofile'">취소</button>
+                    <button type="button" class="btn btn-primary" id="modal-drop-btn">회원 탈퇴</button>
+                </div>
+            </div>
+        </div>
     </div>
+-->
 
-</main><!-- End #main -->
-
-<!-- ======= Footer ======= -->
+</main>
 {{>user_footer}}
-
 <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <div id="preloader"></div>
 
-<!-- Vendor JS Files-->
-<!--<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <script src="/vendor/aos/aos.js"></script>
 <script src="/vendor/glightbox/js/glightbox.min.js"></script>
 <script src="/vendor/swiper/swiper-bundle.min.js"></script>
-<script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-<script src="/vendor/php-email-form/validate.js"></script>-->
 
-
-
-<!--<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
-<script src="/vendor/aos/aos.js"></script>
-<script src="/vendor/glightbox/js/glightbox.min.js"></script>
-<script src="/vendor/swiper/swiper-bundle.min.js"></script>
-<!--<script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>-->
 
 <!-- Template Main JS File -->
 <script src="/js/user/main.js"></script>
 <script src="/js/mypage/delete.js"></script>
-</body>
 
+</body>
 </html>

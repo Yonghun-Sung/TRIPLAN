@@ -108,6 +108,14 @@ public class MypageService {
         mypageMapper.deleteReply(code, reply_code);
     }
 
+    //회원정보 수정(닉네임, 비밀번호)
+    public void updateUser(String nickname, String pw, String id) {
+        mypageMapper.updateUser(nickname, pw, id);
+    }
 
 
+    // 탈퇴버튼 -> 회원탈퇴 테이블로 이동
+    public void userToDropTbl(String id, String name, String nickname, Integer code) {
+        mypageMapper.userToDropTbl(id, name, nickname, code);
+    }
 }

@@ -52,4 +52,8 @@ public interface MypageMapper {
     Integer insertToPlanDeleted(@Param("delete_plan") )*/
     //체크한 댓글 삭제
     void deleteReply(String code, Integer reply_code);
+    //회원정보 수정(닉네임, 패스워드) 아이디필요
+    void updateUser(String nickname, String pw, String id);
+    // 회원탈퇴테이블로 옮기기
+    void userToDropTbl(String id, String name, String nickname, Integer code);
 }

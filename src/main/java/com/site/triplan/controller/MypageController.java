@@ -212,26 +212,6 @@ public class MypageController {
         return view;
     }
 
-    @RequestMapping("/myprofile")
-    public String myprofile(Model model, HttpServletRequest request) {
-        String view = "";
-        HttpSession session = request.getSession();
-        String id = (String)session.getAttribute("session_id");
-//        String code = String.valueOf(session.getAttribute("session_id"));
-
-        if (id == null) {
-            model.addAttribute("errCode", "2");
-            view = "redirect:/triplan/loginform?errCode=2";
-        } else {
-            UserVo userProfile = mypageService.getMyProfile(id);
-            Character nicknameFirst = userProfile.getNickname().charAt(0);
-            model.addAttribute("userprofile", userProfile);
-            model.addAttribute("firstletterNickname", nicknameFirst);//받아온 UserVo에서 닉네임만 string으로 넘김,[0]인덱스 한글자만 보여주려고
-            view = "user_profile_edit";
-        }
-        return view;
-    }
-
     @RequestMapping("/mypage/reply")
     public String mypagereply(Model model, HttpServletRequest request) {
         String view = "";
@@ -290,17 +270,51 @@ public class MypageController {
         return view;
     }
 
-//    @PostMapping("/mypage/reply/delete")
-//    public String deleteReply(@RequestParam Integer id){
-//        mypageService.deleteReply(id);
-//        return "redirect:/mypage/reply";
-//    }
-//    //나의 일정 삭제
-//    @PostMapping("/mypage/plan/delete/{id}")
-//    public String deletePlans(@PathVariable Integer id) {
-//        mypageService.deleteMyPlans(id);
-//        return "redirect:/mypage";
-//    }
+    //회원정보 수정
+    @RequestMapping("/myprofile")
+    public String myprofile(Model model, HttpServletRequest request) {
+        String view = "";
+        HttpSession session = request.getSession();
+        String id = (String)session.getAttribute("session_id");
+//        String code = String.valueOf(session.getAttribute("session_id"));
+
+        if (id == null) {
+            model.addAttribute("errCode", "2");
+            view = "redirect:/triplan/loginform?errCode=2";
+        } else {
+            UserVo userProfile = mypageService.getMyProfile(id);
+            Character nicknameFirst = userProfile.getNickname().charAt(0);
+            model.addAttribute("userprofile", userProfile);
+            model.addAttribute("firstletterNickname", nicknameFirst);//받아온 UserVo에서 닉네임만 string으로 넘김,[0]인덱스 한글자만 보여주려고
+
+
+            /*view = "user_profile_edit";*/
+            view="user_mypage_update";
+        }
+        return view;
+    }
+    @PostMapping("/myprofile")
+    public String myprofilePost(Model model, HttpServletRequest request) {
+        String view = "";
+        HttpSession session = request.getSession();
+        String id = (String)session.getAttribute("session_id");
+//        String code = String.valueOf(session.getAttribute("session_id"));
+
+        if (id == null) {
+            model.addAttribute("errCode", "2");
+            view = "redirect:/triplan/loginform?errCode=2";
+        } else {
+            UserVo userProfile = mypageService.getMyProfile(id);
+            Character nicknameFirst = userProfile.getNickname().charAt(0);
+            model.addAttribute("userprofile", userProfile);
+            model.addAttribute("firstletterNickname", nicknameFirst);//받아온 UserVo에서 닉네임만 string으로 넘김,[0]인덱스 한글자만 보여주려고
+
+
+            /*view = "user_profile_edit";*/
+            view="user_mypage_update";
+        }
+        return view;
+    }
 
 
     //여행 제목 수정
@@ -353,6 +367,38 @@ public class MypageController {
         }
         return "redirect:/triplan/mypage/reply";
     }
+
+    // 회원정보 수정
+    @ResponseBody
+    @PutMapping("/myprofile/update")
+    public String replyDelete(HttpServletRequest request, @RequestParam String nickname, @RequestParam String pw) throws Exception {
+        System.out.println("controller start");
+        HttpSession session = request.getSession();
+        String id = (String)session.getAttribute("session_id");
+/*        String code = String.valueOf(session.getAttribute("session_code"));*/
+        mypageService.updateUser(nickname, pw, id);
+        session.setAttribute("session_nickname", nickname);   // 세션에 새로 전달받은 nickname 넣음
+        return "redirect:/triplan/myprofile";
+    }
+
+    //회원 탈퇴
+    @GetMapping("myprofile/drop")
+    public @ResponseBody String dropUser(HttpServletRequest request, @RequestParam String name) {
+        System.out.println("dropUser controller start");
+        HttpSession session = request.getSession();
+        System.out.println(session.getAttribute("session_code").getClass().getName());
+
+
+        String id = (String)session.getAttribute("session_id");
+        String nickname = (String)session.getAttribute("session_nickname");
+        Integer code = (Integer)session.getAttribute("session_code");
+        /*String name2 = String.valueOf(name);*/
+       /* String code = String.valueOf(session.getAttribute("session_code"));*/
+
+        mypageService.userToDropTbl(id, name, nickname, code);
+        return "redirect:/triplan/main";
+    }
+
 
 }
 
