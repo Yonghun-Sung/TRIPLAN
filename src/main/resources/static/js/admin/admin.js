@@ -55,7 +55,7 @@ $('#report-proc-modal').on('show.bs.modal', function(event) {
         })
         .done(function(response){
             console.log("put success!");
-            window.location.href = "/triplan/reportProc";
+            window.location.href = "/triplan/admin/reportProc";
         });
     });
 });

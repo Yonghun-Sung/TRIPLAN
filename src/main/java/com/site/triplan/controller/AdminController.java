@@ -29,7 +29,7 @@ public class AdminController {
         return "admin_loginform";
     }
 
-    @RequestMapping("/adminInfo")                                       // 관리자 비밀번호 변경 -> 아직 X
+    @RequestMapping("/admin/adminInfo")                                       // 관리자 비밀번호 변경 -> 아직 X
     public String admin_myinfo() {
         return "admin_myinfo";
     }
@@ -41,35 +41,35 @@ public class AdminController {
         return "admin_main";
     }
 
-    @RequestMapping("/memberAll")                                       // 전체회원
+    @RequestMapping("/admin/memberAll")                                       // 전체회원
     public String admin_member_all(Model model) {
             List<UserVo> userVoList = adminService.postAllUser();
             model.addAttribute("posts", userVoList);    
         return "admin_member_all";
     }
 
-    @RequestMapping("/memberBan")                                       // 영구정지회원
+    @RequestMapping("/admin/memberBan")                                       // 영구정지회원
     public String admin_member_ban(Model model) {
         List<UserVo> userVoList= adminService.postBanUser();
         model.addAttribute("posts", userVoList);    
         return "admin_member_ban";
     }
 
-    @RequestMapping("/memberDrop")                                      // 탈퇴회원
+    @RequestMapping("/admin/memberDrop")                                      // 탈퇴회원
     public String admin_member_drop(Model model) {
         List<UserVo> userVoList = adminService.postDropUser();
         model.addAttribute("posts", userVoList);    
         return "admin_member_drop";
     }
 
-    @RequestMapping("/reportUnproc")                                    // 미처리신고
+    @RequestMapping("/admin/reportUnproc")                                    // 미처리신고
     public String admin_report_unproc(Model model) {
         List<ReportVo> reportVoList = adminService.postUnreport();
         model.addAttribute("unreport", reportVoList);   
         return "admin_report_unproc";
     }
 
-    @RequestMapping("/reportProc")                                      // 처리내역
+    @RequestMapping("/admin/reportProc")                                      // 처리내역
     public String admin_report_proc(Model model) {
         List<ReportVo> reportVoList = adminService.postReport();
         model.addAttribute("report",reportVoList);      
@@ -79,13 +79,13 @@ public class AdminController {
     @PostMapping("/processReport")                                      // 미처리신고 - 신고 승인
     public String processReport(ReportVo reportVo) {
         adminService.processReport(reportVo);
-        return "/triplan/reportUnproc";
+        return "/triplan/admin/reportUnproc";
     }
 
     @PutMapping("/processedReport")                                     // 처리내역 - 신고 철회
     public String processedReport(@RequestBody ReportVo reportVo) {
         adminService.processedReport(reportVo);
-        return "/triplan/reportProc";
+        return "/triplan/admin/reportProc";
     }
 
     @RequestMapping(value = "weeklynewbie", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
