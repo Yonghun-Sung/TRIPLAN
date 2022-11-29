@@ -92,11 +92,11 @@ public class AdminController {
 
     @RequestMapping(value = "newbie", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
     public @ResponseBody String monthlyNewbie(Locale locale, Model model){
-        System.out.println("in");
+//        System.out.println("in");
         Gson gson = new Gson();
         List<UserVo> userVoList = adminService.monthlyNewbie();
         String ret = gson.toJson(userVoList);
-        System.out.println(ret);
+//        System.out.println(ret);
         return ret;
     }
 }

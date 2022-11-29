@@ -7,8 +7,7 @@
     var count = [];
 
     $.getJSON("http://localhost:8082/triplan/newbie", function(data){
-        alert(data);
-        //alert(jQuery.Stringify(data));
+<!--        alert(data);-->
 
         $.each(data, function(inx, obj){
             time.push(obj.date);
@@ -24,12 +23,11 @@
 
 		datasets : [
 			{	label : "신규 회원",
-				fillColor : "rbga(151,187,205,0.2)",
-				strokeColor : "rbga(151,187,205,1)",
-				pointColor : "rbga(151,187,205,1)",
-				pointStrokeColor : "#fff",
-				pointHighlightFill : "#fff",
-				pointHighlightStroke : "rbga(151,187,205,1)",
+                backgroundColor: "rgba(2,117,216,0.2)",
+                borderColor: "rgba(2,117,216,1)",
+                pointBackgroundColor: "rgba(2,117,216,1)",
+                pointBorderColor: "rgba(255,255,255,0.8)",
+                pointHoverBackgroundColor: "rgba(2,117,216,1)",
 				data : count
 		    }
 			        ]
