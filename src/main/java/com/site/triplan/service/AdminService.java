@@ -4,6 +4,8 @@ import com.site.triplan.mapper.AdminMapper;
 import com.site.triplan.vo.ReportVo;
 import com.site.triplan.vo.UserVo;
 import org.apache.catalina.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,5 +50,6 @@ public class AdminService {
     public List<UserVo> montlyNewbie(){
         return adminMapper.monthlyNewbie();
     }
+
 
 }

@@ -59,12 +59,12 @@
             <div id="login-container" class="container position-relative">
                 <h2 id="title">로그인</h2>
                 <div class="row gy-4 d-flex justify-content-end">
-                    <form action="" method="post" role="form" class="php-email-form">
+                    <form action="/triplan/login_proc" method="post">
                         <div class="mb-3">
-                            <input type="email" class="form-control" id="id" placeholder="이메일을 입력해주세요.">
+                            <input type="email" name="username" class="form-control" id="id" placeholder="이메일을 입력해주세요.">
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control" id="pw" placeholder="비밀번호를 입력해주세요.">
+                            <input type="password" name="password" class="form-control" id="pw" placeholder="비밀번호를 입력해주세요.">
                         </div>
                         <a id="forget-pw" href="#!" data-bs-toggle="modal" data-bs-target="#findpw-modal">비밀번호를 잊으셨나요?</a>
                         <div class="text-center">
