@@ -25,18 +25,22 @@
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-chart-area me-1"></i>
-                            방문자 현황
+                            주간 신규 회원
                         </div>
-                        <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                        <div class="card-body">
+                            <canvas id="myLineChart" width="100%" height="40"></canvas>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-6">
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-chart-bar me-1"></i>
-                            신규 회원수
+                            월별 신규 회원
                         </div>
-                        <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                        <div class="card-body">
+                            <canvas id="myBarChart" width="100%" height="40"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,83 +54,22 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>신고내역</th>
+                            <th>신고자</th>
+                            <th>신고내용</th>
                             <th>신고사유</th>
                             <th>접수일</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>yh@naver.com</td>
-                            <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                            <td>무단광고</td>
-                            <td>2022-10-31</td>
-                        </tr>
-                        <tr>
-                            <td>jy@gmail.com</td>
-                            <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                            <td>욕설/비속어</td>
-                            <td>2022-11-01</td>
-                        </tr>
-                        <tr>
-                            <td>jy@naver.com</td>
-                            <td>[댓글]XXXXXXXXXXXX</td>
-                            <td>이용방해</td>
-                            <td>2022-11-03</td>
-                        </tr>
-                        <tr>
-                            <td>sg@gmail.com</td>
-                            <td>[게시글]XXXXXXXXXXXXX</td>
-                            <td>무단광고</td>
-                            <td>2022-11-03</td>
-                        </tr>
-                        <tr>
-                            <td>yh@naver.com</td>
-                            <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                            <td>무단광고</td>
-                            <td>2022-11-04</td>
-                        </tr>
-                        <tr>
-                            <td>jy@gmail.com</td>
-                            <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                            <td>욕설/비속어</td>
-                            <td>2022-11-05</td>
-                        </tr>
-                        <tr>
-                            <td>jy@naver.com</td>
-                            <td>[댓글]XXXXXXXXXXXX</td>
-                            <td>이용방해</td>
-                            <td>2022-11-07</td>
-                        </tr>
-                        <tr>
-                            <td>sg@gmail.com</td>
-                            <td>[게시글]XXXXXXXXXXXXX</td>
-                            <td>무단광고</td>
-                            <td>2022-11-07</td>
-                        </tr><tr>
-                            <td>yh@naver.com</td>
-                            <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                            <td>무단광고</td>
-                            <td>2022-11-09</td>
-                        </tr>
-                        <tr>
-                            <td>jy@gmail.com</td>
-                            <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                            <td>욕설/비속어</td>
-                            <td>2022-11-11</td>
-                        </tr>
-                        <tr>
-                            <td>jy@naver.com</td>
-                            <td>[댓글]XXXXXXXXXXXX</td>
-                            <td>이용방해</td>
-                            <td>2022-11-12</td>
-                        </tr>
-                        <tr>
-                            <td>sg@gmail.com</td>
-                            <td>[게시글]XXXXXXXXXXXXX</td>
-                            <td>무단광고</td>
-                            <td>2022-11-13</td>
-                        </tr>
+                        {{#unreport}}
+                            <tr>
+                                <td>{{reportedUser}}</td>
+                                <td>{{reportUser}}</td>
+                                <td>[댓글] {{content}}</td>
+                                <td>{{reason}}</td>
+                                <td>{{dt}}</td>
+                            </tr>
+                        {{/unreport}}
                         </tbody>
                     </table>
                 </div>
@@ -149,8 +92,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="/js/admin/scripts.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<script src="/demo/chart-area-demo.js"></script>
-<script src="/demo/chart-bar-demo.js"></script>
+<!--table-->
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
@@ -162,149 +104,11 @@
                     ordering: true,
 	                info: false,
 	                paging: true,
-	                order: [ [ 3, "asc" ] ]
+	                order: [ [ 3, "desc" ] ]
                 });
             }   );
-        </script>
-<script>
-            $(document).ready(function(){
-                $("#datatablesSimple2").DataTable({
-                    lengthChange: false,
-	                searching: true,
-                    ordering: true,
-	                info: false,
-	                paging: true,
-	                order: [ [ 3, "asc" ] ]
-                });
-            }   );
-        </script>
-        <title>TRIPLAN_ADMIN</title>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
-        <!--HEADER-->
-        {{>admin_bar}}
-            <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                        <ol class="breadcrumb mb-4">
-                        </ol>
-                        <div class="row">
-                                        방문자 현황
-                                        신규 회원수
-                                미처리신고
-                            </div>
-                            <div class="card-body">
-                                <table id="datatablesSimple" class="table table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>신고내역</th>
-                                        <th>신고사유</th>
-                                        <th>접수일</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>yh@naver.com</td>
-                                        <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                                        <td>무단광고</td>
-                                        <td>2022-10-31</td>
-                                    </tr>
-                                    <tr>
-                                        <td>jy@gmail.com</td>
-                                        <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                                        <td>욕설/비속어</td>
-                                        <td>2022-11-01</td>
-                                    </tr>
-                                    <tr>
-                                        <td>jy@naver.com</td>
-                                        <td>[댓글]XXXXXXXXXXXX</td>
-                                        <td>이용방해</td>
-                                        <td>2022-11-03</td>
-                                    </tr>
-                                    <tr>
-                                        <td>sg@gmail.com</td>
-                                        <td>[게시글]XXXXXXXXXXXXX</td>
-                                        <td>무단광고</td>
-                                        <td>2022-11-03</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yh@naver.com</td>
-                                        <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                                        <td>무단광고</td>
-                                        <td>2022-11-04</td>
-                                    </tr>
-                                    <tr>
-                                        <td>jy@gmail.com</td>
-                                        <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                                        <td>욕설/비속어</td>
-                                        <td>2022-11-05</td>
-                                    </tr>
-                                    <tr>
-                                        <td>jy@naver.com</td>
-                                        <td>[댓글]XXXXXXXXXXXX</td>
-                                        <td>이용방해</td>
-                                        <td>2022-11-07</td>
-                                    </tr>
-                                    <tr>
-                                        <td>sg@gmail.com</td>
-                                        <td>[게시글]XXXXXXXXXXXXX</td>
-                                        <td>무단광고</td>
-                                        <td>2022-11-07</td>
-                                    </tr><tr>
-                                        <td>yh@naver.com</td>
-                                        <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                                        <td>무단광고</td>
-                                        <td>2022-11-09</td>
-                                    </tr>
-                                    <tr>
-                                        <td>jy@gmail.com</td>
-                                        <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                                        <td>욕설/비속어</td>
-                                        <td>2022-11-11</td>
-                                    </tr>
-                                    <tr>
-                                        <td>jy@naver.com</td>
-                                        <td>[댓글]XXXXXXXXXXXX</td>
-                                        <td>이용방해</td>
-                                        <td>2022-11-12</td>
-                                    </tr>
-                                    <tr>
-                                        <td>sg@gmail.com</td>
-                                        <td>[게시글]XXXXXXXXXXXXX</td>
-                                        <td>무단광고</td>
-                                        <td>2022-11-13</td>
-                                    </tr>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; TRIPLAN 2022</div>
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
-        <script>
-            $(document).ready(function(){
-                $("#datatablesSimple").DataTable({
-                    lengthChange: false,
-	                searching: true,
-                    ordering: true,
-	                info: false,
-	                paging: true,
-	                order: [ [ 3, "asc" ] ]
-                });
-            }   );
-        </script>
-        <script>
-            $(document).ready(function(){
-                $("#datatablesSimple2").DataTable({
-                    lengthChange: false,
-	                searching: true,
-                    ordering: true,
-	                info: false,
-	                paging: true,
-	                order: [ [ 3, "asc" ] ]
-                });
-            }   );
-        </script>
+</script>
+{{>admin_LineChart}}
+{{>admin_BarChart}}
 </body>
 </html>

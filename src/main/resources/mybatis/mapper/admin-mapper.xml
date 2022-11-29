@@ -3,8 +3,129 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.site.triplan.mapper.AdminMapper">
     <select id="findAll" resultType="com.site.triplan.vo.UserVo">
-        SELECT *
-        FROM user_info
-        ORDER BY id DESC
+        select ui.id
+               ,ui.name
+               ,ui.nickname
+               ,(SELECT count(result_code)
+               FROM report_proc rp
+               right join report_reg rr on rp.reg_code = rr.code
+               inner join reply rpy on rr.reply_code = rpy.code
+               where ui.user_code = rpy.user_code and result_code = 1) as cnt
+               ,(SELECT if(count(result_code) >= 3, '정지', '정상')
+               FROM report_proc rp
+               right join report_reg rr on rp.reg_code = rr.code
+               inner join reply rpy on rr.reply_code = rpy.code
+               where ui.user_code = rpy.user_code and result_code = 1) as state
+               ,u.reg_dt
+        from user_info ui
+        inner join user u on ui.user_code = u.code
+        order by u.reg_dt
     </select>
+    <select id="findBan" resultType="com.site.triplan.vo.UserVo">
+        select
+            ui.id,
+            ui.name,
+            ui.nickname,
+            rp.dt,
+            if(count(rp.result_code) is not null, count(rp.result_code), 0) as cnt
+        from user_info ui inner join user u on ui.user_code = u.code
+        left join reply rpy on u.code = rpy.user_code
+        left join report_reg rr on rpy.code = rr.reply_code
+        left join report_proc rp on rr.code = rp.reg_code
+        where rp.result_code = 1
+        group by ui.id
+        having cnt >= 3
+        order by rp.dt;
+    </select>
+    <select id="findDrop" resultType="com.site.triplan.vo.UserVo">
+        select
+            d.id,
+            d.name,
+            d.nickname,
+            d.dt,
+            if(d.code is not null, '탈퇴', '정상') as state,
+            (SELECT count(result_code)
+            FROM report_proc rp
+            right join report_reg rr on rp.reg_code = rr.code
+            inner join reply rpy on rr.reply_code = rpy.code
+            where d.user_code = rpy.user_code and result_code = 1) as cnt
+        from user u join `drop` d on u.code = d.user_code
+        left join reply rpy on u.code = rpy.user_code
+        left join report_reg rr on rpy.code = rr.reply_code
+        left join report_proc rp on rr.code = rp.reg_code
+        group by d.id
+        order by u.reg_dt;
+    </select>
+    <select id="findUnreport" resultType="com.site.triplan.vo.ReportVo">
+        select
+            (select name
+            from user_info
+            where user_code = rr.user_code) as reportUser,
+            ui.name as reportedUser,
+            rpy.content,
+            case when rr.type_code = 1 then '스팸홍보/도배'
+            when rr.type_code = 2 then '음란물'
+            when rr.type_code = 3 then '불법정보'
+            when rr.type_code = 4 then '청소년유해'
+            when rr.type_code = 5 then '욕설/혐오/차별'
+            when rr.type_code = 6 then '개인정보노출'
+            when rr.type_code = 7 then '불쾌한표현'
+            else '반려'
+            end as reason,
+            rr.dt,
+            rr.code
+        from report_proc rp
+        right join report_reg rr on rp.reg_code = rr.code
+        inner join reply rpy on rr.reply_code = rpy.code
+        inner join user_info ui on rpy.user_code = ui.user_code
+        where rp.result_code is null
+    </select>
+    <select id="findReport" resultType="com.site.triplan.vo.ReportVo">
+        select (select name
+            from user_info
+            where user_code = rr.user_code) as reportUser,
+            ui.name as reportedUser,
+            rpy.content,
+            case when rr.type_code = 1 then '스팸홍보/도배'
+            when rr.type_code = 2 then '음란물'
+            when rr.type_code = 3 then '불법정보'
+            when rr.type_code = 4 then '청소년유해'
+            when rr.type_code = 5 then '욕설/혐오/차별'
+            when rr.type_code = 6 then '개인정보노출'
+            when rr.type_code = 7 then '불쾌한표현'
+            else '반려'
+            end as reason,
+            if(rp.result_code=1, '블라인드', '공개') as state,
+            rp.dt,
+            rr.code
+        from report_proc rp
+        right join report_reg rr on rp.reg_code = rr.code
+        inner join reply rpy on rr.reply_code = rpy.code
+        inner join user_info ui on rpy.user_code = ui.user_code
+        where rp.result_code is not null
+    </select>
+    <select id="weeklyNewbie" resultType="com.site.triplan.vo.UserVo">
+        SELECT date_format(reg_dt,'%Y-%m-%d') as date
+        , count(*) as cnt
+        FROM user
+        WHERE date_format(reg_dt,'%Y-%m-%d') BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) and NOW()
+        GROUP BY date_format(reg_dt,'%Y-%m-%d')
+        ORDER BY date_format(reg_dt,'%Y-%m-%d')
+    </select>
+    <select id="monthlyNewbie" resultType="com.site.triplan.vo.UserVo">
+        SELECT date_format(reg_dt,'%Y-%m') as date
+        ,count(*) as cnt
+        FROM user
+        WHERE date_format(reg_dt,'%Y-%m-%d') BETWEEN date_sub(now(), interval 3 month) AND now()
+        GROUP BY date_format(reg_dt,'%Y-%m');
+    </select>
+    <insert id="processReport">
+        INSERT INTO report_proc(reg_code, result_code, admin_code)
+        VALUES(#{reg_code}, #{result_code}, #{admin_code})
+    </insert>
+    <update id="processedReport">
+        UPDATE report_proc
+        SET result_code=#{result_code}
+        WHERE reg_code=#{reg_code}
+    </update>
 </mapper>

@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Static Navigation - SB Admin</title>
+        <title>TRIPLAN_ADMIN</title>
         <link href="/css/admin_styles.css" rel="stylesheet" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
@@ -40,94 +40,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>yonghun@naver.com</td>
-                                        <td>성용훈</td>
-                                        <td>yongyong</td>
-                                        <td>0</td>
-                                        <td>탈퇴</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
+                                    {{#posts}}
+                                        <tr>
+                                            <td>{{id}}</td>
+                                            <td>{{name}}</td>
+                                            <td>{{nickname}}</td>
+                                            <td>{{cnt}}</td>
+                                            <td>{{state}}</td>
+                                            <td>{{dt}}</td>
+                                        </tr>
+                                    {{/posts}}
                                     </tbody>
                                 </table>
                             </div>
@@ -163,6 +85,7 @@
                     ordering: true,
 	                info: false,
 	                paging: true,
+	                order: [ [ 5, "desc" ] ]
                 });
             }   );
         </script>

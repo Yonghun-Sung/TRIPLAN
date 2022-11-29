@@ -35,9 +35,15 @@ dependencies {
 	// spring mail
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
+
 	tasks.withType(JavaCompile){
 		options.encoding = "UTF-8"
 	}
+
+	// gson
+	implementation 'com.google.code.gson:gson:2.8.7'
+
+	implementation 'org.springframework.boot:spring-boot-starter-security' //
 }
 
 tasks.named('test') {

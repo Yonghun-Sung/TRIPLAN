@@ -1,0 +1,53 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+
+<script>
+<!--    console.log("create2-1");-->
+    var monthlytime = [];
+    var monthlycount = [];
+
+    $.getJSON("http://localhost:8082/triplan/montlynewbie", function(data){
+<!--        alert(data);-->
+
+        $.each(data, function(inx, obj){
+            monthlytime.push(obj.date);
+            monthlycount.push(obj.cnt);
+	    });
+        createBarChart();
+<!--        console.log("create2-2");-->
+    });
+
+    var barChartData = {
+
+		labels : monthlytime,
+
+		datasets : [
+			{	label : "신규 회원",
+                backgroundColor: "rgba(2,117,216,0.2)",
+                borderColor: "rgba(2,117,216,1)",
+                pointBackgroundColor: "rgba(2,117,216,1)",
+                pointBorderColor: "rgba(255,255,255,0.8)",
+                pointHoverBackgroundColor: "rgba(2,117,216,1)",
+				data : monthlycount
+		    }
+			        ]
+    }
+
+    function createBarChart(){
+
+	    var ctx = document.getElementById("myBarChart").getContext("2d");
+
+	    LineChartDemo = Chart.Bar(ctx,{
+		    data : barChartData,
+		    options :{
+			    scales : {
+				    yAxes : [{
+					    ticks :{
+						    beginAtZero : true
+					    }
+				    }]
+			    }
+		    }
+	    })
+    }
+
+</script>

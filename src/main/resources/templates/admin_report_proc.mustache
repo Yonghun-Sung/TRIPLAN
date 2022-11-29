@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Static Navigation - SB Admin</title>
+        <title>TRIPLAN_ADMIN</title>
         <link href="/css/admin_styles.css" rel="stylesheet" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
@@ -31,124 +31,29 @@
                                 <table id="datatablesSimple3" class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>피신고자</th>
                                         <th>신고자</th>
-                                        <th>신고내역</th>
+                                        <th>신고내용</th>
                                         <th>상태</th>
                                         <th>신고사유</th>
-                                        <th>접수일</th>
+                                        <th>처리일</th>
                                         <th id="btn-th"> </th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    {{#report}}
                                     <tr>
-                                        <td>성용훈</td>
-                                        <td>000</td>
-                                        <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                                        <td>블라인드</td>
-                                        <td>무단광고</td>
-                                        <td>2022-10-31</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
+                                        <td>{{reportedUser}}</td>
+                                        <td>{{reportUser}}</td>
+                                        <td>[댓글] {{content}}</td>
+                                        <td>{{state}}</td>
+                                        <td>{{reason}}</td>
+                                        <td>{{dt}}</td>
+                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-proc-modal"
+                                                    data-reporteduser="{{reportedUser}}" data-reportuser="{{reportUser}}" data-content="{{content}}"
+                                                    data-reason="{{reason}}" data-dt="{{dt}}" data-code="{{code}}">관리</button></td>
                                     </tr>
-                                    <tr>
-                                        <td>김정용</td>
-                                        <td>000</td>
-                                        <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                                        <td>블라인드</td>
-                                        <td>욕설/비속어</td>
-                                        <td>2022-11-01</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>김지윤</td>
-                                        <td>000</td>
-                                        <td>[댓글]XXXXXXXXXXXX</td>
-                                        <td>블라인드</td>
-                                        <td>이용방해</td>
-                                        <td>2022-11-03</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>정성경</td>
-                                        <td>000</td>
-                                        <td>[게시글]XXXXXXXXXXXXX</td>
-                                        <td>블라인드</td>
-                                        <td>무단광고</td>
-                                        <td>2022-11-03</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>성용훈</td>
-                                        <td>000</td>
-                                        <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                                        <td>블라인드</td>
-                                        <td>무단광고</td>
-                                        <td>2022-11-05</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>김정용</td>
-                                        <td>000</td>
-                                        <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                                        <td>블라인드</td>
-                                        <td>욕설/비속어</td>
-                                        <td>2022-11-06</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>김지윤</td>
-                                        <td>000</td>
-                                        <td>[댓글]XXXXXXXXXXXX</td>
-                                        <td>블라인드</td>
-                                        <td>이용방해</td>
-                                        <td>2022-11-07</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>정성경</td>
-                                        <td>000</td>
-                                        <td>[게시글]XXXXXXXXXXXXX</td>
-                                        <td>블라인드</td>
-                                        <td>무단광고</td>
-                                        <td>2022-11-08</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>성용훈</td>
-                                        <td>000</td>
-                                        <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                                        <td>블라인드</td>
-                                        <td>무단광고</td>
-                                        <td>2022-11-09</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>김정용</td>
-                                        <td>000</td>
-                                        <td>[댓글]XXXXXXXXXXXXXXXXXX</td>
-                                        <td>블라인드</td>
-                                        <td>욕설/비속어</td>
-                                        <td>2022-11-11</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>김지윤</td>
-                                        <td>000</td>
-                                        <td>[댓글]XXXXXXXXXXXX</td>
-                                        <td>블라인드</td>
-                                        <td>이용방해</td>
-                                        <td>2022-11-12</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>정성경</td>
-                                        <td>000</td>
-                                        <td>[게시글]XXXXXXXXXXXXX</td>
-                                        <td>블라인드</td>
-                                        <td>무단광고</td>
-                                        <td>2022-11-13</td>
-                                        <td><button class="btn-basic" id="btn" data-bs-toggle="modal" data-bs-target="#report-modal">관리</button></td>
-                                    </tr>
+                                    {{/report}}
                                     </tbody>
                                 </table>
                             </div>
@@ -158,41 +63,40 @@
                     </div>
 
                     <!--관리 모달창-->
-                    <div class="modal fade" id="report-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="report-proc-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">미처리 신고</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">처리 신고</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="container">
                                         <div class="row">
-                                            <label for="id1" class="col-form-label"><b>신고자</b></label>
-                                            <div class="col-md-1" style="border: 1px solid black;
-                                                                                           width: 500px;"> col-md-1 </div>
+                                            <label for="id1" class="col-form-label"><b>피신고자</b></label>
+                                            <div class="report_modal" id="modal_reported" > </div>
                                         </div>
                                         <div class="row">
-                                            <label for="id2" class="col-form-label"><b>피신고자</b></label>
-                                            <div class="col-md-2" style="border: 1px solid black;
-                                                                                           width: 500px;"> col-md-4 </div>
+                                            <label for="id2" class="col-form-label"><b>신고자</b>  </label>
+                                            <div class="report_modal" id="modal_report" > </div>
                                         </div>
                                         <div class="row">
-                                            <label for="id3" class="col-form-label"><b>신고사유</b></label>
-                                            <div class=col-md-3" style="border: 1px solid black;
-                                                                                           width: 500px;"> col-md-4 </div>
+                                            <label for="id3" class="col-form-label"><b>처리일</b></label>
+                                            <div class="report_modal" id="modal_dt" > </div>
                                         </div>
                                         <div class="row">
-                                            <label for="id4" class="col-form-label"><b>신고내역</b></label>
-                                            <div class="col-md-4" style="border: 1px solid black;
-                                                                                           width: 500px;
-                                                                                           height: 100px;"> col-md-4 </div>
+                                            <label for="id4" class="col-form-label"><b>신고사유</b></label>
+                                            <div class="report_modal" id="modal_reason" > </div>
+                                        </div>
+                                        <div class="row">
+                                            <label for="id5" class="col-form-label"><b>신고내용</b></label>
+                                            <div class="report_modal" id="modal_content"> </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">철회</button>
-                                    <button type="button" class="btn btn-secondary">유지</button>
+                                    <button type="button" class="report-withdraw-btn btn btn-primary" value=2>철회</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">유지</button>
                                 </div>
                             </div>
                         </div>
@@ -227,11 +131,12 @@
                     ordering: true,
 	                info: false,
 	                paging: true,
-	                order: [ [ 4, "asc" ] ]
+	                order: [ [ 5, "desc" ] ]
                 });
 
                 $('#btn-th').removeClass('sorting');
             });
         </script>
+        <script src="/js/admin/admin.js"></script>
     </body>
 </html>
