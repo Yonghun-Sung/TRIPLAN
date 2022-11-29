@@ -1,8 +1,10 @@
 package com.site.triplan.controller;
 
+import com.google.gson.Gson;
 import com.site.triplan.service.AdminService;
 import com.site.triplan.vo.ReportVo;
 import com.site.triplan.vo.UserVo;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 @RequestMapping("/triplan")
@@ -34,7 +37,8 @@ public class AdminController {
     @RequestMapping("/admin")
     public String admin_main(Model model) {
         List<ReportVo> reportVoList = adminService.postUnreport();      // 미처리신고 데이터 전달
-        model.addAttribute("unreport",reportVoList);        
+        model.addAttribute("unreport",reportVoList);
+
         return "admin_main";
     }
 
@@ -81,8 +85,18 @@ public class AdminController {
     }
 
     @PutMapping("/processedReport") 
-    public String processedReport(@RequestBody ReportVo reportVo) { 
+    public String processedReport(@RequestBody ReportVo reportVo) {
         adminService.processedReport(reportVo);
         return "/triplan/reportProc";
+    }
+
+    @RequestMapping(value = "newbie", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+    public @ResponseBody String monthlyNewbie(Locale locale, Model model){
+        System.out.println("in");
+        Gson gson = new Gson();
+        List<UserVo> userVoList = adminService.monthlyNewbie();
+        String ret = gson.toJson(userVoList);
+        System.out.println(ret);
+        return ret;
     }
 }

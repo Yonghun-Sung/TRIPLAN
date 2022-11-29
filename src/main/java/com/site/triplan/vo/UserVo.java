@@ -20,4 +20,5 @@ public class UserVo {
     Integer cnt;
     Integer user_code;
 
+    String date;
 }

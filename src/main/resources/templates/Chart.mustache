@@ -1,0 +1,56 @@
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+
+<script>
+    console.log("create");
+    var time = [];
+    var count = [];
+
+    $.getJSON("http://localhost:8082/triplan/newbie", function(data){
+        alert(data);
+        //alert(jQuery.Stringify(data));
+
+        $.each(data, function(inx, obj){
+            time.push(obj.date);
+            count.push(obj.cnt);
+	    });
+        createChart();
+        console.log("create2");
+    });
+
+    var lineChartData = {
+
+		labels : time,
+
+		datasets : [
+			{	label : "신규 회원",
+				fillColor : "rbga(151,187,205,0.2)",
+				strokeColor : "rbga(151,187,205,1)",
+				pointColor : "rbga(151,187,205,1)",
+				pointStrokeColor : "#fff",
+				pointHighlightFill : "#fff",
+				pointHighlightStroke : "rbga(151,187,205,1)",
+				data : count
+		    }
+			        ]
+    }
+
+    function createChart(){
+
+	    var ctx = document.getElementById("canvas").getContext("2d");
+
+	    LineChartDemo = Chart.Line(ctx,{
+		    data : lineChartData,
+		    options :{
+			    scales : {
+				    yAxes : [{
+					    ticks :{
+						    beginAtZero : true
+					    }
+				    }]
+			    }
+		    }
+	    })
+    }
+
+</script>

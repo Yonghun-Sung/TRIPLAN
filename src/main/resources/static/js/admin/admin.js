@@ -46,7 +46,7 @@ $('#report-proc-modal').on('show.bs.modal', function(event) {
         var result_code = $(this).val();
 
         $.ajax({
-            method: "put",
+            type: "put",
             url: "/triplan/processedReport",
             data: JSON.stringify({
                 "reg_code": reg_code,

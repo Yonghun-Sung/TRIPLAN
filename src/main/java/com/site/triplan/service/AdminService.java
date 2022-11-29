@@ -3,6 +3,7 @@ package com.site.triplan.service;
 import com.site.triplan.mapper.AdminMapper;
 import com.site.triplan.vo.ReportVo;
 import com.site.triplan.vo.UserVo;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,4 +40,9 @@ public class AdminService {
     public void processedReport(ReportVo reportVo){     // 처리내역 (철회, 유지)
         adminMapper.processedReport(reportVo);
     }
+
+    public List<UserVo> monthlyNewbie(){
+        return adminMapper.monthlyNewbie();
+    }
+
 }

@@ -101,6 +101,13 @@
         inner join user_info ui on rpy.user_code = ui.user_code
         where rp.result_code is not null
     </select>
+    <select id="monthlyNewbie" resultType="com.site.triplan.vo.UserVo">
+        SELECT date_format(reg_dt,'%Y-%m-%d') as date
+        , count(*) as cnt
+        FROM user
+<!--        WHERE date_format(reg_dt,'%Y-%m-%d') BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) and NOW()-->
+        group by date_format(reg_dt,'%Y-%m-%d')
+    </select>
     <insert id="processReport">
         INSERT INTO report_proc(reg_code, result_code, admin_code)
         VALUES(#{reg_code}, #{result_code}, #{admin_code})
