@@ -25,7 +25,7 @@ public interface AdminMapper {
     void processReport(ReportVo reportVo);   // 미처리신고 신고(승인, 반려)
     void processedReport(ReportVo reportVo); // // 처리내역 (철회, 유지)
 
-    List<UserVo> weeklyNewbie();
-    List<UserVo> monthlyNewbie();
+    List<UserVo> weeklyNewbie();    // 주간 신규 회원
+    List<UserVo> monthlyNewbie();   // 월간 신규 회원
 
 }

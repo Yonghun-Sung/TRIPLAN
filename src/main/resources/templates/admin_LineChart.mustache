@@ -5,10 +5,10 @@
     var weeklytime = [];
     var weeklycount = [];
 
-    $.getJSON("http://localhost:8082/triplan/weeklynewbie", function(data){
+    $.getJSON("http://localhost:8082/triplan/weeklynewbie", function(data){     // 주간신규회원 json 리스트 받아오기
 <!--        alert(data);-->
 
-        $.each(data, function(inx, obj){
+        $.each(data, function(inx, obj){                                        // weeklytime, weeklycount에 데이터 넣기
             weeklytime.push(obj.date);
             weeklycount.push(obj.cnt);
 	    });
@@ -16,7 +16,7 @@
 <!--        console.log("create1-2");-->
     });
 
-    var lineChartData = {
+    var lineChartData = {                                                       // 차트에 데이터 넣기, 옵션
 
 		labels : weeklytime,
 
@@ -32,7 +32,7 @@
 			        ]
     }
 
-    function createLineChart(){
+    function createLineChart(){                                                // 차트 생성
 
 	    var ctx = document.getElementById("myLineChart").getContext("2d");
 
