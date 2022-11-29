@@ -114,9 +114,10 @@
     </select>
     <select id="monthlyNewbie" resultType="com.site.triplan.vo.UserVo">
         SELECT date_format(reg_dt,'%Y-%m') as date
-               ,count(*) as cnt
+        ,count(*) as cnt
         FROM user
-        group by date_format(reg_dt,'%Y-%m')
+        WHERE date_format(reg_dt,'%Y-%m-%d') BETWEEN date_sub(now(), interval 3 month) AND now()
+        GROUP BY date_format(reg_dt,'%Y-%m');
     </select>
     <insert id="processReport">
         INSERT INTO report_proc(reg_code, result_code, admin_code)
