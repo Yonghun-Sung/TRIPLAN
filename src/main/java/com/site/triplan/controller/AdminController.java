@@ -76,8 +76,7 @@ public class AdminController {
         model.addAttribute("report",reportVoList);      
         return "admin_report_proc";
     }
-
-
+    
     @PostMapping("/processReport")
     public String processReport(ReportVo reportVo) {
         adminService.processReport(reportVo);
@@ -90,11 +89,21 @@ public class AdminController {
         return "/triplan/reportProc";
     }
 
-    @RequestMapping(value = "newbie", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+    @RequestMapping(value = "weeklynewbie", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+    public @ResponseBody String weeklyNewbie(Locale locale, Model model){
+//        System.out.println("in");
+        Gson gson = new Gson();
+        List<UserVo> userVoList = adminService.weeklyNewbie();
+        String ret = gson.toJson(userVoList);
+//        System.out.println(ret);
+        return ret;
+    }
+
+    @RequestMapping(value = "montlynewbie", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
     public @ResponseBody String monthlyNewbie(Locale locale, Model model){
 //        System.out.println("in");
         Gson gson = new Gson();
-        List<UserVo> userVoList = adminService.monthlyNewbie();
+        List<UserVo> userVoList = adminService.montlyNewbie();
         String ret = gson.toJson(userVoList);
 //        System.out.println(ret);
         return ret;

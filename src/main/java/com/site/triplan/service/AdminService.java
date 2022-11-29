@@ -41,7 +41,11 @@ public class AdminService {
         adminMapper.processedReport(reportVo);
     }
 
-    public List<UserVo> monthlyNewbie(){
+    public List<UserVo> weeklyNewbie(){
+        return adminMapper.weeklyNewbie();
+    }
+
+    public List<UserVo> montlyNewbie(){
         return adminMapper.monthlyNewbie();
     }
 

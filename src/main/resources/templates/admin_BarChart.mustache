@@ -1,25 +1,24 @@
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
 
 <script>
-    console.log("create");
-    var time = [];
-    var count = [];
+<!--    console.log("create2-1");-->
+    var monthlytime = [];
+    var monthlycount = [];
 
-    $.getJSON("http://localhost:8082/triplan/newbie", function(data){
+    $.getJSON("http://localhost:8082/triplan/montlynewbie", function(data){
 <!--        alert(data);-->
 
         $.each(data, function(inx, obj){
-            time.push(obj.date);
-            count.push(obj.cnt);
+            monthlytime.push(obj.date);
+            monthlycount.push(obj.cnt);
 	    });
-        createChart();
-        console.log("create2");
+        createBarChart();
+<!--        console.log("create2-2");-->
     });
 
-    var lineChartData = {
+    var barChartData = {
 
-		labels : time,
+		labels : monthlytime,
 
 		datasets : [
 			{	label : "신규 회원",
@@ -28,17 +27,17 @@
                 pointBackgroundColor: "rgba(2,117,216,1)",
                 pointBorderColor: "rgba(255,255,255,0.8)",
                 pointHoverBackgroundColor: "rgba(2,117,216,1)",
-				data : count
+				data : monthlycount
 		    }
 			        ]
     }
 
-    function createChart(){
+    function createBarChart(){
 
-	    var ctx = document.getElementById("canvas").getContext("2d");
+	    var ctx = document.getElementById("myBarChart").getContext("2d");
 
-	    LineChartDemo = Chart.Line(ctx,{
-		    data : lineChartData,
+	    LineChartDemo = Chart.Bar(ctx,{
+		    data : barChartData,
 		    options :{
 			    scales : {
 				    yAxes : [{
