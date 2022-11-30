@@ -255,8 +255,12 @@ $('#userupdate-btn').click(function() {
 $('#modal-drop-btn').click(function() {
    /* let id = $('#id')*/
     let name = $('#name').val();
-    /*let nickname = $('#nickname').val();*/
+    let nickname = $('#nickname').val();
+    alert(name);
+    alert(nickname);
     /*let user_code = $(this).data('userprofile.user_code');*/
+    let user_code = $(this).data('code');
+    alert(user_code);
     let userpw = $('#db-pw').val(); // 기존 db의 pw
     let pwconfirm = $('.form-control.password-confirm').val(); //입력받은 pw;
 
@@ -267,14 +271,15 @@ $('#modal-drop-btn').click(function() {
         /*$('#exampleModal').on('hidden.bs.modal');*/
     } else {
         $.ajax({
-            method: "GET",
+            method: "POST",
             url: "/triplan/myprofile/drop",
-            data: {
+            data: JSON.stringify({
                 /*"id" : id,*/
                 "name" : name,
                 /*"nickname": nickname,*/
-                /*"user_code": user_code*/
-                }
+                "user_code": user_code
+                }),
+                contentType: "application/json"
             }).done(function(response){
                 console.log(response);
                 console.log("success");
@@ -310,17 +315,34 @@ $('#modal-drop-btn').click(function() {
     });*/
 });
 
-$('#all').click(function () {
-    if($("input:checkbox[id='all']").prop("checked")) {
-        $("input[name=cb1]").prop('checked', true);
-    } else {
-        $("input[name=cb1]").prop('checked', false);
-    }
-});
 
+/*
 
 $('.btn.btn-primary.mate-search').click(function() {
-    let mateEmail = $('.form-control.mate-email').val();
-    let
+    let mateEmail = $('.form-control.mate-email').val(); //입력된 이메일
+    $.ajax({
+            method: "GET",
+            url: "/triplan/addMateForm",
+            data: {
+                "mateEmail": mateEmail
+            }
+        }).done(function(response){
+            console.log(response);
+            alert("동행자 이메일을 검색합니다");
+            */
+/*window or 여기에 이제 리스트 추가이이런거..안될까/.*//*
+
+
+        })
+        .fail(function (e) {
+            console.log("err");
+            console.log(e.status);
+            console.log(e.responseText);
+        });
 
 });
+*/
+
+/*$('.threeplan-btn').click(function() {
+    $('#matemodal').modal('show');
+});*/

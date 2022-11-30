@@ -66,8 +66,8 @@
         WHERE p.user_code = 1 AND pl.day = 1 AND pl.order = 1;
     </select>-->
     <select id="getScheduledPlans" resultType="com.site.triplan.vo.PlanVo"> <!--나의 일정 : 다가오는 일정-->
-        SELECT a.name, p.title, ui.nickname, p.views, DATE_FORMAT(p.start_dt, '%Y-%m-%d'), date_format(p.end_dt, '%Y-%m-%d'), pl.photo_path, ui.id, p.write_dt, p.code,
-        (SELECT count(*) FROM place WHERE plan_code = p.code) "place_num" FROM plan p
+        SELECT a.name, p.title, ui.nickname, p.views, DATE_FORMAT(p.start_dt, '%Y-%m-%d') "start_dt", date_format(p.end_dt, '%Y-%m-%d') "end_dt", ui.id, p.write_dt, p.code, a.engname "area_engname",
+        (SELECT count(*) FROM place WHERE plan_code = p.code) "place_num", ui.user_code FROM plan p
         JOIN user u ON p.user_code = u.code
         JOIN user_info ui ON u.code = ui.user_code
         JOIN area a ON p.area_code = a.code
@@ -80,8 +80,8 @@
         <!-- &gt;= : >= -->
     </select>
     <select id="getCompletedPlans" resultType="com.site.triplan.vo.PlanVo"> <!--나의 일정 : 완료된 일정-->
-        SELECT a.name, p.title, ui.nickname, p.views, DATE_FORMAT(p.start_dt, '%Y-%m-%d'), date_format(p.end_dt, '%Y-%m-%d'), pl.photo_path, ui.id, p.write_dt, p.code,
-        (SELECT count(*) FROM place WHERE plan_code = p.code) "place_num" FROM plan p
+        SELECT a.name, p.title, ui.nickname, p.views, DATE_FORMAT(p.start_dt, '%Y-%m-%d') "start_dt", date_format(p.end_dt, '%Y-%m-%d') "end_dt", ui.id, p.write_dt, p.code, a.engname "area_engname",
+        (SELECT count(*) FROM place WHERE plan_code = p.code) "place_num", ui.user_code FROM plan p
         JOIN user u ON p.user_code = u.code
         JOIN user_info ui ON u.code = ui.user_code
         JOIN area a ON p.area_code = a.code
@@ -96,6 +96,7 @@
     <insert id="deletePlans"><!--일정삭제하면 plan_deleted에 그 일정의 code를 insert-->
         INSERT INTO plan_deleted(plan_code) VALUES (#{code})<!--plan.code-->
     </insert>
+
     <!--여행 제목 변경-->
     <update id="updateTitle">
         UPDATE plan
@@ -116,16 +117,16 @@
         SET nickname=#{nickname}, pw=#{pw}
         WHERE id=#{id}
     </update>
-    <insert id="userToDropTbl">
-        INSERT INTO drop(id, name, nickname, user_code) VALUES (#(id), #(name), #(nickname), #{code}) <!--유저코드를 넘김-->
+    <insert id="userToDropTbl" parameterType="com.site.triplan.vo.UserVo"> <!--탈퇴하면 drop테이블에 insert-->
+        <!--INSERT INTO `drop` (id, name, nickname, user_code) VALUES (#{user.id}, #{user.name}, #{user.nickname}, #{user.user_code}) -->
+        INSERT INTO `drop` (id, name, nickname, user_code) VALUES (#{id}, #{name}, #{nickname}, #{user_code}) <!--유저코드를 넘김-->
     </insert>
-    <delete id="dropUser">
+<!--    <select id="mateIdSearch" resultType="">&lt;!&ndash;입력받은 아이디로 검색한 &ndash;&gt;
+        SELECT plan_code, user_code FROM mate WHERE id=#{mateEmail}
+    </select>-->
+    <insert id="addMate"> <!--동행자 테이블에 넣어줌--> 1번김지윤회원의3번플랜 (동행자 있음)
+        INSERT INTO mate(plan_code, user_code) VALUES (#{plan_code}, #{user_code})
+        동행자 테이블에,,,,,,, 있는 여행일정
+    </insert>
 
-    </delete>
-    <select id="mateIdSearch"><!--입력받은 아이디로 검색한 -->
-        SELECT * FROM
-    </select>
-    <insert id=""> <!--동행자 테이블에 넣어줌-->
-        INSERT INTO mate() VALUES (#())
-    </insert>
 </mapper>

@@ -21,4 +21,13 @@ public class UserVo {
     Integer user_code;
 
     String date;
+
+    // 회원 탈퇴 시  drop테이블에 넣을 정보 객체
+    public UserVo(String id, String name, String nickname, Integer user_code) {
+        this.id = id;
+        this.name = name;
+        this.nickname = nickname;
+        this.user_code = user_code;
+    }
+
 }

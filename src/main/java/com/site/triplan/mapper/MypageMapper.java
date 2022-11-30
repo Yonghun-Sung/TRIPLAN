@@ -55,5 +55,6 @@ public interface MypageMapper {
     //회원정보 수정(닉네임, 패스워드) 아이디필요
     void updateUser(String nickname, String pw, String id);
     // 회원탈퇴테이블로 옮기기
-    void userToDropTbl(String id, String name, String nickname, Integer code);
+    /*UserVo userToDropTbl(@Param("id") String id, @Param("name") String name, @Param("nickname") String nickname, @Param("user_code") Integer user_code);*/
+    void userToDropTbl(UserVo user);
 }

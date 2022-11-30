@@ -49,10 +49,14 @@ public class MypageService {
     }*/
 
     public List<PlanVo> getScheduledList(String code) {
-        return mypageMapper.getScheduledPlans(code);
+        List<PlanVo> getScheduledList = mypageMapper.getScheduledPlans(code);
+
+        //return mypageMapper.getScheduledPlans(code);
+        return getScheduledList;
     }
 
     public List<PlanVo> getCompletedList(String code) {
+
         return mypageMapper.getCompletedPlans(code);
     }
 
@@ -115,7 +119,10 @@ public class MypageService {
 
 
     // 탈퇴버튼 -> 회원탈퇴 테이블로 이동
-    public void userToDropTbl(String id, String name, String nickname, Integer code) {
-        mypageMapper.userToDropTbl(id, name, nickname, code);
+    /*public UserVo userToDropTbl(String id, String name, String nickname, Integer user_code) {
+        return mypageMapper.userToDropTbl()
+    }*/
+    public void userToDropTbl(UserVo user) {
+        mypageMapper.userToDropTbl(user);
     }
 }

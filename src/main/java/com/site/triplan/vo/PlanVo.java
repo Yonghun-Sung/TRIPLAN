@@ -1,10 +1,14 @@
 package com.site.triplan.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class PlanVo {
     String name;
     String title;
@@ -37,20 +41,21 @@ public class PlanVo {
         this.code = code;
         this.place_num = place_num;
     }
-
     //나의 일정
-    public PlanVo(String name, String title, String nickname, Integer views, String start_dt, String end_dt, String photo_path, String id, String write_dt, Integer code, Integer place_num) {
+    public PlanVo(String name, String title, String nickname, Integer views, String start_dt, String end_dt, String id, String write_dt, Integer code, Integer place_num, Integer user_code, String area_engname) {
         this.name = name;
         this.title = title;
         this.nickname = nickname;
         this.views = views;
         this.start_dt = start_dt;
         this.end_dt = end_dt;
-        this.photo_path = photo_path;
+        /*this.photo_path = photo_path;*/
         this.id = id;
         this.write_dt = write_dt;
         this.code = code;
         this.place_num = place_num;
+        this.user_code = user_code;
+        this.area_engname = area_engname;
     }
     /*public PlanVo(String title, Integer code) {
         this.code = code;

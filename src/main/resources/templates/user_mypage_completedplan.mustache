@@ -28,19 +28,11 @@
 
     <!-- Template Main CSS File -->
     <link href="/css/mypage_style.css" rel="stylesheet">
-    <script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <!--  마이로의 UIKit사용하기 위해 넣어봄-->
-    <!--  &lt;!&ndash; UIkit CSS &ndash;&gt;
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.13/dist/css/uikit.min.css" />
 
-      &lt;!&ndash; UIkit JS &ndash;&gt;
-      <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.13/dist/js/uikit.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.13/dist/js/uikit-icons.min.js"></script>-->
 
     <!--부트스트랩 CDN-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <!--  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>-->
-
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
     <style>
 .navbar a {
     color: rgba(0, 0, 0, 0.7);
@@ -52,7 +44,7 @@
 </style>
 </head>
 <body class="page-blog">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>-->
 <!-- ======= Header ======= -->
 {{>user_header}}
 <main id="main">
@@ -154,7 +146,7 @@
                                 <div class="uk-grid" uk-grid-style="margin: 0; height: 60%">
                                     <!--<div class="uk-width-1-2 info-container uk-first-column">-->
                                     <div class="region info-container uk-first-column">
-                                        <img src={{photo_path}} alt="" class="flex-shrink-0">
+                                        <img src="/img/main/{{area_engname}}.jpg" class="flex-shrink-0">
                                     </div>
                                     <div class="uk-width-1-2 info-container">
                                         <div class="travel-region">{{name}}</div> <!--클래스 travel-title-->
@@ -207,9 +199,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--                        <div class="uk-grid uk-grid-stack" uk-grid style="margin: 0; height: 40%">&lt;!&ndash;아래칸&ndash;&gt;
 
-                                                        </div>-->
                                 <div class="uk-grid uk-grid-stack" uk-grid="" style="margin: 0; height: 40%"> <!--아래칸: 일정삭제 수정 동행자-->
                                     <div class="uk-width-expand@m info-container uk-first-column">
                                         <div class="uk-grid">
@@ -233,7 +223,11 @@
                                                     <!--<button class="threeplan-btn" uk-toggle="target:#modal-center_idx_0" onclick="modalCenterBtn(0)" aria-expanded="false">
                                                         동행자 추가
                                                     </button>-->
+
+                                                    <!--
                                                     <button class="threeplan-btn" data-bs-toggle="modal" data-bs-target="#matemodal">
+                                                        -->
+                                                    <button class="threeplan-btn mateAddBtn" data-bs-toggle="modal" data-bs-target="#matemodal"><!--data-bs-toggle="modal" data-bs-target="#exampleModal"-->
                                                         동행자 추가
                                                     </button>
                                                 </div>
@@ -246,44 +240,6 @@
                     </div>
                 </div>
             {{/complanlist}}
-
-            <!-- Modal -->
-            <div class="modal fade" id="matemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">동행자 추가</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="mb-3">
-                                    여행을 함께 하고 싶은 다른 사용자의 이메일을 입력하세요.
-                                </div>
-                                <div class="mb-3">
-                                    <label for="id" class="col-form-label">ex) cope@triplan.com </label>
-                                    <<!--input type="hidden" id="db-pw" value="{{userprofile.id}}" />-->
-                                    <input type="email" class="form-control mate-email" placeholder="이메일 입력" required/>
-                                </div>
-                                {{#emaillist}}
-                                    <div class="mb-3">
-                                        <br><br>
-
-                                    </div>
-                                {{/emaillist}}
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">추가</button>
-                            <button type="button" class="btn btn-primary mate-search" id="modal-drop-btn" data-code="{{userprofile.}}">검색</button>
-                        </div>
-                        <!--                <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" id="cancel-btn" onclick="location.href='/triplan/myprofile'">취소</button>
-                                            <button type="button" class="btn btn-primary" id="modal-drop-btn">회원 탈퇴</button>
-                                        </div>-->
-                    </div>
-                </div>
-            </div>
 
             <div class="blog-pagination">
                 <ul class="justify-content-center">
@@ -300,6 +256,44 @@
 
     </section><!-- End Blog Section -->
 
+    <!-- Modal -->
+    <div class="modal fade" id="matemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><!--id="matemodal"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"--><!--modal-dialog modal-dialog-centered" id="exampleModal"-->
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">동행자 추가</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            여행을 함께 하고 싶은 다른 사용자의 이메일을 입력하세요.
+                        </div>
+                        <div class="mb-3">
+                            <label for="id" class="col-form-label">ex) cope@triplan.com </label>
+                            <!--input type="hidden" id="db-pw" value="userprofile.id}}" />-->
+                            <input type="email" class="form-control mate-email" placeholder="이메일 입력" required/>
+                        </div>
+                        <div class="mb-3">
+                            <br><br>
+                            여기에 검색된 이메일 출력
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary">추가</button><!--data-bs-dismiss="modal"-->
+                    <button type="button" class="btn btn-primary mate-search" id="searchbtn">검색</button>
+                    <!--data-code="userprofile.user_code}}"-->
+                </div>
+                <!--                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="cancel-btn" onclick="location.href='/triplan/myprofile'">취소</button>
+                                    <button type="button" class="btn btn-primary" id="modal-drop-btn">회원 탈퇴</button>
+                                </div>-->
+            </div>
+        </div>
+    </div>
+
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
@@ -308,6 +302,11 @@
 <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <div id="preloader"></div>
+
+
+<script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>-->
+
 
 <!-- Vendor JS Files -->
 <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

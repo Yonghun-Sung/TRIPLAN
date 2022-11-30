@@ -149,7 +149,6 @@ public class MypageController {
         String id = (String)session.getAttribute("session_id");
         String code = String.valueOf(session.getAttribute("session_code"));
 
-        System.out.println(code);
         if (id == null) {
             model.addAttribute("errCode", "2");
             view = "redirect:/triplan/loginform?errCode=2";
@@ -172,6 +171,7 @@ public class MypageController {
             model.addAttribute("complanlist",comPlanList);
 
 
+            /*view = "user_mypage_completedplan";*/
             view = "user_mypage_completedplan";
         }
         return view;
@@ -382,21 +382,58 @@ public class MypageController {
     }
 
     //회원 탈퇴
-    @GetMapping("myprofile/drop")
-    public @ResponseBody String dropUser(HttpServletRequest request, @RequestParam String name) {
+/*    @GetMapping("/myprofile/drop")
+    public @ResponseBody String dropUser(HttpServletRequest request, @RequestParam String name, @RequestParam String nickname, @RequestParam Integer user_code) {
         System.out.println("dropUser controller start");
         HttpSession session = request.getSession();
         System.out.println(session.getAttribute("session_code").getClass().getName());
 
 
         String id = (String)session.getAttribute("session_id");
-        String nickname = (String)session.getAttribute("session_nickname");
-        Integer code = (Integer)session.getAttribute("session_code");
-        /*String name2 = String.valueOf(name);*/
-       /* String code = String.valueOf(session.getAttribute("session_code"));*/
+*//*        String nickname = (String)session.getAttribute("session_nickname");*//*
+        System.out.println(name);
+        System.out.println(nickname);
+        System.out.println(user_code);
+        *//*Integer code = (Integer)session.getAttribute("session_code");*//*
+*//*        String code = String.valueOf(session.getAttribute("session_code"));*//*
+*//*        System.out.println(code);*//*
+        *//*String name2 = String.valueOf(name);*//*
+       *//* String code = String.valueOf(session.getAttribute("session_code"));*//*
 
-        mypageService.userToDropTbl(id, name, nickname, code);
-        return "redirect:/triplan/main";
+        mypageService.userToDropTbl(id, name, nickname, user_code);
+        return "redirect:/triplan/mypage";
+    }*/
+    @PostMapping("/myprofile/drop")
+    public String dropUserPost(HttpServletRequest request, @RequestBody UserVo uservo) {
+        System.out.println("dropUser controller start");
+        HttpSession session = request.getSession();
+        System.out.println(session.getAttribute("session_code").getClass().getName());
+
+        String id = (String)session.getAttribute("session_id");
+        String nickname = (String)session.getAttribute("session_nickname");
+        String name = uservo.getName();
+        System.out.println(name);
+        /*String nickname = uservo.getNickname();*/
+        System.out.println(nickname);
+        Integer user_code = uservo.getUser_code();
+        System.out.println(user_code);
+
+        /*String endcodeName = URLEncoder.encode(name,"utf-8");
+        String endcodeNickname = URLEncoder.encode(nickname,"utf-8");
+
+        System.out.println(endcodeName);
+        System.out.println(endcodeNickname);*/
+        /*Integer code = (Integer)session.getAttribute("session_code");*/
+        /*        String code = String.valueOf(session.getAttribute("session_code"));*/
+        /*        System.out.println(code);*/
+        /*String name2 = String.valueOf(name);*/
+        /* String code = String.valueOf(session.getAttribute("session_code"));*/
+
+        /*mypageService.userToDropTbl(id, endcodeName, endcodeNickname, user_code);*/
+        UserVo dropuser = new UserVo(id, name, nickname, user_code);
+        mypageService.userToDropTbl(dropuser);
+        /*mypageService.userToDropTbl(uservo);*/
+        return "redirect:/triplan/mypage";
     }
 
 
