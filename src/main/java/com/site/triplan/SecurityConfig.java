@@ -28,8 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll();
         http
                 .logout()
-                .logoutUrl("/triplan/logout")
-                .logoutSuccessUrl("/triplan/adminLogin");      // 로그아웃시 이동
+                .logoutUrl("/triplan/adminLogout")
+                .logoutSuccessUrl("/tripla/adminLogin");      // 로그아웃시 이동
     }
 
     @Autowired

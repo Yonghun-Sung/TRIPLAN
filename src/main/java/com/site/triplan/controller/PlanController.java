@@ -15,10 +15,7 @@ import javax.servlet.http.HttpSession;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -237,12 +234,48 @@ public class PlanController {
     }
 
     // 일정 작성
+    //--AttractionVo들이 넘어오는걸 name 속성을 이용해 배열로 받을 예정
     @PostMapping("/planinsertform")
-    public String insertPlan(Model model, PlanVo plan, AttractionVo place) {
-        System.out.println(plan.getTitle());
-        System.out.println(place.getName());
-        Integer plan_code = planService.insertPlan(plan, place);
-        return "redirect:/triplan/plandetail?code=" + plan_code;
+    public String insertPlan(Model model, HttpServletRequest request, PlanVo plan
+                           , @RequestParam("name") String[] names, @RequestParam("memo") String[] memos
+                           , @RequestParam("loc_x") String[] loc_xs, @RequestParam("loc_y") String[] loc_ys
+                           , @RequestParam("photo_path") String[] photo_paths, @RequestParam("day") Integer[] days
+                           , @RequestParam("order") Integer[] orders) {
+
+        HttpSession session = request.getSession();
+        String session_id = (String)session.getAttribute("session_id");
+
+        String view = "";
+        if (session_id == null) {
+            view = "redirect:/triplan/loginform?errCode=2";
+        } else {
+            int user_code = planService.getUserCodeById(session_id);
+            plan.setUser_code(user_code);
+
+            List<AttractionVo> placeList = new ArrayList<>();
+            for (int i = 0; i < names.length; i++) {
+                AttractionVo place = new AttractionVo();
+                place.setName(names[i]);
+                place.setMemo(memos[i]);
+                place.setLoc_x(loc_xs[i]);
+                place.setLoc_y(loc_ys[i]);
+                place.setPhoto_path(photo_paths[i]);
+                place.setDay(days[i]);
+                place.setOrder(orders[i]);
+
+                placeList.add(place);
+            }
+
+            String new_plan_code = planService.insertPlan(plan, placeList);
+            if (new_plan_code == null) {
+                view = "redirect:/triplan/planinsertform?errCode=1";
+            } else {
+
+                view = "redirect:/triplan/plandetail?code=" + new_plan_code;
+            }
+        }
+
+        return view;
     }
 
 }

@@ -1,3 +1,9 @@
+let urlParams = new URL(location.href).searchParams;
+let errCode = urlParams.get('errCode');
+if (errCode == "1") {
+    alert('죄송합니다. 오류가 발생했습니다. 다시 시도해주세요.');
+}
+
 $('#plan-exitbtn').click(function () {
     window.location.href='/triplan/main';
 });
@@ -45,18 +51,21 @@ let daysResult = "";
 let placeResult = "";
 let dayArr = ['일', '월', '화', '수', '목', '금', '토'];
 let date = start_dt;      // month는 -1
-$('div#plan-day').text("DAY1 | " + (date.getMonth()+1) + "/" + date.getDate() + " (" + dayArr[date.getDay()] + ")");
+let month = date.getMonth();
+if (month == 0)
+    month = 12;
+$('div#plan-day').text("DAY1 | " + month + "/" + date.getDate() + " (" + dayArr[date.getDay()] + ")");
 for (let i = 1; i <= tripDays; i++) {
     // DAY
     daysResult += "<a class='trip-day' id='day" + i + "' href='#!'>" +
-                    "<div class='day-info'>" +
-                        "<span class='day-num'>DAY" + i + "</span>" +
-                        "<div class='info-box'>" +
-                            "<span class='date'>" + (date.getMonth()+1) + "/" + date.getDate() + "</span>" +
-                            "<span class='day'>(" + dayArr[date.getDay()] + ")</span>" +
-                        "</div>" +
-                    "</div>" +
-                  "</a>";
+        "<div class='day-info'>" +
+        "<span class='day-num'>DAY" + i + "</span>" +
+        "<div class='info-box'>" +
+        "<span class='date'>" + month + "/" + date.getDate() + "</span>" +
+        "<span class='day'>(" + dayArr[date.getDay()] + ")</span>" +
+        "</div>" +
+        "</div>" +
+        "</a>";
 
     // 일정 장소
     placeResult += "<div id='form" + i + "' class='selected-place'></div>";
@@ -135,17 +144,17 @@ $('select#areacode').change(function () {
             url: "/triplan/getSigunguList",
             data: {"areaCode":areacode}
         })
-        .done(function (response) {
-            let result = "<option value=''>전체</option>";
-            for (let item of response) {
-                result += "<option value='" + item.code + "'>" + item.name + "</option>";
-            }
-            $('select#sigungucode').html(result);
-        })
-        .fail(function (e) {
-            console.log(e.status);
-            console.log(e.responseText);
-        });
+            .done(function (response) {
+                let result = "<option value=''>전체</option>";
+                for (let item of response) {
+                    result += "<option value='" + item.code + "'>" + item.name + "</option>";
+                }
+                $('select#sigungucode').html(result);
+            })
+            .fail(function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            });
     } else {
         $('select#sigungucode').html("<option selected value=''>-- 시군구 --</option>");
     }
@@ -163,25 +172,25 @@ $('.spot-list-btn ').click(function () {
         url: "/triplan/searchSpotList",
         data: {"keyword":keyword, "areaCode":areaCode, "sigunguCode":sigunguCode}
     })
-    .done(function (response) {
-        let result = "";
-        for (let item of response) {
-            result += "<div class='rec-list-box'>" +
-                            "<img class='rec-img' src='" + item.imgPath + "'>" +
-                            "<div class='rec-content'>" +
-                                "<div class='rec-btn-box'>" +
-                                    "<button type='button' class='add-place rec-add-btn' name='" + item.name + "' loc_x='" + item.loc_x + "' loc_y='" + item.loc_y + "' photo_path='" + item.imgPath + "'><i class='bi bi-plus'></i></button>" +
-                                "</div>" +
-                                "<span class='name'>" + item.name + "</span>" +
-                            "</div>" +
-                        "</div>"
-        }
-        $('#tour-list-box').html(result);
-    })
-    .fail(function (e) {
-        console.log(e.status);
-        console.log(e.responseText);
-    });
+        .done(function (response) {
+            let result = "";
+            for (let item of response) {
+                result += "<div class='rec-list-box'>" +
+                    "<img class='rec-img' src='" + item.imgPath + "'>" +
+                    "<div class='rec-content'>" +
+                    "<div class='rec-btn-box'>" +
+                    "<button type='button' class='add-place rec-add-btn' name='" + item.name + "' loc_x='" + item.loc_x + "' loc_y='" + item.loc_y + "' photo_path='" + item.imgPath + "'><i class='bi bi-plus'></i></button>" +
+                    "</div>" +
+                    "<span class='name'>" + item.name + "</span>" +
+                    "</div>" +
+                    "</div>"
+            }
+            $('#tour-list-box').html(result);
+        })
+        .fail(function (e) {
+            console.log(e.status);
+            console.log(e.responseText);
+        });
 });
 
 
@@ -197,17 +206,17 @@ $(document).on('click', 'button.add-place', function() {
         "<div id='place" + count++ + "' class='select-place'>"
         +   "<div class='info-ment'></div>"
         +   "<span class='num-box'><i class='bi bi-check'></i></span>"
-        +   "<input type='text' id='name' name='name' class='select-name' value='" + name + "' disabled>"
+        +   "<input type='text' id='name' name='name' class='name select-name' value='" + name + "'>"
         +   "<button class='delete-place'><i class='bi bi-dash'></i></button>"
         +   "<div class='memo-box'>"
         +     "<span class='memo-tag'>메모</span>"
-        +     "<textarea name='memo' class='select-memo'></textarea>"
+        +     "<textarea name='memo' class='memo select-memo'></textarea>"
         +   "</div>"
-        +   "<input type='hidden' id='loc_x' name='loc_x' value='" + loc_x + "'>"
-        +   "<input type='hidden' id='loc_y' name='loc_y' value='" + loc_y + "'>"
-        +   "<input type='hidden' id='photo_path' name='photo_path' value='" + photo_path + "'>"
-        +   "<input type='hidden' id='day' name='day' value='" + nowDayPageNum + "'>"
-        +   "<input type='hidden' id='order' name='order' value=''>"
+        +   "<input type='hidden' class='loc_x' id='loc_x' name='loc_x' value='" + loc_x + "'>"
+        +   "<input type='hidden' class='loc_y' id='loc_y' name='loc_y' value='" + loc_y + "'>"
+        +   "<input type='hidden' class='photo_path' id='photo_path' name='photo_path' value='" + photo_path + "'>"
+        +   "<input type='hidden' class='day' id='day' name='day' value='" + nowDayPageNum + "'>"
+        +   "<input type='hidden' class='order' id='order' name='order' value=''>"
         + "</div>");
 
     $('div#form' + nowDayPageNum + ' > .select-place:nth-child(1)').css('background-color', '#e0e0e0');
@@ -230,5 +239,33 @@ $(document).on('click', 'button.delete-place', function () {
 
 // 폼 제출
 $('#plan-savebtn').click(function () {
+    window.onbeforeunload = null;
+    $('form.place-form').submit();
 
+
+    /*
+    // 지금은 이렇게 하면 div.form 마다 자식 찾아들어가서 1번 2번 3번 되는데
+    // 잘 코드 짜서 돌리면 voList로 받을 수 있을듯
+    // https://mchch.tistory.com/80
+    for (let i = 0; i < $('form.place-form div.select-place').length; i++) {
+        let name = 'attractionList[' + i + '].name';
+        let memo = 'attractionList[' + i + '].memo';
+        let loc_x = 'attractionList[' + i + '].loc_x';
+        let loc_y = 'attractionList[' + i + '].loc_y';
+        let photo_path = 'attractionList[' + i + '].photo_path';
+        let day = 'attractionList[' + i + '].day';
+        let order = 'attractionList[' + i + '].order';
+
+        //$('div#form' + nowDayPageNum + ' > .select-place:nth-child(1)')
+        $('form.place-form div.select-place:nth-child(' + (i+1) + ') .name').attr('name', name);
+        $('form.place-form div.select-place:nth-child(' + (i+1) + ') .memo').attr('memo', memo);
+        $('form.place-form div.select-place:nth-child(' + (i+1) + ') .loc_x').attr('loc_x', loc_x);
+        $('form.place-form div.select-place:nth-child(' + (i+1) + ') .loc_y').attr('loc_y', loc_y);
+        $('form.place-form div.select-place:nth-child(' + (i+1) + ') .photo_path').attr('photo_path', photo_path);
+        $('form.place-form div.select-place:nth-child(' + (i+1) + ') .day').attr('day', day);
+        $('form.place-form div.select-place:nth-child(' + (i+1) + ') .order').attr('order', order);
+    }
+    */
 });
+
+
