@@ -157,11 +157,11 @@
                                                     <div>
                                                         <h5 class="reply-nickname" data-id="{{id}}">{{nickname}}</h5>
                                                         <div class="other-reply">
-                                                            <a href="#!" class="reply-option" data-code="{{code}}">신고</a>
+                                                            <a href="#!" class="reply-option op-report" data-code="{{code}}">신고</a>
                                                         </div>
                                                         <div class="my-reply">
-                                                            <a href="/triplan/deleteReply/{{plan.code}}/{{code}}" class="reply-option" data-code="{{code}}">삭제</a>
-                                                            <a href="#!" class="reply-option" data-code="{{code}}">수정 | </a>
+                                                            <a href="/triplan/deleteReply/{{plan.code}}/{{code}}" class="reply-option op-delete" data-code="{{code}}">삭제</a>
+                                                            <a href="#!" class="reply-option op-update" data-code="{{code}}">수정 | </a>
                                                         </div>
                                                         <p>
                                                             {{content}}

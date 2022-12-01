@@ -122,7 +122,7 @@ $('#insert-reply-btn').click(function () {
 });
 
 // 댓글 수정
-$('a.reply-option').click(function () {
+$('a.op-update').click(function () {
     let code = $(this).data('code');
 
     // 다른 댓글의 수정창은 없애기
