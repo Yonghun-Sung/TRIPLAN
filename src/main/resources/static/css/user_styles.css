@@ -3114,11 +3114,14 @@ a.reply-option {
   float: right;
   padding-left: 4.6%;
 }
-button#insert-reply-btn {
+button#insert-reply-btn, button.update-reply-btn {
   display: inline-block;
   width: 9%;
   height: 64px;
   float: right;
+}
+div.reply-update-form {
+  display:none;
 }
 @media (max-width: 1920px) {
   .comment p {

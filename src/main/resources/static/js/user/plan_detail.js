@@ -1,3 +1,17 @@
+let urlParams = new URL(location.href).searchParams;
+let focus = urlParams.get('focus');
+let errCode = urlParams.get('errCode');
+// 댓글 관련 업무 → 댓글 focus
+if (focus == "re") {
+    $('#replyTab').css('color', '#81bef0').css('font-weight', 'bold');
+    $('#planTab').css('color', '#666666').css('font-weight', 'normal');
+
+    $('div.comments').css('display', 'block');
+    $('div.content').css('display', 'none');
+}
+if (errCode == "1") {
+    alert('죄송합니다. 일시적인 오류가 발생했습니다. 다시 시도해주세요.');
+}
 
 $('#planTab').click(function () {
     $(this).css('color', '#81bef0').css('font-weight', 'bold');
@@ -24,14 +38,15 @@ if (now_user_id == plan_writer_id) {
     $('#plan-delete-btn').css('display', 'none');
 }
 
-for (let i = 1; i <= $('#planDetail-reply-box > div.comment').length; i++) {
-    let reply_writer_id = $('#planDetail-reply-box > div.comment:nth-child(' + i + ') h5.reply-nickname').data('id');
+for (let i = 1; i <= $('#planDetail-reply-box > div.reply-outer').length; i++) {
+    let reply_writer_id = $('#planDetail-reply-box > div.reply-outer:nth-child(' + i + ') h5.reply-nickname').data('id');
+
     if (now_user_id == reply_writer_id) {
-        $('#planDetail-reply-box > div.comment:nth-child(' + i + ') .my-reply').css('display', 'inline-block');
-        $('#planDetail-reply-box > div.comment:nth-child(' + i + ') .other-reply').css('display', 'none');
+        $('#planDetail-reply-box > div.reply-outer:nth-child(' + i + ') .my-reply').css('display', 'inline-block');
+        $('#planDetail-reply-box > div.reply-outer:nth-child(' + i + ') .other-reply').css('display', 'none');
     } else {
-        $('#planDetail-reply-box > div.comment:nth-child(' + i + ') .other-reply').css('display', 'inline-block');
-        $('#planDetail-reply-box > div.comment:nth-child(' + i + ') .my-reply').css('display', 'none');
+        $('#planDetail-reply-box > div.reply-outer:nth-child(' + i + ') .other-reply').css('display', 'inline-block');
+        $('#planDetail-reply-box > div.reply-outer:nth-child(' + i + ') .my-reply').css('display', 'none');
     }
 }
 
@@ -85,3 +100,38 @@ $('.place-by-day').prepend(
     + "</div>"
 );
 
+
+// 댓글 등록
+$('#insert-reply-btn').click(function () {
+    let comment = $.trim($('#insert-reply-comment').val());
+    if (comment == "") {
+        $('#replyErrMsg').css('display', 'block');
+        $('#insert-reply-comment').focus();
+        return;
+    }
+
+    $('#replyErrMsg').css('display', 'none');
+    $('#replyInsertForm').submit();
+});
+
+// 댓글 수정
+$('a.reply-option').click(function () {
+    let code = $(this).data('code');
+
+    // 다른 댓글의 수정창은 없애기
+    $('div.reply-update-form').css('display', 'none');
+    $('div.comment').css('display', 'block');
+
+    $('div#comment' + code).css('display', 'none');
+    $('div#update' + code).css('display', 'block');
+});
+$('.update-reply-btn').click(function () {
+    let code = $(this).val();
+    let comment = $.trim($('div#update' + code + ' #update-reply-comment').val());
+    if (comment == "") {
+        $('#replyErrMsg' + code).css('display', 'block');
+        $('div#update' + code + ' #update-reply-comment').focus();
+        return;
+    }
+    $('#replyUpdateForm' + code).submit();
+});

@@ -26,30 +26,6 @@ public class PlanService {
         return planList;
     }
 
-    // 일정 상세보기
-    //-- 일정 내용
-    public PlanVo getPlanDetail(String plan_code) {
-        PlanVo plan = planMapper.getPlanDetail(plan_code);
-        return plan;
-    }
-    //-- 찜 여부
-    public int isLike(String plan_code, Integer user_code) {
-        int isLike = planMapper.isLike(plan_code, user_code);
-        return isLike;
-    }
-    //-- 장소 목록
-    public List<AttractionVo> getPlaceList(String plan_code) {
-        List<AttractionVo> placeList = new ArrayList<>();
-        placeList = planMapper.getPlaceList(plan_code);
-        return placeList;
-    }
-    //-- 댓글 목록
-    public List<ReplyVo> getReplyList(String plan_code) {
-        List<ReplyVo> replyList = new ArrayList<>();
-        replyList = planMapper.getReplyList(plan_code);
-        return replyList;
-    }
-
     // 지역
     public List<AreaVo> getAreaInfo() {
         List<AreaVo> areaList = new ArrayList<>();
@@ -82,4 +58,42 @@ public class PlanService {
         return plan_code;
     }
 
+    // 일정 상세보기
+    //-- 일정 내용
+    public PlanVo getPlanDetail(String plan_code) {
+        PlanVo plan = planMapper.getPlanDetail(plan_code);
+        return plan;
+    }
+    //-- 찜 여부
+    public int isLike(String plan_code, Integer user_code) {
+        int isLike = planMapper.isLike(plan_code, user_code);
+        return isLike;
+    }
+    //-- 장소 목록
+    public List<AttractionVo> getPlaceList(String plan_code) {
+        List<AttractionVo> placeList = new ArrayList<>();
+        placeList = planMapper.getPlaceList(plan_code);
+        return placeList;
+    }
+    //-- 댓글 목록
+    public List<ReplyVo> getReplyList(String plan_code) {
+        List<ReplyVo> replyList = new ArrayList<>();
+        replyList = planMapper.getReplyList(plan_code);
+        return replyList;
+    }
+    //-- 댓글 등록
+    public int insertReply(ReplyVo reply) {
+        int result = planMapper.insertReply(reply);
+        return result;
+    }
+    //-- 댓글 수정
+    public int updateReply(ReplyVo reply) {
+        int result = planMapper.updateReply(reply);
+        return result;
+    }
+    //-- 댓글 삭제
+    public int deleteReply(ReplyVo reply) {
+        int result = planMapper.deleteReply(reply);
+        return result;
+    }
 }

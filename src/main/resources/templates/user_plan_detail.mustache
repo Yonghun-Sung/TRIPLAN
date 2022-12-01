@@ -52,14 +52,14 @@
                 <h2 id="title">{{plan.title}}</h2>
                 <div id="like-icon">
                     {{^session_id}}
-                    <i class="bi bi-suit-heart"></i>
+                        <i class="bi bi-suit-heart"></i>
                     {{/session_id}}
                     {{#session_id}}
                         {{^isLike}}
-                        <i class="bi bi-suit-heart"></i>
+                            <i class="bi bi-suit-heart"></i>
                         {{/isLike}}
                         {{#isLike}}
-                        <i class="bi bi-suit-heart-fill"></i>
+                            <i class="bi bi-suit-heart-fill"></i>
                         {{/isLike}}
                         <input type="hidden" id="now_user_id" value="{{now_user_id}}">
                     {{/session_id}}
@@ -71,7 +71,7 @@
                 </div>
                 <div class="meta-top">
                     <i class="bi bi-person"></i><span id="nickname" class="article-info"
-                    data-id="{{plan.id}}">{{plan.nickname}}</span>
+                                                      data-id="{{plan.id}}">{{plan.nickname}}</span>
                     <i class="bi bi-geo-alt"></i><span id="placeNum" class="article-info">{{plan.place_num}}</span>
                     <i class="bi bi-eye"></i><span id="views" class="article-info">{{plan.views}}</span>
                     </ul>
@@ -103,18 +103,18 @@
 
                                 <div class="place-by-day">
                                     {{#placeList}}
-                                    <div class="place-info post-author d-flex align-items-center"
-                                    data-daynum="{{day}}" data-startday="{{travel_date}}">
-                                        <img src="{{photo_path}}" class="rounded-circle flex-shrink-0" alt="">
-                                        <div>
-                                            <h4 name="name">{{name}}</h4>
-                                            <p class="memo">
-                                                {{#memo}}
-                                                    {{memo}}
-                                                {{/memo}}
-                                            </p>
+                                        <div class="place-info post-author d-flex align-items-center"
+                                             data-daynum="{{day}}" data-startday="{{travel_date}}">
+                                            <img src="{{photo_path}}" class="rounded-circle flex-shrink-0" alt="">
+                                            <div>
+                                                <h4 name="name">{{name}}</h4>
+                                                <p class="memo">
+                                                    {{#memo}}
+                                                        {{memo}}
+                                                    {{/memo}}
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
                                     {{/placeList}}
                                 </div>
 
@@ -129,13 +129,14 @@
 
                                 <div class="reply-form">
                                     <h4>댓글</h4>
-                                    <form action="">
+                                    <form id="replyInsertForm" action="/triplan/reply" method="post">
                                         <div class="row">
                                             <div class="col form-group">
-                                              <textarea name="comment" class="form-control"
-                                                        placeholder="내용을 입력하세요."></textarea>
-                                                <button type="submit" id="insert-reply-btn" class="basic-btn">등록
-                                                </button>
+                                                <textarea id="insert-reply-comment" name="content" class="form-control"
+                                                          placeholder="내용을 입력하세요."></textarea>
+                                                <button type="button" id="insert-reply-btn" class="basic-btn">등록</button>
+                                                <div class="errMsg" id="replyErrMsg">내용을 입력해주세요.</div>
+                                                <input type="hidden" name="plan_code" value="{{plan.code}}">
                                             </div>
                                         </div>
                                     </form>
@@ -143,25 +144,41 @@
 
                                 <div id="planDetail-reply-box">
                                     {{#replyList}}
-                                    <div class="comment">
-                                        <div class="d-flex">
-                                            <div class="comment-img"><img src="/img/user.png"></div>
-                                            <div>
-                                                <h5 class="reply-nickname" data-id="{{id}}">{{nickname}}</h5>
-                                                <div class="other-reply">
-                                                    <a href="#!" class="reply-option">신고</a>
+                                        <div class="reply-outer">
+                                            <div class="comment" id="comment{{code}}">
+                                                <div class="d-flex">
+                                                    <div class="comment-img"><img src="/img/user.png"></div>
+                                                    <div>
+                                                        <h5 class="reply-nickname" data-id="{{id}}">{{nickname}}</h5>
+                                                        <div class="other-reply">
+                                                            <a href="#!" class="reply-option" data-code="{{code}}">신고</a>
+                                                        </div>
+                                                        <div class="my-reply">
+                                                            <a href="/triplan/deleteReply/{{plan.code}}/{{code}}" class="reply-option" data-code="{{code}}">삭제</a>
+                                                            <a href="#!" class="reply-option" data-code="{{code}}">수정 | </a>
+                                                        </div>
+                                                        <p>
+                                                            {{content}}
+                                                        </p>
+                                                        <time datetime="2020-01-01">{{write_dt}}</time>
+                                                    </div>
                                                 </div>
-                                                <div class="my-reply">
-                                                    <a href="#!" class="reply-option">삭제</a>
-                                                    <a href="#!" class="reply-option">수정 | </a>
-                                                </div>
-                                                <p>
-                                                    {{content}}
-                                                </p>
-                                                <time datetime="2020-01-01">{{write_dt}}</time>
+                                            </div>
+                                            <div class="reply-form reply-update-form" id="update{{code}}">
+                                                <form id="replyUpdateForm{{code}}" action="/triplan/updateReply" method="post">
+                                                    <div class="row">
+                                                        <div class="col form-group">
+                                                            <textarea id="update-reply-comment" name="content" class="form-control"
+                                                              placeholder="내용을 입력하세요.">{{content}}</textarea>
+                                                            <button type="button" class="update-reply-btn basic-btn" value="{{code}}">수정</button>
+                                                            <div class="errMsg" id="replyErrMsg{{code}}">내용을 입력해주세요.</div>
+                                                            <input type="hidden" name="code" value="{{code}}">
+                                                            <input type="hidden" name="plan_code" value="{{plan.code}}">
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
-                                    </div>
                                     {{/replyList}}
                                 </div>
 

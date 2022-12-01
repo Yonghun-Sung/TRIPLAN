@@ -1,7 +1,7 @@
 let urlParams = new URL(location.href).searchParams;
 let errCode = urlParams.get('errCode');
 if (errCode == "1") {
-    alert('죄송합니다. 오류가 발생했습니다. 다시 시도해주세요.');
+    alert('죄송합니다. 일시적인 오류가 발생했습니다. 다시 시도해주세요.');
 }
 
 $('#plan-exitbtn').click(function () {
