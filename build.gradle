@@ -43,6 +43,7 @@ dependencies {
 	// gson
 	implementation 'com.google.code.gson:gson:2.8.7'
 
+	// spring security
 	implementation 'org.springframework.boot:spring-boot-starter-security' //
 
 	//회원정보수정 비밀번호 유효성 검사

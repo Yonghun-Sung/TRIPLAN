@@ -40,16 +40,17 @@ public class AdminService {
     }
 
     public void processedReport(ReportVo reportVo){     // 처리내역 (철회, 유지)
+
         adminMapper.processedReport(reportVo);
     }
 
     public List<UserVo> weeklyNewbie(){
         return adminMapper.weeklyNewbie();
-    }
+    }       // 주간 신규 회원
 
     public List<UserVo> montlyNewbie(){
         return adminMapper.monthlyNewbie();
-    }
+    }       // 월간 신규 회원
 
 
 }

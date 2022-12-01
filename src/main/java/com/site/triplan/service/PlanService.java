@@ -64,7 +64,22 @@ public class PlanService {
         return user_code;
     }
     @Transactional
-    public Integer insertPlan(PlanVo plan, AttractionVo place) {
-        return 1;
+    public String insertPlan(PlanVo plan, List<AttractionVo> placeList) {
+        int result = planMapper.insertPlan(plan);
+        String plan_code = "";
+        if (result > 0) {
+            plan_code = planMapper.getMaxPlanCode();
+            for (int i = 0; i < placeList.size(); i++) {
+                placeList.get(i).setPlan_code(plan_code);
+                result = planMapper.insertPlace(placeList.get(i));
+                if (result < 0) {
+                    return null;
+                }
+            }
+        } else {
+            return null;
+        }
+        return plan_code;
     }
+
 }

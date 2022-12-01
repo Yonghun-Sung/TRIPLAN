@@ -59,8 +59,9 @@ for (let i = 1; i <= totalPlace; i++) {
     placeArr[$('.place-by-day > .place-info:nth-child(' + i + ')').data('daynum')]++;
 }
 
-for (let i = 1; i < totalDays; i++) {
-    placeArr[i] += placeArr[i - 1];
+for (let i = 2; i < totalDays; i++) {
+    //placeArr[i] += placeArr[i - 1];
+    placeArr[i] += placeArr[i - 1] + 1;
 }
 
 

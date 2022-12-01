@@ -31,11 +31,11 @@ public interface PlanMapper {
     Integer getUserCodeById(String id);
 
     //-- 일정 INSERT
-    void insertPlan(PlanVo plan);
+    Integer insertPlan(PlanVo plan);
 
     //-- 최대 일정코드 찾기
-    Integer getMaxPlanCode();
+    String getMaxPlanCode();
 
     //-- 장소 INSERT
-    void insertPlace(AttractionVo place);
+    Integer insertPlace(AttractionVo place);
 }

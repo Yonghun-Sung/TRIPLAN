@@ -16,7 +16,6 @@ $('#report-modal').on('show.bs.modal', function(event) {
     var code = button.data('code');                     // 접수코드 가져오기
     $('#report-reg-code').val(code);                    // 접수코드 전달
 
-//    let result_code;
     $('.report-result-btn').click(function() {
         let result_code = $(this).val();                // 신고처리코드 가져오기(버튼 value)
         $('#report-result-code').val(result_code);      // 신고처리코드 전달
@@ -40,10 +39,10 @@ $('#report-proc-modal').on('show.bs.modal', function(event) {
     $(this).find('#modal_reason').text(reason);
     $(this).find('#modal_content').text(content);
 
-    var reg_code = button.data('code');                     // 접수코드 가져오기
+    let reg_code = button.data('code');                 // 접수코드 가져오기
 
     $('.report-withdraw-btn').click(function(){
-        var result_code = $(this).val();
+        let result_code = $(this).val();                // 신고처리코드 가져오기
 
         $.ajax({
             type: "put",
@@ -56,7 +55,7 @@ $('#report-proc-modal').on('show.bs.modal', function(event) {
         })
         .done(function(response){
             console.log("put success!");
-            window.location.href = "/triplan/reportProc";
+            window.location.href = "/triplan/admin/reportProc";
         });
     });
 });

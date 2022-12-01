@@ -121,7 +121,7 @@ $("#map-search-btn").click(function(){
          */
 
         innerHtml += "<li class='search-result'><img src='http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_" + k + ".png' style='vertical-align:middle;'/><span class='name'>"+name+"</span>"
-            + "<button class='add-place' name='" + name + "' loc_x='" + lat + "'loc_y='" + lon + "' photo_path=''>"
+            + "<button class='add-place' name='" + name + "' loc_x='" + lat + "'loc_y='" + lon + "' photo_path='/img/no-img.png'>"
             +   "<i class='bi bi-plus'></i>"
             + "</button></li>";
 

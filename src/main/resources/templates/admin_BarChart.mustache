@@ -5,10 +5,10 @@
     var monthlytime = [];
     var monthlycount = [];
 
-    $.getJSON("http://localhost:8082/triplan/montlynewbie", function(data){
+    $.getJSON("http://localhost:8082/triplan/montlynewbie", function(data){         // 월간신규회원 json 리스트 받아오기
 <!--        alert(data);-->
 
-        $.each(data, function(inx, obj){
+        $.each(data, function(inx, obj){                                            // monthlytime, montlycount에 데이터 넣기
             monthlytime.push(obj.date);
             monthlycount.push(obj.cnt);
 	    });
@@ -16,7 +16,7 @@
 <!--        console.log("create2-2");-->
     });
 
-    var barChartData = {
+    var barChartData = {                                                            // 차트에 데이터 넣기, 옵션
 
 		labels : monthlytime,
 
@@ -32,7 +32,7 @@
 			        ]
     }
 
-    function createBarChart(){
+    function createBarChart(){                                                      // bar 차트 생성
 
 	    var ctx = document.getElementById("myBarChart").getContext("2d");
 
