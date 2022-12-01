@@ -260,6 +260,7 @@ public class PlanController {
         String session_id = (String)session.getAttribute("session_id");
 
         PlanVo plan = planService.getPlanDetail(code);
+        planService.updateViews(code);
         List<AttractionVo> placeList = new ArrayList<>();
         List<ReplyVo> replyList = new ArrayList<>();
         if (session_id != null) {

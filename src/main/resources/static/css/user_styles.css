@@ -3144,3 +3144,15 @@ div.place-info p.memo {
   width: 20%;
   float: right;
 }
+
+select#day-select-box {
+  float: right;
+  width: 28%;
+  margin-right: -7%;
+  margin-bottom: 1%;
+}
+
+div.plan-detail-map div.map {
+  border: 2px solid #c4c4c4;
+  overflow: hidden;
+}

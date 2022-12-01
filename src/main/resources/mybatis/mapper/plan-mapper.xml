@@ -47,7 +47,7 @@
     <!-- >> 장소 INSERT -->
     <insert id="insertPlace">
         INSERT INTO place (day, `order`, name, loc_x, loc_y, memo, photo_path, plan_code)
-        VALUES (#{day}, #{order}, #{name}, #{loc_x}, #{loc_x}, #{memo}, #{photo_path}, #{plan_code})
+        VALUES (#{day}, #{order}, #{name}, #{loc_x}, #{loc_y}, #{memo}, #{photo_path}, #{plan_code})
     </insert>
 
     <!--일정 상세보기-->
@@ -67,6 +67,12 @@
                  JOIN user_info u ON u.user_code = p.user_code
         WHERE p.code=#{plan_code}
     </select>
+    <!-- >> 조회수 업데이트 -->
+    <update id="updateViews">
+        UPDATE plan
+        SET views = views + 1
+        WHERE code=#{code}
+    </update>
     <!-- >> 좋아요 여부-->
     <select id="isLike" resultType="java.lang.Integer">
         SELECT count(*)

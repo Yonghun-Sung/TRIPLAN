@@ -41,7 +41,7 @@
 <script>
 </script>
 </head>
-<body class="page-blog">
+<body class="page-blog" onload="initTmap()">
     <!-- ======= Header ======= -->
     {{>user_header}}
 
@@ -104,7 +104,8 @@
                                 <div class="place-by-day">
                                     {{#placeList}}
                                         <div class="place-info post-author d-flex align-items-center"
-                                             data-daynum="{{day}}" data-startday="{{travel_date}}">
+                                             data-daynum="{{day}}" data-startday="{{travel_date}}"
+                                             data-loc_x="{{loc_x}}" data-loc_y="{{loc_y}}">
                                             <img src="{{photo_path}}" class="rounded-circle flex-shrink-0" alt="">
                                             <div>
                                                 <h4 name="name">{{name}}</h4>
@@ -182,39 +183,30 @@
                                     {{/replyList}}
                                 </div>
 
-                            </div><!-- End blog comments -->
+                            </div>
 
-                        </article><!-- End blog post -->
+                        </article>
 
                     </div>
+
                     <div class="col-lg-4">
-
                         <div class="sidebar ps-lg-4">
-
-                            <div class="sidebar-item recent-posts">
-                                <div class="mt-3">
-
-                                    <div class="post-item mt-3">
-                                        <img src="/img/blog/blog-recent-1.jpg" alt="" class="flex-shrink-0">
-                                        <div>
-                                            <h4><a href="blog-post.html">Nihil blanditiis at in nihil autem</a></h4>
-                                            <time datetime="2020-01-01">Jan 1, 2020</time>
-                                        </div>
-                                    </div><!-- End recent post item-->
-
+                            <div class="plan-detail-map sidebar-item recent-posts">
+                                <select name="day" id="day-select-box" class="form-select">
+                                    <option selected value="1">DAY1</option>
+                                </select>
+                                <div id="map_wrap" class="map_wrap">
+                                    <div id='map_div1' class="map"></div>
                                 </div>
-
-                            </div><!-- End sidebar recent posts-->
-
-                        </div><!-- End Blog Sidebar -->
-
+                            </div>
+                        </div>
                     </div>
 
                 </div>
             </div>
-        </section><!-- End Blog Details Section -->
+        </section>
 
-    </main><!-- End #main -->
+    </main>
 
   <!-- ======= Footer ======= -->
   {{>user_footer}}
@@ -235,6 +227,7 @@
   <script src="/js/user/main.js"></script>
 
   <script src="/js/user/plan_detail.js"></script>
+  <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx3baa04961c80465ea1fe8a3be504d3e1"></script>
 
 </body>
 </html>

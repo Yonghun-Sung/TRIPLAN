@@ -64,6 +64,11 @@ public class PlanService {
         PlanVo plan = planMapper.getPlanDetail(plan_code);
         return plan;
     }
+    //-- 조회수 업데이트
+    public int updateViews(String plan_code) {
+        int result = planMapper.updateViews(plan_code);
+        return result;
+    }
     //-- 좋아요 여부
     public int isLike(String plan_code, Integer user_code) {
         int isLike = planMapper.isLike(plan_code, user_code);
