@@ -32,8 +32,12 @@ public interface PlanMapper {
     // 일정 상세보기
     //-- 일정 내용
     PlanVo getPlanDetail(String plan_code);
-    //-- 찜 여부
+    //-- 좋아요 여부
     Integer isLike(String plan_code, Integer user_code);
+    //-- 좋아요 등록
+    Integer insertLike(String plan_code, Integer user_code);
+    //-- 좋아요 해제
+    Integer deleteLike(String plan_code, Integer user_code);
     //-- 장소 목록
     List<AttractionVo> getPlaceList(String plan_code);
     //-- 댓글 목록

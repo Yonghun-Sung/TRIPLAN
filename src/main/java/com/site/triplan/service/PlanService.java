@@ -64,10 +64,20 @@ public class PlanService {
         PlanVo plan = planMapper.getPlanDetail(plan_code);
         return plan;
     }
-    //-- 찜 여부
+    //-- 좋아요 여부
     public int isLike(String plan_code, Integer user_code) {
         int isLike = planMapper.isLike(plan_code, user_code);
         return isLike;
+    }
+    //-- 좋아요 등록
+    public int insertLike(String plan_code, Integer user_code) {
+        int result = planMapper.insertLike(plan_code, user_code);
+        return result;
+    }
+    //-- 좋아요 해제
+    public int deleteLike(String plan_code, Integer user_code) {
+        int result = planMapper.deleteLike(plan_code, user_code);
+        return result;
     }
     //-- 장소 목록
     public List<AttractionVo> getPlaceList(String plan_code) {

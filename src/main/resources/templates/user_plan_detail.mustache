@@ -56,10 +56,10 @@
                     {{/session_id}}
                     {{#session_id}}
                         {{^isLike}}
-                            <i class="bi bi-suit-heart"></i>
+                            <a href="/triplan/insertLike?code={{plan.code}}"><i class="bi bi-suit-heart"></i></a>
                         {{/isLike}}
                         {{#isLike}}
-                            <i class="bi bi-suit-heart-fill"></i>
+                            <a href="/triplan/deleteLike?code={{plan.code}}"><i class="bi bi-suit-heart-fill"></i></a>
                         {{/isLike}}
                         <input type="hidden" id="now_user_id" value="{{now_user_id}}">
                     {{/session_id}}
