@@ -123,4 +123,11 @@
         DELETE FROM reply
         WHERE code=#{code} AND plan_code=#{plan_code} AND user_code=#{user_code}
     </delete>
+    <!-- >> 동행자 목록 -->
+    <select id="getMateList" resultType="com.site.triplan.vo.MateVo">
+        SELECT m.code, m.plan_code, u.user_code, u.id
+        FROM mate m
+                 JOIN user_info u ON m.user_code = u.user_code
+        WHERE m.plan_code=#{plan_code}
+    </select>
 </mapper>

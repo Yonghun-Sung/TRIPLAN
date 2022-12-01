@@ -1,11 +1,8 @@
 package com.site.triplan.controller;
 
 import com.site.triplan.service.PlanService;
-import com.site.triplan.vo.AreaVo;
-import com.site.triplan.vo.AttractionVo;
+import com.site.triplan.vo.*;
 
-import com.site.triplan.vo.PlanVo;
-import com.site.triplan.vo.ReplyVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -261,6 +258,7 @@ public class PlanController {
 
         PlanVo plan = planService.getPlanDetail(code);
         planService.updateViews(code);
+        List<MateVo> mateList = new ArrayList<>();
         List<AttractionVo> placeList = new ArrayList<>();
         List<ReplyVo> replyList = new ArrayList<>();
         if (session_id != null) {
@@ -271,9 +269,11 @@ public class PlanController {
 
             model.addAttribute("now_user_id", session_id);
         }
+        mateList = planService.getMateList(code);
         placeList = planService.getPlaceList(code);
         replyList = planService.getReplyList(code);
         model.addAttribute("plan", plan);
+        model.addAttribute("mateList", mateList);
         model.addAttribute("placeList", placeList);
         model.addAttribute("replyList", replyList);
         return "user_plan_detail";

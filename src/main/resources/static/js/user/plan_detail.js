@@ -37,6 +37,14 @@ if (now_user_id == plan_writer_id) {
     $('#plan-update-btn').css('display', 'none');
     $('#plan-delete-btn').css('display', 'none');
 }
+//--동행자
+for (let i = 1; i <= $('div.mate-id').length; i++) {
+    if (now_user_id == $('div.mate-id:nth-child(' + i + ')').text()) {
+        $('#plan-update-btn').css('display', 'inline-block');
+        //$('#plan-delete-btn').css('display', 'inline-block');
+    }
+}
+
 
 for (let i = 1; i <= $('#planDetail-reply-box > div.reply-outer').length; i++) {
     let reply_writer_id = $('#planDetail-reply-box > div.reply-outer:nth-child(' + i + ') h5.reply-nickname').data('id');

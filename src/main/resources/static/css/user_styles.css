@@ -2957,6 +2957,9 @@ section.plan-detail {
     margin-left: 1.4%;
   }
 }
+div#mateList {
+  display: none;
+}
 div#plan-detail-header {
   margin-top: 10%;
   height: 250px;

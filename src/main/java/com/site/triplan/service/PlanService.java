@@ -1,10 +1,7 @@
 package com.site.triplan.service;
 
 import com.site.triplan.mapper.PlanMapper;
-import com.site.triplan.vo.AreaVo;
-import com.site.triplan.vo.AttractionVo;
-import com.site.triplan.vo.PlanVo;
-import com.site.triplan.vo.ReplyVo;
+import com.site.triplan.vo.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -110,5 +107,10 @@ public class PlanService {
     public int deleteReply(ReplyVo reply) {
         int result = planMapper.deleteReply(reply);
         return result;
+    }
+    //-- 동행자 목록
+    public List<MateVo> getMateList(String plan_code) {
+        List<MateVo> mateList = planMapper.getMateList(plan_code);
+        return mateList;
     }
 }

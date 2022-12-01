@@ -1,9 +1,6 @@
 package com.site.triplan.mapper;
 
-import com.site.triplan.vo.AreaVo;
-import com.site.triplan.vo.AttractionVo;
-import com.site.triplan.vo.PlanVo;
-import com.site.triplan.vo.ReplyVo;
+import com.site.triplan.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -50,4 +47,6 @@ public interface PlanMapper {
     Integer updateReply(ReplyVo reply);
     //-- 댓글 삭제
     Integer deleteReply(ReplyVo reply);
+    //-- 동행자 목록
+    List<MateVo> getMateList(String plan_code);
 }
