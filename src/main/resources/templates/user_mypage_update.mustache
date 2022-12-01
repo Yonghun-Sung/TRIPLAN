@@ -65,6 +65,7 @@
                     <div class="mb-3">
                         <label for="nickname" class="form-label">닉네임</label>
                         <input type="text" value="{{userprofile.nickname}}" class="form-control" id="nickname" placeholder="닉네임 입력">
+                        {{#valid_nickname}}<span id="valid">{{valid_nicnkname}}</span>{{/valid_nickname}}
                     </div>
                     <div class="mb-3">
                         <label for="pw" class="form-label">현재 비밀번호</label>
@@ -74,6 +75,7 @@
                     <div class="mb-3">
                         <label for="pw" class="form-label">새 비밀번호</label>
                         <input type="password" class="form-control" id="pwNew" placeholder="문자,숫자,특수문자 포함 8~20자">
+                        {{#valid_pw}}<span id="valid">{{valid_pw}}</span>{{/valid_pw}}
                     </div>
                     <div class="mb-3">
                         <label for="pw" class="form-label">비밀번호 확인</label>

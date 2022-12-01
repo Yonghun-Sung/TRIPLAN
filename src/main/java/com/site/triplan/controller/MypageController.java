@@ -3,15 +3,19 @@ package com.site.triplan.controller;
 import com.site.triplan.service.MypageService;
 import com.site.triplan.vo.PlanVo;
 import com.site.triplan.vo.ReplyVo;
+import com.site.triplan.vo.UserDto;
 import com.site.triplan.vo.UserVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/triplan")
@@ -316,6 +320,69 @@ public class MypageController {
         return view;
     }
 
+    // 회원정보 수정
+    @PutMapping("/myprofile/update")
+    public String replyDelete(HttpServletRequest request, @Valid UserDto userDto, Errors errors, Model model) throws Exception {
+        System.out.println("controller start");
+        String view = "";
+        HttpSession session = request.getSession();
+        String id = (String) session.getAttribute("session_id");
+        /*        String code = String.valueOf(session.getAttribute("session_code"));*/
+
+
+
+        if (id == null) {
+            model.addAttribute("errCode", "2");
+            view = "redirect:/triplan/loginform?errCode=2";
+        } else if (errors.hasErrors()) {
+            model.addAttribute("userDto", userDto);
+            UserVo userProfile = mypageService.getMyProfile(id);
+            Character nicknameFirst = userProfile.getNickname().charAt(0);
+            model.addAttribute("userprofile", userProfile);
+            model.addAttribute("firstletterNickname", nicknameFirst);//받아온 UserVo에서 닉네임만 string으로 넘김,[0]인덱스 한글자만 보여주려고
+            //유효성 통과 못한 필드와 메세지를 핸들링
+            Map<String, String> validateResult = mypageService.validateHandling(errors);
+            for (String key : validateResult.keySet()) {
+                model.addAttribute(key, validateResult.get(key));
+            }
+            /*return "/myprofile";*/
+            return "user_mypage_update";
+        } else {
+            UserVo userProfile = mypageService.getMyProfile(id);
+            Character nicknameFirst = userProfile.getNickname().charAt(0);
+            model.addAttribute("userprofile", userProfile);
+            model.addAttribute("firstletterNickname", nicknameFirst);//받아온 UserVo에서 닉네임만 string으로 넘김,[0]인덱스 한글자만 보여주려고
+            mypageService.updateUser(userDto);
+
+            /*view = "user_profile_edit";*/
+            view="user_mypage_update";
+        }
+        return view;
+
+ /*       if (errors.hasErrors()) {
+            //비밀번호 수정 실패시 입력 데이터 값 유지
+            model.addAttribute("userDto", userDto);
+            //유효성 통과 못한 필드와 메세지를 핸들링
+            Map<String, String> validateResult = mypageService.validateHandling(errors);
+            for (String key : validateResult.keySet()) {
+                model.addAttribute(key, validateResult.get(key));
+            }
+            *//*return "/myprofile";*//*
+            return "user_mypage_update";
+        }
+
+
+
+        mypageService.updateUser(userDto);
+        return "redirect:/mypage";*/
+
+
+
+        /*mypageService.updateUser(nickname, pw, id);*/
+        /*session.setAttribute("session_nickname", nickname);   // 세션에 새로 전달받은 nickname 넣음
+        return "redirect:/triplan/myprofile";*/
+    }
+
 
     //여행 제목 수정
     @PutMapping("/mypage/update")
@@ -367,7 +434,7 @@ public class MypageController {
         }
         return "redirect:/triplan/mypage/reply";
     }
-
+/*
     // 회원정보 수정
     @ResponseBody
     @PutMapping("/myprofile/update")
@@ -375,11 +442,13 @@ public class MypageController {
         System.out.println("controller start");
         HttpSession session = request.getSession();
         String id = (String)session.getAttribute("session_id");
-/*        String code = String.valueOf(session.getAttribute("session_code"));*/
+*//*        String code = String.valueOf(session.getAttribute("session_code"));*//*
         mypageService.updateUser(nickname, pw, id);
         session.setAttribute("session_nickname", nickname);   // 세션에 새로 전달받은 nickname 넣음
         return "redirect:/triplan/myprofile";
-    }
+    }*/
+
+
 
     //회원 탈퇴
 /*    @GetMapping("/myprofile/drop")
@@ -435,6 +504,7 @@ public class MypageController {
         /*mypageService.userToDropTbl(uservo);*/
         return "redirect:/triplan/mypage";
     }
+
 
 
 }

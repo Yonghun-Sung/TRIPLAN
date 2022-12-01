@@ -109,7 +109,7 @@
         <!--내가 아니라 다른 사람이 좋아해놓은 같은 plan.code인거까지 다삭제되니까,,,  -->
         <!--user_code의 {code} : 세션의 code값 받으면되는데, plan_code는 RequestParam 으로 받아소 -->
     </delete>
-    <delete id="deleteReply">
+    <delete id="deleteReply">ㅔ
         DELETE FROM reply WHERE code=#{reply_code} AND user_code=#{code}
     </delete>
     <update id="updateUser">
@@ -124,9 +124,11 @@
 <!--    <select id="mateIdSearch" resultType="">&lt;!&ndash;입력받은 아이디로 검색한 &ndash;&gt;
         SELECT plan_code, user_code FROM mate WHERE id=#{mateEmail}
     </select>-->
-    <insert id="addMate"> <!--동행자 테이블에 넣어줌--> 1번김지윤회원의3번플랜 (동행자 있음)
+    <insert id="addMate"> <!--동행자 테이블에 넣어줌--> (1번김지윤회원의) 3번플랜(동행자 2번김쥰회원 있음)
         INSERT INTO mate(plan_code, user_code) VALUES (#{plan_code}, #{user_code})
         동행자 테이블에,,,,,,, 있는 여행일정
+        plan_code: 3, user_code:2
+        3번회원은 끝, 2번회원의 나의일정 보여줄떄-> 동행자테이블의 user_code가 본인의 code랑 같은 plan까지 보여주기...
     </insert>
 
 </mapper>

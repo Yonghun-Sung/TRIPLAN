@@ -316,8 +316,7 @@ $('#modal-drop-btn').click(function() {
 });
 
 
-/*
-
+// 동행자 추가 모달
 $('.btn.btn-primary.mate-search').click(function() {
     let mateEmail = $('.form-control.mate-email').val(); //입력된 이메일
     $.ajax({
@@ -329,19 +328,21 @@ $('.btn.btn-primary.mate-search').click(function() {
         }).done(function(response){
             console.log(response);
             alert("동행자 이메일을 검색합니다");
-            */
-/*window or 여기에 이제 리스트 추가이이런거..안될까/.*//*
+            if(response != null){
+                $('div#user_id').text(가져온user_id넣어줌));
+                $('div#user_nickname').text(user_nickname넣어줌);
+            } else {
+                $('div#user_detail').text('검색결과가 없습니다.');
+            }
+/*window or 여기에 이제 리스트 추가이이런거..안될까/.*/
 
-
-        })
-        .fail(function (e) {
+        }).fail(function (e) {
             console.log("err");
             console.log(e.status);
             console.log(e.responseText);
         });
 
 });
-*/
 
 /*$('.threeplan-btn').click(function() {
     $('#matemodal').modal('show');
