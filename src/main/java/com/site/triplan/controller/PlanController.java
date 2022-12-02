@@ -266,14 +266,14 @@ public class PlanController {
             int isLike = planService.isLike(code, user_code);
             if (isLike > 0)
                 model.addAttribute("isLike", isLike);
+            mateList = planService.getMateList(code);
 
+            model.addAttribute("mateList", mateList);
             model.addAttribute("now_user_id", session_id);
         }
-        mateList = planService.getMateList(code);
         placeList = planService.getPlaceList(code);
         replyList = planService.getReplyList(code);
         model.addAttribute("plan", plan);
-        model.addAttribute("mateList", mateList);
         model.addAttribute("placeList", placeList);
         model.addAttribute("replyList", replyList);
         return "user_plan_detail";
