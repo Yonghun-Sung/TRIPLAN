@@ -64,7 +64,7 @@ public class AdminService implements UserDetailsService{    // security에서 �
     @Override
     public AdminVo loadUserByUsername(String id) throws UsernameNotFoundException{
         AdminVo adminVo = adminMapper.getAdminAccount(id);                // 여기고 받은 유저 패스워드와 비교하여 로그인 인증
-        System.out.println(adminVo);
+//        System.out.println(adminVo);
         if (adminVo == null) {
             throw new UsernameNotFoundException("User not authorized");
         }

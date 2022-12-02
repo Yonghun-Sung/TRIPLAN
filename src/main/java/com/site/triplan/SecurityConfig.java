@@ -42,13 +42,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {      //  secu
                 .logoutSuccessUrl("/triplan/adminLogin");      // 로그아웃시 이동
     }
 
-//    @Autowired
-//    public void authenticate(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().
-//                withUser("admin@ad.co.kr").
-//                password("{noop}1234").
-//                roles("ADMIN");
-//    }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws  Exception{
