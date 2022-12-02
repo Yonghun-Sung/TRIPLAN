@@ -17,6 +17,7 @@
             JOIN area a ON a.code = p.area_code
             JOIN user_info u ON u.user_code = p.user_code
         WHERE area_code LIKE #{area_code}
+          AND p.code NOT IN (SELECT plan_code FROM plan_deleted)
         ORDER BY write_dt DESC
     </select>
 
