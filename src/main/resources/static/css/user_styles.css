@@ -2957,6 +2957,9 @@ section.plan-detail {
     margin-left: 1.4%;
   }
 }
+div#mateList {
+  display: none;
+}
 div#plan-detail-header {
   margin-top: 10%;
   height: 250px;
@@ -3114,11 +3117,14 @@ a.reply-option {
   float: right;
   padding-left: 4.6%;
 }
-button#insert-reply-btn {
+button#insert-reply-btn, button.update-reply-btn {
   display: inline-block;
   width: 9%;
   height: 64px;
   float: right;
+}
+div.reply-update-form {
+  display:none;
 }
 @media (max-width: 1920px) {
   .comment p {
@@ -3140,4 +3146,16 @@ div.place-info p.memo {
 .other-reply, .my-reply {
   width: 20%;
   float: right;
+}
+
+select#day-select-box {
+  float: right;
+  width: 28%;
+  margin-right: -7%;
+  margin-bottom: 1%;
+}
+
+div.plan-detail-map div.map {
+  border: 2px solid #c4c4c4;
+  overflow: hidden;
 }

@@ -41,7 +41,7 @@
 <script>
 </script>
 </head>
-<body class="page-blog">
+<body class="page-blog" onload="initTmap()">
     <!-- ======= Header ======= -->
     {{>user_header}}
 
@@ -52,14 +52,14 @@
                 <h2 id="title">{{plan.title}}</h2>
                 <div id="like-icon">
                     {{^session_id}}
-                    <i class="bi bi-suit-heart"></i>
+                        <i class="bi bi-suit-heart"></i>
                     {{/session_id}}
                     {{#session_id}}
                         {{^isLike}}
-                        <i class="bi bi-suit-heart"></i>
+                            <a href="/triplan/insertLike?code={{plan.code}}"><i class="bi bi-suit-heart"></i></a>
                         {{/isLike}}
                         {{#isLike}}
-                        <i class="bi bi-suit-heart-fill"></i>
+                            <a href="/triplan/deleteLike?code={{plan.code}}"><i class="bi bi-suit-heart-fill"></i></a>
                         {{/isLike}}
                         <input type="hidden" id="now_user_id" value="{{now_user_id}}">
                     {{/session_id}}
@@ -71,7 +71,7 @@
                 </div>
                 <div class="meta-top">
                     <i class="bi bi-person"></i><span id="nickname" class="article-info"
-                    data-id="{{plan.id}}">{{plan.nickname}}</span>
+                                                      data-id="{{plan.id}}">{{plan.nickname}}</span>
                     <i class="bi bi-geo-alt"></i><span id="placeNum" class="article-info">{{plan.place_num}}</span>
                     <i class="bi bi-eye"></i><span id="views" class="article-info">{{plan.views}}</span>
                     </ul>
@@ -97,24 +97,30 @@
                     <div class="col-lg-8">
 
                         <article class="blog-details">
+                            <div id="mateList">
+                                {{#mateList}}
+                                    <div class="mate-id">{{id}}</div>
+                                {{/mateList}}
+                            </div>
 
                             <!--일정 내용-->
                             <div class="content">
 
                                 <div class="place-by-day">
                                     {{#placeList}}
-                                    <div class="place-info post-author d-flex align-items-center"
-                                    data-daynum="{{day}}" data-startday="{{travel_date}}">
-                                        <img src="{{photo_path}}" class="rounded-circle flex-shrink-0" alt="">
-                                        <div>
-                                            <h4 name="name">{{name}}</h4>
-                                            <p class="memo">
-                                                {{#memo}}
-                                                    {{memo}}
-                                                {{/memo}}
-                                            </p>
+                                        <div class="place-info post-author d-flex align-items-center"
+                                             data-daynum="{{day}}" data-startday="{{travel_date}}"
+                                             data-loc_x="{{loc_x}}" data-loc_y="{{loc_y}}">
+                                            <img src="{{photo_path}}" class="rounded-circle flex-shrink-0" alt="">
+                                            <div>
+                                                <h4 name="name">{{name}}</h4>
+                                                <p class="memo">
+                                                    {{#memo}}
+                                                        {{memo}}
+                                                    {{/memo}}
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
                                     {{/placeList}}
                                 </div>
 
@@ -129,13 +135,14 @@
 
                                 <div class="reply-form">
                                     <h4>댓글</h4>
-                                    <form action="">
+                                    <form id="replyInsertForm" action="/triplan/reply" method="post">
                                         <div class="row">
                                             <div class="col form-group">
-                                              <textarea name="comment" class="form-control"
-                                                        placeholder="내용을 입력하세요."></textarea>
-                                                <button type="submit" id="insert-reply-btn" class="basic-btn">등록
-                                                </button>
+                                                <textarea id="insert-reply-comment" name="content" class="form-control"
+                                                          placeholder="내용을 입력하세요."></textarea>
+                                                <button type="button" id="insert-reply-btn" class="basic-btn">등록</button>
+                                                <div class="errMsg" id="replyErrMsg">내용을 입력해주세요.</div>
+                                                <input type="hidden" name="plan_code" value="{{plan.code}}">
                                             </div>
                                         </div>
                                     </form>
@@ -143,61 +150,68 @@
 
                                 <div id="planDetail-reply-box">
                                     {{#replyList}}
-                                    <div class="comment">
-                                        <div class="d-flex">
-                                            <div class="comment-img"><img src="/img/user.png"></div>
-                                            <div>
-                                                <h5 class="reply-nickname" data-id="{{id}}">{{nickname}}</h5>
-                                                <div class="other-reply">
-                                                    <a href="#!" class="reply-option">신고</a>
+                                        <div class="reply-outer">
+                                            <div class="comment" id="comment{{code}}">
+                                                <div class="d-flex">
+                                                    <div class="comment-img"><img src="/img/user.png"></div>
+                                                    <div>
+                                                        <h5 class="reply-nickname" data-id="{{id}}">{{nickname}}</h5>
+                                                        <div class="other-reply">
+                                                            <a href="#!" class="reply-option op-report" data-code="{{code}}">신고</a>
+                                                        </div>
+                                                        <div class="my-reply">
+                                                            <a href="/triplan/deleteReply/{{plan.code}}/{{code}}" class="reply-option op-delete" data-code="{{code}}">삭제</a>
+                                                            <a href="#!" class="reply-option op-update" data-code="{{code}}">수정 | </a>
+                                                        </div>
+                                                        <p>
+                                                            {{content}}
+                                                        </p>
+                                                        <time datetime="2020-01-01">{{write_dt}}</time>
+                                                    </div>
                                                 </div>
-                                                <div class="my-reply">
-                                                    <a href="#!" class="reply-option">삭제</a>
-                                                    <a href="#!" class="reply-option">수정 | </a>
-                                                </div>
-                                                <p>
-                                                    {{content}}
-                                                </p>
-                                                <time datetime="2020-01-01">{{write_dt}}</time>
+                                            </div>
+                                            <div class="reply-form reply-update-form" id="update{{code}}">
+                                                <form id="replyUpdateForm{{code}}" action="/triplan/updateReply" method="post">
+                                                    <div class="row">
+                                                        <div class="col form-group">
+                                                            <textarea id="update-reply-comment" name="content" class="form-control"
+                                                              placeholder="내용을 입력하세요.">{{content}}</textarea>
+                                                            <button type="button" class="update-reply-btn basic-btn" value="{{code}}">수정</button>
+                                                            <div class="errMsg" id="replyErrMsg{{code}}">내용을 입력해주세요.</div>
+                                                            <input type="hidden" name="code" value="{{code}}">
+                                                            <input type="hidden" name="plan_code" value="{{plan.code}}">
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
-                                    </div>
                                     {{/replyList}}
                                 </div>
 
-                            </div><!-- End blog comments -->
+                            </div>
 
-                        </article><!-- End blog post -->
+                        </article>
 
                     </div>
+
                     <div class="col-lg-4">
-
                         <div class="sidebar ps-lg-4">
-
-                            <div class="sidebar-item recent-posts">
-                                <div class="mt-3">
-
-                                    <div class="post-item mt-3">
-                                        <img src="/img/blog/blog-recent-1.jpg" alt="" class="flex-shrink-0">
-                                        <div>
-                                            <h4><a href="blog-post.html">Nihil blanditiis at in nihil autem</a></h4>
-                                            <time datetime="2020-01-01">Jan 1, 2020</time>
-                                        </div>
-                                    </div><!-- End recent post item-->
-
+                            <div class="plan-detail-map sidebar-item recent-posts">
+                                <select name="day" id="day-select-box" class="form-select">
+                                    <option selected value="1">DAY1</option>
+                                </select>
+                                <div id="map_wrap" class="map_wrap">
+                                    <div id='map_div1' class="map"></div>
                                 </div>
-
-                            </div><!-- End sidebar recent posts-->
-
-                        </div><!-- End Blog Sidebar -->
-
+                            </div>
+                        </div>
                     </div>
 
                 </div>
             </div>
-        </section><!-- End Blog Details Section -->
+        </section>
 
-    </main><!-- End #main -->
+    </main>
 
   <!-- ======= Footer ======= -->
   {{>user_footer}}
@@ -218,6 +232,7 @@
   <script src="/js/user/main.js"></script>
 
   <script src="/js/user/plan_detail.js"></script>
+  <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx3baa04961c80465ea1fe8a3be504d3e1"></script>
 
 </body>
 </html>

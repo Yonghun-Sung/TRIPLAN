@@ -2281,7 +2281,7 @@ button#join-btn {
 }
 
 /*비밀번호 모달*/
-#findpw-modal input#id {
+/*#findpw-modal input#id {
   height: 45px;
   letter-spacing: 1px;
 }
@@ -2292,7 +2292,7 @@ button#join-btn {
 }
 button#findpw-btn {
   margin: 3% 0%;
-}
+}*/
 
 /*======================
   # 회원가입(joinform)
@@ -2324,10 +2324,14 @@ input#agree-terms {
   margin-top: 7%;
 }
 
-button#joininsert-btn {
+/*button#userupdate-btn {
   font-weight: 600;
   margin-top: 5%;
 }
+button#userdrop-btn {
+  font-weight: 600;
+  margin-top: 5%;
+}*/
 
 #termsOfService .mb-3, #privacyPolicy .mb-3 {
   font-size: 14px;
@@ -2824,3 +2828,29 @@ button.basic-btn2 {
     color: #000000;
 }
 
+/*user_profile_edit.mustache 회원정보수정 모달 취소, 탈퇴 버튼*/
+button#cancel-btn{
+    background: #6C757D;
+    color: #fff;
+    display: inline-box;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    border: none;
+    width: 45%;
+    height: 54px;
+    margin: 2%;
+
+}
+
+button#modal-drop-btn{
+background: var(--color-primary);
+    color: #fff;
+    display: inline-box;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    border: none;
+    width: 45%;
+    height: 54px;
+    margin: 2%;
+
+}

@@ -37,4 +37,9 @@ out/
 .vscode/
 
 ## 나중에 추가
+# **/src/main/resources/static/vendor
 # **/application.properties
+# **/src/main/java/com.site.triplan/controller/PlanController
+# **/src/main/resources/static/js/user/map.js
+# **/src/main/resources/static/templates/user_plan_detail.mustache
+# **/src/main/resources/static/templates/user_plan_insertform.mustache

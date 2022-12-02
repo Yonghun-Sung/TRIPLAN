@@ -28,7 +28,7 @@
 
     <!-- Template Main CSS File -->
     <link href="/css/mypage_style.css" rel="stylesheet">
-
+    <script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!--  마이로의 UIKit사용하기 위해 넣어봄-->
     <!--  &lt;!&ndash; UIkit CSS &ndash;&gt;
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.13/dist/css/uikit.min.css" />
@@ -72,9 +72,9 @@
                     <!--프로필이랑 나의 일정, 댓글, 좋아요한 글 인덱스 버튼-->
                     <div class="top-container">
                         <div class="profilePhotoContainer">
-                            <div class="profilePhoto-text" id="profilePhoto">이</div> <!--그냥 정적으로 이 라고 써놓음-->
+                            <div class="profilePhoto-text" id="profilePhoto">{{firstletterNickname}}</div>
                         </div>
-                        <div class="text">이름름</div><!--여기도 정적으로 넣음-->
+                        <div class="text">{{session_nickname}}</div><!--여기도 정적으로 넣음-->
                         <button class="btn-normal" onclick="location.href='/triplan/myprofile'">프로필 수정</button>
                     </div>
                     <div class="row">
@@ -90,7 +90,7 @@
                             </div>
                             <!--나의 댓글-->
                             <div class="index-circle" onclick="location.href='/triplan/mypage/reply'">
-                                <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
+                                <h6>
                                     <b>나의 댓글</b>
                                 </h6>
                                 <div>
@@ -115,18 +115,29 @@
                             <b>좋아요한 일정</b>
                         </h3>
                     </div>
-                    <!--삭제 버튼-->
-                    <div class="delete-buttonbox">
-                        <!--<button type="button" class="btn btn-outline-primary">선택삭제</button>-->
-                        <button type="button" class="btn btn-outline-primary" id="pick-btn">전체선택</button>
-                        <button type="button" class="btn btn-primary" id="delete_btn">삭제</button>
+<!--                    &lt;!&ndash;삭제 버튼&ndash;&gt;-->
+<!--                    <div class="delete-buttonbox">-->
+<!--                        &lt;!&ndash;<button type="button" class="btn btn-outline-primary">선택삭제</button>&ndash;&gt;-->
+<!--                        <button type="button" class="btn btn-outline-primary" id="pick-btn">전체선택</button>-->
+<!--                        <button type="button" class="btn btn-primary" id="delete-btn">삭제</button>-->
+<!--                    </div>-->
+
+                    <!--삭제버튼-->
+                    <div class="delete_buttonBox">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="all">
+                            <label class="form-check-label" for="all">
+                                <!--Default checkbox-->
+                            </label>
+                            <button type="button" class="btn btn-primary like-delete-btn" id="delete-btn">삭제</button>
+                        </div>
                     </div>
 
                 </div>
             </div>
         </div>
         <div style="height: 15px;"></div>
-        <div class="container" data-aos="fade-up" data-aos-delay="400"><!--좋아요한 일정들//원래 내꺼에서 172-->
+        <div class="container" data-aos="fade-up" data-aos-delay="400"><!--좋아요한 일정들 내꺼에서 172-->
 
             <div class="row g-5">
 
@@ -136,26 +147,26 @@
                         {{#likelist}}
                         <div class="col-lg-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
+                                <input class=" form-check-input like-cb" type="checkbox" name="cb1" data-code='{{code}}'><!--id="flexCheckDefault"  name = "cb1"-->
+                                <label class="form-check-label">
                                     <!--Default checkbox-->
                                 </label>
                             </div>
                             <article class="d-flex flex-column">
                                 <div class="post-img">
                                     <!--<a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>-->
-                                    <a href="#!"><img src="http://img.earthtory.com/img/place_img/312/7317_0_et.jpg" alt="" class="img-fluid"></a>
+                                    <img src="/img/main/{{area_engname}}.jpg" alt="" class="img-fluid">
                                 </div>
-
-                                <h2 class="title">
-                                    <a href="#!">{{name}}</a><br>
-                                    <span class="plan-title">{{title}}</span>
+                                <a class="title">
+                                    <div>{{name}}</div>
+                                    <a href="/triplan/plandetail?code={{code}}" class="a-title"><span class="plan-title">{{title}}</span></a>
                                 </h2>
 
                                 <div class="meta-top">
                                     <ul>
                                         <li class="d-flex align-items-center"><i class="bi bi-person"></i>{{nickname}}</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>{{placecount}}</li>
+                                        <!--<li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>placecount</li>-->
+                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>{{place_num}}</li>
                                         <li class="d-flex align-items-center"><i class="bi bi-eye"></i>{{views}}</li>
                                     </ul>
                                 </div>
@@ -167,7 +178,7 @@
                                 </div>
 
                                 <div class="read-more mt-auto align-self-end">
-                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
+                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a> <!--여기 나중에 일정상세페이지로 이동시키기-->
                                 </div>
                             </article>
                         </div><!-- End post list item -->
@@ -621,7 +632,7 @@
 
 <!-- Template Main JS File -->
 <script src="/js/user/main.js"></script>
-
+<script src="/js/mypage/delete.js"></script>
 
 </body>
 </html>

@@ -17,49 +17,8 @@
             JOIN area a ON a.code = p.area_code
             JOIN user_info u ON u.user_code = p.user_code
         WHERE area_code LIKE #{area_code}
+          AND p.code NOT IN (SELECT plan_code FROM plan_deleted)
         ORDER BY write_dt DESC
-    </select>
-
-    <!--일정 상세보기-->
-    <!-- >> 일정 내용-->
-    <select id="getPlanDetail" resultType="com.site.triplan.vo.PlanVo">
-        SELECT p.code, p.title
-             , date_format(p.start_dt, '%Y-%m-%d') "start_dt"
-             , date_format(p.end_dt, '%Y-%m-%d') "end_dt"
-             , p.views, p.area_code, u.user_code, u.nickname, u.id
-             , (SELECT count(*)
-                FROM place
-                WHERE plan_code = p.code) "place_num"
-             , (SELECT count(*)
-                FROM reply
-                WHERE plan_code = p.code) "reply_num"
-        FROM plan p
-            JOIN user_info u ON u.user_code = p.user_code
-        WHERE p.code=#{plan_code}
-    </select>
-    <!-- >> 찜 여부-->
-    <select id="isLike" resultType="java.lang.Integer">
-        SELECT count(*)
-        FROM `like`
-        WHERE plan_code=#{plan_code} AND user_code=#{user_code};
-    </select>
-    <!-- >> 장소 목록-->
-    <select id="getPlaceList" resultType="com.site.triplan.vo.AttractionVo">
-        SELECT DATE_ADD(date_format(start_dt, '%Y-%m-%d'), INTERVAL (p.day-1) DAY) "travel_date"
-             , p.day, p.order, p.name, p.memo, p.loc_x, p.loc_y, p.photo_path
-        FROM place p
-            JOIN plan pl ON p.plan_code = pl.code
-        WHERE p.plan_code=#{plan_code}
-        ORDER BY p.day, p.order
-    </select>
-    <!-- >> 댓글 목록-->
-    <select id="getReplyList" resultType="com.site.triplan.vo.ReplyVo">
-        SELECT r.code, r.content, date_format(r.write_dt, '%Y-%m-%d') "write_dt", r.plan_code
-             , u.user_code, u.nickname, u.id
-        FROM reply r
-            JOIN user_info u ON r.user_code = u.user_code
-        WHERE r.plan_code = #{plan_code}
-        ORDER BY r.write_dt DESC
     </select>
 
     <!--지역-->
@@ -89,6 +48,87 @@
     <!-- >> 장소 INSERT -->
     <insert id="insertPlace">
         INSERT INTO place (day, `order`, name, loc_x, loc_y, memo, photo_path, plan_code)
-        VALUES (#{day}, #{order}, #{name}, #{loc_x}, #{loc_x}, #{memo}, #{photo_path}, #{plan_code})
+        VALUES (#{day}, #{order}, #{name}, #{loc_x}, #{loc_y}, #{memo}, #{photo_path}, #{plan_code})
     </insert>
+
+    <!--일정 상세보기-->
+    <!-- >> 일정 내용-->
+    <select id="getPlanDetail" resultType="com.site.triplan.vo.PlanVo">
+        SELECT p.code, p.title
+             , date_format(p.start_dt, '%Y-%m-%d') "start_dt"
+             , date_format(p.end_dt, '%Y-%m-%d') "end_dt"
+             , p.views, p.area_code, u.user_code, u.nickname, u.id
+             , (SELECT count(*)
+                FROM place
+                WHERE plan_code = p.code) "place_num"
+             , (SELECT count(*)
+                FROM reply
+                WHERE plan_code = p.code) "reply_num"
+        FROM plan p
+                 JOIN user_info u ON u.user_code = p.user_code
+        WHERE p.code=#{plan_code}
+    </select>
+    <!-- >> 조회수 업데이트 -->
+    <update id="updateViews">
+        UPDATE plan
+        SET views = views + 1
+        WHERE code=#{code}
+    </update>
+    <!-- >> 좋아요 여부-->
+    <select id="isLike" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM `like`
+        WHERE plan_code=#{plan_code} AND user_code=#{user_code};
+    </select>
+    <!-- >> 좋아요 등록 -->
+    <insert id="insertLike">
+        INSERT INTO `like` (plan_code, user_code)
+        VALUES(#{plan_code}, #{user_code})
+    </insert>
+    <!-- >> 좋아요 해제 -->
+    <delete id="deleteLike">
+        DELETE FROM `like`
+        WHERE plan_code=#{plan_code} AND user_code=#{user_code}
+    </delete>
+    <!-- >> 장소 목록-->
+    <select id="getPlaceList" resultType="com.site.triplan.vo.AttractionVo">
+        SELECT DATE_ADD(date_format(start_dt, '%Y-%m-%d'), INTERVAL (p.day-1) DAY) "travel_date"
+             , p.day, p.order, p.name, p.memo, p.loc_x, p.loc_y, p.photo_path
+        FROM place p
+                 JOIN plan pl ON p.plan_code = pl.code
+        WHERE p.plan_code=#{plan_code}
+        ORDER BY p.day, p.order
+    </select>
+    <!-- >> 댓글 목록-->
+    <select id="getReplyList" resultType="com.site.triplan.vo.ReplyVo">
+        SELECT r.code, r.content, date_format(r.write_dt, '%Y-%m-%d') "write_dt", r.plan_code
+             , u.user_code, u.nickname, u.id
+        FROM reply r
+                 JOIN user_info u ON r.user_code = u.user_code
+        WHERE r.plan_code = #{plan_code}
+        ORDER BY r.write_dt DESC
+    </select>
+    <!-- >> 댓글 등록 -->
+    <insert id="insertReply">
+        INSERT INTO reply (content, plan_code, user_code)
+        VALUES(#{content}, #{plan_code}, #{user_code})
+    </insert>
+    <!-- >> 댓글 수정 -->
+    <update id="updateReply">
+        UPDATE reply
+        SET content=#{content}
+        WHERE code=#{code} AND plan_code=#{plan_code} AND user_code=#{user_code}
+    </update>
+    <!-- >> 댓글 삭제 -->
+    <delete id="deleteReply">
+        DELETE FROM reply
+        WHERE code=#{code} AND plan_code=#{plan_code} AND user_code=#{user_code}
+    </delete>
+    <!-- >> 동행자 목록 -->
+    <select id="getMateList" resultType="com.site.triplan.vo.MateVo">
+        SELECT m.code, m.plan_code, u.user_code, u.id
+        FROM mate m
+                 JOIN user_info u ON m.user_code = u.user_code
+        WHERE m.plan_code=#{plan_code}
+    </select>
 </mapper>

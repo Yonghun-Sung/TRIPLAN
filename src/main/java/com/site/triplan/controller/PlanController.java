@@ -1,11 +1,8 @@
 package com.site.triplan.controller;
 
 import com.site.triplan.service.PlanService;
-import com.site.triplan.vo.AreaVo;
-import com.site.triplan.vo.AttractionVo;
+import com.site.triplan.vo.*;
 
-import com.site.triplan.vo.PlanVo;
-import com.site.triplan.vo.ReplyVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -53,31 +50,6 @@ public class PlanController {
         model.addAttribute("areaList", areaList);
         model.addAttribute("planList", planList);
         return "user_plan_list";
-    }
-
-    // 일정 상세보기
-    @GetMapping("/plandetail")
-    public String showPlanDetail(Model model, HttpServletRequest request, @RequestParam(required=true)String code) {
-        HttpSession session = request.getSession();
-        String session_id = (String)session.getAttribute("session_id");
-
-        PlanVo plan = planService.getPlanDetail(code);
-        List<AttractionVo> placeList = new ArrayList<>();
-        List<ReplyVo> replyList = new ArrayList<>();
-        if (session_id != null) {
-            int user_code = planService.getUserCodeById(session_id);
-            int isLike = planService.isLike(code, user_code);
-            if (isLike > 0)
-                model.addAttribute("isLike", isLike);
-
-            model.addAttribute("now_user_id", session_id);
-        }
-        placeList = planService.getPlaceList(code);
-        replyList = planService.getReplyList(code);
-        model.addAttribute("plan", plan);
-        model.addAttribute("placeList", placeList);
-        model.addAttribute("replyList", replyList);
-        return "user_plan_detail";
     }
 
     // 일정 모달창
@@ -278,4 +250,133 @@ public class PlanController {
         return view;
     }
 
+    // 일정 상세보기
+    @GetMapping("/plandetail")
+    public String showPlanDetail(Model model, HttpServletRequest request, @RequestParam(required=true)String code) {
+        HttpSession session = request.getSession();
+        String session_id = (String)session.getAttribute("session_id");
+
+        PlanVo plan = planService.getPlanDetail(code);
+        planService.updateViews(code);
+        List<MateVo> mateList = new ArrayList<>();
+        List<AttractionVo> placeList = new ArrayList<>();
+        List<ReplyVo> replyList = new ArrayList<>();
+        if (session_id != null) {
+            int user_code = planService.getUserCodeById(session_id);
+            int isLike = planService.isLike(code, user_code);
+            if (isLike > 0)
+                model.addAttribute("isLike", isLike);
+
+            model.addAttribute("now_user_id", session_id);
+        }
+        mateList = planService.getMateList(code);
+        placeList = planService.getPlaceList(code);
+        replyList = planService.getReplyList(code);
+        model.addAttribute("plan", plan);
+        model.addAttribute("mateList", mateList);
+        model.addAttribute("placeList", placeList);
+        model.addAttribute("replyList", replyList);
+        return "user_plan_detail";
+    }
+
+    // 좋아요 등록
+    @GetMapping("/insertLike")
+    public String insertLike(Model model, HttpServletRequest request, @RequestParam String code) {
+        HttpSession session = request.getSession();
+        String session_id = (String)session.getAttribute("session_id");
+
+        String view = "";
+        if (session_id == null) {
+            view = "redirect:/triplan/loginform?errCode=2";
+        } else {
+            int user_code = planService.getUserCodeById(session_id);
+            int result = planService.insertLike(code, user_code);
+            if (result > 0)
+                view = "redirect:/triplan/plandetail?code=" + code;
+            else
+                view = "redirect:/triplan/plandetail?code=" + code + "&errCode=1";
+        }
+        return view;
+    }
+    // 좋아요 해제
+    @GetMapping("/deleteLike")
+    public String deleteLike(Model model, HttpServletRequest request, @RequestParam String code) {
+        HttpSession session = request.getSession();
+        String session_id = (String)session.getAttribute("session_id");
+
+        String view = "";
+        if (session_id == null) {
+            view = "redirect:/triplan/loginform?errCode=2";
+        } else {
+            int user_code = planService.getUserCodeById(session_id);
+            int result = planService.deleteLike(code, user_code);
+            if (result > 0)
+                view = "redirect:/triplan/plandetail?code=" + code;
+            else
+                view = "redirect:/triplan/plandetail?code=" + code + "&errCode=1";
+        }
+        return view;
+    }
+
+    // 댓글 등록
+    @PostMapping("/reply")
+    public String insertReply(Model model, HttpServletRequest request, ReplyVo reply) {
+        HttpSession session = request.getSession();
+        String session_id = (String)session.getAttribute("session_id");
+
+        String view = "";
+        if (session_id == null) {
+            view = "redirect:/triplan/loginform?errCode=2";
+        } else {
+            int user_code = planService.getUserCodeById(session_id);
+            reply.setUser_code(Integer.toString(user_code));
+            int result = planService.insertReply(reply);
+            if (result > 0)
+                view = "redirect:/triplan/plandetail?code=" + reply.getPlan_code() + "&focus=re";
+            else
+                view = "redirect:/triplan/plandetail?code=" + reply.getPlan_code() + "&focus=re&errCode=1";
+        }
+        return view;
+    }
+
+    // 댓글 수정
+    @PostMapping("/updateReply")
+    public String updateReply(Model model, HttpServletRequest request, ReplyVo reply) {
+        HttpSession session = request.getSession();
+        String session_id = (String)session.getAttribute("session_id");
+
+        String view = "";
+        if (session_id == null) {
+            view = "redirect:/triplan/loginform?errCode=2";
+        } else {
+            int user_code = planService.getUserCodeById(session_id);
+            reply.setUser_code(Integer.toString(user_code));
+            int result = planService.updateReply(reply);
+            if (result > 0)
+                view = "redirect:/triplan/plandetail?code=" + reply.getPlan_code() + "&focus=re";
+            else
+                view = "redirect:/triplan/plandetail?code=" + reply.getPlan_code() + "&focus=re&errCode=1";
+        }
+        return view;
+    }
+
+    // 댓글 삭제
+    @GetMapping("/deleteReply/{plan_code}/{code}")
+    public String deleteReply(Model model, HttpServletRequest request, ReplyVo reply) {
+        HttpSession session = request.getSession();
+        String session_id = (String)session.getAttribute("session_id");
+        String view = "";
+        if (session_id == null) {
+            view = "redirect:/triplan/loginform?errCode=2";
+        } else {
+            int user_code = planService.getUserCodeById(session_id);
+            reply.setUser_code(Integer.toString(user_code));
+            int result = planService.deleteReply(reply);
+            if (result > 0)
+                view = "redirect:/triplan/plandetail?code=" + reply.getPlan_code() + "&focus=re";
+            else
+                view = "redirect:/triplan/plandetail?code=" + reply.getPlan_code() + "&focus=re&errCode=1";
+        }
+        return view;
+    }
 }

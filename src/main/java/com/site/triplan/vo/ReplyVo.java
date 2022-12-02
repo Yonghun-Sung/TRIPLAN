@@ -11,7 +11,6 @@ public class ReplyVo {
     String write_dt; //reply.write_dt
     String title; //plan.title
     String name; //area.name
-    //user_code받아야하나?
 
     String code, user_code, nickname, plan_code, id;
 
