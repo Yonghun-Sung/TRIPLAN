@@ -23,11 +23,6 @@
         AND p.code NOT IN (SELECT plan_code FROM plan_deleted);
     </select>
     <select id="getPlanCount" resultType="Integer"><!--나의 일정 갯수 : 삭제테이블에 있는 일정 제외-->
-        <!--SELECT count(*) FROM plan p WHERE p.user_code =#{code} AND p.`code`
-        IN (SELECT p.code FROM plan p
-        LEFT OUTER JOIN plan_deleted pd
-        ON p.code = pd.plan_code
-        WHERE pd.plan_code IS NULL)-->
         SELECT sum((SELECT count(*) FROM mate m WHERE m.user_code =#{code})+(SELECT count(*) FROM plan p WHERE p.user_code =#{code} AND p.`code`
         IN (SELECT p.code FROM plan p
         LEFT OUTER JOIN plan_deleted pd

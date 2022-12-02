@@ -139,14 +139,15 @@ $('#pwNew').on('keyup', function() {
     /*$('#newPwMsg').css('color', '#e01b1b');*/
     $('#newPwMsg').css("color", '#e01b1b');
 	//비밀번호 공백 확인
-	let pwNew = $("#newPw").val();
+	let pwNew = $("#pwNew").val();
 	if($("#pwNew").val() === ""){
 		$('#newPwMsg').html('<b>비밀번호는 필수 정보입니다.</b>');
 		chk2 = false;
 	}
 	//비밀번호 유효성검사
-	/*else if(!/(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\W)(?=\S+$).{8,20}/.test(pwNew)){*/
-	else if(!/(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,20}/.test(pwNew)){
+	/*else if(!/(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\W)(?=\S+$).{8,20}/.test(pwNew)){*//*/(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,20}/
+	/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/*/
+	else if(!/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/.test(pwNew)){
 		$('#newPwMsg').html('<b>비밀번호는 8~20자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</b>');
 		chk2 = false;
 	} else {
@@ -169,7 +170,6 @@ $('#newPwCheck').on('keyup', function() {
 		$('#newPwCheckMsg').html('<b>비밀번호가 일치하지 않습니다.</b>');
 		chk3 = false;
 	} else {
-	alert(newPwCheck);
 		$('#newPwCheckMsg').html('');
 		chk3 = true;
     }
@@ -189,20 +189,15 @@ $('.basic-btn2.userupdate-btn').click(function(){
 		const nickname = $('#nickname').val();
 		const pw = $("#pwNew").val();
 		$.ajax({
-			method: "POST",
-			url: "/myapp/user/pw-change",
+			method: "PUT",
+			url: "/triplan/myprofile/update",
 			data:{
 			    "nickname": nickname,
                 "pw": pw
                 }
             }).done(function(response) {
-                console.log("result: " + result);
-                if(result === "changeSuccess") {
-                    alert('비밀번호가 변경되었습니다.');
-                    location.href ="/myapp/user/pw-change";
-                } else {
-                alert('현재 비밀번호가 틀렸습니다.');
-                }
+                alert("회원정보가 변경되었습니다.");
+                window.location.href = "/triplan/main";
             }).fail(function(e){
                 alert('입력정보를 다시 확인하세요.');
             });
