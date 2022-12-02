@@ -1,24 +1,30 @@
 package com.site.triplan.service;
 
 import com.site.triplan.mapper.AdminMapper;
+import com.site.triplan.vo.AdminVo;
 import com.site.triplan.vo.ReportVo;
 import com.site.triplan.vo.UserVo;
+import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public class AdminService {
+@RequiredArgsConstructor // 생성자 자동생성 및 final 변수 의존관계 자동 설정
+public class AdminService implements UserDetailsService{    // security에서 지정한 형식 = UserDetailsService
 
-    private AdminMapper adminMapper;
+    private final AdminMapper adminMapper;
 
-    public AdminService(AdminMapper adminMapper) {
-
-        this.adminMapper = adminMapper;
-    }
+//    public AdminService(AdminMapper adminMapper) {
+//
+//        this.adminMapper = adminMapper;
+//    }
 
     public List<UserVo> postAllUser() {         // 전체회원
         return adminMapper.findAll();}
@@ -52,5 +58,24 @@ public class AdminService {
         return adminMapper.monthlyNewbie();
     }       // 월간 신규 회원
 
+
+
+//    @Transactional
+//    public void joinAdmin(AdminVo adminVo){
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        adminVo.setPw(passwordEncoder.encode(adminVo.getPassword()));
+//        adminVo.setAuth("ADMIN");
+//        adminMapper.saveAdmin(adminVo);
+//    }
+
+    @Override
+    public AdminVo loadUserByUsername(String id) throws UsernameNotFoundException{
+        AdminVo adminVo = adminMapper.getAdminAccount(id);                // 여기고 받은 유저 패스워드와 비교하여 로그인 인증
+        System.out.println(adminVo);
+        if (adminVo == null) {
+            throw new UsernameNotFoundException("User not authorized");
+        }
+        return  adminVo;
+    }
 
 }
