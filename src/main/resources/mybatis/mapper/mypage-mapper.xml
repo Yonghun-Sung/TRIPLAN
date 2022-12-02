@@ -13,10 +13,14 @@
         AND (rr.code IS NULL OR rp.result_code = 2)
         AND p.code NOT IN (SELECT plan_code FROM plan_deleted);
     </select>
-    <select id="getReplyCount" resultType="Integer"><!--나의 댓글 갯수-->
+    <select id="getReplyCount" resultType="Integer"><!--나의 댓글 갯수 : 삭제된 일정에 있는 댓글 , 신고승인된 댓글 안보임+ 갯수도 안세짐-->
         SELECT COUNT(*) FROM reply r
         JOIN plan p ON r.plan_code = p.code
-        WHERE r.user_code =#{code} AND p.code NOT IN (SELECT plan_code FROM plan_deleted);
+        LEFT JOIN report_reg rr ON r.code = rr.reply_code
+        LEFT JOIN report_proc rp ON rr.code = rp.reg_code
+        WHERE r.user_code =#{code}
+        AND (rr.code IS NULL OR rp.result_code = 2)
+        AND p.code NOT IN (SELECT plan_code FROM plan_deleted);
     </select>
     <select id="getPlanCount" resultType="Integer"><!--나의 일정 갯수 : 삭제테이블에 있는 일정 제외-->
         <!--SELECT count(*) FROM plan p WHERE p.user_code =#{code} AND p.`code`
