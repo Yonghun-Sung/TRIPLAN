@@ -2,7 +2,6 @@ package com.site.triplan.mapper;
 
 import com.site.triplan.vo.PlanVo;
 import com.site.triplan.vo.ReplyVo;
-import com.site.triplan.vo.UserDto;
 import com.site.triplan.vo.UserVo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -54,9 +53,13 @@ public interface MypageMapper {
     //체크한 댓글 삭제
     void deleteReply(String code, Integer reply_code);
     //회원정보 수정(닉네임, 패스워드) 아이디필요
-  /*  void updateUser(String nickname, String pw, String id);*/
-    void updateUser(UserDto userDto);
+    void updateUser(String nickname, String pw, String id);
+/*    void updateUser(UserDto userDto);*/
     // 회원탈퇴테이블로 옮기기
     /*UserVo userToDropTbl(@Param("id") String id, @Param("name") String name, @Param("nickname") String nickname, @Param("user_code") Integer user_code);*/
     void userToDropTbl(UserVo user);
+
+    //동행자 이메일 가져오기
+    UserVo searchMate(String mateEmail);//session에서 받아올 id
+    void addMate(Integer plan_code, Integer user_code);
 }

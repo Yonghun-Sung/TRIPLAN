@@ -23,6 +23,7 @@ public class UserVo {
     String date;
 
     // 회원 탈퇴 시  drop테이블에 넣을 정보 객체
+    // 동행자 추가 회원 불러올 정보
     public UserVo(String id, String name, String nickname, Integer user_code) {
         this.id = id;
         this.name = name;

@@ -64,22 +64,25 @@
                     </div>
                     <div class="mb-3">
                         <label for="nickname" class="form-label">닉네임</label>
-                        <input type="text" value="{{userprofile.nickname}}" class="form-control" id="nickname" placeholder="닉네임 입력">
-                        {{#valid_nickname}}<span id="valid">{{valid_nicnkname}}</span>{{/valid_nickname}}
+                        <input type="text" value="{{userprofile.nickname}}" class="form-control" id="nickname" placeholder="수정할 닉네임을 입력해주세요"/>
                     </div>
                     <div class="mb-3">
                         <label for="pw" class="form-label">현재 비밀번호</label>
-                        <input type="password" class="form-control" id="pw" placeholder="password">
+                        <input type="password" class="form-control current-pw" id="dbUserPw" placeholder="password">
+                        <div id="currentPwMsg"></div>
+                        <input type="hidden" id="db-userpw" value="{{userprofile.pw}}" />
+
                         <!--                        <input type="password" class="form-control" id="pw" placeholder="문자,숫자,특수문자 포함 8~20자">-->
                     </div>
                     <div class="mb-3">
                         <label for="pw" class="form-label">새 비밀번호</label>
                         <input type="password" class="form-control" id="pwNew" placeholder="문자,숫자,특수문자 포함 8~20자">
-                        {{#valid_pw}}<span id="valid">{{valid_pw}}</span>{{/valid_pw}}
+                        <div id="newPwMsg"></div>
                     </div>
                     <div class="mb-3">
                         <label for="pw" class="form-label">비밀번호 확인</label>
-                        <input type="password" class="form-control" id="pw" placeholder="비밀번호 재입력">
+                        <input type="password" class="form-control" id="newPwCheck" placeholder="비밀번호 재입력">
+                        <div id="newPwCheckMsg"></div>
                     </div>
 
                     <!--<div class=" text-center">
@@ -90,7 +93,7 @@
                 </form>
                 <div class=" text-center">
                     <button id="button userdrop-btn" class="basic-btn2" data-bs-toggle="modal" data-bs-target="#exampleModal">회원탈퇴</button>
-                    <button id="userupdate-btn" class="basic-btn2">저장</button>
+                    <button id="userupdate-btn" class="basic-btn2 userupdate-btn">저장</button>
                 </div>
                 <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Launch demo modal

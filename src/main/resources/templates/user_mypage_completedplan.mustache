@@ -149,6 +149,7 @@
                                         <img src="/img/main/{{area_engname}}.jpg" class="flex-shrink-0">
                                     </div>
                                     <div class="uk-width-1-2 info-container">
+                                        <div class="travel-region-engname">{{area_engname}}</div>
                                         <div class="travel-region">{{name}}</div> <!--클래스 travel-title-->
                                         <div class="user-id">{{id}}</div>
                                     </div>
@@ -275,14 +276,12 @@
                             <input type="email" class="form-control mate-email" placeholder="이메일 입력" required/>
                         </div>
                         <div class="mb-3">
-                            <br><br>
-                            여기에 검색된 이메일 출력
                             <div id="user_info">
                                 <div id="user_detail">
-                                    (여기에 user의 id, nickname같은거 보여주면 됨)
-                                    (없으면 검색 내용 없다는 거 넣어주거나)
-                                    <div id="user_id"></div>
-                                    <div id="user_nickname"></div>
+                                    <div id="user_nickname" class="mate-nickname"></div>
+                                    <div id="user_id" class="mate-id"></div>
+                                    <button type="button" class="btn btn-secondary mate-add" id="mate-addBtn" style="display: none">추가</button>
+                                    <div id="user_code" class="mate-user_code" style="display: none"></div>
                                 </div>
                             </div>
                         </div>
@@ -290,14 +289,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary">추가</button><!--data-bs-dismiss="modal"-->
                     <button type="button" class="btn btn-primary mate-search" id="searchbtn">검색</button>
-                    <!--data-code="userprofile.user_code}}"-->
                 </div>
-                <!--                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" id="cancel-btn" onclick="location.href='/triplan/myprofile'">취소</button>
-                                    <button type="button" class="btn btn-primary" id="modal-drop-btn">회원 탈퇴</button>
-                                </div>-->
             </div>
         </div>
     </div>

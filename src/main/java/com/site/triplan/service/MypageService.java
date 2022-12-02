@@ -3,15 +3,10 @@ package com.site.triplan.service;
 import com.site.triplan.mapper.MypageMapper;
 import com.site.triplan.vo.PlanVo;
 import com.site.triplan.vo.ReplyVo;
-import com.site.triplan.vo.UserDto;
 import com.site.triplan.vo.UserVo;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class MypageService {
@@ -119,10 +114,10 @@ public class MypageService {
     }
 
     //회원정보 수정(닉네임, 비밀번호)
-    /*public void updateUser(String nickname, String pw, String id) {
+    public void updateUser(String nickname, String pw, String id) {
         mypageMapper.updateUser(nickname, pw, id);
-    }*/
-    //회원정보 수정 시 비밀번호 유효성 체크
+    }
+    /*//회원정보 수정 시 비밀번호 유효성 체크
     public Map<String, String> validateHandling(Errors errors) {
         Map<String, String> validatorResult = new HashMap<>();
 
@@ -131,11 +126,11 @@ public class MypageService {
             validatorResult.put(validKeyName, error.getDefaultMessage());
         }
         return validatorResult;
-    }
+    }*/
     // 회원정보 수정
-    public void updateUser(UserDto userDto) {
+    /*public void updateUser(UserDto userDto) {
         mypageMapper.updateUser(userDto);
-    }
+    }*/
 
     // 탈퇴버튼 -> 회원탈퇴 테이블로 이동
     /*public UserVo userToDropTbl(String id, String name, String nickname, Integer user_code) {
@@ -144,4 +139,12 @@ public class MypageService {
     public void userToDropTbl(UserVo user) {
         mypageMapper.userToDropTbl(user);
     }
+
+    public UserVo searchMate(String mateEmail) {
+        return mypageMapper.searchMate(mateEmail);
+    }
+
+    public void addMate(Integer plan_code, Integer user_code) {
+        mypageMapper.addMate(plan_code, user_code);
+    };
 }

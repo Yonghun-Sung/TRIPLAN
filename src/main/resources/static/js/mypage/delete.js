@@ -1,24 +1,3 @@
-/*function checkAll() {
-var checks = document.getElementById("all")
-
-if(document.getElementById("all").checked==true) {
-for(var i=0;i<)
-}
-}*/
-
-/*function checkAll() {
-    if($("#all").is('checked')) {
-        $("input[name=cb1]").prop("checked", true);
-    } else {
-        $("input[name=cb1]").prop("checked", false);
-    }
-}*/
-/*
-
-$(document).ready(function() {
-$('.')
-
-})*/
 //삭제 체크박스 전체선택 및 전체 해제
 $('#all').click(function () {
     if($("input:checkbox[id='all']").prop("checked")) {
@@ -29,101 +8,6 @@ $('#all').click(function () {
 });
 
 
-
-
-//전체
-
-/*function deleteReport(){
-        var cnt = $("input[name='reportChkBxRow']:checked").length;
-        var arr = new Array();
-        $("input[name='reportChkBxRow']:checked").each(function() {
-            arr.push($(this).attr('id'));
-        });
-        if(cnt == 0){
-            alert("선택된 글이 없습니다.");
-        }
-        else{
-            $.ajax = {
-                type: "POST"
-                url: "OOOO.do"
-                data: "RPRT_ODR=" + arr + "&CNT=" + cnt,
-                dataType:"json",
-                success: function(jdata){
-                    if(jdata != 1) {
-                        alert("삭제 오류");
-                    }
-                    else{
-                        alert("삭제 성공");
-                    }
-                },
-                error: function(){alert("서버통신 오류");}
-            };
-        }
-    }
-
-
-$()*/
-
-
-// 나의 일정에서 삭제버튼 눌렀을때(아직 완료된 일정만 반영해놓음)
-/*
-$("#deleteSavedBtn_0").click(function() {
-    var id = $("#deleteSavedBtn_0").val();
-    $.ajax({
-        method: "DELETE",
-        url: "/mypage/plan/delete"+id,
-        dataType: 'json',
-        ContentType: "application/json"
-    }).done(function(){
-        alert('일정이 삭제되었습니다.');
-        window.location.href = "/mypage";
-    });
-});
-*/
-//
-/*//여행제목 수정 js
-$("#inputTravelName_idx_a").click(function(){
-    var code = $("#title-edit-code").val();//hidden으로 숨겨져있던 일정 code
-    var title = $("inputTravelName_idx_0").val();//일정 title폼에 입력된 제목
-
-    $.ajax({
-        method: "PUT",
-        url: "mypage",
-        data: JSON.stringify({
-            "code": code,
-            "title": title
-        }),
-        contentType: "application/json"
-    }).done(function(){
-        console.log("success");
-        alert("여행 제목이 변경되었습니다.");
-        window.location.href = "/mypage";
-    });
-});*/
-/*
-function titleEdit(){
-    var code = $("#title-edit-code").val();//hidden으로 숨겨져있던 일정 code
-    var title = $("#inputTravelName_idx_0").val();//일정 title폼에 입력된 제목
-
-
-    title = $('#inputTravelName_idx_a').val();
-    alert(title);
-
-    $.ajax({
-        method: "PUT",
-        url: "/triplan/mypage",
-        data: {
-            "code": code,
-            "title": title
-        },
-        contentType: "application/json"
-    }).done(function(response){
-        console.log("success");
-        alert("여행 제목이 변경되었습니다.");
-        window.location.href = "/";
-    });
-};
-*/
 
 //여행제목 수정 버튼
 $('.inputTravelName_idx_a').click(function() {
@@ -226,31 +110,105 @@ $('.btn.btn-primary.reply-delete-btn').click(function() {
     });
 });
 
-//회원정보 수정(닉네임, 비밀번호)
-$('#userupdate-btn').click(function() {
-    let nickname = $('#nickname').val();
-    alert(nickname);
-    let pw = $('#pwNew').val();
-    alert(pw);
-    $.ajax({
-        method: "PUT",
-        url: "/triplan/myprofile/update",
-        data: {
-            "nickname": nickname,
-            "pw": pw
-        }
-    }).done(function(response){
-        console.log(response);
-        console.log("success");
-        alert("회원정보가 변경되었습니다.");
-        window.location.href = "/triplan/myprofile";
-    })
-    .fail(function (e) {
-        console.log("err");
-        console.log(e.status);
-        console.log(e.responseText);
-    });
+
+
+let chk1 = true;
+let chk2 = true;
+let chk3 = true;
+
+// 현재 비밀번호 일치하는지 확인 요청
+$('#dbUserPw').on('keyup', function(){
+    $('#currentPwMsg').css("color", "#0064d6");
+    let dbPw = $('#db-userpw').val(); // 기존 db의 pw
+    let currentPw = $('.form-control.current-pw').val(); //입력받은 현재 비밀번호
+    /*alert("현재입력받은 비번: " + currentPw);
+    alert("디비 비번: "+ dbPw);*/
+    if(currentPw === dbPw) {
+        $('#currentPwMsg').html('');
+        chk1 = true;
+    } else {
+        $('#currentPwMsg').html('<b>현재 비밀번호를 정확히 입력해주세요.</b>');
+        chk1 = false;
+    }
+/*    error : function(error) {
+    console.log(error)
+    }*/
 });
+//새로운 비번
+$('#pwNew').on('keyup', function() {
+    /*$('#newPwMsg').css('color', '#e01b1b');*/
+    $('#newPwMsg').css("color", '#e01b1b');
+	//비밀번호 공백 확인
+	let pwNew = $("#newPw").val();
+	if($("#pwNew").val() === ""){
+		$('#newPwMsg').html('<b>비밀번호는 필수 정보입니다.</b>');
+		chk2 = false;
+	}
+	//비밀번호 유효성검사
+	/*else if(!/(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\W)(?=\S+$).{8,20}/.test(pwNew)){*/
+	else if(!/(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,20}/.test(pwNew)){
+		$('#newPwMsg').html('<b>비밀번호는 8~20자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</b>');
+		chk2 = false;
+	} else {
+		$('#newPwMsg').html('');
+		chk2 = true;
+	}
+}); //end of new password
+
+
+//비밀번호 확인
+$('#newPwCheck').on('keyup', function() {
+    let newPwCheck = $("#newPwCheck").val();
+    let pwNew2 = $("#pwNew").val();
+    $('#newPwCheckMsg').css("color", '#e01b1b');
+
+	if(newPwCheck === "") {
+		$('#newPwCheckMsg').html('<b>비밀번호 확인은 필수 정보입니다.</b>');
+		chk3 = false;
+	} else if(pwNew2 != newPwCheck) {
+		$('#newPwCheckMsg').html('<b>비밀번호가 일치하지 않습니다.</b>');
+		chk3 = false;
+	} else {
+	alert(newPwCheck);
+		$('#newPwCheckMsg').html('');
+		chk3 = true;
+    }
+});//end of passwordCheck
+
+//비밀번호 변경 요청처리하기
+$('.basic-btn2.userupdate-btn').click(function(){
+
+	if(chk1 == false) {
+		alert('현재 비밀번호가 틀렸습니다.');
+	} else if(chk2 == false){
+		alert('2번 틀림');
+	} else if(chk3 == false){
+		alert('3번 틀림');
+
+	} else if(chk1 && chk2 && chk3) {
+		const nickname = $('#nickname').val();
+		const pw = $("#pwNew").val();
+		$.ajax({
+			method: "POST",
+			url: "/myapp/user/pw-change",
+			data:{
+			    "nickname": nickname,
+                "pw": pw
+                }
+            }).done(function(response) {
+                console.log("result: " + result);
+                if(result === "changeSuccess") {
+                    alert('비밀번호가 변경되었습니다.');
+                    location.href ="/myapp/user/pw-change";
+                } else {
+                alert('현재 비밀번호가 틀렸습니다.');
+                }
+            }).fail(function(e){
+                alert('입력정보를 다시 확인하세요.');
+            });
+    }
+    });
+
 //회원탈퇴모달창-탈퇴버튼 클릭하면 id는 세션에서 받을수있어서 제외, name, nickname(마찬가지), code(마찬가지) 보내주기
 $('#modal-drop-btn').click(function() {
    /* let id = $('#id')*/
@@ -293,55 +251,65 @@ $('#modal-drop-btn').click(function() {
             });
     }
 
-/*    $.ajax({
-        method: "POST",
-        url: "/triplan/myprofile/drop",
-        data: {
-            *//*"id" : id,*//*
-            "name" : name,
-            *//*"nickname": nickname,
-            "user_code": user_code*//*
-        }
-    }).done(function(response){
-        console.log(response);
-        console.log("success");
-        alert("탈퇴 되었습니다.");
-        window.location.href = "/triplan/main";
-    })
-    .fail(function (e) {
-        console.log("err");
-        console.log(e.status);
-        console.log(e.responseText);
-    });*/
 });
 
 
-// 동행자 추가 모달
+// 동행자 검색 모달
 $('.btn.btn-primary.mate-search').click(function() {
     let mateEmail = $('.form-control.mate-email').val(); //입력된 이메일
     $.ajax({
             method: "GET",
-            url: "/triplan/addMateForm",
+            url: "/triplan/mypage/searchMate",
             data: {
-                "mateEmail": mateEmail
+                "mateEmail": mateEmail //입력된 이메일 controller로 보내주고
             }
         }).done(function(response){
             console.log(response);
-            alert("동행자 이메일을 검색합니다");
-            if(response != null){
-                $('div#user_id').text(가져온user_id넣어줌));
-                $('div#user_nickname').text(user_nickname넣어줌);
+            if(response != ""){
+                $('div#user_id').text(response.id);
+                $('div#user_nickname').text(response.nickname);
+                $('div#user_code').text(response.user_code);
+                $('button#mate-addBtn').css('display', 'block');
             } else {
-                $('div#user_detail').text('검색결과가 없습니다.');
+                $('div#user_id').text("검색 결과가 없습니다.");
+                $('div#user_nickname').text('');
             }
-/*window or 여기에 이제 리스트 추가이이런거..안될까/.*/
-
         }).fail(function (e) {
             console.log("err");
             console.log(e.status);
             console.log(e.responseText);
         });
+});
 
+// 동행자 추가
+$('.btn.btn-secondary.mate-add').click(function() {
+    /*let id = $('.mate-id').val();
+    let nickname = $('.mate-nickname').val();//입력된 이메일
+    alert(id);
+    alert(nickname);*/
+    /*지금 필요한건 동행자user_code, plan_code*/
+    alert("추가버튼 js시작")
+    let plan_code = $('.threeplan-btn.deleteSavedBtn').data('code');
+    let user_code = $('.mate-user_code').text();
+    alert(plan_code);
+    alert(user_code);
+    $.ajax({
+        method: "POST",
+        url: "/triplan/mypage/addMate",
+        data: JSON.stringify({
+            "code" : plan_code,
+            "user_code": user_code
+            }),
+            contentType: "application/json"
+        }).done(function(response){
+            console.log(response);
+            alert("동행자 일정에 추가되었습니다.");
+            window.location.href = "/triplan/main";
+        }).fail(function (e) {
+            console.log("err");
+            console.log(e.status);
+            console.log(e.responseText);
+        });
 });
 
 /*$('.threeplan-btn').click(function() {

@@ -57,9 +57,9 @@ public class PlanVo {
         this.user_code = user_code;
         this.area_engname = area_engname;
     }
-    /*public PlanVo(String title, Integer code) {
+    public PlanVo(Integer code, Integer user_code) {
         this.code = code;
-        this.title = title;
-    }*/
+        this.user_code = user_code;
+    }
 
 }
