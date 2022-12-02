@@ -3,20 +3,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.site.triplan.mapper.MypageMapper">
     <select id="getAllReplies" resultType="com.site.triplan.vo.ReplyVo"><!--나의 댓글: 삭제된 일정의 댓글 제외, 신고 승인된 댓글 제외-->
-        SELECT r.content, r.write_dt, p.title, a.name, r.code FROM reply r
+        SELECT r.code, r.content, r.write_dt, p.title, a.name
+        FROM reply r
         JOIN plan p ON r.plan_code = p.code
         JOIN area a ON p.area_code = a.code
         LEFT JOIN report_reg rr ON r.code = rr.reply_code
         LEFT JOIN report_proc rp ON rr.code = rp.reg_code
-        WHERE r.user_code=#{code} AND rp.result_code IS NULL OR rp.result_code = 2 AND p.code
-        IN (SELECT p.code FROM plan p
-        LEFT OUTER JOIN plan_deleted pd
-        ON p.code = pd.plan_code
-        WHERE pd.plan_code IS NULL);
+        WHERE r.user_code=#{code}
+        AND (rr.code IS NULL OR rp.result_code = 2)
+        AND p.code NOT IN (SELECT plan_code FROM plan_deleted);
     </select>
     <select id="getReplyCount" resultType="Integer"><!--나의 댓글 갯수-->
-        SELECT COUNT(*) FROM reply
-        WHERE reply.user_code =#{code}
+        SELECT COUNT(*) FROM reply r
+        JOIN plan p ON r.plan_code = p.code
+        WHERE r.user_code =#{code} AND p.code NOT IN (SELECT plan_code FROM plan_deleted);
     </select>
     <select id="getPlanCount" resultType="Integer"><!--나의 일정 갯수 : 삭제테이블에 있는 일정 제외-->
         <!--SELECT count(*) FROM plan p WHERE p.user_code =#{code} AND p.`code`
@@ -42,7 +42,8 @@
         JOIN user_info us ON u.code = us.user_code
         JOIN area a ON p.area_code = a.code
         WHERE l.user_code = 1;-->
-        SELECT a.name, p.title, ui.nickname, p.views, p.start_dt, p.end_dt, pl.photo_path, p.code, (SELECT count(*)
+        SELECT a.name, a.engname "area_engname", p.title, ui.nickname, p.views, DATE_FORMAT(p.start_dt, '%Y-%m-%d') "start_dt"
+        , date_format(p.end_dt, '%Y-%m-%d') "end_dt", pl.photo_path, p.code, (SELECT count(*)
         FROM place WHERE plan_code = p.code) "place_num" FROM `like` l <!--체크박스위해서 plan.code추가-->
         JOIN plan p ON l.plan_code = p.code
         JOIN user u ON p.user_code = u.code
@@ -72,32 +73,55 @@
         WHERE p.user_code = 1 AND pl.day = 1 AND pl.order = 1;
     </select>-->
     <select id="getScheduledPlans" resultType="com.site.triplan.vo.PlanVo"> <!--나의 일정 : 다가오는 일정-->
-        SELECT a.name, p.title, ui.nickname, p.views, DATE_FORMAT(p.start_dt, '%Y-%m-%d') "start_dt", date_format(p.end_dt, '%Y-%m-%d') "end_dt", ui.id, p.write_dt, p.code, a.engname "area_engname",
-        (SELECT count(*) FROM place WHERE plan_code = p.code) "place_num", ui.user_code FROM plan p
+        SELECT T.code, T.title, T.views, T.write_dt, T.start_dt, T.end_dt
+        , T.place_num, T.user_code, T.id, T.nickname, T.name, T.area_engname, T.plan_code
+        FROM
+        (
+        SELECT DISTINCT p.code, p.title, p.views, p.write_dt
+        , DATE_FORMAT(p.start_dt, '%Y-%m-%d') "start_dt"
+        , date_format(p.end_dt, '%Y-%m-%d') "end_dt"
+        , (SELECT count(*) FROM place WHERE plan_code = p.code) "place_num"
+        , ui.user_code, ui.id, ui.nickname
+        , a.name, a.engname "area_engname"
+        , m.plan_code
+        , (p.start_dt &gt;= DATE_FORMAT(now(), '%Y-%m-%d')) "isStart"
+        FROM plan p
         JOIN user u ON p.user_code = u.code
         JOIN user_info ui ON u.code = ui.user_code
         JOIN area a ON p.area_code = a.code
         JOIN place pl ON p.code = pl.plan_code
-        WHERE p.user_code =#{code} AND pl.day = 1 AND pl.order = 1 AND start_dt &gt;= DATE(NOW()) AND p.`code`
-        IN (SELECT p.code FROM plan p
-        LEFT OUTER JOIN plan_deleted pd
-        ON p.code = pd.plan_code
-        WHERE pd.plan_code IS NULL);
+        LEFT JOIN mate m ON p.code = m.plan_code
+        WHERE p.user_code =#{code} OR m.user_code =#{code}
+        AND pl.day = 1 AND pl.`order` = 1 AND start_dt &gt;= DATE(NOW())
+        ) T
+        WHERE T.isStart = 1
+        AND T.code NOT IN (SELECT plan_code FROM plan_deleted);
         <!-- &gt;= : >= -->
     </select>
     <select id="getCompletedPlans" resultType="com.site.triplan.vo.PlanVo"> <!--나의 일정 : 완료된 일정-->
-        SELECT a.name, p.title, ui.nickname, p.views, DATE_FORMAT(p.start_dt, '%Y-%m-%d') "start_dt", date_format(p.end_dt, '%Y-%m-%d') "end_dt", ui.id, p.write_dt, p.code, a.engname "area_engname",
-        (SELECT count(*) FROM place WHERE plan_code = p.code) "place_num", ui.user_code FROM plan p
+        SELECT T.code, T.title, T.views, T.write_dt, T.start_dt, T.end_dt
+        , T.place_num, T.user_code, T.id, T.nickname, T.name, T.area_engname, T.plan_code
+        FROM
+        (
+        SELECT DISTINCT p.code, p.title, p.views, p.write_dt
+        , DATE_FORMAT(p.start_dt, '%Y-%m-%d') "start_dt"
+        , date_format(p.end_dt, '%Y-%m-%d') "end_dt"
+        , (SELECT count(*) FROM place WHERE plan_code = p.code) "place_num"
+        , ui.user_code, ui.id, ui.nickname
+        , a.name, a.engname "area_engname"
+        , m.plan_code
+        , (p.end_dt &lt; DATE_FORMAT(now(), '%Y-%m-%d')) "isEnd"
+        FROM plan p
         JOIN user u ON p.user_code = u.code
-        LEFT JOIN mate m ON m.plan_code = p.code
         JOIN user_info ui ON u.code = ui.user_code
         JOIN area a ON p.area_code = a.code
         JOIN place pl ON p.code = pl.plan_code
-        WHERE p.user_code=#{code} OR m.user_code=#{code} AND pl.day = 1 AND pl.order = 1 AND end_dt &lt; DATE(NOW())
-        AND p.`code` IN (SELECT p.code FROM plan p
-        LEFT OUTER JOIN plan_deleted pd
-        ON p.code = pd.plan_code
-        WHERE pd.plan_code IS NULL);
+        LEFT JOIN mate m ON p.code = m.plan_code
+        WHERE p.user_code =#{code} OR m.user_code =#{code}
+        AND pl.day = 1 AND pl.`order` = 1 AND end_dt &lt; DATE(NOW())
+        ) T
+        WHERE T.isEnd = 1
+        AND T.code NOT IN (SELECT plan_code FROM plan_deleted);
         <!--&lt; : < -->
     </select>
     <insert id="deletePlans"><!--일정삭제하면 plan_deleted에 그 일정의 code를 insert-->

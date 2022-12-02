@@ -30,7 +30,7 @@ public class PlanVo {
     Integer place_num, reply_num;  //--장소 개수, 댓글 개수
 
     //좋아요한 일정
-    public PlanVo(String name, String title, String nickname, Integer views, String start_dt, String end_dt, String photo_path, Integer code, Integer place_num) {
+    public PlanVo(String name, String title, String nickname, Integer views, String start_dt, String end_dt, String photo_path, Integer code, Integer place_num, String area_engname) {
         this.name = name;
         this.title = title;
         this.nickname = nickname;
@@ -40,6 +40,7 @@ public class PlanVo {
         this.photo_path = photo_path;
         this.code = code;
         this.place_num = place_num;
+        this.area_engname = area_engname;
     }
     //나의 일정
     public PlanVo(String name, String title, String nickname, Integer views, String start_dt, String end_dt, String id, String write_dt, Integer code, Integer place_num, Integer user_code, String area_engname) {

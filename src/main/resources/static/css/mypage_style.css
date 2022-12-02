@@ -1545,7 +1545,8 @@ section {
   font-weight: 600;
   padding: 0;
   margin: 20px 0 0 0;
-  font-family: 'Montserrat';
+  font-family: 'S-CoreDream-3Light';
+  color: black;
 }
 
 .blog .posts-list .title a {
@@ -2539,8 +2540,20 @@ span.plan-title {
     display: inline-block;
     margin-top: 4%;
     margin-bottom: 2%;
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
 }
-
+a.plan-title: hover {
+    /* padding-top: 100px; */
+    color: #82cbed;
+    text-decoration: none;
+}
+span.plan-title: hover {
+    /* padding-top: 100px; */
+    color: #82cbed;
+    text-decoration: none;
+}
 div#planlist-in-box {
     padding: 0 5%;
 }
@@ -2676,8 +2689,8 @@ text-align: center;
     font-family: 'Montserrat';
 }
 .travel-region-engname {
-    font-size: 1.8rem;
-    font-weight: 700;
+    font-size: 0.5rem;
+    font-weight: 900;
     text-align: center;
     font-family: 'Montserrat';
 }
