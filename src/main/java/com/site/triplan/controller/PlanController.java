@@ -253,9 +253,9 @@ public class PlanController {
     // 일정 상세보기
     @GetMapping("/plandetail")
     public String showPlanDetail(Model model, HttpServletRequest request, @RequestParam(required=true)String code) {
+    //public String showPlanDetail(Model model, HttpServletRequest request, @RequestParam(value="code", required=false)String code) {
         HttpSession session = request.getSession();
         String session_id = (String)session.getAttribute("session_id");
-
         PlanVo plan = planService.getPlanDetail(code);
         planService.updateViews(code);
         List<MateVo> mateList = new ArrayList<>();
