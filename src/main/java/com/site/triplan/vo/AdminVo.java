@@ -16,7 +16,7 @@ public class AdminVo implements UserDetails {   // security에서 지정한 형�
     private String auth;
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Collection<? extends GrantedAuthority> getAuthorities() {        // 사용자 권한을 콜렉션 형태로 반환
         return Collections.singletonList(new SimpleGrantedAuthority(this.auth));
     }
 

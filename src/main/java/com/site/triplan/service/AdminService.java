@@ -60,13 +60,6 @@ public class AdminService implements UserDetailsService{    // security에서 �
 
 
 
-//    @Transactional
-//    public void joinAdmin(AdminVo adminVo){
-//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//        adminVo.setPw(passwordEncoder.encode(adminVo.getPassword()));
-//        adminVo.setAuth("ADMIN");
-//        adminMapper.saveAdmin(adminVo);
-//    }
 
     @Override
     public AdminVo loadUserByUsername(String id) throws UsernameNotFoundException{

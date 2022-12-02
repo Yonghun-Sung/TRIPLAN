@@ -30,7 +30,7 @@ public interface AdminMapper {
     List<UserVo> monthlyNewbie();   // 월간 신규 회원
 
 
-//    void saveAdmin(AdminVo adminVo);
+
     AdminVo getAdminAccount(String id);     // security 로그인
 
 }

@@ -32,7 +32,7 @@ public class AdminController {
         return "admin_loginform";
     }
 
-    @RequestMapping("/admin/adminInfo")                                       // 관리자 비밀번호 변경 -> 아직 X
+    @GetMapping("/adminInfo")                                       // 관리자 비밀번호 변경 -> 아직 X
     public String admin_myinfo() {
         return "admin_myinfo";
     }

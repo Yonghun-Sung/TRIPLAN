@@ -133,9 +133,4 @@
         FROM admin
         WHERE id=#{id}
     </select>
-<!--    <insert id="saveAdmin" parameterType="com.site.triplan.vo.AdminVo">-->
-<!--        INSERT INTO admin-->
-<!--        (id, pw, name, auth)-->
-<!--        VALUES(#{id},#{pw},#{name},#{auth})-->
-<!--    </insert>-->
 </mapper>
