@@ -2,9 +2,12 @@ package com.site.triplan.controller;
 
 import com.google.gson.Gson;
 import com.site.triplan.service.AdminService;
+import com.site.triplan.vo.AdminVo;
 import com.site.triplan.vo.ReportVo;
 import com.site.triplan.vo.UserVo;
+import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,13 +32,15 @@ public class AdminController {
         return "admin_loginform";
     }
 
-    @RequestMapping("/admin/adminInfo")                                       // 관리자 비밀번호 변경 -> 아직 X
+    @GetMapping("/adminInfo")                                       // 관리자 비밀번호 변경 -> 아직 X
     public String admin_myinfo() {
         return "admin_myinfo";
     }
 
-    @RequestMapping("/admin")                                           // 관리자 메인
-    public String admin_main(Model model) {
+    @RequestMapping("/admin")                                                 // 관리자 메인
+    public String admin_main(Model model, Authentication authentication) {
+        AdminVo adminVo = (AdminVo) authentication.getPrincipal();            // security, userDetail 객체를 가져옴
+
         List<ReportVo> reportVoList = adminService.postUnreport();
         model.addAttribute("unreport",reportVoList);
         return "admin_main";
@@ -107,4 +112,5 @@ public class AdminController {
 //        System.out.println(ret);
         return ret;                                                             // 월간신규회원 리스트 Json형식으로 admin_LineChart에 전달
     }
+
 }

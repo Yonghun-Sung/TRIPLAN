@@ -1,6 +1,7 @@
 package com.site.triplan.mapper;
 
 
+import com.site.triplan.vo.AdminVo;
 import com.site.triplan.vo.ReportVo;
 
 import ch.qos.logback.core.pattern.PostCompileProcessor;
@@ -27,5 +28,9 @@ public interface AdminMapper {
 
     List<UserVo> weeklyNewbie();    // 주간 신규 회원
     List<UserVo> monthlyNewbie();   // 월간 신규 회원
+
+
+
+    AdminVo getAdminAccount(String id);     // security 로그인
 
 }

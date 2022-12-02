@@ -128,4 +128,9 @@
         SET result_code=#{result_code}
         WHERE reg_code=#{reg_code}
     </update>
+    <select id="getAdminAccount" resultType="com.site.triplan.vo.AdminVo">
+        SELECT *
+        FROM admin
+        WHERE id=#{id}
+    </select>
 </mapper>
