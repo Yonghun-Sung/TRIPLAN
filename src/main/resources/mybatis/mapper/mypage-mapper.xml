@@ -28,11 +28,12 @@
         LEFT OUTER JOIN plan_deleted pd
         ON p.code = pd.plan_code
         WHERE pd.plan_code IS NULL)-->
-        SELECT sum((SELECT count(*) FROM mate m WHERE m.user_code =#{code})+(SELECT count(*) FROM plan p WHERE p.user_code =#{code} AND p.`code`
+        SELECT IFNULL(sum((SELECT count(*) FROM mate m WHERE m.user_code =#{code})+(SELECT count(*) FROM plan p WHERE p.user_code =#{code} AND p.`code`
         IN (SELECT p.code FROM plan p
         LEFT OUTER JOIN plan_deleted pd
         ON p.code = pd.plan_code
-        WHERE pd.plan_code IS NULL))) "countAll" FROM plan p
+        WHERE pd.plan_code IS NULL))), 0) "countAll"
+        FROM plan p
         JOIN mate m ON m.plan_code = p.code;
     </select>
     <select id="getLikeCount" resultType="Integer"><!--좋아요한 일정 갯수-->
