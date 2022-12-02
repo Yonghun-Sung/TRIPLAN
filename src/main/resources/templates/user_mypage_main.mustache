@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Nova Bootstrap Template - Blog</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/css/mypage_style.css" rel="stylesheet">
+
+    <!--  마이로의 UIKit사용하기 위해 넣어봄-->
+    <!--  &lt;!&ndash; UIkit CSS &ndash;&gt;
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.13/dist/css/uikit.min.css" />
+
+      &lt;!&ndash; UIkit JS &ndash;&gt;
+      <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.13/dist/js/uikit.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.13/dist/js/uikit-icons.min.js"></script>-->
+
+    <!--부트스트랩 CDN-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!--  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>-->
+<style>
+    .navbar a {
+        color: rgba(0, 0, 0, 0.7);
+        font-weight: 600;
+    }
+    .navbar a:hover, .navbar a:active, .navbar .active {
+        color: #000 !important;
+    }
+</style>
+
+</head>
+
+<body class="page-blog">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<!-- ======= Header ======= -->
+{{>user_header}}
+<main id="main">
+
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+        <div class="container" data-aos="fade-up"> <!--여기 style width추가한거 가운데에 정렬되는거 1080px로 맞추기위해-->
+
+
+            <div class="col-lg-12" data-aos="fade-up" data-aos-delay="400"><!--여기 col-lg-12에서 col-lg-10으로 바꾸고 style width추가한거-->
+
+
+                <!--            <div class="sidebar ps-lg-4">-->
+                <div class="sidebar">
+                    <!--              여기에 지움-->
+                    <!--              여기에 프로필이랑 나의 일정, 댓글, 좋아요한 글 인덱스 버튼 만들기-->
+                    <div class="top-container">
+                        <div class="profilePhotoContainer">
+                            <div class="profilePhoto-text" id="profilePhoto">이</div> <!--그냥 정적으로 이 라고 써놓음-->
+                        </div>
+                        <div class="text">이름름</div><!--여기도 정적으로 넣음-->
+                        <button class="btn-normal" onclick="goToMyPage()">프로필 수정</button>
+                    </div>
+                    <div>
+                        <div class="row">
+                            <div class="index-section">
+                                <!--나의 일정-->
+                                <div class="index-circle" onclick="myPlanData()">
+                                    <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
+                                        <b>나의 일정</b>
+                                    </h6>
+                                    <div>
+                                        <h4 style="line-height: 1; font-weight: 700" id="myPlan">6</h4><!--내가 정적으로 걍 6넣음-->
+                                    </div>
+                                </div>
+                                <!--나의 댓글-->
+                                <div class="index-circle" onclick="myReplyData()">
+                                    <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
+                                        <b>나의 댓글</b>
+                                    </h6>
+                                    <div>
+                                        <h4 style="line-height: 1; font-weight: 700" id="myReply">5</h4><!--내가 정적으로 걍 5넣음-->
+                                    </div>
+                                </div>
+                                <!--좋아요한 일정-->
+                                <div class="index-circle" onclick="myLikeData()">
+                                    <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
+                                        <b>좋아요한 일정</b>
+                                    </h6>
+                                    <div>
+                                        <h4 style="line-height: 1; font-weight: 700" id="myLike">10</h4><!--내가 정적으로 걍 10넣음-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-item recent-posts"> <!--uk-padding-small역할-->
+                        <div class="section-title-container">
+                            <h3 class="sidebar-title"> 다가올 일정 </h3>
+                            <!--              <h3 class="sidebar-title">
+                                            <b>다가올 일정</b>
+                                          </h3>-->
+                            <h3 class="sidebar-title2"> | </h3> <!--sidebar-title2클래스 지윤 새로 추가-->
+                            <h3 class="sidebar-title"> 완료된 일정 </h3>
+                        </div>
+
+                        <div class="mt-3"> <!--본격 여행일정--> <!--여기가 span id="resultArea"대신-->
+                            <!--                  여기에 내가 하나 생성해볼게 ㅇㅇ-->
+
+
+                            <div class="post-item mt-3">
+                                <div class="uk-card uk-card-default uk-grid-collapse uk-grid">
+                                    <!--/*style="padding:16px 0;"*/--><!--클래스 -->
+                                    <div class="uk-width-1-3">
+                                        <div class="uk-grid" uk-grid-style="margin: 0; height: 60%">
+                                            <!--<div class="uk-width-1-2 info-container uk-first-column">-->
+                                            <div class="region info-container uk-first-column">
+                                                <img src="assets/img/blog/blog-recent-1.jpg" alt="" class="flex-shrink-0">
+                                            </div>
+                                            <div class="uk-width-1-2 info-container">
+                                                <div class="travel-region">제주도</div> <!--클래스 travel-title-->
+                                                <div class="user-id">jjiiyy@gmail.com</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-2-3"><!--여기가 오른쪽 파트 시작-->
+                                        <div class="uk-grid uk-grid-stack" uk-grid style="margin: 0; height: 60%"><!--여기가 윗칸-->
+                                            <div class="uk-width-expand@m uk-first-column" style="padding: 16px">
+                                                <div class="uk-grid" uk-grid style="margin: 0; height: 50%; padding: 10px;">
+                                                    <div class="uk-width-1-2 info-container-top uk-first-column">
+                                                        <div class="small-title">
+                                                            여행이름
+                                                            <div class="uk-inline">
+                                                                <a class="uk-form-icon uk-form-icon-flip uk-icon" uk-icon="icon: file-edit" onclick="inputTravelName(0)" id="inputTravelNameBtn_idx_0"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" d="M18.65,1.68 C18.41,1.45 18.109,1.33 17.81,1.33 C17.499,1.33 17.209,1.45 16.98,1.68 L8.92,9.76 L8,12.33 L10.55,11.41 L18.651,3.34 C19.12,2.87 19.12,2.15 18.65,1.68 L18.65,1.68 L18.65,1.68 Z"></path><polyline fill="none" stroke="#000" points="16.5 8.482 16.5 18.5 3.5 18.5 3.5 1.5 14.211 1.5"></polyline></svg></a>
+
+                                                                <input class="
+                                                uk-input
+                                                uk-form-blank
+                                                uk-form-width-medium
+                                                small-text
+                                            " type="text" placeholder="여행이름" id="inputTravelName_idx_0" value="">
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-width-1-2
+                                    info-container-top
+                                ">
+                                                        <div class="small-title">
+                                                            작성일
+
+                                                            <span class="small-text" style="
+                                            line-height: 40px;
+                                        ">
+                                        2022.11.17
+                                    </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-grid" uk-grid style="margin: 0; height: 50%; padding:10px;">
+                                                    <div class="uk-width-1-2 info-container-bottom uk-first-column">
+                                                        <div class="small-title">
+                                                            여행일자
+                                                            <span class="small-text">2022.12.26-2022.12.28</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-width-1-2 info-container-bottom">
+                                                        <div class="small-title">
+                                                            선택장소
+                                                            <span class="small-text">
+                                        12
+                                    </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--                        <div class="uk-grid uk-grid-stack" uk-grid style="margin: 0; height: 40%">&lt;!&ndash;아래칸&ndash;&gt;
+
+                                                                </div>-->
+                                        <div class="uk-grid uk-grid-stack" uk-grid="" style="margin: 0; height: 40%"> <!--아래칸: 일정삭제 수정 동행자-->
+                                            <div class="uk-width-expand@m info-container uk-first-column">
+                                                <div class="
+                                uk-text-center
+                                uk-grid
+                                uk-width-1-1
+                                uk-padding-small
+                            " uk-grid="">
+                                                    <div class="uk-width-1-4 uk-first-column">
+                                                        <div>
+                                                            <button class=" basic-btn
+                                            uk-button
+                                            uk-button-large
+                                            uk-card-default
+                                        " id="modifySavedRoute_idx_0">
+                                                                일정 수정
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="uk-width-1-4">
+                                                        <div>
+                                                            <button class=" basic-btn
+                                            uk-button
+                                            uk-button-large
+                                            uk-card-default
+                                        " id="deleteSavedBtn_0" onclick="deleteSavedRoute(0)">
+                                                                삭제
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-width-1-4">
+                                                        <div>
+                                                            <button class=" basic-btn
+                                            uk-button
+                                            uk-button-large
+                                            uk-card-default
+                                        " uk-toggle="target:#modal-center_idx_0" onclick="modalCenterBtn(0)" aria-expanded="false">
+                                                                일정 공유
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--여기까지 첫번째 일정-->
+
+                            <div class="post-item mt-3">
+                                <div class="
+                uk-card uk-card-default uk-grid-collapse uk-grid"
+                                     style="padding:16px 0;"><!--클래스 -->
+                                    <div class="uk-width-1-3">
+                                        <div class="uk-grid" uk-grid-style="margin: 0; height: 60%">
+                                            <div class="uk-width-1-2 info-container uk-first-column">
+                                                <img src="assets/img/blog/blog-recent-1.jpg" alt="" class="flex-shrink-0">
+                                            </div>
+                                            <div class="uk-width-1-2 info-container">
+                                                <div class="travel-region">대한민국 제주도</div> <!--클래스 travel-title-->
+                                                <div class="uk-text-meta">jjiiyy@gmail.com</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-2-3"><!--여기가 오른쪽 파트 시작-->
+                                        <div class="uk-grid uk-grid-stack" uk-grid style="margin: 0; height: 60%"><!--여기가 윗칸-->
+                                            <div class="uk-width-expand@m uk-first-column" style="padding: 16px">
+                                                <div class="uk-grid" uk-grid style="margin: 0; height: 50%">
+                                                    <div class="uk-width-1-2 info-container-top uk-first-column">
+                                                        <div class="small-title">
+                                                            여행이름
+                                                            <div class="uk-inline">
+                                                                <a class="uk-form-icon uk-form-icon-flip uk-icon" uk-icon="icon: file-edit" onclick="inputTravelName(0)" id="inputTravelNameBtn_idx_0"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" d="M18.65,1.68 C18.41,1.45 18.109,1.33 17.81,1.33 C17.499,1.33 17.209,1.45 16.98,1.68 L8.92,9.76 L8,12.33 L10.55,11.41 L18.651,3.34 C19.12,2.87 19.12,2.15 18.65,1.68 L18.65,1.68 L18.65,1.68 Z"></path><polyline fill="none" stroke="#000" points="16.5 8.482 16.5 18.5 3.5 18.5 3.5 1.5 14.211 1.5"></polyline></svg></a>
+
+                                                                <input class="
+                                                uk-input
+                                                uk-form-blank
+                                                uk-form-width-medium
+                                                small-text
+                                            " type="text" placeholder="여행이름" id="inputTravelName_idx_0" value="">
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="
+                                    uk-width-1-2
+                                    info-container-top
+                                ">
+                                                        <div class="small-title">
+                                                            작성일
+
+                                                            <span class="small-text" style="
+                                            line-height: 40px;
+                                        ">
+                                        2022.11.17
+                                    </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-grid" uk-grid style="margin: 0; height: 50%">
+                                                    <div class="uk-width-1-2 info-container-bottom uk-first-column">
+                                                        <div class="small-title">
+                                                            여행일자
+                                                            <span class="small-text">2022.12.26-2022.12.28</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-width-1-2 info-container-bottom">
+                                                        <div class="small-title">
+                                                            선택장소
+                                                            <span class="small-text">
+                                        12
+                                    </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--                        <div class="uk-grid uk-grid-stack" uk-grid style="margin: 0; height: 40%">&lt;!&ndash;아래칸&ndash;&gt;
+
+                                                                </div>-->
+                                        <div class="uk-grid uk-grid-stack" uk-grid="" style="margin: 0; height: 40%"> <!--아래칸: 일정삭제 수정 동행자-->
+                                            <div class="uk-width-expand@m info-container uk-first-column">
+                                                <div class="
+                                uk-text-center
+                                uk-grid
+                                uk-width-1-1
+                                uk-padding-small
+                            " uk-grid="">
+                                                    <div class="uk-width-1-4 uk-first-column">
+                                                        <div>
+                                                            <button class="
+                                            uk-button
+                                            uk-button-large
+                                            uk-card-default
+                                        " id="modifySavedRoute_idx_0">
+                                                                일정 수정
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="uk-width-1-4">
+                                                        <div>
+                                                            <button class="
+                                            uk-button
+                                            uk-button-large
+                                            uk-card-default
+                                        " id="deleteSavedBtn_0" onclick="deleteSavedRoute(0)">
+                                                                삭제
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-width-1-4">
+                                                        <div>
+                                                            <button class="
+                                            uk-button
+                                            uk-button-large
+                                            uk-card-default
+                                        " uk-toggle="target:#modal-center_idx_0" onclick="modalCenterBtn(0)" aria-expanded="false">
+                                                                일정 공유
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--여기까지 첫번째 일정-->
+
+                            <div class="post-item mt-3">
+                                <div class="
+                uk-card uk-card-default uk-grid-collapse uk-grid"
+                                     style="padding:16px 0;"><!--클래스 -->
+                                    <div class="uk-width-1-3">
+                                        <div class="uk-grid" uk-grid-style="margin: 0; height: 60%">
+                                            <div class="uk-width-1-2 info-container uk-first-column">
+                                                <img src="assets/img/blog/blog-recent-1.jpg" alt="" class="flex-shrink-0">
+                                            </div>
+                                            <div class="uk-width-1-2 info-container">
+                                                <div class="travel-region">대한민국 제주도</div> <!--클래스 travel-title-->
+                                                <div class="uk-text-meta">jjiiyy@gmail.com</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-2-3"><!--여기가 오른쪽 파트 시작-->
+                                        <div class="uk-grid uk-grid-stack" uk-grid style="margin: 0; height: 60%"><!--여기가 윗칸-->
+                                            <div class="uk-width-expand@m uk-first-column" style="padding: 16px">
+                                                <div class="uk-grid" uk-grid style="margin: 0; height: 50%">
+                                                    <div class="uk-width-1-2 info-container-top uk-first-column">
+                                                        <div class="small-title">
+                                                            여행이름
+                                                            <div class="uk-inline">
+                                                                <a class="uk-form-icon uk-form-icon-flip uk-icon" uk-icon="icon: file-edit" onclick="inputTravelName(0)" id="inputTravelNameBtn_idx_0"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" d="M18.65,1.68 C18.41,1.45 18.109,1.33 17.81,1.33 C17.499,1.33 17.209,1.45 16.98,1.68 L8.92,9.76 L8,12.33 L10.55,11.41 L18.651,3.34 C19.12,2.87 19.12,2.15 18.65,1.68 L18.65,1.68 L18.65,1.68 Z"></path><polyline fill="none" stroke="#000" points="16.5 8.482 16.5 18.5 3.5 18.5 3.5 1.5 14.211 1.5"></polyline></svg></a>
+
+                                                                <input class="
+                                                uk-input
+                                                uk-form-blank
+                                                uk-form-width-medium
+                                                small-text
+                                            " type="text" placeholder="여행이름" id="inputTravelName_idx_0" value="">
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="
+                                    uk-width-1-2
+                                    info-container-top
+                                ">
+                                                        <div class="small-title">
+                                                            작성일
+
+                                                            <span class="small-text" style="
+                                            line-height: 40px;
+                                        ">
+                                        2022.11.17
+                                    </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-grid" uk-grid style="margin: 0; height: 50%">
+                                                    <div class="uk-width-1-2 info-container-bottom uk-first-column">
+                                                        <div class="small-title">
+                                                            여행일자
+                                                            <span class="small-text">2022.12.26-2022.12.28</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-width-1-2 info-container-bottom">
+                                                        <div class="small-title">
+                                                            선택장소
+                                                            <span class="small-text">
+                                        12
+                                    </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--                        <div class="uk-grid uk-grid-stack" uk-grid style="margin: 0; height: 40%">&lt;!&ndash;아래칸&ndash;&gt;
+
+                                                                </div>-->
+                                        <div class="uk-grid uk-grid-stack" uk-grid="" style="margin: 0; height: 40%"> <!--아래칸: 일정삭제 수정 동행자-->
+                                            <div class="uk-width-expand@m info-container uk-first-column">
+                                                <div class="
+                                uk-text-center
+                                uk-grid
+                                uk-width-1-1
+                                uk-padding-small
+                            " uk-grid="">
+                                                    <div class="uk-width-1-4 uk-first-column">
+                                                        <div>
+                                                            <button class="
+                                            uk-button
+                                            uk-button-large
+                                            uk-card-default
+                                        " id="modifySavedRoute_idx_0">
+                                                                일정 수정
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="uk-width-1-4">
+                                                        <div>
+                                                            <button class="
+                                            uk-button
+                                            uk-button-large
+                                            uk-card-default
+                                        " id="deleteSavedBtn_0" onclick="deleteSavedRoute(0)">
+                                                                삭제
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-width-1-4">
+                                                        <div>
+                                                            <button class="
+                                            uk-button
+                                            uk-button-large
+                                            uk-card-default
+                                        " uk-toggle="target:#modal-center_idx_0" onclick="modalCenterBtn(0)" aria-expanded="false">
+                                                                일정 공유
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--여기까지 첫번째 일정-->
+
+
+                            <div class="post-item mt-3">
+                                <div class="
+                uk-card uk-card-default uk-grid-collapse uk-grid"
+                                     style="padding:16px 0;"><!--클래스 -->
+                                    <div class="uk-width-1-3">
+                                        <div class="uk-grid" uk-grid-style="margin: 0; height: 60%">
+                                            <div class="uk-width-1-2 info-container uk-first-column">
+                                                <img src="assets/img/blog/blog-recent-1.jpg" alt="" class="flex-shrink-0">
+                                            </div>
+                                            <div class="uk-width-1-2 info-container">
+                                                <div class="travel-region">대한민국 제주도</div> <!--클래스 travel-title-->
+                                                <div class="uk-text-meta">jjiiyy@gmail.com</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-2-3"><!--여기가 오른쪽 파트 시작-->
+                                        <div class="uk-grid uk-grid-stack" uk-grid style="margin: 0; height: 60%"><!--여기가 윗칸-->
+                                            <div class="uk-width-expand@m uk-first-column" style="padding: 16px">
+                                                <div class="uk-grid" uk-grid style="margin: 0; height: 50%">
+                                                    <div class="uk-width-1-2 info-container-top uk-first-column">
+                                                        <div class="small-title">
+                                                            여행이름
+                                                            <div class="uk-inline">
+                                                                <a class="uk-form-icon uk-form-icon-flip uk-icon" uk-icon="icon: file-edit" onclick="inputTravelName(0)" id="inputTravelNameBtn_idx_0"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" d="M18.65,1.68 C18.41,1.45 18.109,1.33 17.81,1.33 C17.499,1.33 17.209,1.45 16.98,1.68 L8.92,9.76 L8,12.33 L10.55,11.41 L18.651,3.34 C19.12,2.87 19.12,2.15 18.65,1.68 L18.65,1.68 L18.65,1.68 Z"></path><polyline fill="none" stroke="#000" points="16.5 8.482 16.5 18.5 3.5 18.5 3.5 1.5 14.211 1.5"></polyline></svg></a>
+
+                                                                <input class="
+                                                uk-input
+                                                uk-form-blank
+                                                uk-form-width-medium
+                                                small-text
+                                            " type="text" placeholder="여행이름" id="inputTravelName_idx_0" value="">
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="
+                                    uk-width-1-2
+                                    info-container-top
+                                ">
+                                                        <div class="small-title">
+                                                            작성일
+
+                                                            <span class="small-text" style="
+                                            line-height: 40px;
+                                        ">
+                                        2022.11.17
+                                    </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-grid" uk-grid style="margin: 0; height: 50%">
+                                                    <div class="uk-width-1-2 info-container-bottom uk-first-column">
+                                                        <div class="small-title">
+                                                            여행일자
+                                                            <span class="small-text">2022.12.26-2022.12.28</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-width-1-2 info-container-bottom">
+                                                        <div class="small-title">
+                                                            선택장소
+                                                            <span class="small-text">
+                                        12
+                                    </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--                        <div class="uk-grid uk-grid-stack" uk-grid style="margin: 0; height: 40%">&lt;!&ndash;아래칸&ndash;&gt;
+
+                                                                </div>-->
+                                        <div class="uk-grid uk-grid-stack" uk-grid="" style="margin: 0; height: 40%"> <!--아래칸: 일정삭제 수정 동행자-->
+                                            <div class="uk-width-expand@m info-container uk-first-column">
+                                                <div class="
+                                uk-text-center
+                                uk-grid
+                                uk-width-1-1
+                                uk-padding-small
+                            " uk-grid="">
+                                                    <div class="uk-width-1-4 uk-first-column">
+                                                        <div>
+                                                            <button class="
+                                            uk-button
+                                            uk-button-large
+                                            uk-card-default
+                                        " id="modifySavedRoute_idx_0">
+                                                                일정 수정
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="uk-width-1-4">
+                                                        <div>
+                                                            <button class="
+                                            uk-button
+                                            uk-button-large
+                                            uk-card-default
+                                        " id="deleteSavedBtn_0" onclick="deleteSavedRoute(0)">
+                                                                삭제
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-width-1-4">
+                                                        <div>
+                                                            <button class="
+                                            uk-button
+                                            uk-button-large
+                                            uk-card-default
+                                        " uk-toggle="target:#modal-center_idx_0" onclick="modalCenterBtn(0)" aria-expanded="false">
+                                                                일정 공유
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--여기까지 첫번째 일정-->
+
+                            <div class="post-item mt-3">
+                                <div class="
+                uk-card uk-card-default uk-grid-collapse uk-grid"
+                                     style="padding:16px 0;"><!--클래스 -->
+                                    <div class="uk-width-1-3">
+                                        <div class="uk-grid" uk-grid-style="margin: 0; height: 60%">
+                                            <div class="uk-width-1-2 info-container uk-first-column">
+                                                <img src="assets/img/blog/blog-recent-1.jpg" alt="" class="flex-shrink-0">
+                                            </div>
+                                            <div class="uk-width-1-2 info-container">
+                                                <div class="travel-region">대한민국 제주도</div> <!--클래스 travel-title-->
+                                                <div class="uk-text-meta">jjiiyy@gmail.com</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-2-3"><!--여기가 오른쪽 파트 시작-->
+                                        <div class="uk-grid uk-grid-stack" uk-grid style="margin: 0; height: 60%"><!--여기가 윗칸-->
+                                            <div class="uk-width-expand@m uk-first-column" style="padding: 16px">
+                                                <div class="uk-grid" uk-grid style="margin: 0; height: 50%">
+                                                    <div class="uk-width-1-2 info-container-top uk-first-column">
+                                                        <div class="small-title">
+                                                            여행이름
+                                                            <div class="uk-inline">
+                                                                <a class="uk-form-icon uk-form-icon-flip uk-icon" uk-icon="icon: file-edit" onclick="inputTravelName(0)" id="inputTravelNameBtn_idx_0"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" d="M18.65,1.68 C18.41,1.45 18.109,1.33 17.81,1.33 C17.499,1.33 17.209,1.45 16.98,1.68 L8.92,9.76 L8,12.33 L10.55,11.41 L18.651,3.34 C19.12,2.87 19.12,2.15 18.65,1.68 L18.65,1.68 L18.65,1.68 Z"></path><polyline fill="none" stroke="#000" points="16.5 8.482 16.5 18.5 3.5 18.5 3.5 1.5 14.211 1.5"></polyline></svg></a>
+
+                                                                <input class="
+                                                uk-input
+                                                uk-form-blank
+                                                uk-form-width-medium
+                                                small-text
+                                            " type="text" placeholder="여행이름" id="inputTravelName_idx_0" value="">
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="
+                                    uk-width-1-2
+                                    info-container-top
+                                ">
+                                                        <div class="small-title">
+                                                            작성일
+
+                                                            <span class="small-text" style="
+                                            line-height: 40px;
+                                        ">
+                                        2022.11.17
+                                    </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-grid" uk-grid style="margin: 0; height: 50%">
+                                                    <div class="uk-width-1-2 info-container-bottom uk-first-column">
+                                                        <div class="small-title">
+                                                            여행일자
+                                                            <span class="small-text">2022.12.26-2022.12.28</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-width-1-2 info-container-bottom">
+                                                        <div class="small-title">
+                                                            선택장소
+                                                            <span class="small-text">
+                                        12
+                                    </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--                        <div class="uk-grid uk-grid-stack" uk-grid style="margin: 0; height: 40%">&lt;!&ndash;아래칸&ndash;&gt;
+
+                                                                </div>-->
+                                        <div class="uk-grid uk-grid-stack" uk-grid="" style="margin: 0; height: 40%"> <!--아래칸: 일정삭제 수정 동행자-->
+                                            <div class="uk-width-expand@m info-container uk-first-column">
+                                                <div class="
+                                uk-text-center
+                                uk-grid
+                                uk-width-1-1
+                                uk-padding-small
+                            " uk-grid="">
+                                                    <div class="uk-width-1-4 uk-first-column">
+                                                        <div>
+                                                            <button class="
+                                            uk-button
+                                            uk-button-large
+                                            uk-card-default
+                                        " id="modifySavedRoute_idx_0">
+                                                                일정 수정
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="uk-width-1-4">
+                                                        <div>
+                                                            <button class="
+                                            uk-button
+                                            uk-button-large
+                                            uk-card-default
+                                        " id="deleteSavedBtn_0" onclick="deleteSavedRoute(0)">
+                                                                삭제
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-width-1-4">
+                                                        <div>
+                                                            <button class="
+                                            uk-button
+                                            uk-button-large
+                                            uk-card-default
+                                        " uk-toggle="target:#modal-center_idx_0" onclick="modalCenterBtn(0)" aria-expanded="false">
+                                                                일정 공유
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--여기까지 첫번째 일정-->
+
+                        </div>
+
+                    </div><!-- End sidebar recent posts-->
+
+                    <!--여기가 nav네비-->
+
+
+                </div><!-- End Blog Sidebar -->
+
+            </div>
+
+        </div>
+
+        </div>
+    </section><!-- End Blog Section -->
+
+</main><!-- End #main -->
+<!-- ======= Footer ======= -->
+{{>user_footer}}
+
+
+<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<div id="preloader"></div>
+
+<!-- Vendor JS Files -->
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendor/aos/aos.js"></script>
+<script src="/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/js/user/main.js"></script>
+
+</body>
+
+</html>

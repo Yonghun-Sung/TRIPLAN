@@ -2,42 +2,144 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.site.triplan.mapper.MypageMapper">
-    <select id="getAllReplies" resultType="com.site.triplan.vo.ReplyVo"><!--//댓글.content, reply.write_dt, reply.plan_code, plan.title, plan.area_code, area.name//reply: r plan :p area: a-->
-        SELECT r.content, r.write_dt, p.title, a.name FROM reply r
+    <select id="getAllReplies" resultType="com.site.triplan.vo.ReplyVo"><!--나의 댓글: 삭제된 일정의 댓글 제외, 신고 승인된 댓글 제외-->
+        SELECT r.content, r.write_dt, p.title, a.name, r.code FROM reply r
         JOIN plan p ON r.plan_code = p.code
         JOIN area a ON p.area_code = a.code
-        WHERE r.user_code = 1
+        LEFT JOIN report_reg rr ON r.code = rr.reply_code
+        LEFT JOIN report_proc rp ON rr.code = rp.reg_code
+        WHERE r.user_code=#{code} AND rp.result_code IS NULL OR rp.result_code = 2 AND p.code
+        IN (SELECT p.code FROM plan p
+        LEFT OUTER JOIN plan_deleted pd
+        ON p.code = pd.plan_code
+        WHERE pd.plan_code IS NULL);
     </select>
     <select id="getReplyCount" resultType="Integer"><!--나의 댓글 갯수-->
         SELECT COUNT(*) FROM reply
-        WHERE reply.user_code = 1
+        WHERE reply.user_code =#{code}
     </select>
-    <select id="getPlanCount" resultType="Integer"><!--나의 일정 갯수-->
-        SELECT COUNT(*) FROM plan
-        WHERE plan.user_code = 1
+    <select id="getPlanCount" resultType="Integer"><!--나의 일정 갯수 : 삭제테이블에 있는 일정 제외-->
+        <!--SELECT count(*) FROM plan p WHERE p.user_code =#{code} AND p.`code`
+        IN (SELECT p.code FROM plan p
+        LEFT OUTER JOIN plan_deleted pd
+        ON p.code = pd.plan_code
+        WHERE pd.plan_code IS NULL)-->
+        SELECT sum((SELECT count(*) FROM mate m WHERE m.user_code =#{code})+(SELECT count(*) FROM plan p WHERE p.user_code =#{code} AND p.`code`
+        IN (SELECT p.code FROM plan p
+        LEFT OUTER JOIN plan_deleted pd
+        ON p.code = pd.plan_code
+        WHERE pd.plan_code IS NULL))) "countAll" FROM plan p
+        JOIN mate m ON m.plan_code = p.code;
     </select>
     <select id="getLikeCount" resultType="Integer"><!--좋아요한 일정 갯수-->
-        SELECT COUNT(*) FROM likes
-        WHERE likes.user_code = 1
+        SELECT COUNT(*) FROM `like`
+        WHERE `like`.user_code=#{code}
     </select>
-    <select id="getAllLikePlans" resultType="com.site.triplan.vo.LikePlanVo"><!--좋아한 일정페이지에 필요한 정보들-->
-        SELECT a.name, p.title, us.nickname, p.views, p.start_dt, p.end_dt FROM `like` l
+    <select id="getAllLikePlans" resultType="com.site.triplan.vo.PlanVo"><!--좋아요한 일정: 좋아요일정 목록-->
+        <!--SELECT a.name, p.title, us.nickname, p.views, p.start_dt, p.end_dt FROM `like` l
         JOIN plan p ON l.plan_code = p.code
         JOIN user u ON p.user_code = u.code
         JOIN user_info us ON u.code = us.user_code
         JOIN area a ON p.area_code = a.code
-        WHERE l.user_code = 1;
+        WHERE l.user_code = 1;-->
+        SELECT a.name, p.title, ui.nickname, p.views, p.start_dt, p.end_dt, pl.photo_path, p.code, (SELECT count(*)
+        FROM place WHERE plan_code = p.code) "place_num" FROM `like` l <!--체크박스위해서 plan.code추가-->
+        JOIN plan p ON l.plan_code = p.code
+        JOIN user u ON p.user_code = u.code
+        JOIN user_info ui ON u.code = ui.user_code
+        JOIN area a ON p.area_code = a.code
+        JOIN place pl ON p.code = pl.plan_code
+        WHERE l.user_code=#{code} AND pl.day = 1 AND pl.order = 1; <!--AND pl.plan_code = 1-->
     </select>
-    <select id="getPlaceCount" resultType="Integer"><!--하나의 일정의 장소개수-->
-        SELECT COUNT(*) FROM place
-        WHERE place.plan_code = 1
-    </select>
+    <!--<select id="getPlaceCount" resultType="Integer">&lt;!&ndash;일정 1개의 선택장소 개수&ndash;&gt;&lt;!&ndash;조인해야할듯&ndash;&gt;
+        SELECT COUNT(*) FROM place p
+        WHERE plan_code = p.code
+    </select>-->
 <!--    <update id="updateUserProfile">
         UPDATE user_info SET id = '', name = '', pw ='', nickname = ''
         WHERE id=''
     </update>-->
-    <select id="getUserProfile" resultType="com.site.triplan.vo.UserVo">
-        SELECT id, name, nickname FROM user_info
-        WHERE id='jiyun@gmail.com'
+    <select id="getUserProfile" resultType="com.site.triplan.vo.UserVo"><!--프로필: 이메일(세션에서), 이름, 닉네임-, 패스워드-->
+        SELECT id, name, nickname, pw, user_code FROM user_info
+        WHERE id=#{id}
+    </select>
+    <!--<select id="getAllMyPlans" resultType="com.site.triplan.vo.PlanVo"> &lt;!&ndash;나의 일정 페이지 정보들&ndash;&gt;
+        SELECT a.name, p.title, ui.nickname, p.views, p.start_dt, p.end_dt, pl.photo_path, ui.id, p.write_dt FROM plan p
+        JOIN user u ON p.user_code = u.code
+        JOIN user_info ui ON u.code = ui.user_code
+        JOIN area a ON p.area_code = a.code
+        JOIN place pl ON p.code = pl.plan_code
+        WHERE p.user_code = 1 AND pl.day = 1 AND pl.order = 1;
+    </select>-->
+    <select id="getScheduledPlans" resultType="com.site.triplan.vo.PlanVo"> <!--나의 일정 : 다가오는 일정-->
+        SELECT a.name, p.title, ui.nickname, p.views, DATE_FORMAT(p.start_dt, '%Y-%m-%d') "start_dt", date_format(p.end_dt, '%Y-%m-%d') "end_dt", ui.id, p.write_dt, p.code, a.engname "area_engname",
+        (SELECT count(*) FROM place WHERE plan_code = p.code) "place_num", ui.user_code FROM plan p
+        JOIN user u ON p.user_code = u.code
+        JOIN user_info ui ON u.code = ui.user_code
+        JOIN area a ON p.area_code = a.code
+        JOIN place pl ON p.code = pl.plan_code
+        WHERE p.user_code =#{code} AND pl.day = 1 AND pl.order = 1 AND start_dt &gt;= DATE(NOW()) AND p.`code`
+        IN (SELECT p.code FROM plan p
+        LEFT OUTER JOIN plan_deleted pd
+        ON p.code = pd.plan_code
+        WHERE pd.plan_code IS NULL);
+        <!-- &gt;= : >= -->
+    </select>
+    <select id="getCompletedPlans" resultType="com.site.triplan.vo.PlanVo"> <!--나의 일정 : 완료된 일정-->
+        SELECT a.name, p.title, ui.nickname, p.views, DATE_FORMAT(p.start_dt, '%Y-%m-%d') "start_dt", date_format(p.end_dt, '%Y-%m-%d') "end_dt", ui.id, p.write_dt, p.code, a.engname "area_engname",
+        (SELECT count(*) FROM place WHERE plan_code = p.code) "place_num", ui.user_code FROM plan p
+        JOIN user u ON p.user_code = u.code
+        LEFT JOIN mate m ON m.plan_code = p.code
+        JOIN user_info ui ON u.code = ui.user_code
+        JOIN area a ON p.area_code = a.code
+        JOIN place pl ON p.code = pl.plan_code
+        WHERE p.user_code=#{code} OR m.user_code=#{code} AND pl.day = 1 AND pl.order = 1 AND end_dt &lt; DATE(NOW())
+        AND p.`code` IN (SELECT p.code FROM plan p
+        LEFT OUTER JOIN plan_deleted pd
+        ON p.code = pd.plan_code
+        WHERE pd.plan_code IS NULL);
+        <!--&lt; : < -->
+    </select>
+    <insert id="deletePlans"><!--일정삭제하면 plan_deleted에 그 일정의 code를 insert-->
+        INSERT INTO plan_deleted(plan_code) VALUES (#{code})<!--plan.code-->
+    </insert>
+
+    <!--여행 제목 변경-->
+    <update id="updateTitle">
+        UPDATE plan
+        SET title=#{title}
+        where code=#{code}<!--plan.code-->
+    </update>
+    <delete id="deleteLike">
+        DELETE FROM `like` WHERE plan_code=#{plan_code} AND user_code=#{code}
+        <!---->
+        <!--내가 아니라 다른 사람이 좋아해놓은 같은 plan.code인거까지 다삭제되니까,,,  -->
+        <!--user_code의 {code} : 세션의 code값 받으면되는데, plan_code는 RequestParam 으로 받아소 -->
+    </delete>
+    <delete id="deleteReply">
+        DELETE FROM reply WHERE code=#{reply_code} AND user_code=#{code}
+    </delete>
+    <update id="updateUser">
+        UPDATE user_info
+        SET nickname=#{nickname}, pw=#{pw}
+        WHERE id=#{id}
+    </update>
+    <insert id="userToDropTbl" parameterType="com.site.triplan.vo.UserVo"> <!--탈퇴하면 drop테이블에 insert-->
+        <!--INSERT INTO `drop` (id, name, nickname, user_code) VALUES (#{user.id}, #{user.name}, #{user.nickname}, #{user.user_code}) -->
+        INSERT INTO `drop` (id, name, nickname, user_code) VALUES (#{id}, #{name}, #{nickname}, #{user_code}) <!--유저코드를 넘김-->
+    </insert>
+<!--    <select id="mateIdSearch" resultType="">&lt;!&ndash;입력받은 아이디로 검색한 &ndash;&gt;
+        SELECT plan_code, user_code FROM mate WHERE id=#{mateEmail}
+    </select>-->
+    <insert id="addMate" parameterType="com.site.triplan.vo.PlanVo"> <!--동행자 테이블에 넣어줌--> <!--(1번김지윤회원의) 3번플랜(동행자 2번김쥰회원 있음)-->
+        INSERT INTO mate(plan_code, user_code) VALUES (#{plan_code}, #{user_code})
+        <!--동행자 테이블에,,,,,,, 있는 여행일정
+        plan_code: 3, user_code:2
+        3번회원은 끝, 2번회원의 나의일정 보여줄떄-> 동행자테이블의 user_code가 본인의 code랑 같은 plan까지 보여주기...-->
+    </insert>
+
+    <select id="searchMate" resultType="com.site.triplan.vo.UserVo">
+        SELECT id, name, nickname, user_code FROM user_info
+        WHERE id =#{mateEmail}
     </select>
 </mapper>

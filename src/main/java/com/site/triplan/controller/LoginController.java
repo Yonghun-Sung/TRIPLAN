@@ -1,7 +1,6 @@
 package com.site.triplan.controller;
 
 import com.site.triplan.service.LoginService;
-import com.site.triplan.vo.AreaVo;
 import com.site.triplan.vo.MailVo;
 import com.site.triplan.vo.UserVo;
 import org.springframework.stereotype.Controller;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @RequestMapping("/triplan")
@@ -38,6 +36,10 @@ public class LoginController {
             HttpSession session = request.getSession();
             session.setAttribute("session_id", user.getId());               // 세션에 id 넣음
             session.setAttribute("session_nickname", user.getNickname());   // 세션에 nickname 넣음
+            session.setAttribute("session_code",user.getUser_code()); // 세션에 user_code 넣음
+            /*System.out.println(session.getAttribute("session_nickname"));
+            System.out.println(session.getAttribute("session_id"));
+            System.out.println(session.getAttribute("session_code"));*/
             view = "redirect:/triplan/main";
         }
         return view;

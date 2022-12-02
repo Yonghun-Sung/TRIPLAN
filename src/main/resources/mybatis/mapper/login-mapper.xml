@@ -4,7 +4,7 @@
 <mapper namespace="com.site.triplan.mapper.LoginMapper">
     <!--로그인-->
     <select id="loginUser" resultType="com.site.triplan.vo.UserVo">
-        SELECT id, nickname
+        SELECT id, nickname, user_code
         FROM user_info
         WHERE id LIKE #{id} AND pw LIKE #{pw}
     </select>
