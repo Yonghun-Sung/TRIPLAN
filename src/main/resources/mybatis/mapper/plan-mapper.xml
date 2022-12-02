@@ -76,9 +76,9 @@
     </update>
     <!-- >> 좋아요 여부-->
     <select id="isLike" resultType="java.lang.Integer">
-        SELECT count(*)
+        SELECT IFNULL(count(*), 0)
         FROM `like`
-        WHERE plan_code=#{plan_code} AND user_code=#{user_code};
+        WHERE plan_code=#{plan_code} AND user_code=#{user_code}
     </select>
     <!-- >> 좋아요 등록 -->
     <insert id="insertLike">
