@@ -3,9 +3,11 @@ package com.site.triplan.security;
 import com.site.triplan.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -28,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {      //  secu
                 .loginPage("/triplan/adminLogin")                                  // custom 로그인 페이지
                 .loginProcessingUrl("/triplan/login_proc")                         // 로그인 폼 액션 url
                 .defaultSuccessUrl("/triplan/admin")                               // 로그인 성공 후 이동
-                .failureUrl("/triplan/adminLogin");
+                .failureUrl("/triplan/adminLogin?errCode=1");
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
@@ -40,6 +42,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {      //  secu
                 .logout()
                 .logoutUrl("/triplan/adminLogout")
                 .logoutSuccessUrl("/triplan/adminLogin");      // 로그아웃시 이동
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 
 

@@ -117,7 +117,8 @@
         ,count(*) as cnt
         FROM user
         WHERE date_format(reg_dt,'%Y-%m-%d') BETWEEN date_sub(now(), interval 3 month) AND now()
-        GROUP BY date_format(reg_dt,'%Y-%m');
+        GROUP BY date_format(reg_dt,'%Y-%m')
+        ORDER BY date_format(reg_dt,'%Y-%m-%d')
     </select>
     <insert id="processReport">
         INSERT INTO report_proc(reg_code, result_code, admin_code)
@@ -133,4 +134,9 @@
         FROM admin
         WHERE id=#{id}
     </select>
+    <update id="updatePw">
+        UPDATE admin
+        SET pw=#{pw}
+        WHERE id=#{id}
+    </update>
 </mapper>

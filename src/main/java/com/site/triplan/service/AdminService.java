@@ -6,6 +6,7 @@ import com.site.triplan.vo.ReportVo;
 import com.site.triplan.vo.UserVo;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -63,12 +64,14 @@ public class AdminService implements UserDetailsService{    // security에서 �
 
     @Override
     public AdminVo loadUserByUsername(String id) throws UsernameNotFoundException{
-        AdminVo adminVo = adminMapper.getAdminAccount(id);                // 여기고 받은 유저 패스워드와 비교하여 로그인 인증
-//        System.out.println(adminVo);
+        AdminVo adminVo = adminMapper.getAdminAccount(id);                // 여기서 받은 유저 패스워드와 비교하여 로그인 인증
         if (adminVo == null) {
             throw new UsernameNotFoundException("User not authorized");
         }
         return  adminVo;
     }
 
+    public void updatePw(AdminVo adminVo){
+        adminMapper.updatePw(adminVo);
+    }
 }
