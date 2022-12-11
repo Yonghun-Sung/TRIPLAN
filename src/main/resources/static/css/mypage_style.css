@@ -60,8 +60,9 @@ a:hover {
   text-decoration: none;
 }
 
+
 h3:hover {
-  color: #82cbed !important;
+  color: #81bef0 !important;
   text-decoration: none;
 }
 
@@ -79,7 +80,7 @@ h6 {
 --------------------------------------------------------------*/
 section {
   overflow: hidden;
-  padding: 130px 0; /*지윤 수정: padding 80px->130px*/
+  padding: 130px 0;
 }
 
 .section-header {
@@ -1522,14 +1523,10 @@ section {
 --------------------------------------------------------------*/
 
 .blog .posts-list article {
-/*    height: 70%;*/
     height: 100%
-/*    border-bottom: 1px solid #d6e2ef;*/
-/*    padding-bottom: 30px;*/
     padding-bottom: 15px;
     font-family: 'S-CoreDream-3Light';
 }
-
 
 .blog .posts-list article+article {
   margin-top: 60px;
@@ -1549,6 +1546,28 @@ section {
   color: black;
 }
 
+.commentedPlan {
+    font-size: 20px;
+    font-weight: 600;
+    padding: 0;
+    margin: 20px 0 0 10px;
+    font-family: 'S-CoreDream-3Light';
+    color: black;
+}
+
+.commentedPlan a:hover {
+  color: #81bef0;
+  text-decoration: none;
+}
+
+a.a-title {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #757575;
+}
+
 .blog .posts-list .title a {
   color: var(--color-secondary);
   transition: 0.3s;
@@ -1559,7 +1578,7 @@ section {
 }
 
 .blog .posts-list .meta-top {
-  margin-top: 20px;
+  margin-top: 10px;
   color: #467ab3;
 }
 
@@ -1792,14 +1811,6 @@ section {
 # Blog Sidebar
 --------------------------------------------------------------*/
 
-/*.blog .sidebar .sidebar-title {
-  font-size: 22px;
-  font-weight: 400;
-  padding: 0;
-  margin: 0;
-  color: var(--color-secondary);
-}*/
-/*지윤 수정 : 안의 내용 전체적으로 다 수정 / 다가올 일정 | 완료된 일정 나오게하려고 */
 .blog .sidebar .sidebar-title {
     font-size: 18px;
     font-weight: 500;
@@ -1822,7 +1833,6 @@ section {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-/*    cursor: pointer;*/
 }
 
 .blog .sidebar .sidebar-title-rep-like {
@@ -1836,7 +1846,6 @@ section {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    cursor: pointer;
     font-family: 'Montserrat' !important;
 }
 
@@ -1913,8 +1922,7 @@ section {
 .blog .sidebar .recent-posts .post-item {
   display: flex;
   box-shadow: 0px 0 15px rgba(0, 0, 0, 0.08);
-  padding: 10px; /*지윤 수정 : padding:20->10px*/
-/*  height: 190px;*//*지윤 수정 : 여행일정하나당 높이*/
+  padding: 10px;
 }
 
 .post-item.mt-3 {
@@ -1928,7 +1936,7 @@ section {
 }
 
 .blog .sidebar .recent-posts img {
-  width: 170px;/*지윤 수정 : 사진하나의 width:170px*/
+  width: 170px;
   margin-right: 15px;
 }
 
@@ -2269,9 +2277,9 @@ section {
   font-size: 13px;
   color: var(--color-secondary);
 }
-/*지윤: 아예 새로 추가하는 css*/
+
+/*추가 css*/
 .top-container {
-    /*margin-top: -80px;*/
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -2280,42 +2288,34 @@ section {
 .profilePhotoContainer {
     width: 80px;
     height: 80px;
-
-    /*width: 100px;
-    height: 100px;*/
     border-radius: 50%;
     background-color: #000;
-/*    margin: 16px;*/
     margin: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 .profilePhoto-text {
     font-size: 1.4rem;
     color: #fff;
     font-family: 'Montserrat';
 }
+
 .container .text {
     font-family: 'Montserrat';
-/*    font-size: 35px;*/
     font-size: 25px;
     font-weight: 600;
     text-align: center;
     color: #000000;
 }
+
 .btn-normal {
     display: block;
-/*    width: 140px;
-    padding: 16px 24px;
-    margin: 8px;*/
     width: 100px;
     padding: 16px 8px;
     margin: 4px;
     border-radius: 4;
     border: 1px solid #e0e0e0;
-/*    font-size: 0.9rem;*/
     font-size: 0.8rem;
     text-align: center;
     outline: none;
@@ -2333,56 +2333,28 @@ div {
     justify-content: center;
     align-items: center;
     margin-top: 8px;
-    /*margin-top: 16px;*/
-    /* flex-direction: column; */
     height: 160px;
 }
 
-
 .index-circle {
-/*    height: 140px;
-    width: 140px;*/
     height: 130px;
     width: 130px;
-    /* border-radius: 50%; */
     border: 2px solid #fafafa;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-/*    margin: 0 8px;*/
     margin: 0 20px;
     cursor: pointer;
 }
 
-
-/*여기 추가함;;잘못되면 아예삭제*/
 .section-title-container{
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    /*margin-top: 16px;*/ /*다가올 일정 | 완료된 일정 위에 공간 줄일려고 없앰*/
 }
-
-/*ps-lg-4아예 html에서도 없애기 */
-/*.sidebar {
-padding: 0 20px;
-}*/
-
-/*
-h5 {
-    */
-/* font-size: 1.25rem; *//*
-
-    font-size: 0.7rem;
-}
-@media (min-width: 1200px)
-.h2, h2 {
-    font-size: 1.2rem;
-}
-*/
 
 /*==============
   # 헤더(header)
@@ -2412,7 +2384,6 @@ h5 {
 
 .header.sticked {
   background: rgba(255, 255, 255, 0.9);
-  /* background: #ffffff; */
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%) !important;
   padding: 12px 0;
 }
@@ -2430,45 +2401,31 @@ h5 {
   margin: 0;
 }
 
-/* header추가 */
 .container-fluid.container-xl.d-flex.align-items-center.justify-content-between {
     max-width: 90%;
 }
 
-/*.uk-grid {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}*/
-/* padding적용하려고 했는데 안됨
-@media (min-width: 992px)
-.col-lg-4 {
-    flex: 0 0 auto;
-    width: 33.33333333%;
-    padding: 30px;
-}*/
-
 .reply-content {
-    /*height: 150px;*/
     height: 250px;
     overflow: hidden;
     position: relative;
     border: 2px solid #fafafa;
-/*    border-radius: 15%;*/
     padding: 20px;
+    margin-top: 10px;
+    box-shadow: 0 0 7px 0 rgb(0 0 0 / 5%);
+    border-radius: 25px;
 }
 
-/*
-.blog .posts-list .title a {
-  color: var(--color-secondary);
-  transition: 0.3s;
-}*/
+p.reply-p {
+    font-size: 18px;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    margin: 0 10px 0 10px;
+    overflow-y: hidden;
+}
+
 .delete-buttonbox {
-    /*padding: 0px 12px;*/
     padding: 25px 0px;
-/*    float: right;*/
 }
 
 .blog .planlist {
@@ -2485,11 +2442,10 @@ h5 {
     text-decoration: none !important;
 }
 h2 > a {
-text-decoration: none;
+    text-decoration: none;
 }
 
-
-/*정용언니헤더*/
+/*헤더*/
   .navbar a,
   .navbar a:focus {
     display: flex;
@@ -2517,51 +2473,56 @@ text-decoration: none;
   .navbar li:hover>a {
     color: #fff;
   }
-
-
-  a{
+/*추가*/
+a{
   text-decoration: none !important;
-  }
+}
+
 .plan-date {
-font-family: 'Montserrat';
+    font-family: 'Montserrat';
 }
 
 a.a-region {
-font-weight: 300;
-pointer-events: none;
-}
-
-a.a-title {
-font-size: 24px
+    font-weight: 300;
+    pointer-events: none;
 }
 
 span.plan-title {
-    /* padding-top: 100px; */
     display: inline-block;
-    margin-top: 4%;
-    margin-bottom: 2%;
-    font-size: 20px;
+    margin-top: 10px;
+    font-size: 17px;
     font-weight: 600;
-    color: black;
+    color: #757575;
 }
-a.plan-title: hover {
-    /* padding-top: 100px; */
+.read-more.mt-auto.align-self-end {
+    width: 100%;
+    border-bottom: 1px solid #d6e2ef;
+    text-align: right;
+}
+
+a.plan-title:hover {
     color: #82cbed;
     text-decoration: none;
 }
-span.plan-title: hover {
-    /* padding-top: 100px; */
+span.plan-title:hover {
     color: #82cbed;
     text-decoration: none;
 }
+
 div#planlist-in-box {
     padding: 0 5%;
 }
 .reply-content .reply-p {
-color: rgba(0, 0, 0, 0.7);
+    color: rgba(0, 0, 0, 0.7);
 }
 
-/*마이페이지 전체선택 , 삭제버튼 */
+p.replyPlanDate {
+    font-family: 'Montserrat';
+    text-align: right;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
 button#pick-btn {
     border: 1px solid var(--color-primary);
     background-color: #fff;
@@ -2572,41 +2533,40 @@ button#pick-btn {
 button#delete-btn{
     background: var(--color-primary);
     color: #fff;
-    /*display: block;*/
     letter-spacing: 1px;
     border-radius: 4px;
     border: none;
     width : 90px;
     display: inline;
     float: right;
-/*
-    width: 100%;
-    height: 54px;
-*/
 }
 
-
-/*마이페이지 삭제버튼 , 전체선택체크박스*/
 .delete_buttonBox {
     margin-bottom: 60px;
     padding: 0 5%;
 }
 
-/*
-input#flexCheckDefault {
-    display: block;
-    width: 24px;
-    height: 24px;
-}*/
-
-
-/*Nova수정테스트의 2458*/
 .uk-grid {
     display: flex;
-/*    flex-wrap: wrap;*/
     margin: 0;
     padding: 0;
     list-style: none;
+}
+
+.row-1-2 {
+    margin: 0;
+    height: 50%;
+    padding: 10px;
+}
+
+.height-3-5 {
+    margin: 0;
+    height: 60%;
+}
+
+.height-2-5 {
+    margin: 0;
+    height: 40%;
 }
 
 .uk-inline {
@@ -2614,13 +2574,9 @@ input#flexCheckDefault {
 }
 
 .uk-width-2-3@m {
-display: block;
-
+    display: block;
 }
 
-/*.uk-width-2-3 {
-    width: 819px;
-}*/
 button.basic-btn {
     background: #81bef0;
     color: #fff;
@@ -2632,55 +2588,20 @@ button.basic-btn {
     height: 54px;
     }
 
-
-.uk-width-1-2 {
-    width : 50%
-    }
-
-/*
-    .uk-width-1-2 {
-    width : 50%
-    }
-
-    .uk-width-1-3 {
-
-    width :33.3%
-    }
-
-    .uk-width-2-3 {
-    width : 66.6%
-    }
-    .uk-grid.uk-grid-stack {
-        width: 100%;
-    }
-
-    .uk-width-1-2.info-container-top.uk-first-column {
-        width: 50%;
-    }*/
-
-
-/*.uk-width-expand\@m.uk-first-column {
-    width: 100%;
-}*/
+.trip-info-left {
+    width: 55%;
+}
+.trip-info-right {
+    width: 45%;
+}
 
 .mt-3 {
-font-family: 'S-CoreDream-3Light';
+    font-family: 'S-CoreDream-3Light';
 }
-
-/*@media (min-width: 960px)
-.uk-width-2-3\@m {
-    width: calc(100% * 2 / 3.001);
-}*/
 
 .region.info-container {
-/*    margin-left: 60px;
-    padding-top: 15%;*/
-text-align: center;
-    /* animation-iteration-count: infinite; */
-    /* list-style: korean-hanja-informal; */
-    /* list-style: korean-hanja-informal; */
+    text-align: center;
 }
-
 
 .travel-region {
     font-size: 1.5rem;
@@ -2689,15 +2610,14 @@ text-align: center;
     font-family: 'Montserrat';
 }
 .travel-region-engname {
-    font-size: 0.5rem;
+    font-size: 0.8rem;
     font-weight: 900;
     text-align: center;
     font-family: 'Montserrat';
 }
 
 .uk-width-2-3 {
-    /*width: 819px;*/
-    width: 775px;
+    width: 750px;
 }
 .user-id
 {
@@ -2709,104 +2629,92 @@ text-align: center;
 .small-title {
     font-size: 1rem;
     font-weight: 700;
-    color: #5dc9dd;
+    color: #81bef0;
 }
 .small-text {
     font-size: 14px;
-    /* text-align: center; */
     color: #616161;
     letter-spacing: 1px;
     padding: 8px;
 }
-
-/*.blog .sidebar .recent-posts img {
-    *//* width: 170px; *//*
-    *//* margin-right: 15px; *//*
-    width: 260px;
-    height: 280px;
-    *//* margin: 10px; *//*
-}*/
-
-/*.region.info-container.uk-first-column img{
-    width: 260px;
-    height: 280px;
-}*/
+.trip-title {
+    width: 250px;
+    font-weight: 700;
+}
+.updateTitle-icon  {
+    margin: 0 3px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 18px;
+}
 
 img.flex-shrink-0 {
     width: 260px;
     height: 280px;
 }
 
-.uk-width-expand\@m.uk-first-column {
+.trip-info {
     width: 100%;
+    padding: 16px;
 }
+
 .uk-width-1-2.info-container {
-    padding: 64px;
+    padding: 94px 64px 64px 64px;
+    width: 300px;
 }
 
 .three-btn {
-margin-left: 26px;
+    margin-left: 27px;
 }
 
-}
-.basic-btn.threeplan-btn.first {
-    width:120px;
-}
-
-/*
-.basic-btn.threeplan-btn.first {
-    width:120px;
-    margin-left: 50px;
-
-}*/
 button.threeplan-btn-first {
     background: #81bef0;
     color: #fff;
     display: block;
     letter-spacing: 1px;
-/*    border-radius: 4px;*/
     box-shadow: 0px 0 15px rgb(0 0 0 / 15%);
     border: none;
-    width: 120px;
+    width: 114px;
     height: 54px;
-    }
+}
+
 button.threeplan-btn {
     background: #81bef0;
     color: #fff;
     display: block;
     letter-spacing: 1px;
-/*    border-radius: 4px;*/
     box-shadow: 0px 0 15px rgb(0 0 0 / 15%);
     margin-left: 115px;
     border: none;
-    width: 120px;
+    width: 114px;
     height: 54px;
-    }
+}
 
 .bottom-btn {
     margin-top: 2%;
-}
-/*야매로 여행제목 수정 폼 길이 늘림*/
-input#inputTravelName_idx_0 {
-    width: 250px;
+    font-size: 16px;
+    font-family: 'Montserrat';
 }
 
 .mate-id{
     float: left;
-    /*width: 70%;*/
     width: 60%;
     padding: 10px;
-    /* border: 1px solid skyblue; */
     font-weight: 900;
 }
-
 .mate-nickname {
     float: left;
-    /* margin-left: 80%; */
-    /*border-left: 1px solid skyblue;*/
-    /*width: 30%;*/
     width: 25%;
     padding: 10px;
     font-weight: 900;
-    /*text-align: center;*/
+}
+
+h3#scheduledplanTab {
+    color: #81bef0;
+    font-weight: bold;
+}
+
+h3#completedplanTab{
+    color: #81bef0;
+    font-weight: bold;
 }

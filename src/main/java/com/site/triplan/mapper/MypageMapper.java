@@ -9,57 +9,45 @@ import java.util.List;
 
 @Mapper
 public interface MypageMapper {
-    Integer getPlanCount(String code);
 
-    Integer getReplyCount(String code);//usercode
-
-    Integer getLikeCount(String code);
-
-    /*Integer getPlaceCount(); //좋아요한 여행일정의 장소개수 알려고*/
-
+    //다가올 일정
+    List<PlanVo> getScheduledPlans(String code);
+    //완료된 일정
+    List<PlanVo> getCompletedPlans(String code);
     //나의 댓글
     List<ReplyVo> getAllReplies(String code);
-
     //좋아요한 일정
     List<PlanVo> getAllLikePlans(String code);
+    //회원정보
+    UserVo getUserProfile(String id);
 
-    //회원정보수정에서 이메일, 이름, 닉네임출력
-    UserVo getUserProfile(String id);//session에서 받아올 id
 
-    //나의 일정들
-    /*List<PlanVo> getAllMyPlans();*/
-    //다가오는 일정
-    List<PlanVo> getScheduledPlans(String code);
+    // 나의 일정 개수
+    Integer getPlanCount(String code);
+    // 나의 댓글 개수
+    Integer getReplyCount(String code);
+    // 좋아요한 일정 개수
+    Integer getLikeCount(String code);
 
-    List<PlanVo> getCompletedPlans(String code);
-
-/*    //나의 일정 삭제
-    void deleteByplanId(Integer id);
-    //좋아요한 일정 삭제(좋아요테이블에서인듯?일정자체가 없어지는게 아니라!)
-    void deleteBylikeId(Integer id);
-    //나의 댓글 삭제
-    void deleteByreplyId(Integer id);*/
 
     //여행 제목 수정
     void updateTitle(String title, Integer code);
-
     //나의 일정 삭제
-    void deletePlans(Integer code);//plan_code
-
-    //체크한 좋아요한 일정 삭제
-    void deleteLike(String code, Integer plan_code);
-    /*    Integer updatePlanTitle(@Param("plan") PlanVo plan);
-    Integer insertToPlanDeleted(@Param("delete_plan") )*/
-    //체크한 댓글 삭제
+    void deletePlans(Integer code);//plan.code
+    //나의 댓글 삭제
     void deleteReply(String code, Integer reply_code);
-    //회원정보 수정(닉네임, 패스워드) 아이디필요
+    //좋아요한 일정 삭제
+    void deleteLike(String code, Integer plan_code);
+
+
+    //회원정보 수정(닉네임, 패스워드), id사용
     void updateUser(String nickname, String pw, String id);
-/*    void updateUser(UserDto userDto);*/
-    // 회원탈퇴테이블로 옮기기
-    /*UserVo userToDropTbl(@Param("id") String id, @Param("name") String name, @Param("nickname") String nickname, @Param("user_code") Integer user_code);*/
+    // 회원탈퇴
     void userToDropTbl(UserVo user);
 
-    //동행자 이메일 가져오기
-    UserVo searchMate(String mateEmail);//session에서 받아올 id
+
+    //동행자 검색
+    UserVo searchMate(String mateEmail);
+    //동행자 추가
     void addMate(Integer plan_code, Integer user_code);
 }

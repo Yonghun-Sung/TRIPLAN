@@ -6,7 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ReplyVo {
-    //댓글.content, reply.write_dt, reply.plan_code, plan.title, plan.area_code, area.name//reply: r plan :p area: a
     String content; //reply.content
     String write_dt; //reply.write_dt
     String title; //plan.title
@@ -15,10 +14,11 @@ public class ReplyVo {
     String code, user_code, nickname, plan_code, id;
 
 
-    public ReplyVo(String content, String write_dt, String title, String name) {
+    public ReplyVo(String content, String write_dt, String title, String name, String plan_code) {
         this.content = content;
         this.write_dt = write_dt;
         this.title = title;
         this.name = name;
+        this.plan_code = plan_code;
     }
 }

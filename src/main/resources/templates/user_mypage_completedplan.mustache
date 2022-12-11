@@ -29,10 +29,9 @@
     <!-- Template Main CSS File -->
     <link href="/css/mypage_style.css" rel="stylesheet">
 
-
     <!--부트스트랩 CDN-->
-    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+
     <style>
 .navbar a {
     color: rgba(0, 0, 0, 0.7);
@@ -44,154 +43,104 @@
 </style>
 </head>
 <body class="page-blog">
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>-->
 <!-- ======= Header ======= -->
 {{>user_header}}
 <main id="main">
-    <!--
-         ======= Breadcrumbs =======
-        <div class="breadcrumbs d-flex align-items-center" style="background-image: url('/img/banner.jpg');">
-            <div class="container position-relative d-flex flex-column align-items-center">
-            </div>
-        </div>  End Breadcrumbs
-    -->
-
     <!-- ======= Blog Section ======= -->
     <section id="blog" class="blog planlist">
         <div class="container" data-aos="fade-up">
             <div class="col-lg-12" data-aos="fade-up" data-aos-delay="400">
                 <div class="sidebar">
-                    <!--프로필이랑 나의 일정, 댓글, 좋아요한 글 인덱스 버튼-->
                     <div class="top-container">
                         <div class="profilePhotoContainer">
                             <div class="profilePhoto-text" id="profilePhoto">{{firstletterNickname}}</div>
                         </div>
-                        <div class="text">{{userprofile.nickname}}</div><!--여기도 정적으로 넣음-->
+                        <div class="text">{{userprofile.nickname}}</div>
                         <button class="btn-normal" onclick="location.href='/triplan/myprofile'">프로필 수정</button>
                     </div>
                     <div class="row">
                         <div class="index-section">
-                            <!--나의 일정-->
                             <div class="index-circle" onclick="location.href='/triplan/mypage'">
-                                <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
+                                <h6>
                                     <b>나의 일정</b>
                                 </h6>
                                 <div>
-                                    <h4 style="line-height: 1; font-weight: 700" id="myPlan">{{plancount}}</h4><!--내가 정적으로 걍 6넣음-->
+                                    <h4 style="line-height: 1; font-weight: 700" id="myPlan">{{plancount}}</h4>
                                 </div>
                             </div>
-                            <!--나의 댓글-->
                             <div class="index-circle" onclick="location.href='/triplan/mypage/reply'">
                                 <h6>
                                     <b>나의 댓글</b>
                                 </h6>
                                 <div>
-                                    <h4 style="line-height: 1; font-weight: 700" id="myReply">{{replycount}}</h4><!--내가 정적으로 걍 5넣음-->
+                                    <h4 style="line-height: 1; font-weight: 700" id="myReply">{{replycount}}</h4>
                                 </div>
                             </div>
-                            <!--좋아요한 일정-->
                             <div class="index-circle" onclick="location.href='/triplan/mypage/like'">
-                                <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
+                                <h6>
                                     <b>좋아요한 일정</b>
                                 </h6>
                                 <div>
-                                    <h4 style="line-height: 1; font-weight: 700" id="myLike">{{likecount}}</h4><!--내가 정적으로 걍 10넣음-->
+                                    <h4 style="line-height: 1; font-weight: 700" id="myLike">{{likecount}}</h4>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!--"좋아요한 일정"-->
                     <div class="section-title-container">
-                        <!--<h3 class="sidebar-title-rep-like"> &lt;!&ndash;css추가&ndash;&gt;
-                            <b>나의 일정</b>
-                        </h3>-->
-                        <h3 class="sidebar-title"  onclick="location.href='/triplan/mypage'">다가올 일정</h3>
-                        <!--              <h3 class="sidebar-title">
-                                        <b>다가올 일정</b>
-                                      </h3>-->
-                        <h3 class="sidebar-title2"> | </h3> <!--sidebar-title2클래스 지윤 새로 추가-->
-                        <h3 class="sidebar-title"  onclick="location.href='/triplan/mypage/completedplans'">완료된 일정</h3>
+                        <h3 class="sidebar-title" onclick="location.href='/triplan/mypage'">다가올 일정</h3>
+                        <h3 class="sidebar-title2"> | </h3>
+                        <h3 class="sidebar-title" id="completedplanTab" onclick="location.href='/triplan/mypage/completedplans'">완료된 일정</h3>
                     </div>
-                    <!--                    &lt;!&ndash;삭제 버튼&ndash;&gt;-->
-                    <!--                    <div class="delete-buttonbox">-->
-                    <!--                        &lt;!&ndash;<button type="button" class="btn btn-outline-primary">선택삭제</button>&ndash;&gt;-->
-                    <!--                        <button type="button" class="btn btn-outline-primary" id="pick-btn">전체선택</button>-->
-                    <!--                        <button type="button" class="btn btn-primary" id="delete-btn">삭제</button>-->
-                    <!--                    </div>-->
-
-                    <!--&lt;!&ndash;삭제버튼&ndash;&gt;
-                    <div class="delete_buttonBox">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                &lt;!&ndash;Default checkbox&ndash;&gt;
-                            </label>
-                            <button type="button" class="btn btn-primary" id="delete-btn">삭제</button>
-                        </div>
-                    </div>-->
-
                 </div>
             </div>
         </div>
-        <!--##########################################여기까지 일정 전 윗파트################################################3-->
-        <div class="container" data-aos="fade-up" data-aos-delay="400"><!--좋아요한 일정들 내꺼에서 172-->
-
+        <!--완료된 일정-->
+        <div class="container" data-aos="fade-up" data-aos-delay="400">
             {{#complanlist}}
                 <div class="mt-3">
                     <div class="post-item mt-3">
                         <div class="uk-card uk-card-default uk-grid-collapse uk-grid">
-                            <!--/*style="padding:16px 0;"*/--><!--클래스 -->
                             <div class="uk-width-1-3">
-                                <div class="uk-grid" uk-grid-style="margin: 0; height: 60%">
-                                    <!--<div class="uk-width-1-2 info-container uk-first-column">-->
-                                    <div class="region info-container uk-first-column">
+                                <div class="uk-grid">
+                                    <div class="region info-container">
                                         <img src="/img/main/{{area_engname}}.jpg" class="flex-shrink-0">
                                     </div>
                                     <div class="uk-width-1-2 info-container">
                                         <div class="travel-region-engname">{{area_engname}}</div>
-                                        <div class="travel-region">{{name}}</div> <!--클래스 travel-title-->
+                                        <div class="travel-region">{{name}}</div>
                                         <div class="user-id">{{id}}</div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="uk-width-2-3"><!--여기가 오른쪽 파트 시작-->
-                                <div class="uk-grid uk-grid-stack" uk-grid style="margin: 0; height: 60%"><!--여기가 윗칸-->
-                                    <div class="uk-width-expand@m uk-first-column" style="padding: 16px">
-                                        <div class="uk-grid" uk-grid style="margin: 0; height: 50%; padding: 10px;">
-                                            <div class="uk-width-1-2 info-container-top uk-first-column">
+                            <div class="uk-width-2-3">
+                                <div class="uk-grid height-3-5">
+                                    <div class="trip-info">
+                                        <div class="uk-grid row-1-2">
+                                            <div class="trip-info-left">
                                                 <div class="small-title">
-                                                    여행이름
+                                                    여행제목
                                                     <div class="uk-inline">
-                                                        <!--<a class="uk-form-icon uk-form-icon-flip uk-icon" uk-icon="icon: file-edit" onclick="inputTravelName(0)" id="inputTravelNameBtn_idx_0"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" d="M18.65,1.68 C18.41,1.45 18.109,1.33 17.81,1.33 C17.499,1.33 17.209,1.45 16.98,1.68 L8.92,9.76 L8,12.33 L10.55,11.41 L18.651,3.34 C19.12,2.87 19.12,2.15 18.65,1.68 L18.65,1.68 L18.65,1.68 Z"></path><polyline fill="none" stroke="#000" points="16.5 8.482 16.5 18.5 3.5 18.5 3.5 1.5 14.211 1.5"></polyline></svg></a>
-                                                        <input class="uk-input uk-form-blank uk-form-width-medium small-text" type="text" placeholder="{{title}}" id="inputTravelName_idx_0" value="">-->
-
                                                         <input type="hidden" id="title-edit-code" value="{{code}}" />
-                                                        <input class="Title uk-input uk-form-blank uk-form-width-medium small-text" type="text" id="inputTravelName_idx_0" value="{{title}}"><!--placeholder=괄호두개title-->
-                                                        <a style="margin:0 3px; text-decoration: none; cursor: pointer;" class="inputTravelName_idx_a" data-code='{{code}}'>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                                                        </svg></a>
-
+                                                        <input class="trip-title small-text" type="text" id="updateTravelName" value="{{title}}">
+                                                        <a class="updateTitle-icon" data-code='{{code}}'><i class="bi bi-pencil-square"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="uk-width-1-2 info-container-top">
+                                            <div class="trip-info-right">
                                                 <div class="small-title">
-                                                    작성일
+                                                    작성일자
                                                     <span class="small-text" style="line-height: 40px;">{{write_dt}}</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="uk-grid" uk-grid style="margin: 0; height: 50%; padding:10px;">
-                                            <div class="uk-width-1-2 info-container-bottom uk-first-column">
+                                        <div class="uk-grid row-1-2">
+                                            <div class="trip-info-left">
                                                 <div class="small-title">
                                                     여행일자
-                                                    <span class="small-text">{{start_dt}}    -    {{end_dt}}</span>
+                                                    <span class="small-text">{{start_dt}} - {{end_dt}}</span>
                                                 </div>
                                             </div>
-                                            <div class="uk-width-1-2 info-container-bottom">
+                                            <div class="trip-info-right">
                                                 <div class="small-title">
                                                     선택장소
                                                     <span class="small-text">{{place_num}}</span>
@@ -201,35 +150,27 @@
                                     </div>
                                 </div>
 
-                                <div class="uk-grid uk-grid-stack" uk-grid="" style="margin: 0; height: 40%"> <!--아래칸: 일정삭제 수정 동행자-->
-                                    <div class="uk-width-expand@m info-container uk-first-column">
+                                <div class="uk-grid height-2-5">
+                                    <div>
                                         <div class="uk-grid">
                                             <div class="bottom-btn">
                                                 <div class="three-btn">
-                                                    <button class="threeplan-btn-first" id="modifySavedRoute_idx_0" onclick="location.href='/triplan/plandetail?code={{code}}'">
+                                                    <button class="threeplan-btn-first" id="modifyPlanBtn" onclick="location.href='/triplan/plandetail?code={{code}}'">
                                                         일정 보기
                                                     </button>
                                                 </div>
                                             </div>
                                             <div class="bottom-btn">
                                                 <div class="three-btn">
-                                                    <!--<button class="threeplan-btn" id="deleteSavedBtn_0" onclick="deleteSavedRoute(0)">-->
-                                                    <button class="threeplan-btn deleteSavedBtn" data-code='{{code}}'><!--onclick="deletePlan();" id랑 value삭제-->
-                                                        일정 삭제
+                                                    <button class="threeplan-btn mateAddBtn" data-code='{{code}}' data-bs-toggle="modal" data-bs-target="#matemodal">
+                                                        동행자 추가
                                                     </button>
                                                 </div>
                                             </div>
                                             <div class="bottom-btn">
                                                 <div class="three-btn">
-                                                    <!--<button class="threeplan-btn" uk-toggle="target:#modal-center_idx_0" onclick="modalCenterBtn(0)" aria-expanded="false">
-                                                        동행자 추가
-                                                    </button>-->
-
-                                                    <!--
-                                                    <button class="threeplan-btn" data-bs-toggle="modal" data-bs-target="#matemodal">
-                                                        -->
-                                                    <button class="threeplan-btn mateAddBtn" data-bs-toggle="modal" data-bs-target="#matemodal"><!--data-bs-toggle="modal" data-bs-target="#exampleModal"-->
-                                                        동행자 추가
+                                                    <button class="threeplan-btn deleteSavedBtn" data-code='{{code}}'>
+                                                        일정 삭제
                                                     </button>
                                                 </div>
                                             </div>
@@ -258,7 +199,7 @@
     </section><!-- End Blog Section -->
 
     <!-- Modal -->
-    <div class="modal fade" id="matemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><!--id="matemodal"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"--><!--modal-dialog modal-dialog-centered" id="exampleModal"-->
+    <div class="modal fade" id="matemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -272,7 +213,6 @@
                         </div>
                         <div class="mb-3">
                             <label for="id" class="col-form-label">ex) cope@triplan.com </label>
-                            <!--input type="hidden" id="db-pw" value="userprofile.id}}" />-->
                             <input type="email" class="form-control mate-email" placeholder="이메일 입력" required/>
                         </div>
                         <div class="mb-3">
@@ -285,7 +225,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -294,7 +233,6 @@
             </div>
         </div>
     </div>
-
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
@@ -304,10 +242,7 @@
 
 <div id="preloader"></div>
 
-
 <script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>-->
-
 
 <!-- Vendor JS Files -->
 <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -319,7 +254,7 @@
 
 <!-- Template Main JS File -->
 <script src="/js/user/main.js"></script>
-<script src="/js/mypage/delete.js"></script>
+<script src="/js/mypage/mypage.js"></script>
 
 </body>
 </html>

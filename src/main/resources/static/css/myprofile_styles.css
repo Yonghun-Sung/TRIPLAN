@@ -1363,6 +1363,7 @@ section {
 
 .contact .basic-form {
   width: 100%;
+  font-weight: 900;
 }
 
 .contact .basic-form .form-group {
@@ -2324,14 +2325,6 @@ input#agree-terms {
   margin-top: 7%;
 }
 
-/*button#userupdate-btn {
-  font-weight: 600;
-  margin-top: 5%;
-}
-button#userdrop-btn {
-  font-weight: 600;
-  margin-top: 5%;
-}*/
 
 #termsOfService .mb-3, #privacyPolicy .mb-3 {
   font-size: 14px;
@@ -2774,13 +2767,19 @@ div.comments {
   display: none;
 }
 
-/*user_style에 추가하는 부분이었음*/
-/*이렇게 myprofile_styles.css로 안뺄꺼면 user_styles.css에 넣기*/
-
-button.basic-btn2 {
+button.userupdate-btn {
     background: var(--color-primary);
     color: #fff;
-    display: inline-box;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    border: none;
+    width: 45%;
+    height: 54px;
+    margin: 2%;
+}
+button.userdrop-btn{
+    background: #6C757D;
+    color: #fff;
     letter-spacing: 1px;
     border-radius: 4px;
     border: none;
@@ -2789,11 +2788,7 @@ button.basic-btn2 {
     margin: 2%;
 }
 
-
-
-/*지윤: 아예 새로 추가하는 css, 이름름부분 */
 .top-container {
-    /*margin-top: -80px;*/
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -2803,11 +2798,8 @@ button.basic-btn2 {
     width: 80px;
     height: 80px;
 
-    /*width: 100px;
-    height: 100px;*/
     border-radius: 50%;
     background-color: #000;
-/*    margin: 16px;*/
     margin: 5px;
     display: flex;
     justify-content: center;
@@ -2821,14 +2813,12 @@ button.basic-btn2 {
 }
 .container .text {
     font-family: 'Montserrat';
-/*    font-size: 35px;*/
     font-size: 25px;
     font-weight: 600;
     text-align: center;
     color: #000000;
 }
 
-/*user_profile_edit.mustache 회원정보수정 모달 취소, 탈퇴 버튼*/
 button#cancel-btn{
     background: #6C757D;
     color: #fff;
@@ -2839,7 +2829,6 @@ button#cancel-btn{
     width: 45%;
     height: 54px;
     margin: 2%;
-
 }
 
 button#modal-drop-btn{
@@ -2852,5 +2841,4 @@ background: var(--color-primary);
     width: 45%;
     height: 54px;
     margin: 2%;
-
 }

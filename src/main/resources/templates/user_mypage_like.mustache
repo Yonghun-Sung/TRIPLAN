@@ -28,19 +28,9 @@
 
     <!-- Template Main CSS File -->
     <link href="/css/mypage_style.css" rel="stylesheet">
-    <script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <!--  마이로의 UIKit사용하기 위해 넣어봄-->
-    <!--  &lt;!&ndash; UIkit CSS &ndash;&gt;
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.13/dist/css/uikit.min.css" />
-
-      &lt;!&ndash; UIkit JS &ndash;&gt;
-      <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.13/dist/js/uikit.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.13/dist/js/uikit-icons.min.js"></script>-->
 
     <!--부트스트랩 CDN-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <!--  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>-->
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
 <style>
 .navbar a {
     color: rgba(0, 0, 0, 0.7);
@@ -52,77 +42,54 @@
 </style>
 </head>
 <body class="page-blog">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-    <!-- ======= Header ======= -->
-    {{>user_header}}
+<!-- ======= Header ======= -->
+{{>user_header}}
 <main id="main">
-<!--
-     ======= Breadcrumbs =======
-    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('/img/banner.jpg');">
-        <div class="container position-relative d-flex flex-column align-items-center">
-        </div>
-    </div>  End Breadcrumbs
--->
-
     <!-- ======= Blog Section ======= -->
     <section id="blog" class="blog planlist">
         <div class="container" data-aos="fade-up">
             <div class="col-lg-12" data-aos="fade-up" data-aos-delay="400">
                 <div class="sidebar">
-                    <!--프로필이랑 나의 일정, 댓글, 좋아요한 글 인덱스 버튼-->
                     <div class="top-container">
                         <div class="profilePhotoContainer">
                             <div class="profilePhoto-text" id="profilePhoto">{{firstletterNickname}}</div>
                         </div>
-                        <div class="text">{{session_nickname}}</div><!--여기도 정적으로 넣음-->
+                        <div class="text">{{session_nickname}}</div>
                         <button class="btn-normal" onclick="location.href='/triplan/myprofile'">프로필 수정</button>
                     </div>
                     <div class="row">
                         <div class="index-section">
-                            <!--나의 일정-->
                             <div class="index-circle" onclick="location.href='/triplan/mypage'">
-                                <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
+                                <h6>
                                     <b>나의 일정</b>
                                 </h6>
                                 <div>
-                                    <h4 style="line-height: 1; font-weight: 700" id="myPlan">{{plancount}}</h4><!--내가 정적으로 걍 6넣음-->
+                                    <h4 style="line-height: 1; font-weight: 700" id="myPlan">{{plancount}}</h4>
                                 </div>
                             </div>
-                            <!--나의 댓글-->
                             <div class="index-circle" onclick="location.href='/triplan/mypage/reply'">
                                 <h6>
                                     <b>나의 댓글</b>
                                 </h6>
                                 <div>
-                                    <h4 style="line-height: 1; font-weight: 700" id="myReply">{{replycount}}</h4><!--내가 정적으로 걍 5넣음-->
+                                    <h4 style="line-height: 1; font-weight: 700" id="myReply">{{replycount}}</h4>
                                 </div>
                             </div>
-                            <!--좋아요한 일정-->
                             <div class="index-circle" onclick="location.href='/triplan/mypage/like'">
-                                <h6><!--여기에 마이로는 h5 style="폰트패밀리넣음"-->
+                                <h6>
                                     <b>좋아요한 일정</b>
                                 </h6>
                                 <div>
-                                    <h4 style="line-height: 1; font-weight: 700" id="myLike">{{likecount}}</h4><!--내가 정적으로 걍 10넣음-->
+                                    <h4 style="line-height: 1; font-weight: 700" id="myLike">{{likecount}}</h4>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!--"좋아요한 일정"-->
                     <div class="section-title-container">
-                        <h3 class="sidebar-title-rep-like"> <!--css추가-->
+                        <h2 class="sidebar-title-rep-like">
                             <b>좋아요한 일정</b>
-                        </h3>
+                        </h2>
                     </div>
-<!--                    &lt;!&ndash;삭제 버튼&ndash;&gt;-->
-<!--                    <div class="delete-buttonbox">-->
-<!--                        &lt;!&ndash;<button type="button" class="btn btn-outline-primary">선택삭제</button>&ndash;&gt;-->
-<!--                        <button type="button" class="btn btn-outline-primary" id="pick-btn">전체선택</button>-->
-<!--                        <button type="button" class="btn btn-primary" id="delete-btn">삭제</button>-->
-<!--                    </div>-->
-
-                    <!--삭제버튼-->
                     <div class="delete_buttonBox">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="all">
@@ -132,465 +99,50 @@
                             <button type="button" class="btn btn-primary like-delete-btn" id="delete-btn">삭제</button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-        <div style="height: 15px;"></div>
-        <div class="container" data-aos="fade-up" data-aos-delay="400"><!--좋아요한 일정들 내꺼에서 172-->
-
+        <!--좋아요한 일정-->
+        <div class="container" data-aos="fade-up" data-aos-delay="400">
             <div class="row g-5">
-
                 <div id="planlist-out-box" class="col-lg-12">
-
                     <div id="planlist-in-box" class="row gy-5 posts-list">
                         {{#likelist}}
                         <div class="col-lg-4">
                             <div class="form-check">
-                                <input class=" form-check-input like-cb" type="checkbox" name="cb1" data-code='{{code}}'><!--id="flexCheckDefault"  name = "cb1"-->
+                                <input class=" form-check-input like-cb" type="checkbox" name="cb1" data-code='{{code}}'>
                                 <label class="form-check-label">
                                     <!--Default checkbox-->
                                 </label>
                             </div>
                             <article class="d-flex flex-column">
                                 <div class="post-img">
-                                    <!--<a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>-->
-                                    <img src="/img/main/{{area_engname}}.jpg" alt="" class="img-fluid">
+                                    <img src="/img/main/{{area_engname}}.jpg" class="img-fluid">
                                 </div>
                                 <a class="title">
                                     <div>{{name}}</div>
-                                    <a href="/triplan/plandetail?code={{code}}" class="a-title"><span class="plan-title">{{title}}</span></a>
-                                </h2>
-
+                                    <a href="/triplan/plandetail?code={{code}}">
+                                    <span class="plan-title">{{title}}</span>
+                                    </a>
+                                </a>
                                 <div class="meta-top">
                                     <ul>
                                         <li class="d-flex align-items-center"><i class="bi bi-person"></i>{{nickname}}</li>
-                                        <!--<li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>placecount</li>-->
                                         <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>{{place_num}}</li>
                                         <li class="d-flex align-items-center"><i class="bi bi-eye"></i>{{views}}</li>
                                     </ul>
                                 </div>
-
                                 <div class="content">
                                     <p class="plan-date">
                                         {{start_dt}} ~ {{end_dt}}
                                     </p>
                                 </div>
-
                                 <div class="read-more mt-auto align-self-end">
-                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a> <!--여기 나중에 일정상세페이지로 이동시키기-->
+                                    <a href="/triplan/plandetail?code={{code}}">Read More<i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </article>
-                        </div><!-- End post list item -->
+                        </div>
                         {{/likelist}}
-<!--
-                        <div class="col-lg-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    &lt;!&ndash;Default checkbox&ndash;&gt;
-                                </label>
-                            </div>
-                            <article class="d-flex flex-column">
-                                <div class="post-img">
-                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                                </div>
-
-                                <h2 class="title">
-                                    <a href="#!">제주</a><br>
-                                    <span class="plan-title">제주 2박3일</span>
-                                </h2>
-
-                                <div class="meta-top">
-                                    <ul>
-                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                                    </ul>
-                                </div>
-
-                                <div class="content">
-                                    <p class="plan-date">
-                                        2022-07-04 ~ 2022-07-06
-                                    </p>
-                                </div>
-
-                                <div class="read-more mt-auto align-self-end">
-                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
-                        </div>&lt;!&ndash; End post list item &ndash;&gt;
-                        <div class="col-lg-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    &lt;!&ndash;Default checkbox&ndash;&gt;
-                                </label>
-                            </div>
-                            <article class="d-flex flex-column">
-                                <div class="post-img">
-                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                                </div>
-
-                                <h2 class="title">
-                                    <a href="#!">제주</a><br>
-                                    <span class="plan-title">제주 2박3일</span>
-                                </h2>
-
-                                <div class="meta-top">
-                                    <ul>
-                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                                    </ul>
-                                </div>
-
-                                <div class="content">
-                                    <p class="plan-date">
-                                        2022-07-04 ~ 2022-07-06
-                                    </p>
-                                </div>
-
-                                <div class="read-more mt-auto align-self-end">
-                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
-                        </div>&lt;!&ndash; End post list item &ndash;&gt;
-
-                        <div class="col-lg-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    &lt;!&ndash;Default checkbox&ndash;&gt;
-                                </label>
-                            </div>
-                            <article class="d-flex flex-column">
-                                <div class="post-img">
-                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                                </div>
-
-                                <h2 class="title">
-                                    <a href="#!">제주</a><br>
-                                    <span class="plan-title">제주 2박3일</span>
-                                </h2>
-
-                                <div class="meta-top">
-                                    <ul>
-                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                                    </ul>
-                                </div>
-
-                                <div class="content">
-                                    <p class="plan-date">
-                                        2022-07-04 ~ 2022-07-06
-                                    </p>
-                                </div>
-
-                                <div class="read-more mt-auto align-self-end">
-                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
-                        </div>&lt;!&ndash; End post list item &ndash;&gt;
-
-                        <div class="col-lg-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    &lt;!&ndash;Default checkbox&ndash;&gt;
-                                </label>
-                            </div>
-                            <article class="d-flex flex-column">
-                                <div class="post-img">
-                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                                </div>
-
-                                <h2 class="title">
-                                    <a href="#!">제주</a><br>
-                                    <span class="plan-title">제주 2박3일</span>
-                                </h2>
-
-                                <div class="meta-top">
-                                    <ul>
-                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                                    </ul>
-                                </div>
-
-                                <div class="content">
-                                    <p class="plan-date">
-                                        2022-07-04 ~ 2022-07-06
-                                    </p>
-                                </div>
-
-                                <div class="read-more mt-auto align-self-end">
-                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
-                        </div>&lt;!&ndash; End post list item &ndash;&gt;
-
-                        <div class="col-lg-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    &lt;!&ndash;Default checkbox&ndash;&gt;
-                                </label>
-                            </div>
-                            <article class="d-flex flex-column">
-                                <div class="post-img">
-                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                                </div>
-
-                                <h2 class="title">
-                                    <a href="#!">제주</a><br>
-                                    <span class="plan-title">제주 2박3일</span>
-                                </h2>
-
-                                <div class="meta-top">
-                                    <ul>
-                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                                    </ul>
-                                </div>
-
-                                <div class="content">
-                                    <p class="plan-date">
-                                        2022-07-04 ~ 2022-07-06
-                                    </p>
-                                </div>
-
-                                <div class="read-more mt-auto align-self-end">
-                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
-                        </div>&lt;!&ndash; End post list item &ndash;&gt;
-
-                        <div class="col-lg-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    &lt;!&ndash;Default checkbox&ndash;&gt;
-                                </label>
-                            </div>
-                            <article class="d-flex flex-column">
-                                <div class="post-img">
-                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                                </div>
-
-                                <h2 class="title">
-                                    <a href="#!">제주</a><br>
-                                    <span class="plan-title">제주 2박3일</span>
-                                </h2>
-
-                                <div class="meta-top">
-                                    <ul>
-                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                                    </ul>
-                                </div>
-
-                                <div class="content">
-                                    <p class="plan-date">
-                                        2022-07-04 ~ 2022-07-06
-                                    </p>
-                                </div>
-
-                                <div class="read-more mt-auto align-self-end">
-                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
-                        </div>&lt;!&ndash; End post list item &ndash;&gt;
-
-                        <div class="col-lg-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    &lt;!&ndash;Default checkbox&ndash;&gt;
-                                </label>
-                            </div>
-                            <article class="d-flex flex-column">
-                                <div class="post-img">
-                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                                </div>
-
-                                <h2 class="title">
-                                    <a href="#!">제주</a><br>
-                                    <span class="plan-title">제주 2박3일</span>
-                                </h2>
-
-                                <div class="meta-top">
-                                    <ul>
-                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                                    </ul>
-                                </div>
-
-                                <div class="content">
-                                    <p class="plan-date">
-                                        2022-07-04 ~ 2022-07-06
-                                    </p>
-                                </div>
-
-                                <div class="read-more mt-auto align-self-end">
-                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
-                        </div>&lt;!&ndash; End post list item &ndash;&gt;
-
-                        <div class="col-lg-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    &lt;!&ndash;Default checkbox&ndash;&gt;
-                                </label>
-                            </div>
-                            <article class="d-flex flex-column">
-                                <div class="post-img">
-                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                                </div>
-
-                                <h2 class="title">
-                                    <a href="#!">제주</a><br>
-                                    <span class="plan-title">제주 2박3일</span>
-                                </h2>
-
-                                <div class="meta-top">
-                                    <ul>
-                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                                    </ul>
-                                </div>
-
-                                <div class="content">
-                                    <p class="plan-date">
-                                        2022-07-04 ~ 2022-07-06
-                                    </p>
-                                </div>
-
-                                <div class="read-more mt-auto align-self-end">
-                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
-                        </div>&lt;!&ndash; End post list item &ndash;&gt;
-
-                        <div class="col-lg-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    &lt;!&ndash;Default checkbox&ndash;&gt;
-                                </label>
-                            </div>
-                            <article class="d-flex flex-column">
-                                <div class="post-img">
-                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                                </div>
-
-                                <h2 class="title">
-                                    <a href="#!">제주</a><br>
-                                    <span class="plan-title">제주 2박3일</span>
-                                </h2>
-
-                                <div class="meta-top">
-                                    <ul>
-                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                                    </ul>
-                                </div>
-
-                                <div class="content">
-                                    <p class="plan-date">
-                                        2022-07-04 ~ 2022-07-06
-                                    </p>
-                                </div>
-
-                                <div class="read-more mt-auto align-self-end">
-                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
-                        </div>&lt;!&ndash; End post list item &ndash;&gt;
-
-                        <div class="col-lg-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    &lt;!&ndash;Default checkbox&ndash;&gt;
-                                </label>
-                            </div>
-                            <article class="d-flex flex-column">
-                                <div class="post-img">
-                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                                </div>
-
-                                <h2 class="title">
-                                    <a href="#!">제주</a><br>
-                                    <span class="plan-title">제주 2박3일</span>
-                                </h2>
-
-                                <div class="meta-top">
-                                    <ul>
-                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                                    </ul>
-                                </div>
-
-                                <div class="content">
-                                    <p class="plan-date">
-                                        2022-07-04 ~ 2022-07-06
-                                    </p>
-                                </div>
-
-                                <div class="read-more mt-auto align-self-end">
-                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
-                        </div>&lt;!&ndash; End post list item &ndash;&gt;
-
-                        <div class="col-lg-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    &lt;!&ndash;Default checkbox&ndash;&gt;
-                                </label>
-                            </div>
-                            <article class="d-flex flex-column">
-                                <div class="post-img">
-                                    <a href="#!"><img src="/img/blog/blog-1.jpg" alt="" class="img-fluid"></a>
-                                </div>
-
-                                <h2 class="title">
-                                    <a href="#!">제주</a><br>
-                                    <span class="plan-title">제주 2박3일</span>
-                                </h2>
-
-                                <div class="meta-top">
-                                    <ul>
-                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>nickname</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-geo-alt"></i>12</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-eye"></i>51</li>
-                                    </ul>
-                                </div>
-
-                                <div class="content">
-                                    <p class="plan-date">
-                                        2022-07-04 ~ 2022-07-06
-                                    </p>
-                                </div>
-
-                                <div class="read-more mt-auto align-self-end">
-                                    <a href="#!">Read More <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </article>
-                        </div>&lt;!&ndash; End post list item &ndash;&gt;
--->
-
                     </div>
 
                     <div class="blog-pagination">
@@ -604,15 +156,10 @@
                             <li><a href="#!"><i class="bi bi-arrow-right"></i></a></li>
                         </ul>
                     </div><!-- End blog pagination -->
-
                 </div>
-
             </div>
-
         </div>
-
     </section><!-- End Blog Section -->
-
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
@@ -621,6 +168,8 @@
 <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <div id="preloader"></div>
+
+<script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <!-- Vendor JS Files -->
 <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -632,7 +181,7 @@
 
 <!-- Template Main JS File -->
 <script src="/js/user/main.js"></script>
-<script src="/js/mypage/delete.js"></script>
+<script src="/js/mypage/mypage.js"></script>
 
 </body>
 </html>

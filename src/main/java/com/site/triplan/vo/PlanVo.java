@@ -17,11 +17,11 @@ public class PlanVo {
     String start_dt;
     String end_dt;
 
-    String photo_path; // 지역테이블에 이미지 넣어두고 그거 멤버변수로 하나만들기
+    String photo_path;
     String id; // 작성자 이메일
     String write_dt; // 일정 작성일
 
-    Integer code; //일정 코드-삭제할때필요
+    Integer code; //일정 코드
 
     Integer area_code, user_code;
     // 일정보기
@@ -50,7 +50,6 @@ public class PlanVo {
         this.views = views;
         this.start_dt = start_dt;
         this.end_dt = end_dt;
-        /*this.photo_path = photo_path;*/
         this.id = id;
         this.write_dt = write_dt;
         this.code = code;
