@@ -62,6 +62,7 @@ public class LoginController {
     // 메일 전송
     @PostMapping("/mail")
     public String sendMail(MailVo mailVo) {
+        System.out.println(mailVo);
         loginService.sendTempPwMail(mailVo);
         return "redirect:/triplan/loginform";
     }

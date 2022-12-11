@@ -12,7 +12,7 @@
     <!-- ======= Header ======= -->
     <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-            <a href="/triplan/main" class="logo d-flex align-items-center">
+            <a href="/triplan/admin" class="logo d-flex align-items-center">
                 <img src="/img/main-logo.png" />
             </a>
             <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
@@ -21,21 +21,20 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <!-- ① 비로그인 -->
+                    {{^session_name}}
                     <li><a href="/triplan/adminLogin">로그인</a></li>
+                    {{/session_name}}
 
                     <!-- ② 로그인 -->
-                    <!--
-                    <li><a href="#" class="active">일정만들기</a></li>
-                    <li><a href="#">일정보기</a></li>
-                    <li><a href="#">이용방법</a></li>
-                    <li class="dropdown">
-                        <a href="#"><span>nickname 님</span><i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                        <ul>
-                            <li><a href="#">마이페이지</a></li>
-                            <li><a href="#">로그아웃</a></li>
-                        </ul>
-                    </li>
-                     -->
+                    {{#session_name}}
+                        <li class="dropdown">
+                            <a href="#"><span>{{session_name}} 님</span><i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                            <ul>
+                                <li><a href="/triplan/admin">관리자페이지</a></li>
+                                <li><a href="/triplan/adminLogout">로그아웃</a></li>
+                            </ul>
+                        </li>
+                    {{/session_name}}
                 </ul>
             </nav>
             <!-- .navbar -->

@@ -27,7 +27,7 @@
     <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="/css/user_styles.css" rel="stylesheet">
+    <link href="/css/myprofile_styles.css" rel="stylesheet">
 <style>
     .navbar a {
         color: rgba(0, 0, 0, 0.7);
@@ -59,39 +59,33 @@
             <div id="joinform-container" class="container position-relative">
                 <h2 id="title">비밀번호 변경</h2>
                 <div class="row gy-4 d-flex justify-content-end">
-                    <form id="joinform" action="" method="post" role="form" class="basic-form">
+                    <form id="joinform" role="form" class="basic-form">
                         <div class="mb-3">
                             <label for="id" class="form-label">이메일</label>
-                            <input type="email" class="form-control" id="id" placeholder="예) gotravel123@triplan.com">
+                            <input type="email" value="{{adminprofile.id}}" class="form-control" id="adminid" placeholder="예) gotravel123@triplan.com" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">이름</label>
-                            <input type="text" class="form-control" id="name" placeholder="이름 입력">
+                            <input type="text" value="{{adminprofile.name}}" class="form-control" id="adminname" placeholder="이름 입력" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="pw" class="form-label">현재 비밀번호</label>
-                            <input type="password" class="form-control" id="pw" placeholder="비밀번호 입력">
+                            <input type="password" name="checkpw" class="form-control current-pw" id="admindbpw" placeholder="비밀번호 입력">
+                            <div id="currentAdminPw"></div>
+                            <input type="hidden" id="adminDBpw" value="{{adminprofile.pw}}" >
                         </div>
                         <div class="mb-3">
                             <label for="pw" class="form-label">새 비밀번호</label>
-                            <input type="password" class="form-control" id="pw" placeholder="문자,숫자,특수문자 포함 8~20자">
+                            <input type="password" class="form-control" id="pwNew" placeholder="문자,숫자,특수문자 포함 8~20자" >
+                            <div id="pwNewMsg"></div>
                         </div>
                         <div class="mb-3">
                             <label for="pw" class="form-label">새 비밀번호 확인</label>
-                            <input type="password" class="form-control" id="pw" placeholder="비밀번호 재입력">
+                            <input type="password" class="form-control" id="pwNewCheck" placeholder="비밀번호 재입력">
+                            <div id="pwNewCheckMsg"></div>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="agree-terms">
-                            <label class="form-check-label" for="agree-terms">
-                                TRIPLAN에 가입하면서
-                                <a href="#!" data-bs-toggle="modal" data-bs-target="#termsOfService">이용약관</a>과
-                                <a href="#!" data-bs-toggle="modal" data-bs-target="#privacyPolicy">개인정보수집</a>에 <br>
-                                동의합니다.
-                            </label>
-                        </div>
-
                         <div class=" text-center">
-                            <button id="joininsert-btn" class="basic-btn">저장하기</button>
+                            <button id="adminupdate-btn" class="basic-btn" type="button">저장하기</button>
                         </div>
                     </form>
                 </div>
@@ -158,6 +152,7 @@
 
     <!-- Template Main JS File -->
     <script src="/js/user/main.js"></script>
+    <script src="/js/admin/admin.js"></script>
 
 </body>
 

@@ -2,6 +2,7 @@ package com.site.triplan.mapper;
 
 import com.site.triplan.vo.*;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -32,7 +33,8 @@ public interface PlanMapper {
     //-- 조회수 업데이트
     Integer updateViews(String plan_code);
     //-- 좋아요 여부
-    Integer isLike(String plan_code, Integer user_code);
+    //Integer isLike(String plan_code, Integer user_code);
+    Integer isLike(@Param("plan_code")String plan_code, @Param("user_code")Integer user_code);
     //-- 좋아요 등록
     Integer insertLike(String plan_code, Integer user_code);
     //-- 좋아요 해제

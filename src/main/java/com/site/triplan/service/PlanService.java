@@ -68,7 +68,11 @@ public class PlanService {
     }
     //-- 좋아요 여부
     public int isLike(String plan_code, Integer user_code) {
+        System.out.println("p " + plan_code);
+        System.out.println("p " + user_code);
+
         int isLike = planMapper.isLike(plan_code, user_code);
+        System.out.println("is: " + isLike);
         return isLike;
     }
     //-- 좋아요 등록

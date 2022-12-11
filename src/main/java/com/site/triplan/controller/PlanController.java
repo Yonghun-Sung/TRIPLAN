@@ -253,9 +253,9 @@ public class PlanController {
     // 일정 상세보기
     @GetMapping("/plandetail")
     public String showPlanDetail(Model model, HttpServletRequest request, @RequestParam(required=true)String code) {
+    //public String showPlanDetail(Model model, HttpServletRequest request, @RequestParam(value="code", required=false)String code) {
         HttpSession session = request.getSession();
         String session_id = (String)session.getAttribute("session_id");
-
         PlanVo plan = planService.getPlanDetail(code);
         planService.updateViews(code);
         List<MateVo> mateList = new ArrayList<>();
@@ -266,14 +266,14 @@ public class PlanController {
             int isLike = planService.isLike(code, user_code);
             if (isLike > 0)
                 model.addAttribute("isLike", isLike);
+            mateList = planService.getMateList(code);
 
+            model.addAttribute("mateList", mateList);
             model.addAttribute("now_user_id", session_id);
         }
-        mateList = planService.getMateList(code);
         placeList = planService.getPlaceList(code);
         replyList = planService.getReplyList(code);
         model.addAttribute("plan", plan);
-        model.addAttribute("mateList", mateList);
         model.addAttribute("placeList", placeList);
         model.addAttribute("replyList", replyList);
         return "user_plan_detail";
