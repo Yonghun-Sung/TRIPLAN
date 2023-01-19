@@ -2,11 +2,15 @@ package com.site.triplan.service;
 
 import com.site.triplan.mapper.AdminMapper;
 import com.site.triplan.vo.AdminVo;
+import com.site.triplan.vo.MailVo;
 import com.site.triplan.vo.ReportVo;
 import com.site.triplan.vo.UserVo;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,6 +30,9 @@ public class AdminService implements UserDetailsService{    // security에서 �
 //
 //        this.adminMapper = adminMapper;
 //    }
+    @Autowired
+    private JavaMailSender javaMailSender;
+    private static final String FROM_ADDRESS = "TRIPLAN_ADMIN@triplan.com";
 
     public List<UserVo> postAllUser() {         // 전체회원
         return adminMapper.findAll();}
@@ -71,7 +78,55 @@ public class AdminService implements UserDetailsService{    // security에서 �
         return  adminVo;
     }
 
-    public void updatePw(AdminVo adminVo){
-        adminMapper.updatePw(adminVo);
+    // 비밀번호 변경
+    public void updatePw(String id, String updatepw){
+        adminMapper.updatePw(id, updatepw);
+    }
+
+    // 임시 비밀번호 생성
+    public String createTempPw() {
+        char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
+                'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+
+        String str = "";
+
+        // 문자 배열 길이의 값을 랜덤으로 14개를 뽑아 구문을 작성함
+        int idx = 0;
+        for (int i = 0; i < 14; i++) {
+            idx = (int) (charSet.length * Math.random());
+            str += charSet[idx];
+        }
+        return str;
+    }
+
+    // 메일 전송
+    public void sendTempPwMail(MailVo mailVo) {
+        SimpleMailMessage mail = new SimpleMailMessage();
+
+
+        String title = "TRIPLAN 임시비밀번호 안내 이메일입니다.";
+        String tempPw = createTempPw();
+        String message = "안녕하세요. TRIPLAN 임시비밀번호 안내 이메일입니다.\n\n"
+                + "아래의 임시 비밀번호를 확인 후 로그인해주세요.\n\n"
+                + tempPw
+                + "\n\n로그인 후, 비밀번호를 변경해주세요.";
+        mailVo.setTitle(title);
+        mailVo.setMessage(message);
+
+//        updatePw(mailVo.getAddress(), tempPw);
+
+        mail.setTo(mailVo.getAddress());
+        mail.setSubject(mailVo.getTitle());
+        mail.setText(mailVo.getMessage());
+        mail.setFrom(FROM_ADDRESS);
+        mail.setReplyTo(FROM_ADDRESS);
+
+        try {
+            System.out.println(mail);
+            javaMailSender.send(mail);
+        } catch (MailException e) {
+            System.out.println("메일발송실패");
+            e.printStackTrace();
+        }
     }
 }

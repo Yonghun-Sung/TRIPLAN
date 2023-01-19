@@ -2,6 +2,7 @@ package com.site.triplan.mapper;
 
 import com.site.triplan.vo.UserVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface LoginMapper {
@@ -12,7 +13,7 @@ public interface LoginMapper {
     Integer countId(String id);
 
     // 비밀번호 변경
-    void updatePw(String pw, String id);
+    void updatePw(@Param("pw") String pw, @Param("id") String id);
 
     // 탈퇴회원 확인
     Integer checkDropId(String id);

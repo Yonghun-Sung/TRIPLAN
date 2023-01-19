@@ -85,10 +85,10 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form id="findpw-form" action="/triplan/adminMail" method="post">
                             <div class="mb-3">
                                 <label for="id" class="col-form-label">이메일 주소</label>
-                                <input type="email" class="form-control" id="id">
+                                <input type="email" class="form-control" name="address" id="id">
                             </div>
                             <div class="pw-explan">
                                 <span class="ment">회원가입 시, 등록하셨던 이메일 주소를 입력해 주세요.</span>
@@ -122,6 +122,7 @@
 
     <!-- Template Main JS File -->
     <script src="/js/user/main.js"></script>
+
     <script src="/js/admin/admin.js"></script>
 
 </body>

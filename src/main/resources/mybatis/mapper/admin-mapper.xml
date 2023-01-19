@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.site.triplan.mapper.AdminMapper">
+    <!--전체회원 조회-->
     <select id="findAll" resultType="com.site.triplan.vo.UserVo">
         select ui.id
                ,ui.name
@@ -21,6 +22,7 @@
         inner join user u on ui.user_code = u.code
         order by u.reg_dt
     </select>
+    <!--정지회원 조회-->
     <select id="findBan" resultType="com.site.triplan.vo.UserVo">
         select
             ui.id,
@@ -37,6 +39,8 @@
         having cnt >= 3
         order by rp.dt;
     </select>
+
+    <!--탈퇴회원 조회-->
     <select id="findDrop" resultType="com.site.triplan.vo.UserVo">
         select
             d.id,
@@ -56,6 +60,8 @@
         group by d.id
         order by u.reg_dt;
     </select>
+
+    <!--미처리 신고-->
     <select id="findUnreport" resultType="com.site.triplan.vo.ReportVo">
         select
             (select name
@@ -80,6 +86,8 @@
         inner join user_info ui on rpy.user_code = ui.user_code
         where rp.result_code is null
     </select>
+
+    <!--처리 신고-->
     <select id="findReport" resultType="com.site.triplan.vo.ReportVo">
         select (select name
             from user_info
@@ -104,6 +112,8 @@
         inner join user_info ui on rpy.user_code = ui.user_code
         where rp.result_code is not null
     </select>
+
+    <!--주간 신규회원-->
     <select id="weeklyNewbie" resultType="com.site.triplan.vo.UserVo">
         SELECT date_format(reg_dt,'%Y-%m-%d') as date
         , count(*) as cnt
@@ -112,6 +122,8 @@
         GROUP BY date_format(reg_dt,'%Y-%m-%d')
         ORDER BY date_format(reg_dt,'%Y-%m-%d')
     </select>
+
+    <!--월간 신규회원-->
     <select id="monthlyNewbie" resultType="com.site.triplan.vo.UserVo">
         SELECT date_format(reg_dt,'%Y-%m') as date
         ,count(*) as cnt
@@ -120,20 +132,28 @@
         GROUP BY date_format(reg_dt,'%Y-%m')
         ORDER BY date_format(reg_dt,'%Y-%m-%d')
     </select>
+
+    <!--신고 승인-->
     <insert id="processReport">
         INSERT INTO report_proc(reg_code, result_code, admin_code)
         VALUES(#{reg_code}, #{result_code}, #{admin_code})
     </insert>
+
+    <!--신고 철회-->
     <update id="processedReport">
         UPDATE report_proc
         SET result_code=#{result_code}
         WHERE reg_code=#{reg_code}
     </update>
+
+    <!--로그인 시큐리티-->
     <select id="getAdminAccount" resultType="com.site.triplan.vo.AdminVo">
         SELECT *
         FROM admin
         WHERE id=#{id}
     </select>
+
+    <!--비밀번호 변경-->
     <update id="updatePw">
         UPDATE admin
         SET pw=#{pw}

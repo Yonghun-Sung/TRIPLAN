@@ -32,5 +32,5 @@ public interface AdminMapper {
 
 
     AdminVo getAdminAccount(String id);     // security 로그인
-    void updatePw(AdminVo adminVo); // 비밀번호 변경
+    void updatePw(@Param("id") String id, @Param("pw") String pw); // 비밀번호 변경
 }
