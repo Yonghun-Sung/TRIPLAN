@@ -33,4 +33,6 @@ public interface AdminMapper {
 
     AdminVo getAdminAccount(String id);     // security 로그인
     void updatePw(@Param("id") String id, @Param("pw") String pw); // 비밀번호 변경
+
+    Integer countId(String id);     // ID 중복 확인
 }

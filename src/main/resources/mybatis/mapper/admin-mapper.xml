@@ -159,4 +159,11 @@
         SET pw=#{pw}
         WHERE id=#{id}
     </update>
+
+    <!--ID 중복확인-->
+    <select id="countId" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM admin
+        WHERE id LIKE #{id}
+    </select>
 </mapper>

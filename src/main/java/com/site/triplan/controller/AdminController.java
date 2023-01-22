@@ -44,6 +44,13 @@ public class AdminController {
         return "admin_loginform";
     }
 
+    // ID 중복확인
+    @PostMapping("/adminId")
+    public @ResponseBody Integer checkId(@RequestParam String email) {
+        Integer count = adminService.countId(email);
+        return count;
+    }
+
     // 메일 보내기
     @PostMapping("/adminMail")
     public String sendMail(MailVo mailVo) {

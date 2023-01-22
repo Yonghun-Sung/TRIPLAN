@@ -168,27 +168,27 @@ $('#adminupdate-btn').click(function(event){
 $('#findpw-btn').click(function () {
     let email = $('#email').val();
 
-    $('#findpw-form').submit();
-    alert('이메일이 전송되었습니다.');
-    $('#findpw-modal').modal('hide');
-//    $.ajax({
-//        type: 'POST',
-//        url: '/triplan/checkId',
-//        data: {'email':email},
-//    })
-//    .done(function (response) {
-//        if (response == 0) {
-//            alert('가입되지 않은 이메일입니다.');
-//        } else {
-//            $('#findpw-form').submit();
-//            alert('이메일이 전송되었습니다.');
-//            $('#findpw-modal').modal('hide');
-//        }
-//    })
-//    .fail(function (e) {
-//        console.log(e.status);
-//        console.log(e.responseText);
-//    });
+//    $('#findpw-form').submit();
+//    alert('이메일이 전송되었습니다.');
+//    $('#findpw-modal').modal('hide');
+    $.ajax({
+        type: 'POST',
+        url: '/triplan/adminId',
+        data: {'email':email},
+    })
+    .done(function (response) {
+        if (response == 0) {
+            alert('가입되지 않은 이메일입니다.');
+        } else {
+            $('#findpw-form').submit();
+            alert('이메일이 전송되었습니다.');
+            $('#findpw-modal').modal('hide');
+        }
+    })
+    .fail(function (e) {
+        console.log(e.status);
+        console.log(e.responseText);
+    });
 });
 
 

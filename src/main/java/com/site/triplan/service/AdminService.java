@@ -102,6 +102,12 @@ public class AdminService implements UserDetailsService{    // security에서 �
         return str;
     }
 
+    // ID 중복확인
+    public Integer countId(String id) {
+        Integer count = adminMapper.countId(id);
+        return count;
+    }
+
     // 메일 전송
     public void sendTempPwMail(MailVo mailVo) {
         SimpleMailMessage mail = new SimpleMailMessage();
