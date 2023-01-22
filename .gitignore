@@ -1,3 +1,32 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Codespaces
+Marketplace
+Explore
+ 
+@Yonghun-Sung 
+yong-k
+/
+TRIPLAN
+Public
+forked from CP-TRIPLAN/TRIPLAN
+Fork your own copy of yong-k/TRIPLAN
+Code
+Pull requests
+Actions
+Projects
+Security
+Insights
+TRIPLAN/.gitignore
+@yong-k
+yong-k fix: .gitignore
+Latest commit 44005b3 on Dec 11, 2022
+ History
+ 1 contributor
+45 lines (40 sloc)  756 Bytes
+
 HELP.md
 .gradle
 build/
@@ -37,9 +66,24 @@ out/
 .vscode/
 
 ## 나중에 추가
-# **/src/main/resources/static/vendor
-# **/application.properties
-# **/src/main/java/com.site.triplan/controller/PlanController
-# **/src/main/resources/static/js/user/map.js
-# **/src/main/resources/static/templates/user_plan_detail.mustache
-# **/src/main/resources/static/templates/user_plan_insertform.mustache
+**/src/main/resources/static/vendor
+**/application.properties
+**/src/main/java/com/site/triplan/controller/PlanController.java
+**/src/main/resources/static/js/user/map.js
+**/src/main/resources/templates/user_plan_detail.mustache
+**/src/main/resources/templates/user_plan_insertform.mustache
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+TRIPLAN/.gitignore at main · yong-k/TRIPLAN
