@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +31,8 @@ public class AdminService implements UserDetailsService{    // security에서 �
 //
 //        this.adminMapper = adminMapper;
 //    }
+
+    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
     @Autowired
     private JavaMailSender javaMailSender;
     private static final String FROM_ADDRESS = "TRIPLAN_ADMIN@triplan.com";
@@ -113,7 +116,7 @@ public class AdminService implements UserDetailsService{    // security에서 �
         mailVo.setTitle(title);
         mailVo.setMessage(message);
 
-//        updatePw(mailVo.getAddress(), tempPw);
+//        updatePw(mailVo.getAddress(), bCryptPasswordEncoder.encode(tempPw));
 
         mail.setTo(mailVo.getAddress());
         mail.setSubject(mailVo.getTitle());

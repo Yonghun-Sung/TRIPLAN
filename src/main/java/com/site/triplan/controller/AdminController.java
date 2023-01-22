@@ -8,8 +8,10 @@ import com.site.triplan.vo.ReportVo;
 import com.site.triplan.vo.UserVo;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +29,10 @@ public class AdminController {
 
     private AdminService adminService;
 
-    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();      // 암호화
+//    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();      // 암호화
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public AdminController(AdminService adminService){
         this.adminService = adminService;
@@ -83,7 +88,8 @@ public class AdminController {
         AdminVo adminVo = adminService.loadUserByUsername(id);
         model.addAttribute("adminprofile", adminVo);
 
-        if(!bCryptPasswordEncoder.matches(AdminVo.getPw(), adminVo.getPw())){   // AdminVo = 입력(암호화x), adminVo = db(암호화)
+//        if(!bCryptPasswordEncoder.matches(AdminVo.getPw(), adminVo.getPw())){   // AdminVo = 입력(암호화x), adminVo = db(암호화)
+        if(!passwordEncoder.matches(AdminVo.getPw(), adminVo.getPw())){   // AdminVo = 입력(암호화x), adminVo = db(암호화)
             check = "1";
             return check;
         }
@@ -95,9 +101,10 @@ public class AdminController {
     @ResponseBody
     public String adminUpdate(@RequestBody AdminVo adminVo){
 //        System.out.println(adminVo.getPw());
-        String pw = bCryptPasswordEncoder.encode(adminVo.getPw());            // 입력 비밀번호 암호화
+//        String pw = bCryptPasswordEncoder.encode(adminVo.getPw());            // 입력 비밀번호 암호화
+        String pw = passwordEncoder.encode(adminVo.getPw());            // 입력 비밀번호 암호화
         adminVo.setPw(pw);
-//        System.out.println(adminVo.getPw());
+        System.out.println(adminVo.getPw());
         adminService.updatePw(adminVo.getId(), adminVo.getPw());
         return "success";
     }
