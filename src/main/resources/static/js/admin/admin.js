@@ -167,10 +167,6 @@ $('#adminupdate-btn').click(function(event){
 
 $('#findpw-btn').click(function () {
     let email = $('#email').val();
-
-//    $('#findpw-form').submit();
-//    alert('이메일이 전송되었습니다.');
-//    $('#findpw-modal').modal('hide');
     $.ajax({
         type: 'POST',
         url: '/triplan/adminId',

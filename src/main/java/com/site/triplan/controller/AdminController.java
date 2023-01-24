@@ -46,7 +46,7 @@ public class AdminController {
 
     // ID 중복확인
     @PostMapping("/adminId")
-    public @ResponseBody Integer checkId(@RequestParam String email) {
+    public @ResponseBody Integer adminId(@RequestParam String email) {
         Integer count = adminService.countId(email);
         return count;
     }

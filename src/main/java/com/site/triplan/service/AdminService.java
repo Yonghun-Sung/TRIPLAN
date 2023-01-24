@@ -122,7 +122,7 @@ public class AdminService implements UserDetailsService{    // security에서 �
         mailVo.setTitle(title);
         mailVo.setMessage(message);
 
-//        updatePw(mailVo.getAddress(), bCryptPasswordEncoder.encode(tempPw));
+        updatePw(mailVo.getAddress(), bCryptPasswordEncoder.encode(tempPw));
 
         mail.setTo(mailVo.getAddress());
         mail.setSubject(mailVo.getTitle());
@@ -131,7 +131,7 @@ public class AdminService implements UserDetailsService{    // security에서 �
         mail.setReplyTo(FROM_ADDRESS);
 
         try {
-            System.out.println(mail);
+//            System.out.println(mail);
             javaMailSender.send(mail);
         } catch (MailException e) {
             System.out.println("메일발송실패");

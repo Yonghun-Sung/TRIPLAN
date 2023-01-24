@@ -164,6 +164,6 @@
     <select id="countId" resultType="java.lang.Integer">
         SELECT count(*)
         FROM admin
-        WHERE id LIKE #{id}
+        WHERE id=#{id}
     </select>
 </mapper>
